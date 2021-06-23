@@ -16,20 +16,7 @@ public class Menu {
     }
 
     public static void main(String[] args) {
-        // where the actual game menu is started
-        // have keywords for the interaction ex:
-        /*
-        Like João sugested with the switch case
-        info -> all possible keywords with explanation
-        show p1
-        show p2
-        show all
-        graveyard
-        fight
-        save p1
-        save p2
-        ...
-         */
+        Warrior jeff = Warrior.createCustom();
     }
 
 }
