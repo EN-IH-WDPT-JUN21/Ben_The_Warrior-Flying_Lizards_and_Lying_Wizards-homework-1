@@ -1,5 +1,7 @@
 package com.ironhack.homework_1;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class Menu {
     public String[] battle(){
         // create battle simulator with the menu's parties and do the battle and return the resulting graveyard
@@ -15,8 +17,15 @@ public class Menu {
 
     }
 
-    public static void main(String[] args) {
-        Warrior jeff = Warrior.createCustom();
+    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+        //Warrior jeff = Warrior.createCustom();
+        Character rndChar = Character.getRandom();
+        System.out.println(rndChar.getClass());
+        System.out.println(rndChar.getHp());
+
+        Character.createCustom();
+
+
     }
 
 }

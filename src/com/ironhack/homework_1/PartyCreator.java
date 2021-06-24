@@ -1,5 +1,7 @@
 package com.ironhack.homework_1;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class PartyCreator {
     public Party importParty(String csvFile){
         // we could have a default folder for the csv files and search there directly
@@ -16,7 +18,8 @@ public class PartyCreator {
 
     // We could also have the option to save a warrior or a wizard to a csv file instead of directly a party
 
-    public void addCharacter(Party party, Character character){
+    public void addCharacter(Party party, Character character) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         // add Warrior warrior to the Party party
+        Character.getRandom();
     }
 }

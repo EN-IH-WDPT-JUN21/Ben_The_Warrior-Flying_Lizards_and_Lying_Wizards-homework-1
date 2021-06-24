@@ -1,5 +1,10 @@
 package com.ironhack.homework_1;
 
+import java.util.ArrayList;
+import java.util.List;
+import  java.lang.reflect.*;
+import java.util.Scanner;
+
 public abstract class Character {
     /*
     id - unique identifier
@@ -14,6 +19,8 @@ public abstract class Character {
     private boolean isAlive;
 
     private static int idCount = 0;
+    private static String[] classNames = {"Warrior", "Wizard"};
+    private static Class[] possibleClasses = {Warrior.class, Wizard.class};
 
     public Character(){
         this.isAlive = true;
@@ -71,4 +78,38 @@ public abstract class Character {
 
     abstract void attack(Character character);
     abstract void receiveDamage(double damage);
+
+    public static Character getRandom() throws NoSuchMethodException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        int rndClassIndex = (int) Math.floor(Math.random() * possibleClasses.length);
+        Character charRnd = (Character) possibleClasses[rndClassIndex].newInstance();
+        return charRnd;
+    }
+
+    public static Character createCustom(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose a class for your new Character: ");
+        boolean chosen = false;
+        while (chosen == false) {
+            for (int i = 0; i < classNames.length; i++) {
+                System.out.println((i + 1) + ". " + classNames[i]);
+            }
+            String input = scanner.nextLine();
+            try {
+                int choice = Integer.parseInt(input);
+                if (choice > 0 && choice < classNames.length + 1){
+                    chosen = true;
+                    switch (choice){
+                        case 1:
+                            return Warrior.createCustom();
+                        case 2:
+                            return Wizard.createCustom();
+                    }
+                }
+            }
+            catch (NumberFormatException e){
+                System.out.println("Please choose a valid option!");
+            }
+        }
+        return null;
+    }
 }
