@@ -18,6 +18,7 @@ public abstract class Character {
     private double hp;
     private boolean isAlive;
 
+    public static boolean hardcore = false;
     private static int idCount = 0;
     private static String[] classNames = {"Warrior", "Wizard"};
     private static Class[] possibleClasses = {Warrior.class, Wizard.class};

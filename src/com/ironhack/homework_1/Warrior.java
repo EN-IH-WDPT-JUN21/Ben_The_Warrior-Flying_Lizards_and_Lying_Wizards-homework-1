@@ -24,44 +24,108 @@ public class Warrior extends Character{
     }
 
     public static Warrior createCustom(){
-        Scanner scanner = new Scanner(System.in);
-        int upgradePoints = 10;
-        int str = 5;
-        int stam = 30;
-        int hp = 150;
-        System.out.println("What would you like to call your Warrior?");
-        String name = scanner.nextLine();
-        while (upgradePoints > 0){
-            System.out.println(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
-            System.out.println("1. Increase Strength: " + str + " => " + (str + 1));
-            System.out.println("2. Increase Stamina: " + stam + " => " + (stam + 5));
-            System.out.println("3. Increase Hit Points: " + hp + " => " + (hp + 10));
-            String input = scanner.nextLine();
-            try {
-                int choice = Integer.parseInt(input);
-                switch (choice){
-                    case 1:
-                        str++;
-                        upgradePoints--;
-                        break;
-                    case 2:
-                        stam += 5;
-                        upgradePoints--;
-                        break;
-                    case 3:
-                        hp += 10;
-                        upgradePoints--;
-                        break;
-                    default:
-                        System.out.println("Please choose a valid option!");
-                        break;
+        if (Character.hardcore == true) {
+            Scanner scanner = new Scanner(System.in);
+            int upgradePoints = 10;
+            int str = 5;
+            int stam = 30;
+            int hp = 150;
+            System.out.println("What would you like to call your Warrior?");
+            String name = scanner.nextLine();
+            while (upgradePoints > 0) {
+                System.out.println(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
+                System.out.println("1. Increase Strength: " + str + " => " + (str + 1));
+                System.out.println("2. Increase Stamina: " + stam + " => " + (stam + 5));
+                System.out.println("3. Increase Hit Points: " + hp + " => " + (hp + 10));
+                String input = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(input);
+                    switch (choice) {
+                        case 1:
+                            str++;
+                            upgradePoints--;
+                            break;
+                        case 2:
+                            stam += 5;
+                            upgradePoints--;
+                            break;
+                        case 3:
+                            hp += 10;
+                            upgradePoints--;
+                            break;
+                        default:
+                            System.out.println("Please choose a valid option!");
+                            break;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please choose a valid option!");
                 }
             }
-            catch (NumberFormatException e){
-                System.out.println("Please choose a valid option!");
-            }
+            return new Warrior(name, str, stam, hp);
         }
-        return new Warrior(name, str, stam, hp);
+        else {
+            Scanner scanner = new Scanner(System.in);
+            int str = 0;
+            int stam = 0;
+            int hp = 0;
+            boolean validChoice = false;
+            System.out.println("What would you like to call your Warrior?");
+            String name = scanner.nextLine();
+            while (validChoice == false){
+                System.out.println("Please enter a value for strength between 1 and 10");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    if (choice >= 1 && choice <= 10){
+                        str = choice;
+                        validChoice = true;
+                    }
+                    else {
+                        System.out.println("Please enter a valid number");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Please enter a valid number");
+                }
+            }
+            validChoice = false;
+            while (validChoice == false){
+                System.out.println("Please enter a value for stamina between 10 and 50");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    if (choice >= 10 && choice <= 50){
+                        stam = choice;
+                        validChoice = true;
+                    }
+                    else {
+                        System.out.println("Please enter a valid number");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Please enter a valid number");
+                }
+            }
+            validChoice = false;
+            while (validChoice == false){
+                System.out.println("Please enter a value for hp between 100 and 200");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    if (choice >= 100 && choice <= 200){
+                        hp = choice;
+                        validChoice = true;
+                    }
+                    else {
+                        System.out.println("Please enter a valid number");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Please enter a valid number");
+                }
+            }
+            return new Warrior(name, str, stam, hp);
+        }
     }
 
     public int getStamina() {

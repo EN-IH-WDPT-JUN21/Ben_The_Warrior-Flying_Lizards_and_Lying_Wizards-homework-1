@@ -25,44 +25,108 @@ public class Wizard extends Character{
     }
 
     public static Wizard createCustom(){
-        Scanner scanner = new Scanner(System.in);
-        int upgradePoints = 10;
-        int intel = 20;
-        int mana = 30;
-        int hp = 75;
-        System.out.println("What would you like to call your Wizard?");
-        String name = scanner.nextLine();
-        while (upgradePoints > 0){
-            System.out.println(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
-            System.out.println("1. Increase Intelligence: " + intel + " => " + (intel + 3));
-            System.out.println("2. Increase Mana: " + mana + " => " + (mana + 5));
-            System.out.println("3. Increase Hit Points: " + hp + " => " + (hp + 5));
-            String input = scanner.nextLine();
-            try {
-                int choice = Integer.parseInt(input);
-                switch (choice){
-                    case 1:
-                        intel += 3;
-                        upgradePoints--;
-                        break;
-                    case 2:
-                        mana += 5;
-                        upgradePoints--;
-                        break;
-                    case 3:
-                        hp += 5;
-                        upgradePoints--;
-                        break;
-                    default:
-                        System.out.println("Please choose a valid option!");
-                        break;
+        if (Character.hardcore == true) {
+            Scanner scanner = new Scanner(System.in);
+            int upgradePoints = 10;
+            int intel = 20;
+            int mana = 30;
+            int hp = 75;
+            System.out.println("What would you like to call your Wizard?");
+            String name = scanner.nextLine();
+            while (upgradePoints > 0) {
+                System.out.println(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
+                System.out.println("1. Increase Intelligence: " + intel + " => " + (intel + 3));
+                System.out.println("2. Increase Mana: " + mana + " => " + (mana + 5));
+                System.out.println("3. Increase Hit Points: " + hp + " => " + (hp + 5));
+                String input = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(input);
+                    switch (choice) {
+                        case 1:
+                            intel += 3;
+                            upgradePoints--;
+                            break;
+                        case 2:
+                            mana += 5;
+                            upgradePoints--;
+                            break;
+                        case 3:
+                            hp += 5;
+                            upgradePoints--;
+                            break;
+                        default:
+                            System.out.println("Please choose a valid option!");
+                            break;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Please choose a valid option!");
                 }
             }
-            catch (NumberFormatException e){
-                System.out.println("Please choose a valid option!");
-            }
+            return new Wizard(name, intel, mana, hp);
         }
-        return new Wizard(name, intel, mana, hp);
+        else {
+            Scanner scanner = new Scanner(System.in);
+            int intel = 0;
+            int mana = 0;
+            int hp = 0;
+            boolean validChoice = false;
+            System.out.println("What would you like to call your Wizard?");
+            String name = scanner.nextLine();
+            while (validChoice == false){
+                System.out.println("Please enter a value for intelligence between 1 and 50");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    if (choice >= 1 && choice <= 50){
+                        intel = choice;
+                        validChoice = true;
+                    }
+                    else {
+                        System.out.println("Please enter a valid number");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Please enter a valid number");
+                }
+            }
+            validChoice = false;
+            while (validChoice == false){
+                System.out.println("Please enter a value for mana between 10 and 50");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    if (choice >= 10 && choice <= 50){
+                        mana = choice;
+                        validChoice = true;
+                    }
+                    else {
+                        System.out.println("Please enter a valid number");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Please enter a valid number");
+                }
+            }
+            validChoice = false;
+            while (validChoice == false){
+                System.out.println("Please enter a value for hp between 50 and 100");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    if (choice >= 50 && choice <= 100){
+                        hp = choice;
+                        validChoice = true;
+                    }
+                    else {
+                        System.out.println("Please enter a valid number");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Please enter a valid number");
+                }
+            }
+            return new Wizard(name, intel, mana, hp);
+        }
     }
 
     public int getMana() {
