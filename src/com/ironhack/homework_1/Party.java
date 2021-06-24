@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Party {
+    private final int MAX_STARTING_SIZE = 12;
     private List<Character> partyCharacters;
 //    private String partyName;     // Not sure if you want to give the party a name
 
@@ -26,7 +27,40 @@ public class Party {
         this.partyCharacters = partyCharacters;
     }
 
-    // ========== EXTRA Methods ==========
+    // ========== Main Methods ==========
+
+    // TODO(JA) Needs to be tested and implemented - waiting random generation methods.
+    //Generates random party (party still needs to be previously initialized)
+    public void generateRandomParty() {
+        int partySize = inputPartySize();
+        for (int i = 0; i < partySize; i++) {
+//            partyCharacters.add(generate random character method  => createRandom);
+        }
+    }
+    // TODO(JA) Needs to be tested and implemented - waiting for merge to test.
+    //Generates custom party (party still needs to be previously initialized)
+    public void generateCustomParty() {
+        int partySize = inputPartySize();
+        for (int i = 0; i < partySize; i++) {
+            partyCharacters.add(Character.createCustom);
+        }
+    }
+
+    // Method to select the initial size of the party
+    private int inputPartySize() {
+        System.out.println("Input the size of the party:    ( maximum " + MAX_STARTING_SIZE + " Characters )");
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+            try {
+                int choice = Integer.parseInt(input);
+                if (choice > 0 && choice < MAX_STARTING_SIZE) return choice;
+                System.out.println("Please input a valid number! Maximum " + MAX_STARTING_SIZE + ".");
+            } catch (NumberFormatException e) {
+                System.out.println("Please input a valid number! Maximum " + MAX_STARTING_SIZE + ".");
+            }
+        }
+    }
 
     //Adds character to party list
     // TODO(JA) - Might be useful to merge with similar methods (when cleaning the code)
@@ -38,6 +72,7 @@ public class Party {
     public void removeCharacter(Character character) {
         this.getPartyCharacters().remove(character);
     }
+
     //Removes character from party list (by index)
     public void removeCharacter(int i) {
         this.getPartyCharacters().remove(i);
@@ -54,9 +89,7 @@ public class Party {
     public Character selectCharacter() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose a Character from your party: ");
-
 //        logPartyStats();   // Might be betters to have a print method separate for each character (and print as loop)
-
         // Maybe something like this but as a Character Method
         for (int i = 0; i < partyCharacters.size(); i++) {
             System.out.println("(" + (i + 1) + ")" + "\t" + partyCharacters.get(i).getClass().getSimpleName());
@@ -82,12 +115,10 @@ public class Party {
         }
     }
 
-
     // Returns the index of the character in the party list (can be useful for further methods)
     public int getIdxInParty(Character character) {
         return this.getPartyCharacters().indexOf(character);
     }
-
 
     // TODO(JA) Needs to be tested - not sure if getMethods from Warrior and Wizard can be used on Character "character".
     // Prints each character from the party with their stats.
