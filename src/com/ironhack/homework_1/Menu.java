@@ -1,5 +1,7 @@
 package com.ironhack.homework_1;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class Menu {
     public String[] battle(){
         // create battle simulator with the menu's parties and do the battle and return the resulting graveyard
@@ -15,21 +17,20 @@ public class Menu {
 
     }
 
-    public static void main(String[] args) {
-        // where the actual game menu is started
-        // have keywords for the interaction ex:
-        /*
-        Like João sugested with the switch case
-        info -> all possible keywords with explanation
-        show p1
-        show p2
-        show all
-        graveyard
-        fight
-        save p1
-        save p2
-        ...
-         */
+    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+        System.out.println("                  '||'  '||'     |     '||''|.   '||''|.     ..|'''.|  ..|''||   '||''|.   '||''''|  ");
+        System.out.println("                   ||    ||     |||     ||   ||   ||   ||  .|'     '  .|'    ||   ||   ||   ||  .    ");
+        System.out.println("                   ||''''||    |  ||    ||''|'    ||    || ||         ||      ||  ||''|'    ||''|    ");
+        System.out.println("                   ||    ||   .''''|.   ||   |.   ||    || '|.      . '|.     ||  ||   |.   ||       ");
+        System.out.println("                  .||.  .||. .|.  .||. .||.  '|' .||...|'   ''|....'   ''|...|'  .||.  '|' .||.....| ");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("                                       '||    ||'  ..|''||   '||''|.   '||''''|  ");
+        System.out.println("                                        |||  |||  .|'    ||   ||   ||   ||  .    ");
+        System.out.println("                                        |'|..'||  ||      ||  ||    ||  ||''|    ");
+        System.out.println("                                        | '|' ||  '|.     ||  ||    ||  ||       ");
+        System.out.println("                                       .|. | .||.  ''|...|'  .||...|'  .||.....| ");
+
     }
 
 }
