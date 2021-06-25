@@ -16,24 +16,23 @@ public class PartyCreator {
         // Initialization of party to be returned
         Party importedParty = new Party();
 
+        String[] directoryAndFile = directoryAndName(csvFile);
+        String directory = directoryAndFile[0];
+        csvFile = directoryAndFile[1];
+
         // Add ".csv" to the file name if it was not provided
-        if(csvFile.length() <= 4){
-            csvFile = csvFile.concat(".csv");
-        }else{
-            if(csvFile.contains(".") && !csvFile.endsWith(".csv")){
-                System.err.println("ERROR: Party must be imported from .csv file");
-                return null;
-            }else{
-                csvFile = csvFile.concat(".csv");
-            }
+        csvFile = csvCheck(csvFile, true);
+
+        if(csvFile == null) {
+            return null;
         }
 
         // Search the file in the parties folder and if not found verify if the full directory was provided
         File file = new File("parties/" + csvFile);
         if(!file.exists()) {
-            file = new File(csvFile);
+            file = new File(directory + csvFile);
             if (!file.exists()) {
-                System.err.println("ERROR: File not found! Make sure the .csv file is in the parties folder or the " +
+                System.err.println("ERROR: File not found! Make sure the .csv file is in the folder parties or the " +
                         "correct directory is provided");
                 return null;
             }
@@ -46,31 +45,12 @@ public class PartyCreator {
         try{
             while(scanner.hasNextLine()){
                 String[] newCharacter = scanner.nextLine().split(",");
-                switch (newCharacter[0]){
-                    case "warrior":
-                        if(newCharacter.length != 7){
-                            System.err.println("ERROR: Warrior with incorrect number of parameters!");
-                            return null;
-                        }
-                        importedParty.addCharacter(new Warrior(Integer.parseInt(newCharacter[1]), newCharacter[2],
-                                Integer.parseInt(newCharacter[3]), Boolean.parseBoolean(newCharacter[4]),
-                                Integer.parseInt(newCharacter[5]), Integer.parseInt(newCharacter[6])));
-                        break;
-                    case "wizard":
-                        if(newCharacter.length != 7){
-                            System.err.println("ERROR: Wizard with incorrect number of parameters!");
-                            return null;
-                        }
-                        importedParty.addCharacter(new Wizard(Integer.parseInt(newCharacter[1]), newCharacter[2],
-                                Integer.parseInt(newCharacter[3]), Boolean.parseBoolean(newCharacter[4]),
-                                Integer.parseInt(newCharacter[5]), Integer.parseInt(newCharacter[6])));
-                        break;
-                    default:
-                        System.err.println("ERROR: Unknown Character!");
-                        return null;
+                Character character = Character.addCharacter(newCharacter);
+                if(character != null){
+                    importedParty.addCharacter(Character.addCharacter(newCharacter));
                 }
-                scanner.close();
             }
+            scanner.close();
         }catch(Exception e){
             System.err.println("ERROR: Incorrect argument!");
             return null;
@@ -85,48 +65,115 @@ public class PartyCreator {
 
         return null;
     }
+
     public static void saveParty(Party party, String csvFile) throws IOException {
         // Save passed in Party party to file <fileName>.csv in the default folder
 
-        if (csvFile.length() > 4) {
-            if (csvFile.contains(".") && !csvFile.endsWith(".csv")) {
-                System.err.println("ERROR: File extension changed to .csv");
-                csvFile = csvFile.split("\\.")[0];
-            }
-        }
-        csvFile = csvFile.concat(".csv");
+        String[] directoryAndFile = directoryAndName(csvFile);
+        String directory = directoryAndFile[0];
+        csvFile = directoryAndFile[1];
 
-        FileWriter fileWriter = new FileWriter(csvFile);
+        csvFile = csvCheck(csvFile, false);
+        if(csvFile == null) {
+            return;
+        }
+        csvFile = csvFile.replaceAll("[\\\\/:*?\"<>|«»]", "");
+
+        if(!directory.equals("") && !directory.equals("parties/")){
+            System.out.println("Warning: file saved in parties folder!");
+        }
+
+        csvFile = "parties/".concat(csvFile);
+        FileWriter fileWriter = new FileWriter(csvFile, false);
 
         List<Character> characterList = party.getPartyCharacters();
 
         for(Character character : characterList){
             fileWriter.write(character.toCsvFormat());
         }
+        fileWriter.flush();
+        fileWriter.close();
 
+        if(csvFile.equals(".csv")){
+            System.out.println("Warning: party saved in file parties/unnamed.csv");
+        }else if(!csvFile.equals(directoryAndFile[1])){
+            System.out.println("Warning: party saved in " + csvFile);
+        }
 
     }
     public static Party randomParty(){
-        Random randomInt = new Random(20);
-        Random randomCharacter = new Random(1);
+        // Find way to know each of the subclasses of Character?
+
+        Random randomInt = new Random(30);
         Party party = new Party();
+        int numCharacters = randomInt.nextInt();
         for(int i = 0; i < randomInt.nextInt(); i++){
-            switch (randomCharacter.nextInt()){
-                case 0:
-                    party.addCharacter(new Warrior());
-                    break;
-                case 1:
-                    party.addCharacter(new Wizard());
-                    break;
-            }
+            party.addCharacter(Character.getRandom());
         }
         return party;
     }
 
-    // We could also have the option to save a warrior or a wizard to a csv file instead of directly a party
-
-    public static void addCharacter(Party party, Character character) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public static void addCharacter(Party party){
         // add Warrior warrior to the Party party
-        Character.getRandom();
+        party.addCharacter(Character.createCustom());
+    }
+
+    public static void addCharacter(String csvFile) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationExc{
+        csvFile = csvCheck(csvFile, false);
+        if(csvFile == null) {
+            return;
+        }
+
+        String[] directoryAndFile = directoryAndName(csvFile);
+        String directory = directoryAndFile[0];
+        csvFile = directoryAndFile[1];
+
+        if(!directory.equals("") && !directory.equals("parties/")){
+            System.out.println("Warning: file saved in parties folder!");
+        }
+
+        csvFile = "parties/".concat(csvFile);
+        FileWriter fileWriter = new FileWriter(csvFile,true);
+
+        fileWriter.write(Character.createCustom().toCsvFormat());
+        fileWriter.flush();
+        fileWriter.close();
+    }
+
+    private static String csvCheck(String csvFile, boolean toRead){
+        // Add ".csv" to the file name if it was not provided
+        if(csvFile.length() > 100){
+            System.err.println("ERROR: please make sure the file name has less than 100 characters");
+            return null;
+        }
+
+        if(!csvFile.contains(".")){
+            csvFile = csvFile.concat(".csv");
+        }else{
+            if(csvFile.contains(".") && !csvFile.endsWith(".csv") && toRead) {
+                System.err.println("ERROR: Party must be imported from .csv file");
+                return null;
+            }else if(csvFile.contains(".") && !csvFile.endsWith(".csv") && !toRead){
+                System.err.println("Warning: file extension changed to .csv");
+                csvFile = csvFile.split("\\.")[0];
+                csvFile = csvFile.concat(".csv");
+            }else if(!csvFile.endsWith(".csv")){
+                csvFile = csvFile.concat(".csv");
+            }
+        }
+        return csvFile;
+    }
+
+    private static String[] directoryAndName(String csvFile){
+        String[] csvFileParts = csvFile.split("/");
+        if(csvFileParts.length == 1){
+            return new String[]{"", csvFile};
+        }else{
+            String directory = "";
+            for(int i = 0; i < csvFileParts.length - 2; i++){
+                directory = directory.concat(csvFileParts[i]).concat("/");
+            }
+            return new String[]{directory, csvFileParts[csvFileParts.length-1]};
+        }
     }
 }
