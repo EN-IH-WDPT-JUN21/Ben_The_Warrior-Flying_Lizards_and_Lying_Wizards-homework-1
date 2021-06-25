@@ -86,19 +86,19 @@ public abstract class Character {
     public static Character addCharacter(String[] parameters){
         switch(parameters[0]){
             case "Warrior":
-                if(parameters.length == 7){
+                if(parameters.length == 6){
                     return new Warrior(Integer.parseInt(parameters[1].trim()), parameters[2].trim(),
-                            Integer.parseInt(parameters[3].trim()), Boolean.parseBoolean(parameters[4].trim()),
-                            Integer.parseInt(parameters[5].trim()), Integer.parseInt(parameters[6].trim()));
+                            Double.parseDouble(parameters[3].trim()), true,
+                            Integer.parseInt(parameters[4].trim()), Integer.parseInt(parameters[5].trim()));
                 }else{
                     System.err.println("ERROR: incorrect number of parameters for Warrior. This Character will not be added to the party");
                 }
 
             case "Wizard":
-                if(parameters.length == 7){
+                if(parameters.length == 6){
                     return new Wizard(Integer.parseInt(parameters[1].trim()), parameters[2].trim(),
-                            Integer.parseInt(parameters[3].trim()), Boolean.parseBoolean(parameters[4].trim()),
-                            Integer.parseInt(parameters[5].trim()), Integer.parseInt(parameters[6].trim()));
+                            Double.parseDouble(parameters[3].trim()), true,
+                            Integer.parseInt(parameters[4].trim()), Integer.parseInt(parameters[5].trim()));
                 }else{
                     System.err.println("ERROR: incorrect number of parameters for Wizard. This Character will not be added to the party");
                     return null;
