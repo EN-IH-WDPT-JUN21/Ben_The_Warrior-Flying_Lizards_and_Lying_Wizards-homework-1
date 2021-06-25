@@ -29,14 +29,14 @@ public class Party {
 
     // ========== Party Creation ==========
     // Method to select the initial size of the party
-    private int inputPartySize() {
+    public int inputPartySize() {
         System.out.println("Input the size of the party:    ( maximum " + MAX_STARTING_SIZE + " Characters )");
         while (true) {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
             try {
                 int choice = Integer.parseInt(input);
-                if (choice > 0 && choice < MAX_STARTING_SIZE) return choice;
+                if (choice > 0 && choice <= MAX_STARTING_SIZE) return choice;
                 System.out.println("Please input a valid choice! Maximum " + MAX_STARTING_SIZE + ".");
             } catch (NumberFormatException e) {
                 System.out.println("Please input a valid number! Maximum " + MAX_STARTING_SIZE + ".");
@@ -46,14 +46,16 @@ public class Party {
 
     // TODO(JA) Needs to be tested and implemented - waiting for merge to test.
     // Generates random party (party still needs to be previously initialized)
-    public void generateRandomParty(int partySize) {
-        partyCharacters.add(Character.getRandom());
+    public void generateRandomParty(int partySize) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        for (int i = 0; i < partySize; i++) {
+            partyCharacters.add(Character.getRandom());
+        }
     }
 
 
     // TODO(JA) Needs to be tested and implemented - waiting for merge to test.
     // Generates custom party (party still needs to be previously initialized)
-    public void generateCustomParty(int partySize) {
+    public void generateCustomParty(int partySize) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         for (int i = 0; i < partySize; i++) {
             partyCharacters.add(Character.createCustom());
 
@@ -64,7 +66,6 @@ public class Party {
                 generateRandomParty(partySize - i - 1);
                 return;
             }
-
         }
     }
 
@@ -93,7 +94,7 @@ public class Party {
     }
 
     // Deletes all elements from party
-    public void clearParty(){
+    public void clearParty() {
         partyCharacters.clear();
     }
 
@@ -130,22 +131,22 @@ public class Party {
         // Maybe something like this but as a Character Method
         for (int i = 0; i < partyCharacters.size(); i++) {
             System.out.println("(" + (i + 1) + ")" + "\t" + partyCharacters.get(i).getClass().getSimpleName());
-            System.out.println("\t\tName: " + partyCharacters.get(i).getName);
-            System.out.println("\t\tHP: " + partyCharacters.get(i).getHp);
-            if (partyCharacters.get(i).getClass().getSimpleName().equals("Warrior")) {
-                System.out.println("\t\tStamina: " + partyCharacters.get(i).getStamina);
-                System.out.println("\t\tStrength: " + partyCharacters.get(i).getStrength + "\n");
-            }
-            if (partyCharacters.get(i).getClass().getSimpleName().equals("Wizard")) {
-                System.out.println("\t\tMana: " + partyCharacters.get(i).getMana);
-                System.out.println("\t\tIntelligence: " + partyCharacters.get(i).getIntelligence + "\n");
-            }
+            System.out.println("\t\tName: " + partyCharacters.get(i).getName());
+            System.out.println("\t\tHP: " + partyCharacters.get(i).getHp());
+//            if (partyCharacters.get(i).getClass().getSimpleName().equals("Warrior")) {
+//                System.out.println("\t\tStamina: " + partyCharacters.get(i).getStamina());
+//                System.out.println("\t\tStrength: " + partyCharacters.get(i).getStrength() + "\n");
+//            }
+//            if (partyCharacters.get(i).getClass().getSimpleName().equals("Wizard")) {
+//                System.out.println("\t\tMana: " + partyCharacters.get(i).getMana());
+//                System.out.println("\t\tIntelligence: " + partyCharacters.get(i).getIntelligence() + "\n");
+//            }
         }
         while (true) {
             String input = scanner.nextLine();
             try {
                 int choice = Integer.parseInt(input);
-                if (choice > 0 && choice < partyCharacters.size()) return partyCharacters.get(choice-1);
+                if (choice > 0 && choice <= partyCharacters.size()) return partyCharacters.get(choice - 1);
             } catch (NumberFormatException e) {
                 System.out.println("Please choose a valid option!");
             }
@@ -166,18 +167,18 @@ public class Party {
 //        System.out.println(partyName.toUpperCase());
         for (Character character : partyCharacters) {
             System.out.println("Class: " + character.getClass().getSimpleName());
-            System.out.println("ID: " + character.getId);
-            System.out.println("Name: " + character.getName);
-            System.out.println("HP: " + character.getHp);
+            System.out.println("ID: " + character.getId());
+            System.out.println("Name: " + character.getName());
+            System.out.println("HP: " + character.getHp() + "\n");
 
-            if (character.getClass().getSimpleName().equals("Warrior")) {
-                System.out.println("Stamina: " + character.getStamina);
-                System.out.println("Strength: " + character.getStrength + "\n");
-            }
-            if (character.getClass().getSimpleName().equals("Wizard")) {
-                System.out.println("Mana: " + character.getMana);
-                System.out.println("Intelligence: " + character.getIntelligence + "\n");
-            }
+//            if (character.getClass().getSimpleName().equals("Warrior")) {
+//                System.out.println("Stamina: " + character.getStamina);
+//                System.out.println("Strength: " + character.getStrength + "\n");
+//            }
+//            if (character.getClass().getSimpleName().equals("Wizard")) {
+//                System.out.println("Mana: " + character.getMana);
+//                System.out.println("Intelligence: " + character.getIntelligence + "\n");
+//            }
         }
     }
 }
