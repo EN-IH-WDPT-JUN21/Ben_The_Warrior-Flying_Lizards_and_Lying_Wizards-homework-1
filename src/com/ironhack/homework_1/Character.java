@@ -81,6 +81,34 @@ public abstract class Character {
     abstract void receiveDamage(double damage);
     abstract String printStats();
 
+    abstract String toCsvFormat();
+
+    public static Character addCharacter(String[] parameters){
+        switch(parameters[0]){
+            case "Warrior":
+                if(parameters.length == 7){
+                    return new Warrior(Integer.parseInt(parameters[1].trim()), parameters[2].trim(),
+                            Integer.parseInt(parameters[3].trim()), Boolean.parseBoolean(parameters[4].trim()),
+                            Integer.parseInt(parameters[5].trim()), Integer.parseInt(parameters[6].trim()));
+                }else{
+                    System.err.println("ERROR: incorrect number of parameters for Warrior. This Character will not be added to the party");
+                }
+
+            case "Wizard":
+                if(parameters.length == 7){
+                    return new Wizard(Integer.parseInt(parameters[1].trim()), parameters[2].trim(),
+                            Integer.parseInt(parameters[3].trim()), Boolean.parseBoolean(parameters[4].trim()),
+                            Integer.parseInt(parameters[5].trim()), Integer.parseInt(parameters[6].trim()));
+                }else{
+                    System.err.println("ERROR: incorrect number of parameters for Wizard. This Character will not be added to the party");
+                    return null;
+                }
+
+            default:
+                System.err.println("ERROR: Character " + parameters[0] + " not found");
+                return null;
+        }
+    }
     public static Character getRandom() throws NoSuchMethodException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         int rndClassIndex = (int) Math.floor(Math.random() * possibleClasses.length);
         Character charRnd = (Character) possibleClasses[rndClassIndex].newInstance();
