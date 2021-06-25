@@ -18,31 +18,18 @@ public class Menu {
     }
 
     public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-        /* System.out.println("                    @@@  @@@   @@@@@@   @@@@@@@   @@@@@@@    @@@@@@@   @@@@@@   @@@@@@@   @@@@@@@@  ");
-        System.out.println("                    @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  ");
-        System.out.println("                    @@!  @@@  @@!  @@@  @@!  @@@  @@!  @@@  !@@       @@!  @@@  @@!  @@@  @@!       ");
-        System.out.println("                    !@!  @!@  !@!  @!@  !@!  @!@  !@!  @!@  !@!       !@!  @!@  !@!  @!@  !@!       ");
-        System.out.println("                    @!@!@!@!  @!@!@!@!  @!@!!@!   @!@  !@!  !@!       @!@  !@!  @!@!!@!   @!!!:!    ");
-        System.out.println("                    !!!@!!!!  !!!@!!!!  !!@!@!    !@!  !!!  !!!       !@!  !!!  !!@!@!    !!!!!:    ");
-        System.out.println("                    !!:  !!!  !!:  !!!  !!: :!!   !!:  !!!  :!!       !!:  !!!  !!: :!!   !!:       ");
-        System.out.println("                    :!:  !:!  :!:  !:!  :!:  !:!  :!:  !:!  :!:       :!:  !:!  :!:  !:!  :!:       ");
-        System.out.println("                    ::   :::  ::   :::  ::   :::   :::: ::   ::: :::  ::::: ::  ::   :::   :: ::::  ");
-        System.out.println("                     :   : :   :   : :   :   : :  :: :  :    :: :: :   : :  :    :   : :  : :: ::   ");
+        System.out.println("                  '||'  '||'     |     '||''|.   '||''|.     ..|'''.|  ..|''||   '||''|.   '||''''|  ");
+        System.out.println("                   ||    ||     |||     ||   ||   ||   ||  .|'     '  .|'    ||   ||   ||   ||  .    ");
+        System.out.println("                   ||''''||    |  ||    ||''|'    ||    || ||         ||      ||  ||''|'    ||''|    ");
+        System.out.println("                   ||    ||   .''''|.   ||   |.   ||    || '|.      . '|.     ||  ||   |.   ||       ");
+        System.out.println("                  .||.  .||. .|.  .||. .||.  '|' .||...|'   ''|....'   ''|...|'  .||.  '|' .||.....| ");
         System.out.println("");
         System.out.println("");
-        System.out.println("                                      @@@@@@@@@@    @@@@@@   @@@@@@@   @@@@@@@@  ");
-        System.out.println("                                      @@@@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  ");
-        System.out.println("                                      @@! @@! @@!  @@!  @@@  @@!  @@@  @@!       ");
-        System.out.println("                                      !@! !@! !@!  !@!  @!@  !@!  @!@  !@!       ");
-        System.out.println("                                      @!! !!@ @!@  @!@  !@!  @!@  !@!  @!!!:!    ");
-        System.out.println("                                      !@!   ! !@!  !@!  !!!  !@!  !!!  !!!!!:    ");
-        System.out.println("                                      !!:     !!:  !!:  !!!  !!:  !!!  !!:       ");
-        System.out.println("                                      :!:     :!:  :!:  !:!  :!:  !:!  :!:       ");
-        System.out.println("                                      :::     ::   ::::: ::   :::: ::   :: ::::  ");
-        System.out.println("                                       :      :     : :  :   :: :  :   : :: ::  ");
-        */
-        Character bob = Warrior.createCustom();
-        System.out.println(bob.getHp());
+        System.out.println("                                       '||    ||'  ..|''||   '||''|.   '||''''|  ");
+        System.out.println("                                        |||  |||  .|'    ||   ||   ||   ||  .    ");
+        System.out.println("                                        |'|..'||  ||      ||  ||    ||  ||''|    ");
+        System.out.println("                                        | '|' ||  '|.     ||  ||    ||  ||       ");
+        System.out.println("                                       .|. | .||.  ''|...|'  .||...|'  .||.....| ");
 
     }
 
