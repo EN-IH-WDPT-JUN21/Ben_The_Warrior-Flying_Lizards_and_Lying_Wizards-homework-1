@@ -27,25 +27,7 @@ public class Party {
         this.partyCharacters = partyCharacters;
     }
 
-    // ========== Main Methods ==========
-
-    // TODO(JA) Needs to be tested and implemented - waiting random generation methods.
-    //Generates random party (party still needs to be previously initialized)
-    public void generateRandomParty() {
-        int partySize = inputPartySize();
-        for (int i = 0; i < partySize; i++) {
-//            partyCharacters.add(generate random character method  => createRandom);
-        }
-    }
-    // TODO(JA) Needs to be tested and implemented - waiting for merge to test.
-    //Generates custom party (party still needs to be previously initialized)
-    public void generateCustomParty() {
-        int partySize = inputPartySize();
-        for (int i = 0; i < partySize; i++) {
-            partyCharacters.add(Character.createCustom);
-        }
-    }
-
+    // ========== Party Creation ==========
     // Method to select the initial size of the party
     private int inputPartySize() {
         System.out.println("Input the size of the party:    ( maximum " + MAX_STARTING_SIZE + " Characters )");
@@ -55,13 +37,68 @@ public class Party {
             try {
                 int choice = Integer.parseInt(input);
                 if (choice > 0 && choice < MAX_STARTING_SIZE) return choice;
-                System.out.println("Please input a valid number! Maximum " + MAX_STARTING_SIZE + ".");
+                System.out.println("Please input a valid choice! Maximum " + MAX_STARTING_SIZE + ".");
             } catch (NumberFormatException e) {
                 System.out.println("Please input a valid number! Maximum " + MAX_STARTING_SIZE + ".");
             }
         }
     }
 
+    // TODO(JA) Needs to be tested and implemented - waiting for merge to test.
+    // Generates random party (party still needs to be previously initialized)
+    public void generateRandomParty(int partySize) {
+        partyCharacters.add(Character.getRandom());
+    }
+
+
+    // TODO(JA) Needs to be tested and implemented - waiting for merge to test.
+    // Generates custom party (party still needs to be previously initialized)
+    public void generateCustomParty(int partySize) {
+        for (int i = 0; i < partySize; i++) {
+            partyCharacters.add(Character.createCustom());
+
+            //optional, used to stop creation method
+            int nextChoice = inputContinueCreating();
+            if (nextChoice == -1) return;       // exits
+            if (nextChoice == 1) {              // create remaining party size as random. and exits
+                generateRandomParty(partySize - i - 1);
+                return;
+            }
+
+        }
+    }
+
+    // Checks if the user wants to continue custom creation
+    private static int inputContinueCreating() {
+        System.out.println("Continue custom creation?   (y)Yes   (r)Randomise Remaining   (n)Exit");
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+            try {
+                switch (input) {
+                    case "y":
+                        return 0;
+                    case "r":
+                        return 1;
+                    case "n":
+                        return -1;
+                    default:
+                        System.out.println("Please choose a valid option!");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please choose a valid option!");
+            }
+        }
+    }
+
+    // Deletes all elements from party
+    public void clearParty(){
+        partyCharacters.clear();
+    }
+
+
+    // ========== Characters in Party ==========
     //Adds character to party list
     // TODO(JA) - Might be useful to merge with similar methods (when cleaning the code)
     public void addCharacterToParty(Character character) {
@@ -79,7 +116,7 @@ public class Party {
     }
 
     // Returns a random character from the party
-    public Character getRandomCharacter() {
+    public Character selectRandomCharacter() {
         Random rand = new Random();
         return partyCharacters.get(rand.nextInt(partyCharacters.size()));
     }
@@ -108,18 +145,20 @@ public class Party {
             String input = scanner.nextLine();
             try {
                 int choice = Integer.parseInt(input);
-                if (choice > 0 && choice < partyCharacters.size()) return partyCharacters.get(choice);
+                if (choice > 0 && choice < partyCharacters.size()) return partyCharacters.get(choice-1);
             } catch (NumberFormatException e) {
                 System.out.println("Please choose a valid option!");
             }
         }
     }
 
-    // Returns the index of the character in the party list (can be useful for further methods)
+    // Returns the index of the character in the party list (can be useful for further methods) (not in use)
     public int getIdxInParty(Character character) {
         return this.getPartyCharacters().indexOf(character);
     }
 
+
+    // ========== Party Log ==========
     // TODO(JA) Needs to be tested - not sure if getMethods from Warrior and Wizard can be used on Character "character".
     // Prints each character from the party with their stats.
     // (Can be divided if we create a method to print a single character stats)
