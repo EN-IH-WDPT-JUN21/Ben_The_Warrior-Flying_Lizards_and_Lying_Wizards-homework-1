@@ -92,9 +92,9 @@ public class Warrior extends Character{
             int hp = 0;
             System.out.println("What would you like to call your Warrior?");
             String name = scanner.nextLine();
-            str = statInput(1, 10, "Please enter a value for strength between 1 and 10");
-            stam = statInput(10, 50, "Please enter a value for stamina between 10 and 50");
-            hp = statInput(100, 200, "Please enter a value for hp between 100 and 200");
+            str = statInput(1, 10, "Please enter a value for Strength between 1 and 10");
+            stam = statInput(10, 50, "Please enter a value for Stamina between 10 and 50");
+            hp = statInput(100, 200, "Please enter a value for Hp between 100 and 200");
             scanner.close();
             return new Warrior(name, str, stam, hp);
         }

@@ -93,9 +93,9 @@ public class Wizard extends Character{
             int hp = 0;
             System.out.println("What would you like to call your Wizard?");
             String name = scanner.nextLine();
-            intel = statInput(10, 50, "Please enter a value for strength between 10 and 50");
-            mana = statInput(10, 50, "Please enter a value for stamina between 10 and 50");
-            hp = statInput(50, 100, "Please enter a value for hp between 50 and 100");
+            intel = statInput(10, 50, "Please enter a value for Intelligence between 10 and 50");
+            mana = statInput(10, 50, "Please enter a value for Mana between 10 and 50");
+            hp = statInput(50, 100, "Please enter a value for Hp between 50 and 100");
             scanner.close();
             return new Wizard(name, intel, mana, hp);
         }
