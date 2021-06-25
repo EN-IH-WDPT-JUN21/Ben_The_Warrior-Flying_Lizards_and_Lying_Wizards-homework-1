@@ -16,6 +16,7 @@ public class PartyCreator {
         // Initialization of party to be returned
         Party importedParty = new Party();
 
+        // String split into directory and name of the file
         String[] directoryAndFile = directoryAndName(csvFile);
         String directory = directoryAndFile[0];
         csvFile = directoryAndFile[1];
@@ -27,7 +28,7 @@ public class PartyCreator {
             return null;
         }
 
-        // Search the file in the parties folder and if not found verify if the full directory was provided
+        // Search the file in the parties folder and if not found check with the directory provided
         File file = new File("parties/" + csvFile);
         if(!file.exists()) {
             file = new File(directory + csvFile);
@@ -42,50 +43,41 @@ public class PartyCreator {
         Scanner scanner = new Scanner(file);
 
         // While loop to add each Character to the Party
-        try{
-            while(scanner.hasNextLine()){
-                String[] newCharacter = scanner.nextLine().split(",");
-                Character character = Character.addCharacter(newCharacter);
-                if(character != null){
-                    importedParty.addCharacter(Character.addCharacter(newCharacter));
-                }
+        while(scanner.hasNextLine()){
+            String[] newCharacter = scanner.nextLine().split(",");
+            Character character = Character.addCharacter(newCharacter);
+            if(character != null){
+                importedParty.addCharacter(Character.addCharacter(newCharacter));
             }
-            scanner.close();
-        }catch(Exception e){
-            System.err.println("ERROR: Incorrect argument!");
-            return null;
         }
+        scanner.close();
         return importedParty;
     }
 
-    public static Party importParty() throws FileNotFoundException {
-        // Try to open file navigator
-        File file = new File("");
-        Scanner scanner = new Scanner(file);
-
-        return null;
-    }
-
     public static void saveParty(Party party, String csvFile) throws IOException {
+
         // Save passed in Party party to file <fileName>.csv in the default folder
 
+        // Split string into directory and name of file
         String[] directoryAndFile = directoryAndName(csvFile);
         String directory = directoryAndFile[0];
         csvFile = directoryAndFile[1];
 
+        // Check if correct file extension was provided
         csvFile = csvCheck(csvFile, false);
         if(csvFile == null) {
             return;
         }
-        csvFile = csvFile.replaceAll("[\\\\/:*?\"<>|«»]", "");
+        directoryAndFile[1] = csvFile;
 
-        if(!directory.equals("") && !directory.equals("parties/")){
-            System.out.println("Warning: file saved in parties folder!");
-        }
+        // Delete all invalid characters
+        csvFile = csvFile.replaceAll("[\\\\/:*?\"<>|«»']", "");
 
+        // add parties directory and open FileWriter
         csvFile = "parties/".concat(csvFile);
         FileWriter fileWriter = new FileWriter(csvFile, false);
 
+        // Get Characters from Party and save them in the file
         List<Character> characterList = party.getPartyCharacters();
 
         for(Character character : characterList){
@@ -94,10 +86,13 @@ public class PartyCreator {
         fileWriter.flush();
         fileWriter.close();
 
+        // Message indicating the party was saved
         if(csvFile.equals(".csv")){
             System.out.println("Warning: party saved in file parties/unnamed.csv");
-        }else if(!csvFile.equals(directoryAndFile[1])){
+        }else if(!csvFile.equals("parties/".concat(directoryAndFile[1])) || (!directory.equals("") && !directory.equals("parties/"))){
             System.out.println("Warning: party saved in " + csvFile);
+        }else{
+            System.out.println("File saved to " + csvFile);
         }
 
     }
@@ -141,12 +136,14 @@ public class PartyCreator {
     }
 
     private static String csvCheck(String csvFile, boolean toRead){
-        // Add ".csv" to the file name if it was not provided
+
+        // Check if file name exceeds maximum length
         if(csvFile.length() > 100){
             System.err.println("ERROR: please make sure the file name has less than 100 characters");
             return null;
         }
 
+        // Add .csv to the file name if it was not provided
         if(!csvFile.contains(".")){
             csvFile = csvFile.concat(".csv");
         }else{
@@ -154,7 +151,7 @@ public class PartyCreator {
                 System.err.println("ERROR: Party must be imported from .csv file");
                 return null;
             }else if(csvFile.contains(".") && !csvFile.endsWith(".csv") && !toRead){
-                System.err.println("Warning: file extension changed to .csv");
+                System.out.println("Warning: file extension changed to .csv");
                 csvFile = csvFile.split("\\.")[0];
                 csvFile = csvFile.concat(".csv");
             }else if(!csvFile.endsWith(".csv")){
@@ -165,6 +162,7 @@ public class PartyCreator {
     }
 
     private static String[] directoryAndName(String csvFile){
+        //Split string into directory and name of the file
         String[] csvFileParts = csvFile.split("/");
         if(csvFileParts.length == 1){
             return new String[]{"", csvFile};
