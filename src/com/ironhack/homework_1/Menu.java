@@ -3,7 +3,7 @@ package com.ironhack.homework_1;
 import java.lang.reflect.InvocationTargetException;
 
 public class Menu {
-    public String[] battle() {
+    public String[] battle(){
         // create battle simulator with the menu's parties and do the battle and return the resulting graveyard
         /*
         Check party1 and party2 have >0 Characters
@@ -13,7 +13,7 @@ public class Menu {
         return null; // return the graveyard
     }
 
-    public void printGraveyard() {
+    public void printGraveyard(){
 
     }
 
