@@ -17,7 +17,7 @@ public class Wizard extends Character{
         setHp(50 + (int)(Math.random() * 50 + 1));
     }
 
-    public Wizard(String name, int intel, int mana, int hp){
+    public Wizard(String name, int intel, int mana, double hp){
         super(name);
         setIntelligence(intel);
         setMana(mana);
@@ -48,7 +48,7 @@ public class Wizard extends Character{
     
         @Override
     public String toCsvFormat() {
-        return "Wizard," + super.getId() + "," + super.getName() + "," + super.getHp() + "," + super.isAlive() + "," + getMana()
+        return "Wizard," + super.getId() + "," + super.getName() + "," + super.getHp() + "," + getMana()
                 + "," + getIntelligence() + "\n";
     }
 

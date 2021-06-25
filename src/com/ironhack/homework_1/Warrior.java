@@ -16,7 +16,7 @@ public class Warrior extends Character{
         setHp(100 + (int)(Math.random() * 100 + 1));
     }
 
-    public Warrior(String name, int str, int stam, int hp){
+    public Warrior(String name, int str, int stam, double hp){
         super(name);
         setStrength(str);
         setStamina(stam);
@@ -47,8 +47,7 @@ public class Warrior extends Character{
     
         @Override
     public String toCsvFormat() {
-        return "Warrior," + super.getId() + "," + super.getName() + "," + super.getHp() + "," + super.isAlive() + "," + getStamina()
-                + "," + getStrength() + "\n";
+        return "Warrior," + super.getId() + "," + super.getName() + "," + super.getHp() + "," + getStamina()
     }
 
     public static Warrior createCustom(){
