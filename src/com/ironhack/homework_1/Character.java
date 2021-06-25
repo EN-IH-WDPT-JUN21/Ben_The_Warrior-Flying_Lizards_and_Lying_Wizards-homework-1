@@ -98,15 +98,17 @@ public abstract class Character {
             String input = scanner.nextLine();
             try {
                 int choice = Integer.parseInt(input);
-                if (choice > 0 && choice < classNames.length + 1){
-                    chosen = true;
-                    switch (choice){
-                        case 1:
-                            return Warrior.createCustom();
-                        case 2:
-                            return Wizard.createCustom();
-                    }
+                switch (choice){
+                    case 1:
+                        chosen = true;
+                        return Warrior.createCustom();
+                    case 2:
+                        chosen = true;
+                        return Wizard.createCustom();
+                    default:
+                        break;
                 }
+
             }
             catch (NumberFormatException e){
                 System.out.println("Please choose a valid option!");

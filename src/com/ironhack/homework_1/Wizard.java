@@ -24,6 +24,28 @@ public class Wizard extends Character{
         setHp(hp);
     }
 
+    private static int statInput(int statMin, int statMax, String message){
+        Scanner scanner = new Scanner(System.in);
+        boolean validChoice = false;
+        while (validChoice == false){
+            System.out.println(message);
+            String tmp = scanner.nextLine();
+            try {
+                int choice = Integer.parseInt(tmp);
+                if (choice >= statMin && choice <= statMax){
+                    return choice;
+                }
+                else {
+                    System.out.println("Please enter a valid number");
+                }
+            }
+            catch (NumberFormatException e){
+                System.out.println("Please enter a valid number");
+            }
+        }
+        return statMin;
+    }
+
     public static Wizard createCustom(){
         if (Character.hardcore == true) {
             Scanner scanner = new Scanner(System.in);
@@ -69,62 +91,12 @@ public class Wizard extends Character{
             int intel = 0;
             int mana = 0;
             int hp = 0;
-            boolean validChoice = false;
             System.out.println("What would you like to call your Wizard?");
             String name = scanner.nextLine();
-            while (validChoice == false){
-                System.out.println("Please enter a value for intelligence between 1 and 50");
-                String tmp = scanner.nextLine();
-                try {
-                    int choice = Integer.parseInt(tmp);
-                    if (choice >= 1 && choice <= 50){
-                        intel = choice;
-                        validChoice = true;
-                    }
-                    else {
-                        System.out.println("Please enter a valid number");
-                    }
-                }
-                catch (NumberFormatException e){
-                    System.out.println("Please enter a valid number");
-                }
-            }
-            validChoice = false;
-            while (validChoice == false){
-                System.out.println("Please enter a value for mana between 10 and 50");
-                String tmp = scanner.nextLine();
-                try {
-                    int choice = Integer.parseInt(tmp);
-                    if (choice >= 10 && choice <= 50){
-                        mana = choice;
-                        validChoice = true;
-                    }
-                    else {
-                        System.out.println("Please enter a valid number");
-                    }
-                }
-                catch (NumberFormatException e){
-                    System.out.println("Please enter a valid number");
-                }
-            }
-            validChoice = false;
-            while (validChoice == false){
-                System.out.println("Please enter a value for hp between 50 and 100");
-                String tmp = scanner.nextLine();
-                try {
-                    int choice = Integer.parseInt(tmp);
-                    if (choice >= 50 && choice <= 100){
-                        hp = choice;
-                        validChoice = true;
-                    }
-                    else {
-                        System.out.println("Please enter a valid number");
-                    }
-                }
-                catch (NumberFormatException e){
-                    System.out.println("Please enter a valid number");
-                }
-            }
+            intel = statInput(10, 50, "Please enter a value for strength between 10 and 50");
+            mana = statInput(10, 50, "Please enter a value for stamina between 10 and 50");
+            hp = statInput(50, 100, "Please enter a value for hp between 50 and 100");
+            scanner.close();
             return new Wizard(name, intel, mana, hp);
         }
     }

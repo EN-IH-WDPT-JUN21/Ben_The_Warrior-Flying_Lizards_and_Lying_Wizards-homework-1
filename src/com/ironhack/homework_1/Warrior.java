@@ -23,6 +23,28 @@ public class Warrior extends Character{
         setHp(hp);
     }
 
+    private static int statInput(int statMin, int statMax, String message){
+        Scanner scanner = new Scanner(System.in);
+        boolean validChoice = false;
+        while (validChoice == false){
+            System.out.println(message);
+            String tmp = scanner.nextLine();
+            try {
+                int choice = Integer.parseInt(tmp);
+                if (choice >= statMin && choice <= statMax){
+                    return choice;
+                }
+                else {
+                    System.out.println("Please enter a valid number");
+                }
+            }
+            catch (NumberFormatException e){
+                System.out.println("Please enter a valid number");
+            }
+        }
+        return statMin;
+    }
+
     public static Warrior createCustom(){
         if (Character.hardcore == true) {
             Scanner scanner = new Scanner(System.in);
@@ -68,62 +90,12 @@ public class Warrior extends Character{
             int str = 0;
             int stam = 0;
             int hp = 0;
-            boolean validChoice = false;
             System.out.println("What would you like to call your Warrior?");
             String name = scanner.nextLine();
-            while (validChoice == false){
-                System.out.println("Please enter a value for strength between 1 and 10");
-                String tmp = scanner.nextLine();
-                try {
-                    int choice = Integer.parseInt(tmp);
-                    if (choice >= 1 && choice <= 10){
-                        str = choice;
-                        validChoice = true;
-                    }
-                    else {
-                        System.out.println("Please enter a valid number");
-                    }
-                }
-                catch (NumberFormatException e){
-                    System.out.println("Please enter a valid number");
-                }
-            }
-            validChoice = false;
-            while (validChoice == false){
-                System.out.println("Please enter a value for stamina between 10 and 50");
-                String tmp = scanner.nextLine();
-                try {
-                    int choice = Integer.parseInt(tmp);
-                    if (choice >= 10 && choice <= 50){
-                        stam = choice;
-                        validChoice = true;
-                    }
-                    else {
-                        System.out.println("Please enter a valid number");
-                    }
-                }
-                catch (NumberFormatException e){
-                    System.out.println("Please enter a valid number");
-                }
-            }
-            validChoice = false;
-            while (validChoice == false){
-                System.out.println("Please enter a value for hp between 100 and 200");
-                String tmp = scanner.nextLine();
-                try {
-                    int choice = Integer.parseInt(tmp);
-                    if (choice >= 100 && choice <= 200){
-                        hp = choice;
-                        validChoice = true;
-                    }
-                    else {
-                        System.out.println("Please enter a valid number");
-                    }
-                }
-                catch (NumberFormatException e){
-                    System.out.println("Please enter a valid number");
-                }
-            }
+            str = statInput(1, 10, "Please enter a value for strength between 1 and 10");
+            stam = statInput(10, 50, "Please enter a value for stamina between 10 and 50");
+            hp = statInput(100, 200, "Please enter a value for hp between 100 and 200");
+            scanner.close();
             return new Warrior(name, str, stam, hp);
         }
     }

@@ -18,13 +18,31 @@ public class Menu {
     }
 
     public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-        //Warrior jeff = Warrior.createCustom();
-        Character rndChar = Character.getRandom();
-        System.out.println(rndChar.getClass());
-        System.out.println(rndChar.getHp());
-
-        System.out.println(rndChar.printStats());
-
+        /* System.out.println("                    @@@  @@@   @@@@@@   @@@@@@@   @@@@@@@    @@@@@@@   @@@@@@   @@@@@@@   @@@@@@@@  ");
+        System.out.println("                    @@@  @@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  ");
+        System.out.println("                    @@!  @@@  @@!  @@@  @@!  @@@  @@!  @@@  !@@       @@!  @@@  @@!  @@@  @@!       ");
+        System.out.println("                    !@!  @!@  !@!  @!@  !@!  @!@  !@!  @!@  !@!       !@!  @!@  !@!  @!@  !@!       ");
+        System.out.println("                    @!@!@!@!  @!@!@!@!  @!@!!@!   @!@  !@!  !@!       @!@  !@!  @!@!!@!   @!!!:!    ");
+        System.out.println("                    !!!@!!!!  !!!@!!!!  !!@!@!    !@!  !!!  !!!       !@!  !!!  !!@!@!    !!!!!:    ");
+        System.out.println("                    !!:  !!!  !!:  !!!  !!: :!!   !!:  !!!  :!!       !!:  !!!  !!: :!!   !!:       ");
+        System.out.println("                    :!:  !:!  :!:  !:!  :!:  !:!  :!:  !:!  :!:       :!:  !:!  :!:  !:!  :!:       ");
+        System.out.println("                    ::   :::  ::   :::  ::   :::   :::: ::   ::: :::  ::::: ::  ::   :::   :: ::::  ");
+        System.out.println("                     :   : :   :   : :   :   : :  :: :  :    :: :: :   : :  :    :   : :  : :: ::   ");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("                                      @@@@@@@@@@    @@@@@@   @@@@@@@   @@@@@@@@  ");
+        System.out.println("                                      @@@@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  ");
+        System.out.println("                                      @@! @@! @@!  @@!  @@@  @@!  @@@  @@!       ");
+        System.out.println("                                      !@! !@! !@!  !@!  @!@  !@!  @!@  !@!       ");
+        System.out.println("                                      @!! !!@ @!@  @!@  !@!  @!@  !@!  @!!!:!    ");
+        System.out.println("                                      !@!   ! !@!  !@!  !!!  !@!  !!!  !!!!!:    ");
+        System.out.println("                                      !!:     !!:  !!:  !!!  !!:  !!!  !!:       ");
+        System.out.println("                                      :!:     :!:  :!:  !:!  :!:  !:!  :!:       ");
+        System.out.println("                                      :::     ::   ::::: ::   :::: ::   :: ::::  ");
+        System.out.println("                                       :      :     : :  :   :: :  :   : :: ::  ");
+        */
+        Character bob = Warrior.createCustom();
+        System.out.println(bob.getHp());
 
     }
 
