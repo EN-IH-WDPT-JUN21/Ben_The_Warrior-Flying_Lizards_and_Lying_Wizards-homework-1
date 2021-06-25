@@ -161,4 +161,8 @@ public class Warrior extends Character{
             setAlive(false);
         }
     }
+
+    public String printStats(){
+        return this.getName() + " the " + this.getClass().getSimpleName() + "; Id: " + this.getId() + ", Strength: " + this.getStrength() + ", Stamina: " + this.getStamina() + ", Hp: " + (int) this.getHp() + ".";
+    }
 }

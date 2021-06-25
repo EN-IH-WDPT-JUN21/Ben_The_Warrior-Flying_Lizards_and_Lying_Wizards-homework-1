@@ -79,6 +79,7 @@ public abstract class Character {
 
     abstract void attack(Character character);
     abstract void receiveDamage(double damage);
+    abstract String printStats();
 
     public static Character getRandom() throws NoSuchMethodException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         int rndClassIndex = (int) Math.floor(Math.random() * possibleClasses.length);

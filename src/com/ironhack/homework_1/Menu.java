@@ -23,7 +23,7 @@ public class Menu {
         System.out.println(rndChar.getClass());
         System.out.println(rndChar.getHp());
 
-        Character.createCustom();
+        System.out.println(rndChar.printStats());
 
 
     }

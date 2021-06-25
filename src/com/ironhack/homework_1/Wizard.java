@@ -162,4 +162,8 @@ public class Wizard extends Character{
             setAlive(false);
         }
     }
+
+    public String printStats(){
+        return this.getName() + " the " + this.getClass().getSimpleName() + "; Id: " + this.getId() + ", Intelligence: " + this.getIntelligence() + ", Mana: " + this.getMana() + ", Hp: " + (int) this.getHp() + ".";
+    }
 }
