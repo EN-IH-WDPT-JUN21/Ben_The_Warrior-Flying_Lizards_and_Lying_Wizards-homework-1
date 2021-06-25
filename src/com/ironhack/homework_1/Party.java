@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Party {
-    private final int MAX_STARTING_SIZE = 12; // Only used to define the maximum party size for the manual creation
+    private final int MAX_STARTING_SIZE = 20; // Only used to define the maximum party size for the manual creation
     private List<Character> partyCharacters;
     private String partyName;
 
@@ -42,11 +42,19 @@ public class Party {
     }
 
     // ========== Party Creation ==========
-    // Method to select the initial size of the party  (USER INPUT METHOD)
+
+    // Name the party  (USER INPUT METHOD)
+    public void inputPartyName() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What would you like to name your Party?");
+        this.partyName = scanner.nextLine();
+    }
+
+    // Select the initial size of the party  (USER INPUT METHOD)
     public int inputPartySize() {
-        System.out.println("Input the size of the party:    ( maximum " + MAX_STARTING_SIZE + " Characters )");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Input the size of the party:   ( maximum " + MAX_STARTING_SIZE + " Characters )");
         while (true) {
-            Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
             try {
                 int choice = Integer.parseInt(input);
@@ -58,18 +66,17 @@ public class Party {
         }
     }
 
-    // TODO(JA) Needs to be tested and implemented - waiting for merge to test.
     // Generates random party (party still needs to be previously initialized)
     public void generateRandomParty(int partySize) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         for (int i = 0; i < partySize; i++) {
             partyCharacters.add(Character.getRandom());
         }
+        System.out.println("Randomly Generated party:");
+        printPartyStats();
     }
 
-
-    // TODO(JA) Needs to be tested and implemented - waiting for merge to test.
     // Generates custom party (party still needs to be previously initialized)
-    public void generateCustomParty(int partySize) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void createCustomParty(int partySize) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         for (int i = 0; i < partySize; i++) {
             partyCharacters.add(Character.createCustom());
 
@@ -81,12 +88,14 @@ public class Party {
                 return;
             }
         }
+        System.out.println("Customised party:");
+        printPartyStats();
     }
 
     // Checks if the user wants to continue custom creation  (USER INPUT METHOD)
     // (doesn't need to be included. just for cases where you regret trying to create 30 characters by hand)
     // (adapted so it could be used to exit other method)  (returns -1 to exit and 0 to continue)
-    private static int inputExit(boolean isCreating) {
+    public static int inputExit(boolean isCreating) {
         System.out.println(isCreating ? "Continue custom creation?   (y)Yes   (r)Randomise Remaining   (n)Exit"
                 : "Continue operation?   (y)Yes   (n)Exit");
         while (true) {
@@ -112,13 +121,14 @@ public class Party {
         }
     }
 
-    // Deletes all elements from party
+    // Deletes all Characters from party
     public void clearParty() {
         partyCharacters.clear();
         System.out.println(partyName + " cleared!");
     }
 
-    // ========== Characters in Party ==========
+
+    // ==================== Characters Management in Party ====================
     //Adds character to party list
     public void addCharacterToParty(Character character) {
         System.out.println("Added to " + partyName + ": " + character.printStats());
@@ -162,10 +172,11 @@ public class Party {
         return partyCharacters.get(rand.nextInt(partyCharacters.size()));
     }
 
-    // Returns the index of the character in the party list (can be useful for further methods) (not in use)
+    // Returns the index of the character in the party list (can be useful for newer methods) (not in use)
     public int getIdxInParty(Character character) {
         return partyCharacters.indexOf(character);
     }
+
 
     // ==================== Log ====================
     // Prints each character from the party with their stats, using "Character.printStats()"
