@@ -61,6 +61,7 @@ public class Menu {
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Welcome to the ECC Flying Lizards and Lying Wizards game!");
+            System.out.println("Choose your players");
             boolean isRunning = true;
             while (isRunning) {
                 System.out.println("\nHere are your options...");
@@ -68,6 +69,7 @@ public class Menu {
                 System.out.println("2 -> Create Wizard individually customizing his/her stats and name");
                 System.out.println("3 -> Create a full party of randomly generated Wizards and Warriors ");
                 System.out.println("4 -> Import a party using a CSV file");
+                System.out.println("x -> Go to the next step");
 
                 String option = scanner.nextLine();
                 switch (option) {
@@ -80,7 +82,6 @@ public class Menu {
                         Warrior warrior1=new Warrior();
                         PartyCreator pc1= new PartyCreator();
                         pc1.addCharacter(party1, warrior1);
-                        isRunning = false;
                         break;
                     case "2":   // Create Wizard individually customizing his/her stats and name
                         System.out.println("Write the Wizard name:");
@@ -91,19 +92,16 @@ public class Menu {
                         Wizard wizard1=new Wizard();
                         PartyCreator pc2= new PartyCreator();
                         pc2.addCharacter(party2, wizard1);
-                        isRunning = false;
                         break;
                     case "3":   // Create a full party of randomly generated Wizards and Warriors ");
                         PartyCreator pc3= new PartyCreator();
                         pc3.randomParty();
-                        isRunning = false;
                         break;
                     case "4":   // Import a party using a CSV file
                         System.out.println("Write the path to CSV file with its name:");
                         String csvpath = scanner.nextLine();
                         PartyCreator pc4= new PartyCreator();
                         pc4.importParty(csvpath);
-                        isRunning = false;
                         break;
                     case "x":   // Exit program
                         isRunning = false;
@@ -114,6 +112,8 @@ public class Menu {
                 }
             }
 
+        System.out.println("Now you can begin...");
+
         boolean isRunning2 = true;
         while (isRunning2) {
 
@@ -122,7 +122,7 @@ public class Menu {
             System.out.println("7 -> Show the graveyard");
             System.out.println("8 -> Show a log");
             System.out.println("9 -> Export party into an importable CSV file");
-            System.out.println("x -> Exit program / Export Employee/Intern list");
+            System.out.println("x -> Exit menu");
             String option = scanner.nextLine();
             switch (option) {
                 case "5":   // Start single battle between individuals
