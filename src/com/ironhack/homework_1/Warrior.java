@@ -47,7 +47,7 @@ public class Warrior extends Character{
     
         @Override
     public String toCsvFormat() {
-        return "Warrior," + super.getId() + "," + super.getName() + "," + super.getHp() + "," + getStamina()
+        return "Warrior," + super.getId() + "," + super.getName() + "," + super.getHp() + "," + getStamina();
     }
 
     public static Warrior createCustom(){

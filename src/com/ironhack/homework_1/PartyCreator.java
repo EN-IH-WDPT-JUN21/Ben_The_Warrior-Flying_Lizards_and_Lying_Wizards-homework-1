@@ -96,7 +96,7 @@ public class PartyCreator {
         }
 
     }
-    public static Party randomParty(){
+    public static Party randomParty() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // Find way to know each of the subclasses of Character?
 
         Random randomInt = new Random(30);
@@ -113,7 +113,7 @@ public class PartyCreator {
         party.addCharacter(Character.createCustom());
     }
 
-    public static void addCharacter(String csvFile) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationExc{
+    public static void addCharacter(String csvFile) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException {
         csvFile = csvCheck(csvFile, false);
         if(csvFile == null) {
             return;
