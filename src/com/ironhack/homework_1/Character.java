@@ -81,6 +81,41 @@ public abstract class Character {
     abstract void receiveDamage(double damage);
     abstract String printStats();
 
+    abstract String toCsvFormat();
+
+    public static Character addCharacter(String[] parameters){
+        switch(parameters[0]){
+            case "Warrior":
+                if(parameters.length == 5){
+                    try{
+                        return new Warrior(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                    }catch (NumberFormatException e){
+                        return null;
+                    }
+                }else{
+                    System.err.println("ERROR: incorrect number of parameters for Warrior. This Character will not be added to the party");
+                }
+
+            case "Wizard":
+                if(parameters.length == 5){
+                    try{
+                        return new Wizard(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                    }
+                    catch (NumberFormatException e){
+                        return null;
+                    }
+                }else{
+                    System.err.println("ERROR: incorrect number of parameters for Wizard. This Character will not be added to the party");
+                    return null;
+                }
+
+            default:
+                System.err.println("ERROR: Character " + parameters[0] + " not found");
+                return null;
+        }
+    }
     public static Character getRandom() throws NoSuchMethodException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         int rndClassIndex = (int) Math.floor(Math.random() * possibleClasses.length);
         Character charRnd = (Character) possibleClasses[rndClassIndex].newInstance();
