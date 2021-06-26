@@ -1,11 +1,7 @@
 package com.ironhack.homework_1;
 
-<<<<<<< HEAD
-import java.lang.reflect.InvocationTargetException;
 
-public class Menu {
-    public String[] battle(){
-=======
+import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +9,6 @@ import java.util.Scanner;
 
 public class Menu {
     public static String[] battle(Party party1, Party party2){
->>>>>>> 5d00605 (first commit)
         // create battle simulator with the menu's parties and do the battle and return the resulting graveyard
         /*
         Check party1 and party2 have >0 Characters
@@ -28,37 +23,7 @@ public class Menu {
     }
 
 <<<<<<< HEAD
-    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-        System.out.println("                  '||'  '||'     |     '||''|.   '||''|.     ..|'''.|  ..|''||   '||''|.   '||''''|  ");
-        System.out.println("                   ||    ||     |||     ||   ||   ||   ||  .|'     '  .|'    ||   ||   ||   ||  .    ");
-        System.out.println("                   ||''''||    |  ||    ||''|'    ||    || ||         ||      ||  ||''|'    ||''|    ");
-        System.out.println("                   ||    ||   .''''|.   ||   |.   ||    || '|.      . '|.     ||  ||   |.   ||       ");
-        System.out.println("                  .||.  .||. .|.  .||. .||.  '|' .||...|'   ''|....'   ''|...|'  .||.  '|' .||.....| ");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("                                       '||    ||'  ..|''||   '||''|.   '||''''|  ");
-        System.out.println("                                        |||  |||  .|'    ||   ||   ||   ||  .    ");
-        System.out.println("                                        |'|..'||  ||      ||  ||    ||  ||''|    ");
-        System.out.println("                                        | '|' ||  '|.     ||  ||    ||  ||       ");
-        System.out.println("                                       .|. | .||.  ''|...|'  .||...|'  .||.....| ");
-=======
-    public static void main(String[] args) throws IOException {
-        // where the actual game menu is started
-        // have keywords for the interaction ex:
-        /*
-        Like João sugested with the switch case
-        info -> all possible keywords with explanation
-        show p1
-        show p2
-        show all
-        graveyard
-        fight
-        save p1
-        save p2
-        ...
-         */
-        // ========== Main Menu ==========
-
+     public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Welcome to the ECC Flying Lizards and Lying Wizards game!");
             System.out.println("Choose your players");
@@ -170,9 +135,5 @@ public class Menu {
                     break;
             }
         }
-
->>>>>>> 5d00605 (first commit)
-
     }
-
 }
