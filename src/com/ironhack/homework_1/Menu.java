@@ -22,7 +22,7 @@ public class Menu {
 
     }
 
-<<<<<<< HEAD
+
      public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Welcome to the ECC Flying Lizards and Lying Wizards game!");
