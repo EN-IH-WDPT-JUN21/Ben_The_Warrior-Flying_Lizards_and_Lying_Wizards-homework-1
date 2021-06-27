@@ -7,11 +7,11 @@ public class BattleSimulator {
     private Party party2;
     private String[] graveyard;
 
-    public BattleSimulator(Party party1, Party party2) {
+    public BattleSimulator(Party party1, Party party2){
 
     }
 
-    public List<Character> battle() {
+    public List<Character> battle(){
         return null; // return the graveyard
     }
 
