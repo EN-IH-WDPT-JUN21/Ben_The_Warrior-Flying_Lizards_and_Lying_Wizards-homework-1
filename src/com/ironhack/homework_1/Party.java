@@ -130,7 +130,7 @@ public class Party {
 
     // ==================== Characters Management in Party ====================
     //Adds character to party list
-    public void addCharacterToParty(Character character) {
+    public void addCharacter(Character character) {
         System.out.println("Added to " + partyName + ": " + character.printStats());
         partyCharacters.add(character);
     }
