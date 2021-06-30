@@ -126,7 +126,7 @@ public class BattleSimulator {
         while(!isPartyEmpty(this.party1) || !isPartyEmpty(this.party2)){
 
             //choose characters for Duel
-            Duel(getChar(party1),getChar(party2));
+            Duel(getChar(this.party1),getChar(this.party2));
         }
 
 
