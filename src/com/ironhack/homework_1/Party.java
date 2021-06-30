@@ -18,6 +18,7 @@ public class Party {
 
     public Party(String partyName) {
         this.partyName = partyName;
+        this.partyCharacters = new ArrayList<>();
     }
 
     public Party() {

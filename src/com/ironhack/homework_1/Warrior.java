@@ -47,7 +47,7 @@ public class Warrior extends Character{
     
         @Override
     public String toCsvFormat() {
-        return "Warrior," + super.getId() + "," + super.getName() + "," + super.getHp() + "," + getStamina();
+        return "Warrior," + super.getName() + "," + getStrength() + "," + getStamina() +"," + super.getHp() + "\n";
     }
 
     public static Warrior createCustom(){
@@ -100,7 +100,7 @@ public class Warrior extends Character{
             str = statInput(1, 10, "Please enter a value for Strength between 1 and 10");
             stam = statInput(10, 50, "Please enter a value for Stamina between 10 and 50");
             hp = statInput(100, 200, "Please enter a value for Hp between 100 and 200");
-            scanner.close();
+            //scanner.close();
             return new Warrior(name, str, stam, hp);
         }
     }
