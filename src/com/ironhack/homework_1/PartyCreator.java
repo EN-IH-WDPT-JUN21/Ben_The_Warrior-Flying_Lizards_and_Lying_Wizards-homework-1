@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class PartyCreator {
-    public static Party importParty(String csvFile) throws FileNotFoundException {
+    public Party importParty(String csvFile) throws FileNotFoundException {
 
         // Initialization of party to be returned
         Party importedParty = new Party();
@@ -54,7 +54,7 @@ public class PartyCreator {
         return importedParty;
     }
 
-    public static void saveParty(Party party, String csvFile) throws IOException {
+    public void saveParty(Party party, String csvFile) throws IOException {
 
         // Save passed in Party party to file <fileName>.csv in the default folder
 
@@ -96,24 +96,21 @@ public class PartyCreator {
         }
 
     }
-    public static Party randomParty() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public Party randomParty(Party party) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // Find way to know each of the subclasses of Character?
-
-        Random randomInt = new Random(30);
-        Party party = new Party();
-        int numCharacters = randomInt.nextInt();
-        for(int i = 0; i < randomInt.nextInt(); i++){
+        party.clearParty();
+        for(int i = 0; i < 5; i++){
             party.addCharacter(Character.getRandom());
         }
         return party;
     }
 
-    public static void addCharacter(Party party){
+    public void addCharacter(Party party){
         // add Warrior warrior to the Party party
         party.addCharacter(Character.createCustom());
     }
 
-    public static void addCharacter(String csvFile) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException {
+    public void addCharacter(String csvFile) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException {
         csvFile = csvCheck(csvFile, false);
         if(csvFile == null) {
             return;
@@ -135,7 +132,7 @@ public class PartyCreator {
         fileWriter.close();
     }
 
-    private static String csvCheck(String csvFile, boolean toRead){
+    private String csvCheck(String csvFile, boolean toRead){
 
         // Check if file name exceeds maximum length
         if(csvFile.length() > 100){
@@ -161,7 +158,7 @@ public class PartyCreator {
         return csvFile;
     }
 
-    private static String[] directoryAndName(String csvFile){
+    private String[] directoryAndName(String csvFile){
         //Split string into directory and name of the file
         String[] csvFileParts = csvFile.split("/");
         if(csvFileParts.length == 1){

@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,48 +27,53 @@ public class Menu {
 
      public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
             Scanner scanner = new Scanner(System.in);
+            PartyCreator pc = new PartyCreator();
             System.out.println("Welcome to the ECC Flying Lizards and Lying Wizards game!");
             System.out.println("Choose your players");
+            Party party1 = new Party("Player 1");
+            Party party2 = new Party("Player 2");
+            List<Character> graveyard = new ArrayList<>();
+
             boolean isRunning = true;
             while (isRunning) {
                 System.out.println("\nHere are your options...");
-                System.out.println("1 -> Create Warrior individually customizing his/her stats and name");
-                System.out.println("2 -> Create Wizard individually customizing his/her stats and name");
-                System.out.println("3 -> Create a full party of randomly generated Wizards and Warriors ");
-                System.out.println("4 -> Import a party using a CSV file");
+                System.out.println("1 -> Create a Character individually customizing his/her stats and name in party 1");
+                System.out.println("2 -> Create a Character individually customizing his/her stats and name in party 2");
+                System.out.println("3 -> Create a full party of randomly generated Characters in party 1");
+                System.out.println("4 -> Create a full party of randomly generated Characters in party 2");
+                System.out.println("5 -> Import a party using a CSV file in party 1");
+                System.out.println("6 -> Import a party using a CSV file in party 2");
                 System.out.println("x -> Go to the next step");
 
                 String option = scanner.nextLine();
                 switch (option) {
                     case "1":   // Create Warrior individually customizing his/her stats and name
-                        System.out.println("Write the Warrior name:");
-                        String name1 = scanner.nextLine();
-                        System.out.println("Write the Warrior stamina:");
-                        int stamina1 = scanner.nextInt();
-                        Party party1= new Party();
-                        Warrior warrior1=new Warrior();
-                        PartyCreator pc1= new PartyCreator();
-                        pc1.addCharacter(party1, warrior1);
+                        pc.addCharacter(party1);
+                        party1.printPartyStats();
                         break;
                     case "2":   // Create Wizard individually customizing his/her stats and name
-                        System.out.println("Write the Wizard name:");
-                        String name2 = scanner.nextLine();
-                        System.out.println("Write the Wizard stamina:");
-                        int stamina2 = scanner.nextInt();
-                        Party party2= new Party();
-                        Wizard wizard1=new Wizard();
-                        PartyCreator pc2= new PartyCreator();
-                        pc2.addCharacter(party2, wizard1);
+                        pc.addCharacter(party2);
+                        party2.printPartyStats();
                         break;
                     case "3":   // Create a full party of randomly generated Wizards and Warriors ");
-                        PartyCreator pc3= new PartyCreator();
-                        pc3.randomParty();
+                        party1 = pc.randomParty(party1);
+                        party1.printPartyStats();
                         break;
-                    case "4":   // Import a party using a CSV file
+                    case "4":
+                        party2 = pc.randomParty(party2);
+                        party2.printPartyStats();
+                        break;
+                    case "5":   // Import a party using a CSV file
                         System.out.println("Write the path to CSV file with its name:");
-                        String csvpath = scanner.nextLine();
-                        PartyCreator pc4= new PartyCreator();
-                        pc4.importParty(csvpath);
+                        String csvpath1 = scanner.nextLine();
+                        party1 = pc.importParty(csvpath1);
+                        party1.printPartyStats();
+                        break;
+                    case "6":   // Import a party using a CSV file
+                        System.out.println("Write the path to CSV file with its name:");
+                        String csvpath2 = scanner.nextLine();
+                        party2 = pc.importParty(csvpath2);
+                        party2.printPartyStats();
                         break;
                     case "x":   // Exit program
                         isRunning = false;
@@ -93,17 +99,21 @@ public class Menu {
             switch (option) {
                 case "5":   // Start single battle between individuals
                     System.out.println("Battle...");
-                    //    BattleSimulator bt = new BattleSimulator(party1, party2);
-                    //    bt.battle();
+                    BattleSimulator bt = new BattleSimulator(party1, party2);
+                    bt.battle();
                     //isRunning2 = false;
                     break;
                 case "6":   // Simulate whole party fights with one command
                     System.out.println("Battle of the armies...");
-                    //    BattleSimulator bt = new BattleSimulator(party1, party2);
-                    //    bt.battleRandom();
+                    BattleSimulator bt2 = new BattleSimulator(party1, party2);
+                    bt2.battleRandom();
+                    bt2.printGraveyard();
                     //isRunning2 = false;
                     break;
                 case "7":   // Show the graveyard
+                    for(Character chr : graveyard){
+                        chr.printStats();
+                    }
                     //System.out.println("Graveyard:");
                     //printGraveyard();
                     //isRunning2 = false;
@@ -113,20 +123,16 @@ public class Menu {
                     //isRunning2 = false;
                     break;
                 case "9":   // Export party into an importable CSV file
-                    System.out.println("Exporting parties to parties.txt");
-                    FileWriter writer0 = new FileWriter("parties.txt", false);
-                    writer0.write("Example \n");
-                    writer0.write("cd \n");
-                    writer0.close();
-                    File file0= new File("parties.txt");
-                    Scanner scanner0 = new Scanner(file0);
-                    while (scanner0.hasNextLine()) {
-                        String line = scanner0.nextLine();
-                        System.out.println(line);
-
-                    }
-                    scanner0.close();
+                    System.out.println("Where do you want to save the party?");
+                    String fileName = scanner.nextLine();
+                    pc.saveParty(party1, fileName);
                     //isRunning2 = false;
+                    break;
+                case "10":   // Export party into an importable CSV file
+                    /*System.out.println("Where do you want to save the party?");
+                    String fileName = scanner.nextLine();
+                    pc.saveParty(fileName, party1);
+                    //isRunning2 = false;*/
                     break;
                 case "x":   // Exit program
                     isRunning2 = false;
