@@ -45,7 +45,7 @@ public class BattleSimulator {
 
 
     // private Method that simulate a single duel
-    private void Duel(Character c1, Character c2){
+    private void duel(Character c1, Character c2){
         int round = 0;
 
         while(c1.isAlive() || c2.isAlive()){
@@ -98,7 +98,7 @@ public class BattleSimulator {
         while(!isPartyEmpty(this.party1) || !isPartyEmpty(this.party2)){
 
         //choose random characters for Duel
-            Duel(getRandomChar(party1),getRandomChar(party2));
+            duel(getRandomChar(party1),getRandomChar(party2));
         }
 
 
@@ -126,7 +126,7 @@ public class BattleSimulator {
         while(!isPartyEmpty(this.party1) || !isPartyEmpty(this.party2)){
 
             //choose characters for Duel
-            Duel(getChar(this.party1),getChar(this.party2));
+            duel(getChar(this.party1),getChar(this.party2));
         }
 
 
