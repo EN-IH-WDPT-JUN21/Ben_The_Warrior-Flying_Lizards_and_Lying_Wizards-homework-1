@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -19,7 +20,7 @@ public class Menu {
     }
 
     public void printGraveyard(){
-
+        //
     }
 
 
@@ -99,11 +100,11 @@ public class Menu {
                 case "6":   // Simulate whole party fights with one command
                     System.out.println("Battle of the armies...");
                     //    BattleSimulator bt = new BattleSimulator(party1, party2);
-                    //    bt.battle();
+                    //    bt.battleRandom();
                     //isRunning2 = false;
                     break;
                 case "7":   // Show the graveyard
-                    System.out.println("Graveyard:");
+                    //System.out.println("Graveyard:");
                     //printGraveyard();
                     //isRunning2 = false;
                     break;
