@@ -48,37 +48,37 @@ public class BattleSimulator {
     private void duel(Character c1, Character c2){
         int round = 0;
 
-        while(c1.isAlive() || c2.isAlive()){
+        while(c1.isAlive() && c2.isAlive()){
             round += 1;
             System.out.println("==========    Round N°"+round+"   ============");
 
             c1.attack(c2); //they attack at the same time
             c2.attack(c1);
 
-            if(!c1.isAlive() || !c2.isAlive()){
+            if(!c1.isAlive() && !c2.isAlive()){
                 this.graveyard.add(c1);
                 this.graveyard.add(c2);
                 this.party1.removeCharacter(c1);
                 this.party2.removeCharacter(c2);
                 System.out.println("Both fighters have fallen in combat");
             }
-            else if(!c1.isAlive() && c2.isAlive()){
+            else if(!c1.isAlive()){
                 this.graveyard.add(c1);
                 this.party1.removeCharacter(c1);
                 System.out.println("Fighter "+c1.getName()+ "has fallen in combat");
                 System.out.println("The winner is "+c2.getName());
             }
-            else if(c1.isAlive() && !c2.isAlive()){
+            else if(!c2.isAlive()){
                 this.graveyard.add(c2);
-                this.party1.removeCharacter(c2);
+                this.party2.removeCharacter(c2);
                 System.out.println("Fighter "+c2.getName()+ "has fallen in combat");
                 System.out.println("The winner is "+c1.getName());
             }
             else{
                 System.out.println("Party 1 fighter "+c1.getName()+ " attacks "+c2.getName());
                 System.out.println("Party 2 fighter "+c2.getName()+ " attacks "+c1.getName());
-                System.out.println(c1.getName()+" it has "+c1.getHp()+" HP");
-                System.out.println(c2.getName()+" it has "+c2.getHp()+" HP");
+                System.out.println(c1.getName()+" has "+c1.getHp()+" HP");
+                System.out.println(c2.getName()+" has "+c2.getHp()+" HP");
             }
 
 
@@ -95,7 +95,7 @@ public class BattleSimulator {
                 "======== "+party1.getPartyName()+" V/S "+party2.getPartyName()+" ========");
 
         // battle is going to happen meanwhile party1 and party2 has at least one element
-        while(!isPartyEmpty(this.party1) || !isPartyEmpty(this.party2)){
+        while(!isPartyEmpty(this.party1) && !isPartyEmpty(this.party2)){
 
         //choose random characters for Duel
             duel(getRandomChar(party1),getRandomChar(party2));
@@ -105,10 +105,10 @@ public class BattleSimulator {
 
         System.out.println("======   END OF THE BATTLE   ======");
 
-        if(isPartyEmpty(this.party1) || isPartyEmpty(this.party2)){
+        if(isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
             System.out.println("Both parties are dead, it's a draw");
         }
-        else if (!isPartyEmpty(this.party1) || isPartyEmpty(this.party2)){
+        else if (!isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
             System.out.println("We have a winner: "+party1.getPartyName());
         }
         else {
@@ -123,7 +123,7 @@ public class BattleSimulator {
                 "======== "+party1.getPartyName()+" V/S "+party2.getPartyName()+" ========");
 
         // battle is going to happen meanwhile party1 and party2 has at least one element
-        while(!isPartyEmpty(this.party1) || !isPartyEmpty(this.party2)){
+        while(!isPartyEmpty(this.party1) && !isPartyEmpty(this.party2)){
 
             //choose characters for Duel
             duel(getChar(this.party1),getChar(this.party2));
@@ -133,10 +133,10 @@ public class BattleSimulator {
 
         System.out.println("======   END OF THE BATTLE   ======");
 
-        if(isPartyEmpty(this.party1) || isPartyEmpty(this.party2)){
+        if(isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
             System.out.println("Both parties are dead, it's a draw");
         }
-        else if (!isPartyEmpty(this.party1) || isPartyEmpty(this.party2)){
+        else if (!isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
             System.out.println("We have a winner: "+party1.getPartyName());
         }
         else {

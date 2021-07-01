@@ -48,8 +48,7 @@ public class Wizard extends Character{
     
         @Override
     public String toCsvFormat() {
-        return "Wizard," + super.getId() + "," + super.getName() + "," + super.getHp() + "," + getMana()
-                + "," + getIntelligence() + "\n";
+        return "Wizard," + super.getName() + "," + getIntelligence() + "," + getMana() + "," + super.getHp() + "\n";
     }
 
     public static Wizard createCustom(){
@@ -102,7 +101,7 @@ public class Wizard extends Character{
             intel = statInput(10, 50, "Please enter a value for Intelligence between 10 and 50");
             mana = statInput(10, 50, "Please enter a value for Mana between 10 and 50");
             hp = statInput(50, 100, "Please enter a value for Hp between 50 and 100");
-            scanner.close();
+            //scanner.close();
             return new Wizard(name, intel, mana, hp);
         }
     }
