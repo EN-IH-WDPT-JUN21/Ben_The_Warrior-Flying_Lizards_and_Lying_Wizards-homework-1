@@ -1,7 +1,7 @@
 package com.ironhack.homework_1;
 
 public class Names {
-    private static String[] nameList2 = {"Ben"};
+//    private static String[] nameList2 = {"Ben"};
     private static String[] nameList = {"Aaran", "Aaren", "Aarez", "Aarman", "Aaron", "Aaron-James", "Aarron",
             "Aaryan", "Aaryn", "Aayan", "Aazaan", "Abaan", "Abbas", "Abdallah", "Abdalroof", "Abdihakim", "Abdirahman"
             , "Abdisalam", "Abdul", "Abdul-Aziz", "Abdulbasir", "Abdulkadir", "Abdulkarem", "Abdulkhader", "Abdullah"
@@ -272,6 +272,6 @@ public class Names {
 
 
     public static String randomName() {
-        return nameList2[(int) Math.floor(Math.random() * nameList2.length)];
+        return nameList[(int) Math.floor(Math.random() * nameList.length)];
     }
 }
