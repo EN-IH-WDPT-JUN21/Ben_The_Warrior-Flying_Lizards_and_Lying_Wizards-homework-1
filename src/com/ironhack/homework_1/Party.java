@@ -152,7 +152,7 @@ public class Party {
     // Selects character from the party  (USER INPUT METHOD)
     public Character selectCharacter() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose a Character from your party:");
+        System.out.println("Choose a Character from your party - " + this.partyName + ":");
         for (int i = 0; i < partyCharacters.size(); i++) {
             System.out.println("(" + (i + 1) + ")" + " " + partyCharacters.get(i).printStats());
         }
