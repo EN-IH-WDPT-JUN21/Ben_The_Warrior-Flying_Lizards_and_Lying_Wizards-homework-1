@@ -134,6 +134,7 @@ public class Party {
     public void addCharacter(Character character) {
         System.out.println("Added to " + partyName + ": " + character.printStats());
         partyCharacters.add(character);
+        this.setRepeatedName(character);
     }
 
     //Removes character from party list (by character)
@@ -151,7 +152,7 @@ public class Party {
     // Selects character from the party  (USER INPUT METHOD)
     public Character selectCharacter() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose a Character from your party:");
+        System.out.println("Choose a Character from your party - " + this.partyName + ":");
         for (int i = 0; i < partyCharacters.size(); i++) {
             System.out.println("(" + (i + 1) + ")" + " " + partyCharacters.get(i).printStats());
         }
@@ -176,6 +177,15 @@ public class Party {
     // Returns the index of the character in the party list (can be useful for newer methods) (not in use)
     public int getIdxInParty(Character character) {
         return partyCharacters.indexOf(character);
+    }
+
+    // Renames characters that have repeated names in party. Needs to be added everytime we add to party.
+    public void setRepeatedName(Character character) {
+        for (Character partyMembers : this.partyCharacters) {
+            if (partyMembers.getName().equals(character.getName()) && partyMembers != character) {
+                character.setName(character.getName() + " Jr.");
+            }
+        }
     }
 
 
