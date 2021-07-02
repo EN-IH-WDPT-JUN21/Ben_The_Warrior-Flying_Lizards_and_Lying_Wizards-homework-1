@@ -44,7 +44,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("Select a valid option...");
+                    System.out.println("| Select a valid option...                                                                                                    |");
                     break;
             }
         }
@@ -90,7 +90,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("Select a valid option...");
+                    System.out.println("| Select a valid option...                                                                                                    |");
                     break;
             }
         }
@@ -136,7 +136,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("Select a valid option...");
+                    System.out.println("| Select a valid option...                                                                                                    |");
                     break;
             }
         }
@@ -162,7 +162,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("Select a valid option...");
+                    System.out.println("| Select a valid option...                                                                                                    |");
                     break;
             }
         }
@@ -172,7 +172,7 @@ public class Menu {
         if(!party.getPartyCharacters().isEmpty()){
             boolean deleteNotSelected = true;
             while(deleteNotSelected){
-                System.out.println("Do you want to delete the characters previously added to this party? [ yes | no ]");
+                System.out.println("| Do you want to delete the characters previously added to this party? [ yes | no ]                                           |");
                 input = scanner.nextLine();
                 if(input.length() == 0){
                     input = "empty";
@@ -187,7 +187,7 @@ public class Menu {
                         System.out.println("Previously added characters preserved!");
                         break;
                     default:
-                        System.out.println("Select a valid option...");
+                        System.out.println("| Select a valid option...                                                                                                    |");
                         break;
                 }
             }
@@ -204,7 +204,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("Select a valid option...");
+                    System.out.println("| Select a valid option...                                                                                                    |");
                     break;
             }
         }
@@ -241,7 +241,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("Select a valid option...");
+                    System.out.println("| Select a valid option...                                                                                                    |");
                     break;
             }
         }
@@ -258,7 +258,7 @@ public class Menu {
                     if(!party1.getPartyCharacters().isEmpty()){
                         boolean deleteNotSelected = true;
                         while (deleteNotSelected){
-                            System.out.println("Are you sure you want to delete the existing characters in party 1? [ yes | no ]");
+                            System.out.println("| Are you sure you want to delete the existing characters in party 1? [ yes | no ]                                            |");
                             input = scanner.nextLine();
                             if(input.length() == 0){
                                 input = "empty";
@@ -274,7 +274,7 @@ public class Menu {
                                     deleteNotSelected = false;
                                     break;
                                 default:
-                                    System.out.println("Select a valid option...");
+                                    System.out.println("| Select a valid option...                                                                                                    |");
                                     break;
                             }
                         }
@@ -286,7 +286,7 @@ public class Menu {
                     if(!party2.getPartyCharacters().isEmpty()){
                         boolean deleteNotSelected = true;
                         while (deleteNotSelected){
-                            System.out.println("Are you sure you want to delete the existing characters in party 1? [ yes | no ]");
+                            System.out.println("| Are you sure you want to delete the existing characters in party 1? [ yes | no ]                                            |");
                             input = scanner.nextLine();
                             if(input.length() == 0){
                                 input = "empty";
@@ -302,7 +302,7 @@ public class Menu {
                                     deleteNotSelected = false;
                                     break;
                                 default:
-                                    System.out.println("Select a valid option...");
+                                    System.out.println("| Select a valid option...                                                                                                    |");
                                     break;
                             }
                         }
@@ -329,7 +329,7 @@ public class Menu {
                 case "1":
                     confirmBattle = true;
                     while (confirmBattle){
-                        System.out.println("Are you sure you want to start a manual battle? [ yes | no ]");
+                        System.out.println("| Are you sure you want to start a manual battle? [ yes | no ]                                                                |");
                         input = scanner.nextLine();
                         if(input.length() == 0){
                             input = "empty";
@@ -349,7 +349,7 @@ public class Menu {
                                 confirmBattle = false;
                                 break;
                             default:
-                                System.out.println("Select a valid option...");
+                                System.out.println("| Select a valid option...                                                                                                    |");
                                 break;
                         }
                     }
@@ -357,7 +357,7 @@ public class Menu {
                 case "2":
                     confirmBattle = true;
                     while (confirmBattle){
-                        System.out.println("Are you sure you want to start a manual battle? [ yes | no ]");
+                        System.out.println("| Are you sure you want to start a manual battle? [ yes | no ]                                                                |");
                         input = scanner.nextLine();
                         if(input.length() == 0){
                             input = "empty";
@@ -371,14 +371,13 @@ public class Menu {
                                     pc.randomParty(party2);
                                 }
                                 bt.battleRandom();
-                                System.out.println(bt.graveyard().size());
                                 confirmBattle = false;
                                 break;
                             case 'n':
                                 confirmBattle = false;
                                 break;
                             default:
-                                System.out.println("Select a valid option...");
+                                System.out.println("| Select a valid option...                                                                                                    |");
                                 break;
                         }
                     }
@@ -386,7 +385,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("Select a valid option...");
+                    System.out.println("| Select a valid option...                                                                                                    |");
                     break;
             }
         }
@@ -467,7 +466,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("Select a valid option...");
+                    System.out.println("| Select a valid option...                                                                                                    |");
                     break;
             }
         }
@@ -558,7 +557,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("Select a valid option...");
+                    System.out.println("| Select a valid option...                                                                                                    |");
                     break;
             }
         }
@@ -606,7 +605,7 @@ public class Menu {
                         isRunning = false;
                         break;
                     default:
-                        System.out.println("Select a valid option...");
+                        System.out.println("| Select a valid option...                                                                                                    |");
                         break;
                     }
                 }

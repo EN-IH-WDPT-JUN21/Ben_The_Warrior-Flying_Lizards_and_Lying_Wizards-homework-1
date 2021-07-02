@@ -1,9 +1,6 @@
 package com.ironhack.homework_1;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Party {
     private final int MAX_STARTING_SIZE = 20; // Only used to define the maximum party size for the manual creation
@@ -138,7 +135,7 @@ public class Party {
 
     //Removes character from party list (by character)
     public void removeCharacter(Character character) {
-        System.out.println("Removed from " + partyName + ": " + character.printStats());
+        //System.out.println("Removed from " + partyName + ": " + character.printStats());
         this.getPartyCharacters().remove(character);
     }
 
@@ -151,18 +148,37 @@ public class Party {
     // Selects character from the party  (USER INPUT METHOD)
     public Character selectCharacter() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose a Character from your party:");
+        StringBuilder teamName = new StringBuilder("|");
+        int teamLength = getPartyName().length();
+        int spaces = 125 - teamLength;
+        boolean even = spaces % 2 == 0;
+        teamName.append(String.join("", Collections.nCopies(spaces / 2, " ")));
+        teamName.append(getPartyName());
+        if(even){
+            teamName.append(String.join("", Collections.nCopies(spaces / 2, " ")));
+        }else{
+            teamName.append(String.join("", Collections.nCopies((spaces / 2) + 1, " ")));
+        }
+        teamName.append("|");
+        System.out.println("+=============================================================================================================================+");
+        System.out.println(teamName);
+        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("| Choose a character from your party:                                                                                         |");
         for (int i = 0; i < partyCharacters.size(); i++) {
-            System.out.println("(" + (i + 1) + ")" + " " + partyCharacters.get(i).printStats());
+            StringBuilder str = new StringBuilder("| (" + (i + 1) + ")" + " " + partyCharacters.get(i).printStats());
+            int length = 126 - str.toString().length();
+            str.append(String.join("", Collections.nCopies(length, " ")));
+            str.append("|");
+            System.out.println(str);
         }
         while (true) {
             String input = scanner.nextLine();
             try {
                 int choice = Integer.parseInt(input);
                 if (choice > 0 && choice <= partyCharacters.size()) return partyCharacters.get(choice - 1);
-                System.out.println("Please choose a valid option!");
+                System.out.println("| Please choose a valid option!                                                                                               |");
             } catch (NumberFormatException e) {
-                System.out.println("Please choose a valid option!");
+                System.out.println("| Please choose a valid option!                                                                                               |");
             }
         }
     }
