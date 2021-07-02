@@ -145,7 +145,7 @@ public class Menu {
         String input = "";
         while(true){
             System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-            System.out.println("|         1 - Party 1          |         2 - Party 2           |     3 - Single character      |           b - Back           |");
+            System.out.println("|         1 - Player 1         |         2 - Player 2          |     3 - Single character      |           b - Back           |");
             System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
             input = scanner.nextLine();
             switch (input.toLowerCase()){
@@ -157,6 +157,7 @@ public class Menu {
                     partyManagement_createManually_party(party2);
                     break;
                 case "3":
+                    partyManagement_createManually_singleCharacter();
                     break;
                 case "b":
                     return;
@@ -208,11 +209,48 @@ public class Menu {
             }
         }
     }
+    public static void partyManagement_createManually_singleCharacter(){
+        String input = "";
+        while(true) {
+            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            System.out.println("|     1 - Add to Player 2      |      2 - Add to Player 2      |   3 - Add to exported party   |           b - Back           |");
+            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            input = scanner.nextLine();
+            switch (input.toLowerCase()) {
+                case "1":
+                    pc.addCharacter(party1);
+                    break;
+                case "2":
+                    pc.addCharacter(party2);
+                    break;
+                case "3":
+                    boolean running = true;
+                    while(running){
+                        try{
+                            System.out.println("What is the file you want to export to?");
+                            input = scanner.nextLine();
+                            pc.addCharacter(input);
+                            running = false;
+                        }catch (FileNotFoundException e){
+                            System.out.println(e.getMessage());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    break;
+                case "b":
+                    return;
+                default:
+                    System.out.println("Select a valid option...");
+                    break;
+            }
+        }
+    }
     public static void partyManagement_randomParty() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         while(true){
             String input = "";
             System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            System.out.println("|               1 - Party 1               |               2 - Party 2               |                b - Back                 |");
+            System.out.println("|              1 - Player 1               |              2 - Player 2               |                b - Back                 |");
             System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
             input = scanner.nextLine();
             switch (input.toLowerCase()){
