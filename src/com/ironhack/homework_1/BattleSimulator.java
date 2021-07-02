@@ -52,31 +52,35 @@ public class BattleSimulator {
 
         while(c1.isAlive() && c2.isAlive()){
             round += 1;
-            if (round == 1){
-                System.out.println("+=============================================================================================================================+");
-            }else{
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
-            }
-            StringBuilder roundString = new StringBuilder("|");
-            int roundLength = 9 + Integer.toString(round).length();
-            int spaces = 125 - roundLength;
-            boolean even = spaces % 2 == 0;
-            roundString.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-            roundString.append("Round Nº ").append(round);
-            if(even){
+            if(!Menu.getSmallLog()) {
+                if (round == 1) {
+                    System.out.println("+=============================================================================================================================+");
+                } else {
+                    System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                }
+                StringBuilder roundString = new StringBuilder("|");
+                int roundLength = 9 + Integer.toString(round).length();
+                int spaces = 125 - roundLength;
+                boolean even = spaces % 2 == 0;
                 roundString.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-            }else{
-                roundString.append(String.join("", Collections.nCopies((spaces / 2) + 1, " ")));
+                roundString.append("Round Nº ").append(round);
+                if (even) {
+                    roundString.append(String.join("", Collections.nCopies(spaces / 2, " ")));
+                } else {
+                    roundString.append(String.join("", Collections.nCopies((spaces / 2) + 1, " ")));
+                }
+                roundString.append("|");
+                System.out.println(roundString);
             }
-            roundString.append("|");
-            System.out.println(roundString);
-
             c1.attack(c2); //they attack at the same time
             c2.attack(c1);
 
-            System.out.println("|                                                                                                                             |");
+            if(!Menu.getSmallLog()) {
+                System.out.println("|                                                                                                                             |");
+            }
 
             if(!c1.isAlive() && !c2.isAlive()){
+
                 this.graveyard.add(c1);
                 this.graveyard.add(c2);
                 this.party1.removeCharacter(c1);
@@ -122,29 +126,31 @@ public class BattleSimulator {
                 System.out.println(print2.toString());
             }
             else{
-                StringBuilder print1 = new StringBuilder("| Player 1: Fighter " + c1.getName() + " attacks " + c2.getName());
-                StringBuilder print2 = new StringBuilder("| Player 2: Fighter " + c2.getName() + " attacks " + c1.getName());
-                StringBuilder print3 = new StringBuilder("| " + c1.getName() + " has " + c1.getHp() + " HP");
-                StringBuilder print4 = new StringBuilder("| " + c2.getName() + " has " + c2.getHp() + " HP");
+                if(!Menu.getSmallLog()) {
+                    StringBuilder print1 = new StringBuilder("| Player 1: Fighter " + c1.getName() + " attacks " + c2.getName());
+                    StringBuilder print2 = new StringBuilder("| Player 2: Fighter " + c2.getName() + " attacks " + c1.getName());
+                    StringBuilder print3 = new StringBuilder("| " + c1.getName() + " has " + c1.getHp() + " HP");
+                    StringBuilder print4 = new StringBuilder("| " + c2.getName() + " has " + c2.getHp() + " HP");
 
-                print1.append(String.join("", Collections.nCopies(126 - print1.toString().length(), " ")));
-                print1.append("|");
-                print2.append(String.join("", Collections.nCopies(126 - print2.toString().length(), " ")));
-                print2.append("|");
-                print3.append(String.join("", Collections.nCopies(126 - print3.toString().length(), " ")));
-                print3.append("|");
-                print4.append(String.join("", Collections.nCopies(126 - print4.toString().length(), " ")));
-                print4.append("|");
-                Menu.battleSpeedPause(500,150);
-                System.out.println(print1);
-                Menu.battleSpeedPause(500,150);
-                System.out.println(print2);
-                Menu.battleSpeedPause(500,150);
-                System.out.println("|                                                                                                                             |");
-                System.out.println(print3);
-                Menu.battleSpeedPause(500,150);
-                System.out.println(print4);
-                Menu.battleSpeedPause(500,150);
+                    print1.append(String.join("", Collections.nCopies(126 - print1.toString().length(), " ")));
+                    print1.append("|");
+                    print2.append(String.join("", Collections.nCopies(126 - print2.toString().length(), " ")));
+                    print2.append("|");
+                    print3.append(String.join("", Collections.nCopies(126 - print3.toString().length(), " ")));
+                    print3.append("|");
+                    print4.append(String.join("", Collections.nCopies(126 - print4.toString().length(), " ")));
+                    print4.append("|");
+                    Menu.battleSpeedPause(500, 150);
+                    System.out.println(print1);
+                    Menu.battleSpeedPause(500, 150);
+                    System.out.println(print2);
+                    Menu.battleSpeedPause(500, 150);
+                    System.out.println("|                                                                                                                             |");
+                    System.out.println(print3);
+                    Menu.battleSpeedPause(500, 150);
+                    System.out.println(print4);
+                    Menu.battleSpeedPause(500, 150);
+                }
             }
 
 
