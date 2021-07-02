@@ -1,9 +1,8 @@
 package com.ironhack.homework_1;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
-public class Warrior extends Character{
+public class Warrior extends Character implements Attacker{
     /*stamina - number to represent a resource the warrior consumes to make an attack
     strength - number to calculate how strong the warrior attack is*/
     private int stamina;
@@ -121,14 +120,16 @@ public class Warrior extends Character{
         this.strength = strength;
     }
 
-    public void attack(Character character) {
+    public String attack(Character character) {
         if (this.stamina >= 5){
             character.receiveDamage(this.strength);
             this.stamina -= 5;
+            return "Heavy Attack|" + this.strength;
         }
         else {
             character.receiveDamage(this.strength / 2.0);
             this.stamina++;
+            return "Weak Attack|" + (this.strength / 2);
         }
     }
 

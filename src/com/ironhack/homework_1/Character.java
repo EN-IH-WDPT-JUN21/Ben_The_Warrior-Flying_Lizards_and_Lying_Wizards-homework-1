@@ -3,6 +3,7 @@ package com.ironhack.homework_1;
 import java.util.ArrayList;
 import java.util.List;
 import  java.lang.reflect.*;
+import java.util.Map;
 import java.util.Scanner;
 
 public abstract class Character {
@@ -20,8 +21,8 @@ public abstract class Character {
 
     public static boolean hardcore = false;
     private static int idCount = 0;
-    private static String[] classNames = {"Warrior", "Wizard"};
-    private static Class[] possibleClasses = {Warrior.class, Wizard.class};
+    private static String[] classNames = {"Warrior", "Wizard", "Archer"};
+    private static Class[] possibleClasses = {Warrior.class, Wizard.class, Archer.class};
 
     public Character(){
         this.isAlive = true;
@@ -77,7 +78,7 @@ public abstract class Character {
 
 
 
-    abstract void attack(Character character);
+    abstract String attack(Character character);
     abstract void receiveDamage(double damage);
     abstract String printStats();
 
