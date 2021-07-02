@@ -1,14 +1,11 @@
 package com.ironhack.homework_1;
 
-
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Menu {
@@ -16,17 +13,45 @@ public class Menu {
     private static final Party party1 = new Party("Player 1");
     private static final Party party2 = new Party("Player 2");
     private static final Scanner scanner = new Scanner(System.in);
+    private static final BattleSimulator bt = new BattleSimulator(party1, party2);
+    private static boolean smallLog = false;
+    private static boolean hardcore = false;
 
-    public static void printGraveyard(){
-        //
+    public static void partyManagement() throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        String input = "";
+        while(true){
+            System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
+            System.out.println("|    1 - Import party    |    2 - Export party    |   3 - Create manually   |    4 - Random party    |        b - Back        |");
+            System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
+            input = scanner.nextLine();
+            switch (input.toLowerCase()){
+                // Party management -> Import party
+                case "1":
+                    partyManagement_importParty();
+                    break;
+                // Party management -> Export party
+                case "2":
+                    partyManagement_exportParty();
+                    break;
+                // Party management -> Create manually
+                case "3":
+                    partyManagement_createManually();
+                    break;
+                //Party management -> Random party
+                case "4":
+                    partyManagement_randomParty();
+                    break;
+                case "b":
+                    return;
+                default:
+                    System.out.println("Select a valid option...");
+                    break;
+            }
+        }
     }
-
-    public static void partyManagement(){
-
-    }
-
     public static void partyManagement_importParty(){
-        /*Strng
+        String input = "";
+        boolean running = false;
         while(true){
             System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
             System.out.println("|             1 - To Player 1             |             2 - To Player 2             |                b - Back                 |");
@@ -35,13 +60,13 @@ public class Menu {
             switch (input.toLowerCase()){
                 // Party management -> Import party -> To Player 1
                 case "1":
-                    depth3 = true;
-                    while(depth3){
+                    running = true;
+                    while(running){
                         try{
                             System.out.println("What is the file you want to import from?");
                             input = scanner.nextLine();
                             pc.importParty(party1, input);
-                            depth3 = false;
+                            running = false;
                         }catch (FileNotFoundException e){
                             System.out.println(e.getMessage());
                         }
@@ -49,13 +74,13 @@ public class Menu {
                     break;
                 // Party management -> Import party -> To Player 2
                 case "2":
-                    depth3 = true;
-                    while(depth3){
+                    running = true;
+                    while(running){
                         try{
                             System.out.println("What is the file you want to import from?");
                             input = scanner.nextLine();
                             pc.importParty(party2, input);
-                            depth3 = false;
+                            running = false;
                         }catch (FileNotFoundException e){
                             System.out.println(e.getMessage());
                         }
@@ -63,346 +88,472 @@ public class Menu {
                     break;
                 // Party management -> Import party -> Back
                 case "b":
-                    depth2 = false;
-                    break;
+                    return;
                 default:
                     System.out.println("Select a valid option...");
                     break;
             }
-        }*/
+        }
     }
-    public static void partyManagement_exportParty(){
-
+    public static void partyManagement_exportParty() throws IOException {
+        String input = "";
+        boolean running = false;
+        while(true) {
+            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            System.out.println("|           1 - Export Player 1           |           2 - Export Player 2           |                b - Back                 |");
+            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            input = scanner.nextLine();
+            switch (input.toLowerCase()){
+                // Party management -> Export party -> Export Player 1
+                case "1":
+                    running = true;
+                    while(running){
+                        try{
+                            System.out.println("What is the file you want to export to?");
+                            input = scanner.nextLine();
+                            pc.saveParty(party1, input);
+                            running = false;
+                        }catch (FileNotFoundException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                    break;
+                // Party management -> Export party -> Export Player 2
+                case "2":
+                    running = true;
+                    while(running){
+                        try{
+                            System.out.println("What is the file you want to export to?");
+                            input = scanner.nextLine();
+                            pc.importParty(party2, input);
+                            running = false;
+                        }catch (FileNotFoundException e){
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                    break;
+                // Party management -> Export party -> Back
+                case "b":
+                    return;
+                default:
+                    System.out.println("Select a valid option...");
+                    break;
+            }
+        }
     }
     public static void partyManagement_createManually(){
-
-    }
-    public static void partyManagement_randomParty(){
-
-    }
-
-     public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-            System.out.println("Welcome to the ECC Flying Lizards and Lying Wizards game!");
-            System.out.println("Choose your players");
-            List<Character> graveyard = new ArrayList<>();
-            String input = "";
-
-            boolean isRunning = true;
-
-            while(isRunning){
-                boolean mainMenu = true;
-                boolean depth1 = false;
-                boolean depth2 = false;
-                boolean depth3 = false;
-                boolean depth4 = false;
-                while(mainMenu){
-                    System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
-                    System.out.println("|  _____ _     _            __    _               _                  _    __        _            _ _ _ _               _      |");
-                    System.out.println("| |   __| |_ _|_|___ ___   |  |  |_|___ ___ ___ _| |___    ___ ___ _| |  |  |   _ _|_|___ ___   | | | |_|___ ___ ___ _| |___  |");
-                    System.out.println("| |   __| | | | |   | . |  |  |__| |- _| .'|  _| . |_ -|  | .'|   | . |  |  |__| | | |   | . |  | | | | |- _| .'|  _| . |_ -| |");
-                    System.out.println("| |__|  |_|_  |_|_|_|_  |  |_____|_|___|__,|_| |___|___|  |__,|_|_|___|  |_____|_  |_|_|_|_  |  |_____|_|___|__,|_| |___|___| |");
-                    System.out.println("|         |___|     |___|                                                      |___|     |___|                                |");
-                    System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
-                    System.out.println("|  1 - Party management  |        2 - Play        |   3 - Show graveyard    |      4 - Settings      |        x - Quit        |");
-                    System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
-                    input = scanner.nextLine();
-                    switch (input.toLowerCase()){
-                        // Party management
-                        case "1":
-                            depth1 = true;
-                            while(depth1){
-                                System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
-                                System.out.println("|    1 - Import party    |    2 - Export party    |   3 - Create manually   |    4 - Random party    |        b - Back        |");
-                                System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
-                                input = scanner.nextLine();
-                                switch (input.toLowerCase()){
-                                    // Party management -> Import party
-                                    case "1":
-                                        depth2 = true;
-                                        while(depth2){
-                                            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-                                            System.out.println("|             1 - To Player 1             |             2 - To Player 2             |                b - Back                 |");
-                                            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-                                            input = scanner.nextLine();
-                                            switch (input.toLowerCase()){
-                                                // Party management -> Import party -> To Player 1
-                                                case "1":
-                                                    depth3 = true;
-                                                    while(depth3){
-                                                        try{
-                                                            System.out.println("What is the file you want to import from?");
-                                                            input = scanner.nextLine();
-                                                            pc.importParty(party1, input);
-                                                            depth3 = false;
-                                                        }catch (FileNotFoundException e){
-                                                            System.out.println(e.getMessage());
-                                                        }
-                                                    }
-                                                    break;
-                                                // Party management -> Import party -> To Player 2
-                                                case "2":
-                                                    depth3 = true;
-                                                    while(depth3){
-                                                        try{
-                                                            System.out.println("What is the file you want to import from?");
-                                                            input = scanner.nextLine();
-                                                            pc.importParty(party2, input);
-                                                            depth3 = false;
-                                                        }catch (FileNotFoundException e){
-                                                            System.out.println(e.getMessage());
-                                                        }
-                                                    }
-                                                    break;
-                                                // Party management -> Import party -> Back
-                                                case "b":
-                                                    depth2 = false;
-                                                    break;
-                                                default:
-                                                    System.out.println("Select a valid option...");
-                                                    break;
-                                            }
-                                        }
-                                        break;
-                                    // Party management -> Export party
-                                    case "2":
-                                        depth2 = true;
-                                        while(depth2) {
-                                            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-                                            System.out.println("|           1 - Export Player 1           |           2 - Export Player 2           |                b - Back                 |");
-                                            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-                                            input = scanner.nextLine();
-                                            switch (input.toLowerCase()){
-                                                // Party management -> Export party -> Export Player 1
-                                                case "1":
-                                                    depth3 = true;
-                                                    while(depth3){
-                                                        try{
-                                                            System.out.println("What is the file you want to export to?");
-                                                            input = scanner.nextLine();
-                                                            pc.saveParty(party1, input);
-                                                            depth3 = false;
-                                                        }catch (FileNotFoundException e){
-                                                            System.out.println(e.getMessage());
-                                                        }
-                                                    }
-                                                    break;
-                                                // Party management -> Export party -> Export Player 2
-                                                case "2":
-                                                    depth3 = true;
-                                                    while(depth3){
-                                                        try{
-                                                            System.out.println("What is the file you want to export to?");
-                                                            input = scanner.nextLine();
-                                                            pc.importParty(party2, input);
-                                                            depth3 = false;
-                                                        }catch (FileNotFoundException e){
-                                                            System.out.println(e.getMessage());
-                                                        }
-                                                    }
-                                                    break;
-                                                // Party management -> Export party -> Back
-                                                case "b":
-                                                    depth2 = false;
-                                                    break;
-                                                default:
-                                                    System.out.println("Select a valid option...");
-                                                    break;
-                                            }
-                                        }
-                                        break;
-                                    // Party management -> Create manually
-                                    case "3":
-                                        depth2 = true;
-                                        while(depth2){
-                                            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-                                            System.out.println("|         1 - Party 1          |         2 - Party 2           |     3 - Single character      |           b - Back           |");
-                                            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-                                            input = scanner.nextLine();
-                                            switch (input.toLowerCase()){
-                                                // Party management -> Create manually -> Party 1
-                                                case "1":
-                                                    depth3 = true;
-                                                    if(!party1.getPartyCharacters().isEmpty()){
-                                                        depth4 = true;
-                                                        while(depth4){
-                                                            System.out.println("Do you want to delete the characters previously added to this party? [ yes | no ]");
-                                                            input = scanner.nextLine();
-                                                            switch (input.toLowerCase().charAt(0)){
-                                                                case 'y':
-                                                                    party1.clearParty();
-                                                                    depth4 = false;
-                                                                    break;
-                                                                case 'n':
-                                                                    depth4 = false;
-                                                                    System.out.println("Previously added characters preserved!");
-                                                                    break;
-                                                                default:
-                                                                    System.out.println("Select a valid option...");
-                                                                    break;
-                                                            }
-                                                        }
-                                                    }
-                                                    System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-                                                    System.out.println("|            Party size (" + party1.getPartyCharacters().size() + "/10)            |            2 - Add Character            |                b - Back                 |");
-                                                    System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-                                                    input = scanner.nextLine();
-                                                    switch (input.toLowerCase()){}
-                                                    break;
-                                                case "2":
-                                                    break;
-                                                case "3":
-                                                    break;
-                                                case "b":
-                                                    depth2 = false;
-                                                    break;
-                                                default:
-                                                    System.out.println("Select a valid option...");
-                                                    break;
-                                            }
-                                        }
-                                        break;
-                                    //Party management -> Random party
-                                    case "4":
-                                        depth2 = true;
-                                        while(depth2){
-                                            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-                                            System.out.println("|       1 - Import party       |       2 - Export party        |       3 - Create party        |           b - Back           |");
-                                            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-                                        }
-                                        break;
-                                    case "b":
-                                        depth1 = false;
-                                        break;
-                                    default:
-                                        System.out.println("Select a valid option...");
-                                        break;
-                                }
-                            }
-                            break;
-                        case "2":
-
-                            break;
-                        case "3":
-                            break;
-                        case "4":
-                            break;
-                        case "x":
-                            mainMenu = false;
-                            isRunning = false;
-                            break;
-                        default:
-                            System.out.println("Select a valid option...");
-                            break;
-                    }
-                }
+        String input = "";
+        while(true){
+            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            System.out.println("|         1 - Party 1          |         2 - Party 2           |     3 - Single character      |           b - Back           |");
+            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            input = scanner.nextLine();
+            switch (input.toLowerCase()){
+                // Party management -> Create manually -> Party 1
+                case "1":
+                    partyManagement_createManually_party(party1);
+                    break;
+                case "2":
+                    partyManagement_createManually_party(party2);
+                    break;
+                case "3":
+                    break;
+                case "b":
+                    return;
+                default:
+                    System.out.println("Select a valid option...");
+                    break;
             }
-
-
-
-            /*while (isRunning) {
-
-                System.out.println("\nHere are your options...");
-                System.out.println("1 -> Create a Character individually customizing his/her stats and name in party 1");
-                System.out.println("2 -> Create a Character individually customizing his/her stats and name in party 2");
-                System.out.println("3 -> Create a full party of randomly generated Characters in party 1");
-                System.out.println("4 -> Create a full party of randomly generated Characters in party 2");
-                System.out.println("5 -> Import a party using a CSV file in party 1");
-                System.out.println("6 -> Import a party using a CSV file in party 2");
-                System.out.println("x -> Go to the next step");
-
-                String option = scanner.nextLine();
-                switch (option) {
-                    case "1":   // Create Warrior individually customizing his/her stats and name
-                        pc.addCharacter(party1);
-                        party1.printPartyStats();
+        }
+    }
+    public static void partyManagement_createManually_party(Party party){
+        String input = "";
+        if(!party.getPartyCharacters().isEmpty()){
+            boolean deleteNotSelected = true;
+            while(deleteNotSelected){
+                System.out.println("Do you want to delete the characters previously added to this party? [ yes | no ]");
+                input = scanner.nextLine();
+                if(input.length() == 0){
+                    input = "empty";
+                }
+                switch (input.toLowerCase().charAt(0)){
+                    case 'y':
+                        party.clearParty();
+                        deleteNotSelected = false;
                         break;
-                    case "2":   // Create Wizard individually customizing his/her stats and name
-                        pc.addCharacter(party2);
-                        party2.printPartyStats();
+                    case 'n':
+                        deleteNotSelected = false;
+                        System.out.println("Previously added characters preserved!");
                         break;
-                    case "3":   // Create a full party of randomly generated Wizards and Warriors ");
-                        party1 = pc.randomParty(party1);
-                        party1.printPartyStats();
-                        break;
-                    case "4":
-                        party2 = pc.randomParty(party2);
-                        party2.printPartyStats();
-                        break;
-                    case "5":   // Import a party using a CSV file
-                        System.out.println("Write the path to CSV file with its name:");
-                        String csvpath1 = scanner.nextLine();
-                        party1 = pc.importParty(csvpath1);
-                        party1.printPartyStats();
-                        break;
-                    case "6":   // Import a party using a CSV file
-                        System.out.println("Write the path to CSV file with its name:");
-                        String csvpath2 = scanner.nextLine();
-                        party2 = pc.importParty(csvpath2);
-                        party2.printPartyStats();
-                        break;
-                    case "x":   // Exit program
-                        isRunning = false;
-                        break;
-                    default:    // Repeats...
+                    default:
                         System.out.println("Select a valid option...");
                         break;
                 }
             }
-
-        System.out.println("Now you can begin...");
-
-        boolean isRunning2 = true;
-        while (isRunning2) {
-
-            System.out.println("5 -> Start single battle between individuals");
-            System.out.println("6 -> Simulate whole party fights with one command by choosing random fighters on each side");
-            System.out.println("7 -> Show the graveyard");
-            System.out.println("8 -> Show a log");
-            System.out.println("9 -> Export party into an importable CSV file");
-            System.out.println("x -> Exit menu");
-            String option = scanner.nextLine();
-            switch (option) {
-                case "5":   // Start single battle between individuals
-                    System.out.println("Battle...");
-                    BattleSimulator bt = new BattleSimulator(party1, party2);
-                    bt.battle();
-                    //isRunning2 = false;
+        }
+        while(true){
+            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            System.out.println("|            Party size (" + party.getPartyCharacters().size() + "/10)            |            1 - Add Character            |                b - Back                 |");
+            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            input = scanner.nextLine();
+            switch (input.toLowerCase()){
+                case "1":
+                    pc.addCharacter(party);
                     break;
-                case "6":   // Simulate whole party fights with one command
-                    System.out.println("Battle of the armies...");
-                    BattleSimulator bt2 = new BattleSimulator(party1, party2);
-                    bt2.battleRandom();
-                    bt2.printGraveyard();
-                    //isRunning2 = false;
-                    break;
-                case "7":   // Show the graveyard
-                    for(Character chr : graveyard){
-                        chr.printStats();
-                    }
-                    //System.out.println("Graveyard:");
-                    //printGraveyard();
-                    //isRunning2 = false;
-                    break;
-                case "8":   // Show a log
-                    System.out.println("Log:");
-                    //isRunning2 = false;
-                    break;
-                case "9":   // Export party into an importable CSV file
-                    System.out.println("Where do you want to save the party?");
-                    String fileName = scanner.nextLine();
-                    pc.saveParty(party1, fileName);
-                    //isRunning2 = false;
-                    break;
-                case "10":   // Export party into an importable CSV file
-
-                    break;
-                case "x":   // Exit program
-                    isRunning2 = false;
-                    break;
-                default:    // Repeats...
+                case "b":
+                    return;
+                default:
                     System.out.println("Select a valid option...");
                     break;
             }
-        }*/
+        }
+    }
+    public static void partyManagement_randomParty() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        while(true){
+            String input = "";
+            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            System.out.println("|               1 - Party 1               |               2 - Party 2               |                b - Back                 |");
+            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            input = scanner.nextLine();
+            switch (input.toLowerCase()){
+                case "1":
+                    if(!party1.getPartyCharacters().isEmpty()){
+                        boolean deleteNotSelected = true;
+                        while (deleteNotSelected){
+                            System.out.println("Are you sure you want to delete the existing characters in party 1? [ yes | no ]");
+                            input = scanner.nextLine();
+                            if(input.length() == 0){
+                                input = "empty";
+                            }
+                            switch (input.toLowerCase().charAt(0)){
+                                case 'y':
+                                    party1.clearParty();
+                                    pc.randomParty(party1);
+                                    deleteNotSelected = false;
+                                    break;
+                                case 'n':
+                                    System.out.println("Random party was not created!");
+                                    deleteNotSelected = false;
+                                    break;
+                                default:
+                                    System.out.println("Select a valid option...");
+                                    break;
+                            }
+                        }
+                    }else{
+                        pc.randomParty(party1);
+                    }
+                    break;
+                case "2":
+                    if(!party2.getPartyCharacters().isEmpty()){
+                        boolean deleteNotSelected = true;
+                        while (deleteNotSelected){
+                            System.out.println("Are you sure you want to delete the existing characters in party 1? [ yes | no ]");
+                            input = scanner.nextLine();
+                            if(input.length() == 0){
+                                input = "empty";
+                            }
+                            switch (input.toLowerCase().charAt(0)){
+                                case 'y':
+                                    party2.clearParty();
+                                    pc.randomParty(party2);
+                                    deleteNotSelected = false;
+                                    break;
+                                case 'n':
+                                    System.out.println("Random party was not created!");
+                                    deleteNotSelected = false;
+                                    break;
+                                default:
+                                    System.out.println("Select a valid option...");
+                                    break;
+                            }
+                        }
+                    }else{
+                        pc.randomParty(party2);
+                    }
+                    break;
+                case "b":
+                    return;
+            }
+        }
+    }
+
+    public static void battleMenu() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        String input = "";
+        boolean running = false;
+        while(true){
+            boolean confirmBattle = false;
+            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            System.out.println("|            1 - Manual battle            |            2 - Random battle            |                b - Back                 |");
+            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            input = scanner.nextLine();
+            switch (input){
+                case "1":
+                    confirmBattle = true;
+                    while (confirmBattle){
+                        System.out.println("Are you sure you want to start a manual battle? [ yes | no ]");
+                        input = scanner.nextLine();
+                        if(input.length() == 0){
+                            input = "empty";
+                        }
+                        switch (input.toLowerCase().charAt(0)){
+                            case 'y':
+                                if(party1.getPartyCharacters().isEmpty()){
+                                    pc.randomParty(party1);
+                                }
+                                if(party2.getPartyCharacters().isEmpty()){
+                                    pc.randomParty(party2);
+                                }
+                                bt.battle();
+                                confirmBattle = false;
+                                break;
+                            case 'n':
+                                confirmBattle = false;
+                                break;
+                            default:
+                                System.out.println("Select a valid option...");
+                                break;
+                        }
+                    }
+                    break;
+                case "2":
+                    confirmBattle = true;
+                    while (confirmBattle){
+                        System.out.println("Are you sure you want to start a manual battle? [ yes | no ]");
+                        input = scanner.nextLine();
+                        if(input.length() == 0){
+                            input = "empty";
+                        }
+                        switch (input.toLowerCase().charAt(0)){
+                            case 'y':
+                                if(party1.getPartyCharacters().isEmpty()){
+                                    pc.randomParty(party1);
+                                }
+                                if(party2.getPartyCharacters().isEmpty()){
+                                    pc.randomParty(party2);
+                                }
+                                bt.battleRandom();
+                                System.out.println(bt.graveyard().size());
+                                confirmBattle = false;
+                                break;
+                            case 'n':
+                                confirmBattle = false;
+                                break;
+                            default:
+                                System.out.println("Select a valid option...");
+                                break;
+                        }
+                    }
+                    break;
+                case "b":
+                    return;
+                default:
+                    System.out.println("Select a valid option...");
+                    break;
+            }
+        }
+    }
+
+    public static void printGraveyard(){
+        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("|                                                                                                                             |");
+        System.out.println("|                                                           .---.                                                             |");
+        System.out.println("|                                                      '-.  |   |  .-'                                                        |");
+        System.out.println("|                                                        ___|   |___                                                          |");
+        System.out.println("|                                                   -=  [           ]  =-                                                     |");
+        System.out.println("|                                                       `---.   .---'                                                         |");
+        System.out.println("|                                                    __||__ |   | __||__                                                      |");
+        System.out.println("|                                                    '-..-' |   | '-..-'                                                      |");
+        System.out.println("|                                                      ||   |   |   ||                                                        |");
+        System.out.println("|                                                      ||_.-|   |-,_||                                                        |");
+        System.out.println("|                                                    .-\"`   `\"`'`   `\"-.                                                      |");
+        System.out.println("|                                                  .'                   '.                                                    |");
+        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+
+        List<Character> graveyard = bt.graveyard();
+
+        int startInt = 0;
+        int longestName = 0;
+        for (Character character : graveyard) {
+            int length = character.getName().length();
+            if(longestName < length){
+                longestName = length;
+            }
+        }
+        if(longestName < 15){
+            //print 7 names at a time
+            while(startInt < graveyard.size()){
+                startInt = graveyardLine(graveyard,7,new int[]{17,17,17,17,17,17,17},startInt);
+            }
+        }else if(longestName < 18){
+            //print 6 names at a time
+            while(startInt < graveyard.size()){
+                startInt = graveyardLine(graveyard,6,new int[]{20,20,20,20,20,20},startInt);
+            }
+        }else if(longestName < 22) {
+            //print 5 names at a time
+            while (startInt < graveyard.size()) {
+                startInt = graveyardLine(graveyard, 5, new int[]{24, 24, 25, 24, 24}, startInt);
+            }
+        }else if(longestName < 28){
+            //print 4 names at a time
+            while (startInt < graveyard.size()) {
+                startInt = graveyardLine(graveyard, 4, new int[]{30,31,31,30}, startInt);
+            }
+        }else if(longestName < 39){
+            //print 3 names at a time
+            while(startInt < graveyard.size()){
+                startInt = graveyardLine(graveyard,3,new int[]{41,41,41},startInt);
+            }
+        }else if(longestName < 60){
+            //print 2 names at a time
+            while(startInt < graveyard.size()){
+                startInt = graveyardLine(graveyard,2,new int[]{62,62},startInt);
+            }
+        }else{
+            while(startInt < graveyard.size()){
+                startInt = graveyardLine(graveyard,1,new int[]{125},startInt);
+            }
+        }
+    }
+    public static int graveyardLine(List<Character> graveyard, int numberNames, int[] maxLength, int startIndex){
+        int index = startIndex;
+        StringBuilder str = new StringBuilder("|");
+        int cnt = 0;
+        for(; (index < startIndex + numberNames); index++){
+            if(index < graveyard.size()){
+                int length = graveyard.get(index).getName().length();
+                if(length > 125){
+                    str.append(" ");
+                    str.append(graveyard.get(index).getName().substring(0,120));
+                    str.append("... ");
+                }else{
+                    int dif = maxLength[cnt++] - length;
+                    int n = dif / 2;
+                    boolean even = dif % 2 == 0;
+                    str.append(String.join("", Collections.nCopies(n, " ")));
+                    str.append(graveyard.get(index).getName());
+                    if(even){
+                        str.append(String.join("", Collections.nCopies(n, " ")));
+                    }else{
+                        str.append(String.join("", Collections.nCopies(n+1, " ")));
+                    }
+                }
+            }else{
+                str.append(String.join("", Collections.nCopies(maxLength[cnt], " ")));
+                cnt++;
+            }
+            str.append("|");
+        }
+        System.out.println(str);
+        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+        return index;
+    }
+
+    public static void settings(){
+        String input = "";
+        String logStd =   "     1 - Change log mode (Standard)      ";
+        String logSmall = "     1 - Change log mode (Small log)     ";
+        String gameNormal =   "      2 - Change game mode (Normal)      ";
+        String gameHardcore = "     2 - Change game mode (Hardcore)     ";
+        while(true){
+            if(!smallLog && !hardcore){
+                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+                System.out.println("|" + logStd + "|" + gameNormal + "|                b - Back                 |");
+                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            }else if(smallLog && !hardcore){
+                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+                System.out.println("|" + logSmall + "|" + gameNormal + "|                b - Back                 |");
+                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            }else if(!smallLog && hardcore){
+                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+                System.out.println("|" + logStd + "|" + gameHardcore + "|                b - Back                 |");
+                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            }else{
+                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+                System.out.println("|" + logSmall + "|" + gameHardcore + "|                b - Back                 |");
+                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            }
+            input = scanner.nextLine();
+            switch (input.toLowerCase()){
+                case "1":
+                    smallLog = !smallLog;
+                    break;
+                case "2":
+                    hardcore = !hardcore;
+                    if(hardcore){
+                        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                        System.out.println("|                                                                                                                             |");
+                        System.out.println("|                      '||'  '||'     |     '||''|.   '||''|.     ..|'''.|  ..|''||   '||''|.   '||''''|                      |");
+                        System.out.println("|                       ||    ||     |||     ||   ||   ||   ||  .|'     '  .|'    ||   ||   ||   ||  .                        |");
+                        System.out.println("|                       ||''''||    |  ||    ||''|'    ||    || ||         ||      ||  ||''|'    ||''|                        |");
+                        System.out.println("|                       ||    ||   .''''|.   ||   |.   ||    || '|.      . '|.     ||  ||   |.   ||                           |");
+                        System.out.println("|                      .||.  .||. .|.  .||. .||.  '|' .||...|'   ''|....'   ''|...|'  .||.  '|' .||.....|                     |");
+                        System.out.println("|                                                                                                                             |");
+                        System.out.println("|                                                                                                                             |");
+                        System.out.println("|                                        '||    ||'  ..|''||   '||''|.   '||''''|                                             |");
+                        System.out.println("|                                         |||  |||  .|'    ||   ||   ||   ||  .                                               |");
+                        System.out.println("|                                         |'|..'||  ||      ||  ||    ||  ||''|                                               |");
+                        System.out.println("|                                         | '|' ||  '|.     ||  ||    ||  ||                                                  |");
+                        System.out.println("|                                        .|. | .||.  ''|...|'  .||...|'  .||.....|                                            |");
+                        System.out.println("|                                                                                                                             |");
+                    }
+                    break;
+                case "b":
+                    return;
+                default:
+                    System.out.println("Select a valid option...");
+                    break;
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+        System.out.println("Welcome to the ECC Flying Lizards and Lying Wizards game!");
+        System.out.println("Choose your players");
+        List<Character> graveyard = new ArrayList<>();
+        String input = "";
+        boolean isRunning = true;
+
+        while(isRunning){
+            boolean mainMenu = true;
+            boolean depth1 = false;
+            boolean depth2 = false;
+            while(mainMenu){
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                System.out.println("|  _____ _     _            __    _               _                  _    __        _            _ _ _ _               _      |");
+                System.out.println("| |   __| |_ _|_|___ ___   |  |  |_|___ ___ ___ _| |___    ___ ___ _| |  |  |   _ _|_|___ ___   | | | |_|___ ___ ___ _| |___  |");
+                System.out.println("| |   __| | | | |   | . |  |  |__| |- _| .'|  _| . |_ -|  | .'|   | . |  |  |__| | | |   | . |  | | | | |- _| .'|  _| . |_ -| |");
+                System.out.println("| |__|  |_|_  |_|_|_|_  |  |_____|_|___|__,|_| |___|___|  |__,|_|_|___|  |_____|_  |_|_|_|_  |  |_____|_|___|__,|_| |___|___| |");
+                System.out.println("|         |___|     |___|                                                      |___|     |___|                                |");
+                System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
+                System.out.println("|  1 - Party management  |       2 - Battle       |   3 - Show graveyard    |      4 - Settings      |        x - Quit        |");
+                System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
+                input = scanner.nextLine();
+                switch (input.toLowerCase()){
+                    // Party management
+                    case "1":
+                        partyManagement();
+                        break;
+                    // Battle
+                    case "2":
+                        battleMenu();
+                        break;
+                    case "3":
+                        printGraveyard();
+                        break;
+                    case "4":
+                        settings();
+                        break;
+                    case "x":
+                        mainMenu = false;
+                        isRunning = false;
+                        break;
+                    default:
+                        System.out.println("Select a valid option...");
+                        break;
+                    }
+                }
+            }
     }
 }

@@ -96,13 +96,12 @@ public class PartyCreator {
         }
 
     }
-    public Party randomParty(Party party) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void randomParty(Party party) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // Find way to know each of the subclasses of Character?
         party.clearParty();
         for(int i = 0; i < 5; i++){
             party.addCharacter(Character.getRandom());
         }
-        return party;
     }
 
     public void addCharacter(Party party){

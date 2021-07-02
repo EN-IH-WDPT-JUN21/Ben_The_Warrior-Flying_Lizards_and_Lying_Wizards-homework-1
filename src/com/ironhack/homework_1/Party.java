@@ -189,4 +189,7 @@ public class Party {
         System.out.println("");
     }
 
+    public int getMAX_STARTING_SIZE() {
+        return MAX_STARTING_SIZE;
+    }
 }
