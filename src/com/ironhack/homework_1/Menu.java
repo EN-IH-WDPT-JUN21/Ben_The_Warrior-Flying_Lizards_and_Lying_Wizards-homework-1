@@ -25,13 +25,22 @@ public class Menu {
     }
 
 
-     public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+    private static Party party1 = new Party("Player 1");
+    private static Party party2 = new Party("Player 2");
+
+    public static Party getParty1() {
+        return party1;
+    }
+
+    public static Party getParty2() {
+        return party2;
+    }
+
+    public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
             Scanner scanner = new Scanner(System.in);
             PartyCreator pc = new PartyCreator();
             System.out.println("Welcome to the ECC Flying Lizards and Lying Wizards game!");
             System.out.println("Choose your players");
-            Party party1 = new Party("Player 1");
-            Party party2 = new Party("Player 2");
             List<Character> graveyard = new ArrayList<>();
 
             boolean isRunning = true;

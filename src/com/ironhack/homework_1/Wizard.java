@@ -122,14 +122,16 @@ public class Wizard extends Character{
         this.intelligence = intelligence;
     }
 
-    public void attack(Character character) {
+    public double attack(Character character) {
         if (this.mana >= 5){
             character.receiveDamage(this.intelligence);
             this.mana -= 5;
+            return this.intelligence;
         }
         else {
             character.receiveDamage(2);
             this.mana++;
+            return 2;
         }
     }
 

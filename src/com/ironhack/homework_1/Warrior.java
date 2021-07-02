@@ -121,14 +121,16 @@ public class Warrior extends Character{
         this.strength = strength;
     }
 
-    public void attack(Character character) {
+    public double attack(Character character) {
         if (this.stamina >= 5){
             character.receiveDamage(this.strength);
             this.stamina -= 5;
+            return this.strength;
         }
         else {
             character.receiveDamage(this.strength / 2.0);
             this.stamina++;
+            return (double) Math.round((this.strength / 2) * 100) / 100;
         }
     }
 
