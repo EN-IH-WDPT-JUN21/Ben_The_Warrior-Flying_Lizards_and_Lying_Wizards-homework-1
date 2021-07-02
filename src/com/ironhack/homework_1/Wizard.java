@@ -1,5 +1,7 @@
 package com.ironhack.homework_1;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Wizard extends Character{
@@ -122,16 +124,16 @@ public class Wizard extends Character{
         this.intelligence = intelligence;
     }
 
-    public double attack(Character character) {
+    public String attack(Character character) {
         if (this.mana >= 5){
             character.receiveDamage(this.intelligence);
             this.mana -= 5;
-            return this.intelligence;
+            return "Fireball|" + this.intelligence;
         }
         else {
             character.receiveDamage(2);
             this.mana++;
-            return 2;
+            return "Staff Hit|" + 2;
         }
     }
 

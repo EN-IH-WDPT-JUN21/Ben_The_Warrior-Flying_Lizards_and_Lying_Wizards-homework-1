@@ -1,5 +1,7 @@
 package com.ironhack.homework_1;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Archer extends Character{
@@ -122,26 +124,28 @@ public class Archer extends Character{
         this.Dexterity = Math.min(Dexterity, 35);
     }
 
-    public double attack(Character character) {
+    public String attack(Character character) {
         if (this.Energy < 10) {
             character.receiveDamage( (double) this.Dexterity / 2);
             this.Energy += 2;
-            return (double)(this.Dexterity / 2);
+            return "Aimed Shot|" + (this.Dexterity / 2);
         } else {
             if (Menu.getParty1().getIdxInParty(character) == -1) {
                 for (Character ch : Menu.getParty1().getPartyCharacters()){
                     ch.receiveDamage(this.Dexterity / 5);
                     this.Energy -= 10;
-                    return this.Dexterity;
+                    return "Spread Shot|" + this.Dexterity;
                 }
             } else {
                 for (Character ch : Menu.getParty2().getPartyCharacters()){
                     ch.receiveDamage(this.Dexterity / 5);
                     this.Energy -= 10;
-                    return this.Dexterity;
+                    Map<String, Double> attackDetails = new HashMap<>();
+                    attackDetails.put("Heavy Attack", (double) this.Dexterity);
+                    return "Spread Shot|" + this.Dexterity;
                 }
             }
-            return (double)this.Dexterity;
+            return "Spread Shot|" + this.Dexterity;
         }
     }
 

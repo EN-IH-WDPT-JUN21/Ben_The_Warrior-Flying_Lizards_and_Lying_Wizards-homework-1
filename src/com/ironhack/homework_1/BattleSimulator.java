@@ -1,9 +1,6 @@
 package com.ironhack.homework_1;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class BattleSimulator {
     private Party party1;
@@ -74,8 +71,10 @@ public class BattleSimulator {
             roundString.append("|");
             System.out.println(roundString);
 
-            c1.attack(c2); //they attack at the same time
-            c2.attack(c1);
+            String c1attack = c1.attack(c2); //they attack at the same time
+            String[] c1AttackDetails = {c1attack.substring(0, c1attack.indexOf('|')), c1attack.substring(c1attack.indexOf('|') + 1, c1attack.length())};
+            String c2attack = c2.attack(c1);
+            String[] c2AttackDetails = {c2attack.substring(0, c2attack.indexOf('|')), c2attack.substring(c2attack.indexOf('|') + 1, c2attack.length())};
 
             System.out.println("|                                                                                                                             |");
 
@@ -125,8 +124,10 @@ public class BattleSimulator {
                 System.out.println(print2.toString());
             }
             else{
-                StringBuilder print1 = new StringBuilder("| Player 1: Fighter " + c1.getName() + " attacks " + c2.getName());
-                StringBuilder print2 = new StringBuilder("| Player 2: Fighter " + c2.getName() + " attacks " + c1.getName());
+                StringBuilder print1 = new StringBuilder("| " + Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
+                        c1.getClass().getSimpleName() + " attacks " +c2.getName() + " with " + c1AttackDetails[0] + " dealing " + c1AttackDetails[1] + " damage!");
+                StringBuilder print2 = new StringBuilder("| " + Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
+                        c2.getClass().getSimpleName() + " attacks " +c1.getName() + " with " + c2AttackDetails[0] + " dealing " + c2AttackDetails[1] + " damage!");
                 StringBuilder print3 = new StringBuilder("| " + c1.getName() + " has " + c1.getHp() + " HP");
                 StringBuilder print4 = new StringBuilder("| " + c2.getName() + " has " + c2.getHp() + " HP");
 

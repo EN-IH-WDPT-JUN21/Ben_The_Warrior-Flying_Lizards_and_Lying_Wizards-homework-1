@@ -3,6 +3,7 @@ package com.ironhack.homework_1;
 import java.util.ArrayList;
 import java.util.List;
 import  java.lang.reflect.*;
+import java.util.Map;
 import java.util.Scanner;
 
 public abstract class Character {
@@ -77,7 +78,7 @@ public abstract class Character {
 
 
 
-    abstract double attack(Character character);
+    abstract String attack(Character character);
     abstract void receiveDamage(double damage);
     abstract String printStats();
 
