@@ -136,16 +136,16 @@ public class BattleSimulator {
                 print3.append("|");
                 print4.append(String.join("", Collections.nCopies(126 - print4.toString().length(), " ")));
                 print4.append("|");
-                Menu.battleSpeedPause(500,200);
+                Menu.battleSpeedPause(500,150);
                 System.out.println(print1);
-                Menu.battleSpeedPause(500,200);
+                Menu.battleSpeedPause(500,150);
                 System.out.println(print2);
-                Menu.battleSpeedPause(500,200);
+                Menu.battleSpeedPause(500,150);
                 System.out.println("|                                                                                                                             |");
                 System.out.println(print3);
-                Menu.battleSpeedPause(500,200);
+                Menu.battleSpeedPause(500,150);
                 System.out.println(print4);
-                Menu.battleSpeedPause(500,200);
+                Menu.battleSpeedPause(500,150);
             }
 
 
@@ -177,13 +177,16 @@ public class BattleSimulator {
         // battle is going to happen meanwhile party1 and party2 has at least one element
         while(!isPartyEmpty(this.party1) && !isPartyEmpty(this.party2)){
             fight++;
-
+            Character f1 =getRandomChar(party1);
+            Character f2 =getRandomChar(party2);
+            String f1Presentation = f1.getName() + " the " + f1.getClass().getSimpleName();
+            String f2Presentation = f2.getName() + " the " + f2.getClass().getSimpleName();
             StringBuilder fightPrint = new StringBuilder("|");
-            int fightLength = 6 + Integer.toString(fight).length();
+            int fightLength = 17 + Integer.toString(fight).length() + f1Presentation.length() + f2Presentation.length();
             int spaces = 125 - fightLength;
             boolean even = spaces % 2 == 0;
             fightPrint.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-            fightPrint.append("FIGHT ").append(fight);
+            fightPrint.append("FIGHT ").append(fight).append("  -  ").append(f1Presentation).append("  VS  ").append(f2Presentation);
             if(even){
                 fightPrint.append(String.join("", Collections.nCopies(spaces / 2, " ")));
             }else{
@@ -199,7 +202,7 @@ public class BattleSimulator {
             }
 
         //choose random characters for Duel
-            duel(getRandomChar(party1),getRandomChar(party2));
+            duel(f1,f2);
         }
 
 
