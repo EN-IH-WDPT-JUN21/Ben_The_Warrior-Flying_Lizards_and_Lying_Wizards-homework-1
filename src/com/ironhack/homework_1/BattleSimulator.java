@@ -1,7 +1,6 @@
 package com.ironhack.homework_1;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class BattleSimulator {
     private Party party1;
