@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Archer extends Character{
+public class Archer extends Character implements Attacker{
     /*
     Energy - number to represent a resource the Archer consumes to cast spells
     Dexterity - number to calculate how strong the Archer spells are

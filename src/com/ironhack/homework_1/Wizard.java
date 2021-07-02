@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Wizard extends Character{
+public class Wizard extends Character implements Attacker{
     /*
     mana - number to represent a resource the wizard consumes to cast spells
     intelligence - number to calculate how strong the wizard spells are

@@ -2,7 +2,7 @@ package com.ironhack.homework_1;
 
 import java.util.*;
 
-public class Warrior extends Character{
+public class Warrior extends Character implements Attacker{
     /*stamina - number to represent a resource the warrior consumes to make an attack
     strength - number to calculate how strong the warrior attack is*/
     private int stamina;
