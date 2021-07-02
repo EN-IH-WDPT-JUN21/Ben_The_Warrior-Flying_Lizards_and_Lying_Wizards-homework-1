@@ -530,7 +530,7 @@ public class Menu {
     public static void settings(){
         String input = "";
         String[] gameMode = {"    1 - Game mode [Normal]    ","   1 - Game mode [Hardcore]   "};
-        String[] logMode = {"     2 - Log mode [Small]      ","      2 - Log mode [Full]      "};
+        String[] logMode = {"  2 - Log mode [Reduced Logs]  ","   2 - Log mode [Full Logs]    "};
         String[] gameSpeed = {"  3 -  Battle speed [Instant]  ","    3 -  Battle speed [Slow]   ","    3 -  Battle speed [Fast]   "};
 
         while(true){
