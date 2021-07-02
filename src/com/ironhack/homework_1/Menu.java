@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Menu {
     private static final PartyCreator pc = new PartyCreator();
@@ -17,6 +18,26 @@ public class Menu {
     private static boolean smallLog = false;
     private static boolean hardcore = false;
     private static int battleSpeed = 0;
+
+    public static int getBattleSpeed() {
+        return battleSpeed;
+    }
+
+    public static void battleSpeedPause(int slowMilliseconds,int fastMilliseconds) {
+        try {
+            if (Menu.getBattleSpeed()==1) Thread.sleep(slowMilliseconds);
+            if (Menu.getBattleSpeed()==2) Thread.sleep(fastMilliseconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean getSmallLog() {
+        return smallLog;
+    }
+    public static boolean getHardcore() {
+        return hardcore;
+    }
 
     public static void partyManagement() throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String input = "";
@@ -554,9 +575,9 @@ public class Menu {
                     break;
                 case "3":
                     if (battleSpeed == 0) {
-                        battleSpeed = 1;
-                    } else if (battleSpeed ==1){
                         battleSpeed = 2;
+                    } else if (battleSpeed ==2){
+                        battleSpeed = 1;
                     }else {
                         battleSpeed = 0;
                     }

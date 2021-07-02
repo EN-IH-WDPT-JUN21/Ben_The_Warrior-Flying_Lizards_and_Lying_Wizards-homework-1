@@ -1,9 +1,7 @@
 package com.ironhack.homework_1;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class BattleSimulator {
     private Party party1;
@@ -138,12 +136,16 @@ public class BattleSimulator {
                 print3.append("|");
                 print4.append(String.join("", Collections.nCopies(126 - print4.toString().length(), " ")));
                 print4.append("|");
-
+                Menu.battleSpeedPause(500,200);
                 System.out.println(print1);
+                Menu.battleSpeedPause(500,200);
                 System.out.println(print2);
+                Menu.battleSpeedPause(500,200);
                 System.out.println("|                                                                                                                             |");
                 System.out.println(print3);
+                Menu.battleSpeedPause(500,200);
                 System.out.println(print4);
+                Menu.battleSpeedPause(500,200);
             }
 
 
@@ -163,6 +165,13 @@ public class BattleSimulator {
         System.out.println("|                                                                                                                             |");
         System.out.println("+=============================================================================================================================+");
         System.out.println("|                                                    Player 1 V/S Player 2                                                    |");
+
+
+        // TODO(JA) We could add here the list of fighters for each player. (and maybe also it to the party management) we have to see if it fits in two columns
+        System.out.println("+=============================================================================================================================+");
+        System.out.println("|                                                 PRESS ENTER TO START BATTLE                                                 |");
+        System.out.print("+=============================================================================================================================+");
+        new Scanner(System.in).nextLine();
 
         int fight = 0;
         // battle is going to happen meanwhile party1 and party2 has at least one element
@@ -184,13 +193,17 @@ public class BattleSimulator {
 
             System.out.println("+=============================================================================================================================+");
             System.out.println(fightPrint);
+            if (Menu.getBattleSpeed()!=0) {
+                System.out.print("|                                                    PRESS ENTER TO START                                                     |");
+                new Scanner(System.in).nextLine();
+            }
 
         //choose random characters for Duel
             duel(getRandomChar(party1),getRandomChar(party2));
         }
 
 
-        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("+=============================================================================================================================+");
         System.out.println("|                                                      END OF THE BATTLE                                                      |");
         System.out.println("|                                                                                                                             |");
 
@@ -200,13 +213,11 @@ public class BattleSimulator {
         }
         else if (!isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
             System.out.println("|                                                        Player 1 WINS                                                        |");
-            System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
         }
         else {
             System.out.println("|                                                        Player 2 WINS                                                        |");
-            System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
         }
-
+        System.out.println("+=============================================================================================================================+");
     }
     // Method battle simulate a fight and you can choose your fighter.
 
@@ -228,7 +239,7 @@ public class BattleSimulator {
 
 
 
-        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("+=============================================================================================================================+");
         System.out.println("|                                                      END OF THE BATTLE                                                      |");
         System.out.println("|                                                                                                                             |");
 
@@ -238,13 +249,11 @@ public class BattleSimulator {
         }
         else if (!isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
             System.out.println("|                                                        Player 1 WINS                                                        |");
-            System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
         }
         else {
             System.out.println("|                                                        Player 2 WINS                                                        |");
-            System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
-        }
-
+       }
+        System.out.println("+=============================================================================================================================+");
     }
 
     // Parties setter
