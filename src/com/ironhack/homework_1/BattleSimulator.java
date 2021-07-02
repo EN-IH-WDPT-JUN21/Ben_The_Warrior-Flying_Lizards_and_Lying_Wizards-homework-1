@@ -15,6 +15,10 @@ public class BattleSimulator {
         this.graveyard = new ArrayList<>();
     }
 
+    public void clearGraveyard(){
+        this.graveyard.clear();
+    }
+
     // Method that returns graveyard
     public List<Character> graveyard(){
         return this.graveyard; // return the graveyard

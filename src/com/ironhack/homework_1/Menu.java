@@ -355,6 +355,7 @@ public class Menu {
     }
 
     public static void printGraveyard(){
+        String input = "";
         System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
         System.out.println("|                                                                                                                             |");
         System.out.println("|                                                           .---.                                                             |");
@@ -413,6 +414,23 @@ public class Menu {
         }else{
             while(startInt < graveyard.size()){
                 startInt = graveyardLine(graveyard,1,new int[]{125},startInt);
+            }
+        }
+        System.out.println("+--------------------------------------------------------------+--------------------------------------------------------------+");
+        System.out.println("|                     1 - Clear graveyard                      |                           b - Back                           |");
+        System.out.println("+--------------------------------------------------------------+--------------------------------------------------------------+");
+        while(true){
+            input = scanner.nextLine();
+            switch (input.toLowerCase()){
+                case "1":
+                    bt.clearGraveyard();
+                    printGraveyard();
+                    return;
+                case "b":
+                    return;
+                default:
+                    System.out.println("Select a valid option...");
+                    break;
             }
         }
     }
