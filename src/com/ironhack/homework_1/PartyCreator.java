@@ -11,10 +11,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class PartyCreator {
-    public Party importParty(String csvFile) throws FileNotFoundException {
-
-        // Initialization of party to be returned
-        Party importedParty = new Party();
+    public void importParty(Party party, String csvFile) throws FileNotFoundException {
 
         // String split into directory and name of the file
         String[] directoryAndFile = directoryAndName(csvFile);
@@ -22,10 +19,10 @@ public class PartyCreator {
         csvFile = directoryAndFile[1];
 
         // Add ".csv" to the file name if it was not provided
-        csvFile = csvCheck(csvFile, true);
-
-        if(csvFile == null) {
-            return null;
+        try{
+            csvFile = csvCheck(csvFile, true);
+        }catch(IllegalArgumentException e){
+            throw new FileNotFoundException(e.getMessage());
         }
 
         // Search the file in the parties folder and if not found check with the directory provided
@@ -33,11 +30,12 @@ public class PartyCreator {
         if(!file.exists()) {
             file = new File(directory + csvFile);
             if (!file.exists()) {
-                System.err.println("ERROR: File not found! Make sure the .csv file is in the folder parties or the " +
-                        "correct directory is provided");
-                return null;
+                throw new FileNotFoundException("File not found! Make sure the .csv file is in the folder parties or the " +
+                "correct directory is provided");
             }
         }
+
+        party.clearParty();
 
         // Scanner initialization
         Scanner scanner = new Scanner(file);
@@ -47,11 +45,11 @@ public class PartyCreator {
             String[] newCharacter = scanner.nextLine().split(",");
             Character character = Character.addCharacter(newCharacter);
             if(character != null){
-                importedParty.addCharacter(Character.addCharacter(newCharacter));
+                party.addCharacter(Character.addCharacter(newCharacter));
             }
         }
         scanner.close();
-        return importedParty;
+        //return party;
     }
 
     public void saveParty(Party party, String csvFile) throws IOException {
@@ -64,10 +62,12 @@ public class PartyCreator {
         csvFile = directoryAndFile[1];
 
         // Check if correct file extension was provided
-        csvFile = csvCheck(csvFile, false);
-        if(csvFile == null) {
-            return;
+        try{
+            csvFile = csvCheck(csvFile, false);
+        }catch(IllegalArgumentException e){
+            throw new FileNotFoundException(e.getMessage());
         }
+
         directoryAndFile[1] = csvFile;
 
         // Delete all invalid characters
@@ -96,13 +96,12 @@ public class PartyCreator {
         }
 
     }
-    public Party randomParty(Party party) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void randomParty(Party party) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // Find way to know each of the subclasses of Character?
         party.clearParty();
         for(int i = 0; i < 5; i++){
             party.addCharacter(Character.getRandom());
         }
-        return party;
     }
 
     public void addCharacter(Party party){
@@ -111,9 +110,10 @@ public class PartyCreator {
     }
 
     public void addCharacter(String csvFile) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException {
-        csvFile = csvCheck(csvFile, false);
-        if(csvFile == null) {
-            return;
+        try{
+            csvFile = csvCheck(csvFile, true);
+        }catch(IllegalArgumentException e){
+            throw new FileNotFoundException(e.getMessage());
         }
 
         String[] directoryAndFile = directoryAndName(csvFile);
@@ -132,12 +132,11 @@ public class PartyCreator {
         fileWriter.close();
     }
 
-    private String csvCheck(String csvFile, boolean toRead){
+    private String csvCheck(String csvFile, boolean toRead) throws IllegalArgumentException{
 
         // Check if file name exceeds maximum length
         if(csvFile.length() > 100){
-            System.err.println("ERROR: please make sure the file name has less than 100 characters");
-            return null;
+            throw new IllegalArgumentException("Make sure the file name has less than 100 characters!");
         }
 
         // Add .csv to the file name if it was not provided
@@ -145,8 +144,7 @@ public class PartyCreator {
             csvFile = csvFile.concat(".csv");
         }else{
             if(csvFile.contains(".") && !csvFile.endsWith(".csv") && toRead) {
-                System.err.println("ERROR: Party must be imported from .csv file");
-                return null;
+                throw new IllegalArgumentException("Make sure the file extension is .csv!");
             }else if(csvFile.contains(".") && !csvFile.endsWith(".csv") && !toRead){
                 System.out.println("Warning: file extension changed to .csv");
                 csvFile = csvFile.split("\\.")[0];
