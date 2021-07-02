@@ -16,6 +16,7 @@ public class Menu {
     private static final BattleSimulator bt = new BattleSimulator(party1, party2);
     private static boolean smallLog = false;
     private static boolean hardcore = false;
+    private static int battleSpeed = 0;
 
     public static void partyManagement() throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String input = "";
@@ -507,34 +508,28 @@ public class Menu {
 
     public static void settings(){
         String input = "";
-        String logStd =   "     1 - Change log mode (Standard)      ";
-        String logSmall = "     1 - Change log mode (Small log)     ";
-        String gameNormal =   "      2 - Change game mode (Normal)      ";
-        String gameHardcore = "     2 - Change game mode (Hardcore)     ";
+        String[] gameMode = {"    1 - Game mode [Normal]    ","   1 - Game mode [Hardcore]   "};
+        String[] logMode = {"     2 - Log mode [Small]      ","      2 - Log mode [Full]      "};
+        String[] gameSpeed = {"  3 -  Battle speed [Instant]  ","    3 -  Battle speed [Slow]   ","    3 -  Battle speed [Fast]   "};
+
         while(true){
-            if(!smallLog && !hardcore){
-                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-                System.out.println("|" + logStd + "|" + gameNormal + "|                b - Back                 |");
-                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            }else if(smallLog && !hardcore){
-                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-                System.out.println("|" + logSmall + "|" + gameNormal + "|                b - Back                 |");
-                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            }else if(!smallLog && hardcore){
-                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-                System.out.println("|" + logStd + "|" + gameHardcore + "|                b - Back                 |");
-                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            }else{
-                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-                System.out.println("|" + logSmall + "|" + gameHardcore + "|                b - Back                 |");
-                System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+            System.out.println("|                                                       Change Settings                                                       |");
+            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            System.out.print("|" + (hardcore ? gameMode[1] : gameMode[0]) + "|" + (smallLog ? logMode[0] : logMode[1]) + "|");
+            if (battleSpeed==1) {
+                System.out.print(gameSpeed[1]);
+            } else if (battleSpeed ==2){
+                System.out.print(gameSpeed[2]);
+            }else {
+                System.out.print(gameSpeed[0]);
             }
+            System.out.println("|           b - Back           |");
+            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 case "1":
-                    smallLog = !smallLog;
-                    break;
-                case "2":
                     hardcore = !hardcore;
                     if(hardcore){
                         System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
@@ -552,6 +547,18 @@ public class Menu {
                         System.out.println("|                                         | '|' ||  '|.     ||  ||    ||  ||                                                  |");
                         System.out.println("|                                        .|. | .||.  ''|...|'  .||...|'  .||.....|                                            |");
                         System.out.println("|                                                                                                                             |");
+                    }
+                    break;
+                case "2":
+                    smallLog = !smallLog;
+                    break;
+                case "3":
+                    if (battleSpeed == 0) {
+                        battleSpeed = 1;
+                    } else if (battleSpeed ==1){
+                        battleSpeed = 2;
+                    }else {
+                        battleSpeed = 0;
                     }
                     break;
                 case "b":
