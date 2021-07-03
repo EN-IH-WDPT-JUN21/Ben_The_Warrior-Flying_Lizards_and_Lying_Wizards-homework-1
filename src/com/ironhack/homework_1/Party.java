@@ -150,18 +150,8 @@ public class Party {
     public Character selectCharacter() {
         Scanner scanner = new Scanner(System.in);
 
-        StringBuilder teamName = new StringBuilder("|");
-        int teamLength = getPartyName().length();
-        int spaces = 125 - teamLength;
-        boolean even = spaces % 2 == 0;
-        teamName.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-        teamName.append(getPartyName());
-        if(even){
-            teamName.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-        }else{
-            teamName.append(String.join("", Collections.nCopies((spaces / 2) + 1, " ")));
-        }
-        teamName.append("|");
+        String teamName = getPartyName();
+        teamName = Menu.centerString(teamName,125);
         System.out.println("+=============================================================================================================================+");
         System.out.println(teamName);
         System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");

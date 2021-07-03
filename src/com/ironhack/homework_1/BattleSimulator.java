@@ -58,24 +58,14 @@ public class BattleSimulator {
                 }else{
                     System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
                 }
-                StringBuilder roundString = new StringBuilder("|");
-                int roundLength = 9 + Integer.toString(round).length();
-                int spaces = 125 - roundLength;
-                boolean even = spaces % 2 == 0;
-                roundString.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-                roundString.append("Round Nº ").append(round);
-                if(even){
-                    roundString.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-                }else{
-                    roundString.append(String.join("", Collections.nCopies((spaces / 2) + 1, " ")));
-                }
-                roundString.append("|");
+                String roundString = "Round Nº " + round;
+                roundString = Menu.centerString(roundString, 125);
                 System.out.println(roundString);
             }
 
-            String c1attack = Menu.isHardcore() == false ? c1.attack(c2) : c1.manualAttack(c2); //they attack at the same time
+            String c1attack = !Menu.isHardcore() ? c1.attack(c2) : c1.manualAttack(c2); //they attack at the same time
             String[] c1AttackDetails = {c1attack.substring(0, c1attack.indexOf('|')), c1attack.substring(c1attack.indexOf('|') + 1, c1attack.length())};
-            String c2attack = Menu.isHardcore() == false ? c2.attack(c1) : c2.manualAttack(c1);
+            String c2attack = !Menu.isHardcore() ? c2.attack(c1) : c2.manualAttack(c1);
             String[] c2AttackDetails = {c2attack.substring(0, c2attack.indexOf('|')), c2attack.substring(c2attack.indexOf('|') + 1, c2attack.length())};
 
             if (!Menu.getSmallLog()) {

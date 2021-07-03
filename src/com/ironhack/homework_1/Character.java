@@ -122,6 +122,20 @@ public abstract class Character {
                     return null;
                 }
 
+            case "Archer":
+                if(parameters.length == 5){
+                    try{
+                        return new Wizard(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                    }
+                    catch (NumberFormatException e){
+                        return null;
+                    }
+                }else{
+                    System.err.println("ERROR: incorrect number of parameters for Wizard. This Character will not be added to the party");
+                    return null;
+                }
+
             default:
                 System.err.println("ERROR: Character " + parameters[0] + " not found");
                 return null;
@@ -137,7 +151,7 @@ public abstract class Character {
         Scanner scanner = new Scanner(System.in);
         printFormatted("Choose a class for your new Character: ");
         boolean chosen = false;
-        while (chosen == false) {
+        while (!chosen) {
             for (int i = 0; i < classNames.length; i++) {
                 printFormatted((i + 1) + ". " + classNames[i]);
             }
