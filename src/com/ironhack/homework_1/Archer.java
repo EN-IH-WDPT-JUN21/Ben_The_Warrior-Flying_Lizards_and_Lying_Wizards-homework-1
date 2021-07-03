@@ -62,7 +62,7 @@ public class Archer extends Character implements Attacker{
             System.out.println("What would you like to call your Archer?");
             String name = scanner.nextLine();
             while (upgradePoints > 0) {
-                System.out.println("" + upgradePoints + " stat points remaining. Choose a stat to upgrade.");
+                System.out.println(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
                 System.out.println("1. Increase Dexterity: " + dex + " => " + (dex + 3));
                 System.out.println("2. Increase Energy: " + Energy + " => " + (Energy + 2));
                 System.out.println("3. Increase Hit Points: " + hp + " => " + (hp + 7));
