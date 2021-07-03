@@ -39,6 +39,14 @@ public class Menu {
         return hardcore;
     }
 
+    public static Party getParty1() {
+        return party1;
+    }
+
+    public static Party getParty2() {
+        return party2;
+    }
+
     public static void partyManagement() throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String input = "";
         while(true){
@@ -379,7 +387,7 @@ public class Menu {
                 case "2":
                     confirmBattle = true;
                     while (confirmBattle){
-                        System.out.println("| Are you sure you want to start a manual battle? [ yes | no ]                                                                |");
+                        System.out.println("| Are you sure you want to start a random battle? [ yes | no ]                                                                |");
                         input = scanner.nextLine();
                         if(input.length() == 0){
                             input = "empty";

@@ -1,8 +1,10 @@
 package com.ironhack.homework_1;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
-public class Wizard extends Character{
+public class Wizard extends Character implements Attacker{
     /*
     mana - number to represent a resource the wizard consumes to cast spells
     intelligence - number to calculate how strong the wizard spells are
@@ -122,14 +124,16 @@ public class Wizard extends Character{
         this.intelligence = intelligence;
     }
 
-    public void attack(Character character) {
+    public String attack(Character character) {
         if (this.mana >= 5){
             character.receiveDamage(this.intelligence);
             this.mana -= 5;
+            return "Fireball|" + this.intelligence;
         }
         else {
             character.receiveDamage(2);
             this.mana++;
+            return "Staff Hit|" + 2;
         }
     }
 
