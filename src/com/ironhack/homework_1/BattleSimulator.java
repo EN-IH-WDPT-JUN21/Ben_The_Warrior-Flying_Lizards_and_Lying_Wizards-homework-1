@@ -173,10 +173,8 @@ public class BattleSimulator {
         System.out.println("|                                                                                                                             |");
         System.out.println("+=============================================================================================================================+");
         System.out.println("|                                                    Player 1 V/S Player 2                                                    |");
-
-
-        // TODO(JA) We could add here the list of fighters for each player. (and maybe also it to the party management) we have to see if it fits in two columns
-        System.out.println("+=============================================================================================================================+");
+        Printer.printLine(2);
+        Printer.partyPrint(party1, party2);
         System.out.println("|                                                 PRESS ENTER TO START BATTLE                                                 |");
         System.out.print("+=============================================================================================================================+");
         new Scanner(System.in).nextLine();
@@ -187,23 +185,10 @@ public class BattleSimulator {
             fight++;
             Character f1 = getRandomChar(party1);
             Character f2 = getRandomChar(party2);
-            String f1Presentation = f1.getName() + " the " + f1.getClass().getSimpleName();
-            String f2Presentation = f2.getName() + " the " + f2.getClass().getSimpleName();
-            StringBuilder fightPrint = new StringBuilder("|");
-            int fightLength = 17 + Integer.toString(fight).length() + f1Presentation.length() + f2Presentation.length();
-            int spaces = 125 - fightLength;
-            boolean even = spaces % 2 == 0;
-            fightPrint.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-            fightPrint.append("FIGHT ").append(fight).append("  -  ").append(f1Presentation).append("  VS  ").append(f2Presentation);
-            if(even){
-                fightPrint.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-            }else{
-                fightPrint.append(String.join("", Collections.nCopies((spaces / 2) + 1, " ")));
-            }
-            fightPrint.append("|");
 
             System.out.println("+=============================================================================================================================+");
-            System.out.println(fightPrint);
+            String fightTitle = "FIGHT " + fight + "  -  " + f1.printSimpleIntroduction() + "  VS  " + f2.printSimpleIntroduction();
+            Printer.printChosenMenus(new String[]{fightTitle});
             if (Menu.getBattleSpeed() != 0) {
                 System.out.print("|                                                    PRESS ENTER TO START                                                     |");
                 new Scanner(System.in).nextLine();
@@ -240,12 +225,25 @@ public class BattleSimulator {
         System.out.println("|                                                                                                                             |");
         System.out.println("+=============================================================================================================================+");
         System.out.println("|                                                    Player 1 V/S Player 2                                                    |");
+        Printer.printLine(2);
+        Printer.partyPrint(party1, party2);
+        System.out.println("|                                                 PRESS ENTER TO START BATTLE                                                 |");
+        System.out.print("+=============================================================================================================================+");
+        new Scanner(System.in).nextLine();
 
         // battle is going to happen meanwhile party1 and party2 has at least one element
+        int fight = 0;
         while(!isPartyEmpty(this.party1) && !isPartyEmpty(this.party2)){
+            fight++;
+            System.out.println("+=============================================================================================================================+");
+            String fightTitle = "FIGHT " + fight;
+            Printer.printChosenMenus(new String[]{fightTitle});
+
+            Character f1 = getChar(party1);
+            Character f2 = getChar(party2);
 
             //choose characters for Duel
-            duel(getChar(this.party1),getChar(this.party2));
+            duel(f1,f2);
         }
 
 
