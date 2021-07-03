@@ -546,9 +546,9 @@ public class Menu {
             System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
             System.out.print("|" + (hardcore ? gameMode[1] : gameMode[0]) + "|" + (smallLog ? logMode[0] : logMode[1]) + "|");
             if (battleSpeed==1) {
-                System.out.print(gameSpeed[1]);
-            } else if (battleSpeed ==2){
                 System.out.print(gameSpeed[2]);
+            } else if (battleSpeed ==2){
+                System.out.print(gameSpeed[1]);
             }else {
                 System.out.print(gameSpeed[0]);
             }
@@ -582,9 +582,9 @@ public class Menu {
                     break;
                 case "3":
                     if (battleSpeed == 0) {
-                        battleSpeed = 2;
-                    } else if (battleSpeed ==2){
                         battleSpeed = 1;
+                    } else if (battleSpeed ==1){
+                        battleSpeed = 2;
                     }else {
                         battleSpeed = 0;
                     }
