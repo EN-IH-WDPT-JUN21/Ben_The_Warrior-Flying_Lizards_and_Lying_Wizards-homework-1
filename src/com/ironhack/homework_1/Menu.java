@@ -56,7 +56,9 @@ public class Menu {
 
     public static void partyManagement() throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String input = "";
-        while(true){
+        while (true) {
+            Printer.printChosenMenus(new String[]{"PARTY - " + party1.getPartyName(), "PARTY - " + party2.getPartyName()}, false, true);
+            Printer.partyPrint(party1, party2);
             System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
             System.out.println("|    1 - Import party    |    2 - Export party    |   3 - Create manually   |    4 - Random party    |        b - Back        |");
             System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
@@ -230,13 +232,16 @@ public class Menu {
             }
         }
         while(true){
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            System.out.println("|            Party size (" + party.getPartyCharacters().size() + "/10)            |            1 - Add Character            |                b - Back                 |");
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            Printer.printChosenMenus(new String[]{party.getPartyName()}, false, true);
+            Printer.partyPrint(party);
+            Printer.printChosenMenus(new String[]{"Party size (" + party.getPartyCharacters().size() + "/10)", "1 - Add Character", "2 - Delete character", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 case "1":
                     pc.addCharacter(party);
+                    break;
+                case "2":
+                    pc.removeCharacter(party);
                     break;
                 case "b":
                     return;
@@ -250,7 +255,7 @@ public class Menu {
         String input = "";
         while(true) {
             System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-            System.out.println("|     1 - Add to Player 2      |      2 - Add to Player 2      |   3 - Add to exported party   |           b - Back           |");
+            System.out.println("|     1 - Add to Player 1      |      2 - Add to Player 2      |   3 - Add to exported party   |           b - Back           |");
             System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
             input = scanner.nextLine();
             switch (input.toLowerCase()) {
@@ -650,8 +655,8 @@ public class Menu {
                     default:
                         System.out.println("| Select a valid option...                                                                                                    |");
                         break;
-                    }
                 }
             }
+        }
     }
 }

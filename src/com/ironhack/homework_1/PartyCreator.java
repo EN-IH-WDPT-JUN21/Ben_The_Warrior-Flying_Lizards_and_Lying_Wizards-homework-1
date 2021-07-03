@@ -108,6 +108,10 @@ public class PartyCreator {
         // add Warrior warrior to the Party party
         party.addCharacter(Character.createCustom());
     }
+    public void removeCharacter(Party party){
+        // add Warrior warrior to the Party party
+        party.removeCharacter(party.selectCharacter());
+    }
 
     public void addCharacter(String csvFile) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException {
         try{

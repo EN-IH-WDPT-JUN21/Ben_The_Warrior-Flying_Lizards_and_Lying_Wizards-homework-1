@@ -210,4 +210,7 @@ public class Warrior extends Character implements Attacker{
     public String printStats(){
         return this.getName() + " the " + this.getClass().getSimpleName() + "; Id: " + this.getId() + ", Strength: " + this.getStrength() + ", Stamina: " + this.getStamina() + ", Hp: " + (int) this.getHp() + ".";
     }
+    public String printSimpleStats(){
+        return "Hp:" + (int) this.getHp() + " / Stamina:" + this.getStamina() + " / Strength:" + this.getStrength();
+    }
 }
