@@ -538,7 +538,7 @@ public class Menu {
         String input = "";
         String[] gameMode = {"    1 - Game mode [Normal]    ","   1 - Game mode [Hardcore]   "};
         String[] logMode = {"  2 - Log mode [Reduced Logs]  ","   2 - Log mode [Full Logs]    "};
-        String[] gameSpeed = {"  3 -  Battle speed [Instant]  ","    3 -  Battle speed [Slow]   ","    3 -  Battle speed [Fast]   "};
+        String[] gameSpeed = {"  3 -  Battle speed [Instant]  ","    3 -  Battle speed [Fast]   ","    3 -  Battle speed [Slow]   "};
 
         while(true){
             System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
@@ -546,9 +546,9 @@ public class Menu {
             System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
             System.out.print("|" + (hardcore ? gameMode[1] : gameMode[0]) + "|" + (smallLog ? logMode[0] : logMode[1]) + "|");
             if (battleSpeed==1) {
-                System.out.print(gameSpeed[2]);
-            } else if (battleSpeed ==2){
                 System.out.print(gameSpeed[1]);
+            } else if (battleSpeed ==2){
+                System.out.print(gameSpeed[2]);
             }else {
                 System.out.print(gameSpeed[0]);
             }
