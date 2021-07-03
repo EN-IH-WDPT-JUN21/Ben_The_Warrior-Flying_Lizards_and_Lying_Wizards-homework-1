@@ -71,9 +71,9 @@ public class BattleSimulator {
             roundString.append("|");
             System.out.println(roundString);
 
-            String c1attack = !Menu.hardcore ? c1.attack(c2) : c1.manualAttack(c2); //they attack at the same time
+            String c1attack = Menu.isHardcore() == false ? c1.attack(c2) : c1.manualAttack(c2); //they attack at the same time
             String[] c1AttackDetails = {c1attack.substring(0, c1attack.indexOf('|')), c1attack.substring(c1attack.indexOf('|') + 1, c1attack.length())};
-            String c2attack = !Menu.hardcore ? c2.attack(c1) : c2.manualAttack(c1);
+            String c2attack = Menu.isHardcore() == false ? c2.attack(c1) : c2.manualAttack(c1);
             String[] c2AttackDetails = {c2attack.substring(0, c2attack.indexOf('|')), c2attack.substring(c2attack.indexOf('|') + 1, c2attack.length())};
 
             System.out.println("|                                                                                                                             |");

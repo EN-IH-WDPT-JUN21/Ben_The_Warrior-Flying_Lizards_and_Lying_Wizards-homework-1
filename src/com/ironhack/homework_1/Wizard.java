@@ -54,7 +54,7 @@ public class Wizard extends Character implements Attacker{
     }
 
     public static Wizard createCustom(){
-        if (Menu.hardcore == true) {
+        if (Menu.isHardcore() == true) {
             int upgradePoints = 10;
             int intel = 20;
             int mana = 30;

@@ -50,7 +50,7 @@ public class Warrior extends Character implements Attacker{
     }
 
     public static Warrior createCustom(){
-        if (Menu.hardcore == true) {
+        if (Menu.isHardcore() == true) {
             int upgradePoints = 10;
             int str = 5;
             int stam = 30;

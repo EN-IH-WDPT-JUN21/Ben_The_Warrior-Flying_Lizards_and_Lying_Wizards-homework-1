@@ -54,18 +54,18 @@ public class Archer extends Character implements Attacker{
     }
 
     public static Archer createCustom(){
-        if (Menu.hardcore == true) {
+        if (Menu.isHardcore() == true) {
             int upgradePoints = 10;
             int dex = 5;
             int Energy = 10;
             int hp = 50;
-            System.out.println("| What would you like to call your Archer?");
+            System.out.println("What would you like to call your Archer?");
             String name = scanner.nextLine();
             while (upgradePoints > 0) {
-                System.out.println("| " + upgradePoints + " stat points remaining. Choose a stat to upgrade.");
-                System.out.println("| 1. Increase Dexterity: " + dex + " => " + (dex + 3));
-                System.out.println("| 2. Increase Energy: " + Energy + " => " + (Energy + 2));
-                System.out.println("| 3. Increase Hit Points: " + hp + " => " + (hp + 7));
+                System.out.println("" + upgradePoints + " stat points remaining. Choose a stat to upgrade.");
+                System.out.println("1. Increase Dexterity: " + dex + " => " + (dex + 3));
+                System.out.println("2. Increase Energy: " + Energy + " => " + (Energy + 2));
+                System.out.println("3. Increase Hit Points: " + hp + " => " + (hp + 7));
                 String input = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(input);
@@ -83,11 +83,11 @@ public class Archer extends Character implements Attacker{
                             upgradePoints--;
                             break;
                         default:
-                            System.out.println("| Please choose a valid option!");
+                            System.out.println("Please choose a valid option!");
                             break;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("| Please choose a valid option!");
+                    System.out.println("Please choose a valid option!");
                 }
             }
             return new Archer(name, dex, Energy, hp);
@@ -98,9 +98,9 @@ public class Archer extends Character implements Attacker{
             int hp = 0;
             System.out.println("| What would you like to call your Archer?");
             String name = scanner.nextLine();
-            dex = statInput(5, 25, "| Please enter a value for Dexterity between 10 and 50");
-            Energy = statInput(5, 20, "| Please enter a value for Energy between 10 and 50");
-            hp = statInput(50, 100, "| Please enter a value for Hp between 50 and 100");
+            dex = statInput(5, 25, "Please enter a value for Dexterity between 10 and 50");
+            Energy = statInput(5, 20, "Please enter a value for Energy between 10 and 50");
+            hp = statInput(50, 100, "Please enter a value for Hp between 50 and 100");
             //scanner.close();
             return new Archer(name, dex, Energy, hp);
         }
