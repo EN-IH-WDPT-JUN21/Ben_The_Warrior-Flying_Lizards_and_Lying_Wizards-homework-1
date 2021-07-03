@@ -38,6 +38,14 @@ public class Menu {
         return hardcore;
     }
 
+    public static boolean isHardcore() {
+        return hardcore;
+    }
+
+    public static void setHardcore(boolean hardcore) {
+        Menu.hardcore = hardcore;
+    }
+
     public static Party getParty1() {
         return party1;
     }

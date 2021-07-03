@@ -79,6 +79,7 @@ public abstract class Character {
 
 
     abstract String attack(Character character);
+    abstract String manualAttack(Character character);
     abstract void receiveDamage(double damage);
     abstract String printStats();
 
@@ -141,6 +142,9 @@ public abstract class Character {
                     case 2:
                         chosen = true;
                         return Wizard.createCustom();
+                    case 3:
+                        chosen = true;
+                        return Archer.createCustom();
                     default:
                         break;
                 }

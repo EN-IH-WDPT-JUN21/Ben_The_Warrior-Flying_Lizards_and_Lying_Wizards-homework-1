@@ -12,6 +12,8 @@ public class Wizard extends Character implements Attacker{
     private int mana;
     private int intelligence;
 
+    static Scanner scanner = new Scanner(System.in);
+
     public Wizard(){
         super();
         mana = 10 + (int)(Math.random() * 40 + 1);
@@ -27,23 +29,21 @@ public class Wizard extends Character implements Attacker{
     }
 
     private static int statInput(int statMin, int statMax, String message){
-        Scanner scanner = new Scanner(System.in);
-        boolean validChoice = false;
-        while (validChoice == false){
-            System.out.println(message);
-            String tmp = scanner.nextLine();
-            try {
-                int choice = Integer.parseInt(tmp);
-                if (choice >= statMin && choice <= statMax){
-                    return choice;
-                }
-                else {
-                    System.out.println("Please enter a valid number");
-                }
+        System.out.println(message);
+        String tmp = scanner.nextLine();
+        try {
+            int choice = Integer.parseInt(tmp);
+            if (choice >= statMin && choice <= statMax){
+                return choice;
             }
-            catch (NumberFormatException e){
+            else {
                 System.out.println("Please enter a valid number");
+                statInput(statMin, statMax, message);
             }
+        }
+        catch (NumberFormatException e){
+            System.out.println("Please enter a valid number");
+            statInput(statMin, statMax, message);
         }
         return statMin;
     }
@@ -54,8 +54,7 @@ public class Wizard extends Character implements Attacker{
     }
 
     public static Wizard createCustom(){
-        if (Character.hardcore == true) {
-            Scanner scanner = new Scanner(System.in);
+        if (Menu.isHardcore() == true) {
             int upgradePoints = 10;
             int intel = 20;
             int mana = 30;
@@ -134,6 +133,74 @@ public class Wizard extends Character implements Attacker{
             character.receiveDamage(2);
             this.mana++;
             return "Staff Hit|" + 2;
+        }
+    }
+
+    public String manualAttack(Character character) {
+        if (this.mana >= 5){
+            while (true){
+                System.out.println(this.getName() + " attacks with: ");
+                System.out.println("1. Fireball");
+                System.out.println("_________________________________________________________________________________________________");
+                System.out.println("Turn your foe to cinders!");
+                System.out.println("Expend 5 mana to deal damage equal to your intelligence: " + this.intelligence + " Damage");
+                System.out.println("");
+                System.out.println("2. Staff Hit");
+                System.out.println("_________________________________________________________________________________________________");
+                System.out.println("Whack!");
+                System.out.println("Recover 1 mana while giving your opponent a whack with your staff: " + "2 Damage");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    switch (choice){
+                        case 1:
+                            character.receiveDamage(this.intelligence);
+                            this.mana -= 5;
+                            return "Fireball|" + this.intelligence;
+                        case 2:
+                            character.receiveDamage(2);
+                            this.mana++;
+                            return "Staff Hit|" + 2;
+                        default:
+                            System.out.println("Choose an attack by entering 1 or 2");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Choose an attack by entering 1 or 2");
+                }
+            }
+        }
+        else {
+            while (true){
+                System.out.println(this.getName() + " attacks with: ");
+                System.out.println("1. Fireball   ---   NOT ENOUGH MANA: " + this.mana + "/5 Mana required.");
+                System.out.println("_________________________________________________________________________________________________");
+                System.out.println("Turn your foe to cinders!");
+                System.out.println("Expend 5 mana to deal damage equal to your intelligence: " + this.intelligence + " Damage");
+                System.out.println("");
+                System.out.println("2. Staff Hit");
+                System.out.println("_________________________________________________________________________________________________");
+                System.out.println("Whack!");
+                System.out.println("Recover 1 mana while giving your opponent a whack with your staff: " + "2 Damage");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    switch (choice){
+                        case 1:
+                            System.out.println("Not enough Mana!");
+                            break;
+                        case 2:
+                            character.receiveDamage(2);
+                            this.mana++;
+                            return "Staff Hit|" + 2;
+                        default:
+                            System.out.println("Choose an attack by entering 1 or 2");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Choose an attack by entering 1 or 2");
+                }
+            }
         }
     }
 

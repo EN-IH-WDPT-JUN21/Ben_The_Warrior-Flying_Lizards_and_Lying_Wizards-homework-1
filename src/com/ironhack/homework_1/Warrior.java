@@ -8,6 +8,8 @@ public class Warrior extends Character implements Attacker{
     private int stamina;
     private int strength;
 
+    static Scanner scanner = new Scanner(System.in);
+
     public Warrior() {
         super();
         setStrength(1 + (int)(Math.random() * 9 + 1));
@@ -23,23 +25,21 @@ public class Warrior extends Character implements Attacker{
     }
 
     private static int statInput(int statMin, int statMax, String message){
-        Scanner scanner = new Scanner(System.in);
-        boolean validChoice = false;
-        while (validChoice == false){
-            System.out.println(message);
-            String tmp = scanner.nextLine();
-            try {
-                int choice = Integer.parseInt(tmp);
-                if (choice >= statMin && choice <= statMax){
-                    return choice;
-                }
-                else {
-                    System.out.println("Please enter a valid number");
-                }
+        System.out.println(message);
+        String tmp = scanner.nextLine();
+        try {
+            int choice = Integer.parseInt(tmp);
+            if (choice >= statMin && choice <= statMax){
+                return choice;
             }
-            catch (NumberFormatException e){
+            else {
                 System.out.println("Please enter a valid number");
+                statInput(statMin, statMax, message);
             }
+        }
+        catch (NumberFormatException e){
+            System.out.println("Please enter a valid number");
+            statInput(statMin, statMax, message);
         }
         return statMin;
     }
@@ -50,8 +50,7 @@ public class Warrior extends Character implements Attacker{
     }
 
     public static Warrior createCustom(){
-        if (Character.hardcore == true) {
-            Scanner scanner = new Scanner(System.in);
+        if (Menu.isHardcore() == true) {
             int upgradePoints = 10;
             int str = 5;
             int stam = 30;
@@ -130,6 +129,74 @@ public class Warrior extends Character implements Attacker{
             character.receiveDamage(this.strength / 2.0);
             this.stamina++;
             return "Weak Attack|" + (this.strength / 2);
+        }
+    }
+
+    public String manualAttack(Character character) {
+        if (this.stamina >= 5){
+            while (true){
+                System.out.println(this.getName() + " attacks with: ");
+                System.out.println("1. Heavy Attack");
+                System.out.println("_________________________________________________________________________________________________");
+                System.out.println("A strong cleaving stroke with equipped weapon.");
+                System.out.println("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
+                System.out.println("");
+                System.out.println("2. Weak Attack");
+                System.out.println("_________________________________________________________________________________________________");
+                System.out.println("Wear your opponent down with a basic strike while conversing energy.");
+                System.out.println("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2) + " Damage");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    switch (choice){
+                        case 1:
+                            character.receiveDamage(this.strength);
+                            this.stamina -= 5;
+                            return "Heavy Attack|" + this.strength;
+                        case 2:
+                            character.receiveDamage(this.strength / 2.0);
+                            this.stamina++;
+                            return "Weak Attack|" + (this.strength / 2);
+                        default:
+                            System.out.println("Choose an attack by entering 1 or 2");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Choose an attack by entering 1 or 2");
+                }
+            }
+        }
+        else {
+            while (true){
+                System.out.println(this.getName() + " attacks with: ");
+                System.out.println("1. Heavy Attack   ---    NOT ENOUGH STAMINA: " + this.stamina + "/5 Stamina required.");
+                System.out.println("_________________________________________________________________________________________________");
+                System.out.println("A strong cleaving stroke with equipped weapon.");
+                System.out.println("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
+                System.out.println("");
+                System.out.println("2. Weak Attack");
+                System.out.println("_________________________________________________________________________________________________");
+                System.out.println("Wear your opponent down with a basic strike while conversing energy.");
+                System.out.println("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2) + " Damage");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    switch (choice){
+                        case 1:
+                            System.out.println("Not enough Stamina!");
+                            break;
+                        case 2:
+                            character.receiveDamage(this.strength / 2.0);
+                            this.stamina++;
+                            return "Weak Attack|" + (this.strength / 2);
+                        default:
+                            System.out.println("Choose an attack by entering 1 or 2");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Choose an attack by entering 1 or 2");
+                }
+            }
         }
     }
 
