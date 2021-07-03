@@ -22,10 +22,10 @@ public class Menu {
         return battleSpeed;
     }
 
-    public static void battleSpeedPause(int slowMilliseconds,int fastMilliseconds) {
+    public static void battleSpeedPause() {
         try {
-            if (Menu.getBattleSpeed()==1) Thread.sleep(slowMilliseconds);
-            if (Menu.getBattleSpeed()==2) Thread.sleep(fastMilliseconds);
+            if (Menu.getBattleSpeed()==1) Thread.sleep(150);
+            if (Menu.getBattleSpeed()==2) Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

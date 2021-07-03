@@ -145,16 +145,16 @@ public class BattleSimulator {
                     print4.append(String.join("", Collections.nCopies(126 - print4.toString().length(), " ")));
                     print4.append("|");
 
-                    Menu.battleSpeedPause(500, 150);
+                    Menu.battleSpeedPause();
                     System.out.println(print1);
-                    Menu.battleSpeedPause(500, 150);
+                    Menu.battleSpeedPause();
                     System.out.println(print2);
-                    Menu.battleSpeedPause(500, 150);
+                    Menu.battleSpeedPause();
                     System.out.println("|                                                                                                                             |");
                     System.out.println(print3);
-                    Menu.battleSpeedPause(500, 150);
+                    Menu.battleSpeedPause();
                     System.out.println(print4);
-                    Menu.battleSpeedPause(500, 150);
+                    Menu.battleSpeedPause();
                 }
             }
         }
