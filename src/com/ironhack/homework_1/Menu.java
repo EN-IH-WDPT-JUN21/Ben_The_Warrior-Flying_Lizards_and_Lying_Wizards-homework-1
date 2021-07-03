@@ -15,7 +15,7 @@ public class Menu {
     private static final Scanner scanner = new Scanner(System.in);
     private static final BattleSimulator bt = new BattleSimulator(party1, party2);
     private static boolean smallLog = false;
-    private static boolean hardcore = false;
+    public static boolean hardcore = false;
 
     public static Party getParty1() {
         return party1;

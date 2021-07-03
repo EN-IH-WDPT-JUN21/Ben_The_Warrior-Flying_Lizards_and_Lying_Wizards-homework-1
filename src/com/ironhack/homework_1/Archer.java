@@ -12,6 +12,8 @@ public class Archer extends Character implements Attacker{
     private int Energy;
     private int Dexterity;
 
+    static Scanner scanner = new Scanner(System.in);
+
     public Archer(){
         super();
         Energy = 5 + (int)(Math.random() * 20 + 1);
@@ -27,23 +29,21 @@ public class Archer extends Character implements Attacker{
     }
 
     private static int statInput(int statMin, int statMax, String message){
-        Scanner scanner = new Scanner(System.in);
-        boolean validChoice = false;
-        while (validChoice == false){
-            System.out.println(message);
-            String tmp = scanner.nextLine();
-            try {
-                int choice = Integer.parseInt(tmp);
-                if (choice >= statMin && choice <= statMax){
-                    return choice;
-                }
-                else {
-                    System.out.println("Please enter a valid number");
-                }
+        System.out.println(message);
+        String tmp = scanner.nextLine();
+        try {
+            int choice = Integer.parseInt(tmp);
+            if (choice >= statMin && choice <= statMax){
+                return choice;
             }
-            catch (NumberFormatException e){
+            else {
                 System.out.println("Please enter a valid number");
+                statInput(statMin, statMax, message);
             }
+        }
+        catch (NumberFormatException e){
+            System.out.println("Please enter a valid number");
+            statInput(statMin, statMax, message);
         }
         return statMin;
     }
@@ -54,19 +54,18 @@ public class Archer extends Character implements Attacker{
     }
 
     public static Archer createCustom(){
-        if (Character.hardcore == true) {
-            Scanner scanner = new Scanner(System.in);
+        if (Menu.hardcore == true) {
             int upgradePoints = 10;
             int dex = 5;
             int Energy = 10;
             int hp = 50;
-            System.out.println("What would you like to call your Archer?");
+            System.out.println("| What would you like to call your Archer?");
             String name = scanner.nextLine();
             while (upgradePoints > 0) {
-                System.out.println(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
-                System.out.println("1. Increase Dexterity: " + dex + " => " + (dex + 3));
-                System.out.println("2. Increase Energy: " + Energy + " => " + (Energy + 2));
-                System.out.println("3. Increase Hit Points: " + hp + " => " + (hp + 7));
+                System.out.println("| " + upgradePoints + " stat points remaining. Choose a stat to upgrade.");
+                System.out.println("| 1. Increase Dexterity: " + dex + " => " + (dex + 3));
+                System.out.println("| 2. Increase Energy: " + Energy + " => " + (Energy + 2));
+                System.out.println("| 3. Increase Hit Points: " + hp + " => " + (hp + 7));
                 String input = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(input);
@@ -84,25 +83,24 @@ public class Archer extends Character implements Attacker{
                             upgradePoints--;
                             break;
                         default:
-                            System.out.println("Please choose a valid option!");
+                            System.out.println("| Please choose a valid option!");
                             break;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Please choose a valid option!");
+                    System.out.println("| Please choose a valid option!");
                 }
             }
             return new Archer(name, dex, Energy, hp);
         }
         else {
-            Scanner scanner = new Scanner(System.in);
             int dex = 0;
             int Energy = 0;
             int hp = 0;
-            System.out.println("What would you like to call your Archer?");
+            System.out.println("| What would you like to call your Archer?");
             String name = scanner.nextLine();
-            dex = statInput(5, 25, "Please enter a value for Dexterity between 10 and 50");
-            Energy = statInput(5, 20, "Please enter a value for Energy between 10 and 50");
-            hp = statInput(50, 100, "Please enter a value for Hp between 50 and 100");
+            dex = statInput(5, 25, "| Please enter a value for Dexterity between 10 and 50");
+            Energy = statInput(5, 20, "| Please enter a value for Energy between 10 and 50");
+            hp = statInput(50, 100, "| Please enter a value for Hp between 50 and 100");
             //scanner.close();
             return new Archer(name, dex, Energy, hp);
         }
@@ -133,19 +131,84 @@ public class Archer extends Character implements Attacker{
             if (Menu.getParty1().getIdxInParty(character) == -1) {
                 for (Character ch : Menu.getParty1().getPartyCharacters()){
                     ch.receiveDamage(this.Dexterity / 5);
-                    this.Energy -= 10;
-                    return "Spread Shot|" + this.Dexterity;
                 }
             } else {
                 for (Character ch : Menu.getParty2().getPartyCharacters()){
                     ch.receiveDamage(this.Dexterity / 5);
-                    this.Energy -= 10;
-                    Map<String, Double> attackDetails = new HashMap<>();
-                    attackDetails.put("Heavy Attack", (double) this.Dexterity);
-                    return "Spread Shot|" + this.Dexterity;
                 }
             }
+            this.Energy -= 10;
             return "Spread Shot|" + this.Dexterity;
+        }
+    }
+
+    public String manualAttack(Character character) {
+        if (this.Energy >= 5){
+            while (true){
+                System.out.println(this.getName() + " attacks with: ");
+                System.out.println("1. Spread Shot");
+                System.out.println("_____________________________________________________________________________________________________________________________________");
+                System.out.println("Release a clutch of arrows damaging all members of the enemy party.");
+                System.out.println("Expend 10 Energy to deal damage to each enemy equal to 1 fifth of your dexterity: " + (this.Dexterity / 5) + " Damage to each enemy");
+                System.out.println("");
+                System.out.println("2. Aimed shot");
+                System.out.println("_____________________________________________________________________________________________________________________________________");
+                System.out.println("Take aim and deliver a single arrow to center mass.");
+                System.out.println("Recover 2 Energy deal damage equal to half your dexterity to your opponent: " + (this.Dexterity / 2) + " Damage");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    switch (choice){
+                        case 1:
+                            for (Character ch : Menu.getParty1().getPartyCharacters()){
+                                ch.receiveDamage(this.Dexterity / 5);
+                            }
+                            this.Energy -= 10;
+                            return "Spread Shot|" + this.Dexterity;
+                        case 2:
+                            character.receiveDamage( (double) this.Dexterity / 2);
+                            this.Energy += 2;
+                            return "Aimed Shot|" + (this.Dexterity / 2);
+                        default:
+                            System.out.println("Choose an attack by entering 1 or 2");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Choose an attack by entering 1 or 2");
+                }
+            }
+        }
+        else {
+            while (true){
+                System.out.println(this.getName() + " attacks with: ");
+                System.out.println("1. Spread Shot   ---   NOT ENOUGH ENERGY " + this.Energy + "/10 Energy required");
+                System.out.println("_____________________________________________________________________________________________________________________________________");
+                System.out.println("Release a clutch of arrows damaging all members of the enemy party.");
+                System.out.println("Expend 10 Energy to deal damage to each enemy equal to 1 fifth of your dexterity: " + (this.Dexterity / 5) + " Damage to each enemy");
+                System.out.println("");
+                System.out.println("2. Aimed shot");
+                System.out.println("_____________________________________________________________________________________________________________________________________");
+                System.out.println("Take aim and deliver a single arrow to center mass.");
+                System.out.println("Recover 2 Energy deal damage equal to half your dexterity to your opponent: " + (this.Dexterity / 2) + " Damage");
+                String tmp = scanner.nextLine();
+                try {
+                    int choice = Integer.parseInt(tmp);
+                    switch (choice){
+                        case 1:
+                            System.out.println("Not enough Energy!");
+                            break;
+                        case 2:
+                            character.receiveDamage( (double) this.Dexterity / 2);
+                            this.Energy += 2;
+                            return "Aimed Shot|" + (this.Dexterity / 2);
+                        default:
+                            System.out.println("Choose an attack by entering 1 or 2");
+                    }
+                }
+                catch (NumberFormatException e){
+                    System.out.println("Choose an attack by entering 1 or 2");
+                }
+            }
         }
     }
 
