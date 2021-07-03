@@ -1,5 +1,6 @@
 package com.ironhack.homework_1;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -28,8 +29,18 @@ public class Wizard extends Character implements Attacker{
         setHp(hp);
     }
 
+    private static void printFormatted(String message){
+        StringBuilder print0 = new StringBuilder("| " + message);
+        print0.append(String.join("", Collections.nCopies(126 - print0.toString().length(), " ")));
+        print0.append("|");
+        System.out.println(print0);
+    }
+
     private static int statInput(int statMin, int statMax, String message){
-        System.out.println(message);
+        StringBuilder print0 = new StringBuilder("| " + message);
+        print0.append(String.join("", Collections.nCopies(126 - print0.toString().length(), " ")));
+        print0.append("|");
+        System.out.println(print0);
         String tmp = scanner.nextLine();
         try {
             int choice = Integer.parseInt(tmp);
@@ -37,12 +48,18 @@ public class Wizard extends Character implements Attacker{
                 return choice;
             }
             else {
-                System.out.println("Please enter a valid number");
+                StringBuilder print1 = new StringBuilder("| Please enter a valid number");
+                print1.append(String.join("", Collections.nCopies(126 - print1.toString().length(), " ")));
+                print1.append("|");
+                System.out.println(print1);
                 statInput(statMin, statMax, message);
             }
         }
         catch (NumberFormatException e){
-            System.out.println("Please enter a valid number");
+            StringBuilder print2 = new StringBuilder("| Please enter a valid number");
+            print2.append(String.join("", Collections.nCopies(126 - print2.toString().length(), " ")));
+            print2.append("|");
+            System.out.println(print2);
             statInput(statMin, statMax, message);
         }
         return statMin;
@@ -59,13 +76,13 @@ public class Wizard extends Character implements Attacker{
             int intel = 20;
             int mana = 30;
             int hp = 75;
-            System.out.println("What would you like to call your Wizard?");
+            printFormatted("What would you like to call your Wizard?");
             String name = scanner.nextLine();
             while (upgradePoints > 0) {
-                System.out.println(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
-                System.out.println("1. Increase Intelligence: " + intel + " => " + (intel + 3));
-                System.out.println("2. Increase Mana: " + mana + " => " + (mana + 5));
-                System.out.println("3. Increase Hit Points: " + hp + " => " + (hp + 5));
+                printFormatted(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
+                printFormatted("1. Increase Intelligence: " + intel + " => " + (intel + 3));
+                printFormatted("2. Increase Mana: " + mana + " => " + (mana + 5));
+                printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 5));
                 String input = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(input);
@@ -83,11 +100,11 @@ public class Wizard extends Character implements Attacker{
                             upgradePoints--;
                             break;
                         default:
-                            System.out.println("Please choose a valid option!");
+                            printFormatted("Please choose a valid option!");
                             break;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Please choose a valid option!");
+                    printFormatted("Please choose a valid option!");
                 }
             }
             return new Wizard(name, intel, mana, hp);
@@ -97,7 +114,7 @@ public class Wizard extends Character implements Attacker{
             int intel = 0;
             int mana = 0;
             int hp = 0;
-            System.out.println("What would you like to call your Wizard?");
+            printFormatted("What would you like to call your Wizard?");
             String name = scanner.nextLine();
             intel = statInput(10, 50, "Please enter a value for Intelligence between 10 and 50");
             mana = statInput(10, 50, "Please enter a value for Mana between 10 and 50");
@@ -139,16 +156,15 @@ public class Wizard extends Character implements Attacker{
     public String manualAttack(Character character) {
         if (this.mana >= 5){
             while (true){
-                System.out.println(this.getName() + " attacks with: ");
-                System.out.println("1. Fireball");
-                System.out.println("_________________________________________________________________________________________________");
-                System.out.println("Turn your foe to cinders!");
-                System.out.println("Expend 5 mana to deal damage equal to your intelligence: " + this.intelligence + " Damage");
-                System.out.println("");
-                System.out.println("2. Staff Hit");
-                System.out.println("_________________________________________________________________________________________________");
-                System.out.println("Whack!");
-                System.out.println("Recover 1 mana while giving your opponent a whack with your staff: " + "2 Damage");
+                printFormatted(this.getName() + " attacks with: ");
+                printFormatted("1. Fireball");
+                printFormatted("Turn your foe to cinders!");
+                printFormatted("Expend 5 mana to deal damage equal to your intelligence: " + this.intelligence + " Damage");
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                printFormatted("2. Staff Hit");
+                printFormatted("Whack!");
+                printFormatted("Recover 1 mana while giving your opponent a whack with your staff: " + "2 Damage");
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
@@ -162,43 +178,42 @@ public class Wizard extends Character implements Attacker{
                             this.mana++;
                             return "Staff Hit|" + 2;
                         default:
-                            System.out.println("Choose an attack by entering 1 or 2");
+                            printFormatted("Choose an attack by entering 1 or 2");
                     }
                 }
                 catch (NumberFormatException e){
-                    System.out.println("Choose an attack by entering 1 or 2");
+                    printFormatted("Choose an attack by entering 1 or 2");
                 }
             }
         }
         else {
             while (true){
-                System.out.println(this.getName() + " attacks with: ");
-                System.out.println("1. Fireball   ---   NOT ENOUGH MANA: " + this.mana + "/5 Mana required.");
-                System.out.println("_________________________________________________________________________________________________");
-                System.out.println("Turn your foe to cinders!");
-                System.out.println("Expend 5 mana to deal damage equal to your intelligence: " + this.intelligence + " Damage");
-                System.out.println("");
-                System.out.println("2. Staff Hit");
-                System.out.println("_________________________________________________________________________________________________");
-                System.out.println("Whack!");
-                System.out.println("Recover 1 mana while giving your opponent a whack with your staff: " + "2 Damage");
+                printFormatted(this.getName() + " attacks with: ");
+                printFormatted("1. Fireball   ---   NOT ENOUGH MANA: " + this.mana + "/5 Mana required.");
+                printFormatted("Turn your foe to cinders!");
+                printFormatted("Expend 5 mana to deal damage equal to your intelligence: " + this.intelligence + " Damage");
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                printFormatted("2. Staff Hit");
+                printFormatted("Whack!");
+                printFormatted("Recover 1 mana while giving your opponent a whack with your staff: " + "2 Damage");
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
                     switch (choice){
                         case 1:
-                            System.out.println("Not enough Mana!");
+                            printFormatted("Not enough Mana!");
                             break;
                         case 2:
                             character.receiveDamage(2);
                             this.mana++;
                             return "Staff Hit|" + 2;
                         default:
-                            System.out.println("Choose an attack by entering 1 or 2");
+                            printFormatted("Choose an attack by entering 1 or 2");
                     }
                 }
                 catch (NumberFormatException e){
-                    System.out.println("Choose an attack by entering 1 or 2");
+                    printFormatted("Choose an attack by entering 1 or 2");
                 }
             }
         }
