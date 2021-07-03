@@ -80,6 +80,11 @@ public abstract class Character {
     abstract void receiveDamage(double damage);
     abstract String printStats();
 
+    public String printSimpleIntroduction(){
+        return this.getName() + " the " + this.getClass().getSimpleName();
+    }
+    abstract String printSimpleStats();
+
     abstract String toCsvFormat();
 
     private static void printFormatted(String message){

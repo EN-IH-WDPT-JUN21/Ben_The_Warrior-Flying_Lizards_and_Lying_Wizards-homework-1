@@ -229,4 +229,7 @@ public class Wizard extends Character implements Attacker{
     public String printStats(){
         return this.getName() + " the " + this.getClass().getSimpleName() + "; Id: " + this.getId() + ", Intelligence: " + this.getIntelligence() + ", Mana: " + this.getMana() + ", Hp: " + (int) this.getHp() + ".";
     }
+    public String printSimpleStats(){
+        return "Hp:" + (int) this.getHp()  + " / Mana:" + this.getMana() + " / Intelligence:" + this.getIntelligence();
+    }
 }

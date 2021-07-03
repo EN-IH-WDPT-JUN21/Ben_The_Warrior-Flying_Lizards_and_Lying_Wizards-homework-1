@@ -133,8 +133,8 @@ public class Archer extends Character implements Attacker{
             print9.append("|");
             System.out.println(print9);
             String name = scanner.nextLine();
-            dex = statInput(5, 25, "Please enter a value for Dexterity between 10 and 50");
-            Energy = statInput(5, 20, "Please enter a value for Energy between 10 and 50");
+            dex = statInput(5, 25, "Please enter a value for Dexterity between 5 and 25");
+            Energy = statInput(5, 20, "Please enter a value for Energy between 5 and 20");
             hp = statInput(50, 100, "Please enter a value for Hp between 50 and 100");
             //scanner.close();
             return new Archer(name, dex, Energy, hp);
@@ -312,5 +312,8 @@ public class Archer extends Character implements Attacker{
 
     public String printStats(){
         return this.getName() + " the " + this.getClass().getSimpleName() + "; Id: " + this.getId() + ", Dexterity: " + this.getDexterity() + ", Energy: " + this.getEnergy() + ", Hp: " + (int) this.getHp() + ".";
+    }
+    public String printSimpleStats(){
+        return "Hp:" + (int) this.getHp() + " / Energy:" + this.getEnergy() + " / Dexterity:" + this.getDexterity() ;
     }
 }
