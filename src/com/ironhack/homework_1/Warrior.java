@@ -24,8 +24,18 @@ public class Warrior extends Character implements Attacker{
         setHp(hp);
     }
 
+    private static void printFormatted(String message){
+        StringBuilder print0 = new StringBuilder("| " + message);
+        print0.append(String.join("", Collections.nCopies(126 - print0.toString().length(), " ")));
+        print0.append("|");
+        System.out.println(print0);
+    }
+
     private static int statInput(int statMin, int statMax, String message){
-        System.out.println(message);
+        StringBuilder print0 = new StringBuilder("| " + message);
+        print0.append(String.join("", Collections.nCopies(126 - print0.toString().length(), " ")));
+        print0.append("|");
+        System.out.println(print0);
         String tmp = scanner.nextLine();
         try {
             int choice = Integer.parseInt(tmp);
@@ -33,12 +43,18 @@ public class Warrior extends Character implements Attacker{
                 return choice;
             }
             else {
-                System.out.println("Please enter a valid number");
+                StringBuilder print1 = new StringBuilder("| Please enter a valid number");
+                print1.append(String.join("", Collections.nCopies(126 - print1.toString().length(), " ")));
+                print1.append("|");
+                System.out.println(print1);
                 statInput(statMin, statMax, message);
             }
         }
         catch (NumberFormatException e){
-            System.out.println("Please enter a valid number");
+            StringBuilder print2 = new StringBuilder("| Please enter a valid number");
+            print2.append(String.join("", Collections.nCopies(126 - print2.toString().length(), " ")));
+            print2.append("|");
+            System.out.println(print2);
             statInput(statMin, statMax, message);
         }
         return statMin;
@@ -55,13 +71,13 @@ public class Warrior extends Character implements Attacker{
             int str = 5;
             int stam = 30;
             int hp = 150;
-            System.out.println("What would you like to call your Warrior?");
+            printFormatted("What would you like to call your Warrior?");
             String name = scanner.nextLine();
             while (upgradePoints > 0) {
-                System.out.println(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
-                System.out.println("1. Increase Strength: " + str + " => " + (str + 1));
-                System.out.println("2. Increase Stamina: " + stam + " => " + (stam + 5));
-                System.out.println("3. Increase Hit Points: " + hp + " => " + (hp + 10));
+                printFormatted(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
+                printFormatted("1. Increase Strength: " + str + " => " + (str + 1));
+                printFormatted("2. Increase Stamina: " + stam + " => " + (stam + 5));
+                printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 10));
                 String input = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(input);
@@ -79,11 +95,11 @@ public class Warrior extends Character implements Attacker{
                             upgradePoints--;
                             break;
                         default:
-                            System.out.println("Please choose a valid option!");
+                            printFormatted("Please choose a valid option!");
                             break;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Please choose a valid option!");
+                    printFormatted("Please choose a valid option!");
                 }
             }
             return new Warrior(name, str, stam, hp);
@@ -93,7 +109,7 @@ public class Warrior extends Character implements Attacker{
             int str = 0;
             int stam = 0;
             int hp = 0;
-            System.out.println("What would you like to call your Warrior?");
+            printFormatted("What would you like to call your Warrior?");
             String name = scanner.nextLine();
             str = statInput(1, 10, "Please enter a value for Strength between 1 and 10");
             stam = statInput(10, 50, "Please enter a value for Stamina between 10 and 50");
@@ -135,16 +151,15 @@ public class Warrior extends Character implements Attacker{
     public String manualAttack(Character character) {
         if (this.stamina >= 5){
             while (true){
-                System.out.println(this.getName() + " attacks with: ");
-                System.out.println("1. Heavy Attack");
-                System.out.println("_________________________________________________________________________________________________");
-                System.out.println("A strong cleaving stroke with equipped weapon.");
-                System.out.println("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
-                System.out.println("");
-                System.out.println("2. Weak Attack");
-                System.out.println("_________________________________________________________________________________________________");
-                System.out.println("Wear your opponent down with a basic strike while conversing energy.");
-                System.out.println("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2) + " Damage");
+                printFormatted(this.getName() + " attacks with: ");
+                printFormatted("1. Heavy Attack");
+                printFormatted("A strong cleaving stroke with equipped weapon.");
+                printFormatted("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                printFormatted("2. Weak Attack");
+                printFormatted("Wear your opponent down with a basic strike while conversing energy.");
+                printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2) + " Damage");
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
@@ -158,43 +173,42 @@ public class Warrior extends Character implements Attacker{
                             this.stamina++;
                             return "Weak Attack|" + (this.strength / 2);
                         default:
-                            System.out.println("Choose an attack by entering 1 or 2");
+                            printFormatted("Choose an attack by entering 1 or 2");
                     }
                 }
                 catch (NumberFormatException e){
-                    System.out.println("Choose an attack by entering 1 or 2");
+                    printFormatted("Choose an attack by entering 1 or 2");
                 }
             }
         }
         else {
             while (true){
-                System.out.println(this.getName() + " attacks with: ");
-                System.out.println("1. Heavy Attack   ---    NOT ENOUGH STAMINA: " + this.stamina + "/5 Stamina required.");
-                System.out.println("_________________________________________________________________________________________________");
-                System.out.println("A strong cleaving stroke with equipped weapon.");
-                System.out.println("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
-                System.out.println("");
-                System.out.println("2. Weak Attack");
-                System.out.println("_________________________________________________________________________________________________");
-                System.out.println("Wear your opponent down with a basic strike while conversing energy.");
-                System.out.println("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2) + " Damage");
+                printFormatted(this.getName() + " attacks with: ");
+                printFormatted("1. Heavy Attack   ---    NOT ENOUGH STAMINA: " + this.stamina + "/5 Stamina required.");
+                printFormatted("A strong cleaving stroke with equipped weapon.");
+                printFormatted("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                printFormatted("2. Weak Attack");
+                printFormatted("Wear your opponent down with a basic strike while conversing energy.");
+                printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2) + " Damage");
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
                     switch (choice){
                         case 1:
-                            System.out.println("Not enough Stamina!");
+                            printFormatted("Not enough Stamina!");
                             break;
                         case 2:
                             character.receiveDamage(this.strength / 2.0);
                             this.stamina++;
                             return "Weak Attack|" + (this.strength / 2);
                         default:
-                            System.out.println("Choose an attack by entering 1 or 2");
+                            printFormatted("Choose an attack by entering 1 or 2");
                     }
                 }
                 catch (NumberFormatException e){
-                    System.out.println("Choose an attack by entering 1 or 2");
+                    printFormatted("Choose an attack by entering 1 or 2");
                 }
             }
         }

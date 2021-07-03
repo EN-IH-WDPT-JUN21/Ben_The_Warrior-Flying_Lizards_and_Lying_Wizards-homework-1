@@ -1,10 +1,7 @@
 package com.ironhack.homework_1;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import  java.lang.reflect.*;
-import java.util.Map;
-import java.util.Scanner;
 
 public abstract class Character {
     /*
@@ -85,6 +82,13 @@ public abstract class Character {
 
     abstract String toCsvFormat();
 
+    private static void printFormatted(String message){
+        StringBuilder print0 = new StringBuilder("| " + message);
+        print0.append(String.join("", Collections.nCopies(126 - print0.toString().length(), " ")));
+        print0.append("|");
+        System.out.println(print0);
+    }
+
     public static Character addCharacter(String[] parameters){
         switch(parameters[0]){
             case "Warrior":
@@ -126,11 +130,11 @@ public abstract class Character {
 
     public static Character createCustom(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose a class for your new Character: ");
+        printFormatted("Choose a class for your new Character: ");
         boolean chosen = false;
         while (chosen == false) {
             for (int i = 0; i < classNames.length; i++) {
-                System.out.println((i + 1) + ". " + classNames[i]);
+                printFormatted((i + 1) + ". " + classNames[i]);
             }
             String input = scanner.nextLine();
             try {
@@ -151,7 +155,7 @@ public abstract class Character {
 
             }
             catch (NumberFormatException e){
-                System.out.println("Please choose a valid option!");
+                printFormatted("Please choose a valid option!");
             }
         }
         return null;
