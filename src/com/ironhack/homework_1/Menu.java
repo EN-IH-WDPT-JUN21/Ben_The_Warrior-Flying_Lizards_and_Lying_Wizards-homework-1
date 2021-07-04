@@ -443,36 +443,36 @@ public class Menu {
         if(longestName < 15){
             //print 7 names at a time
             while(startInt < graveyard.size()){
-                startInt = graveyardLine(graveyard,7,new int[]{17,17,17,17,17,17,17},startInt);
+                startInt = Printer.graveyardLine(graveyard,7,new int[]{17,17,17,17,17,17,17},startInt);
             }
         }else if(longestName < 18){
             //print 6 names at a time
             while(startInt < graveyard.size()){
-                startInt = graveyardLine(graveyard,6,new int[]{20,20,20,20,20,20},startInt);
+                startInt = Printer.graveyardLine(graveyard,6,new int[]{20,20,20,20,20,20},startInt);
             }
         }else if(longestName < 22) {
             //print 5 names at a time
             while (startInt < graveyard.size()) {
-                startInt = graveyardLine(graveyard, 5, new int[]{24, 24, 25, 24, 24}, startInt);
+                startInt = Printer.graveyardLine(graveyard, 5, new int[]{24, 24, 25, 24, 24}, startInt);
             }
         }else if(longestName < 28){
             //print 4 names at a time
             while (startInt < graveyard.size()) {
-                startInt = graveyardLine(graveyard, 4, new int[]{30,31,31,30}, startInt);
+                startInt = Printer.graveyardLine(graveyard, 4, new int[]{30,31,31,30}, startInt);
             }
         }else if(longestName < 39){
             //print 3 names at a time
             while(startInt < graveyard.size()){
-                startInt = graveyardLine(graveyard,3,new int[]{41,41,41},startInt);
+                startInt = Printer.graveyardLine(graveyard,3,new int[]{41,41,41},startInt);
             }
         }else if(longestName < 60){
             //print 2 names at a time
             while(startInt < graveyard.size()){
-                startInt = graveyardLine(graveyard,2,new int[]{62,62},startInt);
+                startInt = Printer.graveyardLine(graveyard,2,new int[]{62,62},startInt);
             }
         }else{
             while(startInt < graveyard.size()){
-                startInt = graveyardLine(graveyard,1,new int[]{125},startInt);
+                startInt = Printer.graveyardLine(graveyard,1,new int[]{125},startInt);
             }
         }
         Printer.printChosenMenus(new String[]{"1 - Clear graveyard", "b - Back"}, false,false);
@@ -491,58 +491,23 @@ public class Menu {
             }
         }
     }
-    public static int graveyardLine(List<Character> graveyard, int numberNames, int[] maxLength, int startIndex){
-        int index = startIndex;
-        StringBuilder str = new StringBuilder("|");
-        int cnt = 0;
-        for(; (index < startIndex + numberNames); index++){
-            if(index < graveyard.size()){
-                int length = graveyard.get(index).getName().length();
-                if(length > 125){
-                    str.append(" ");
-                    str.append(graveyard.get(index).getName().substring(0,120));
-                    str.append("... ");
-                }else{
-                    str.append(Menu.centerString(graveyard.get(index).getName(), maxLength[cnt]).substring(1, maxLength[cnt++] + 1));
-                }
-            }else{
-                str.append(String.join("", Collections.nCopies(maxLength[cnt], " ")));
-                cnt++;
-            }
-            str.append("|");
-        }
-        System.out.println(str);
-        Printer.printLine(1);
-        return index;
-    }
 
     public static void settings(){
         String input = "";
-        String[] gameMode = {"    1 - Game mode [Normal]    ","   1 - Game mode [Hardcore]   "};
-        String[] logMode = {"  2 - Log mode [Reduced Logs]  ","   2 - Log mode [Full Logs]    "};
-        String[] gameSpeed = {"  3 -  Battle speed [Instant]  ","    3 -  Battle speed [Fast]   ","    3 -  Battle speed [Slow]   "};
-        String[] partySize = {"   4 - Party size limit [5]   ", "  4 - Party size limit [10]   ", "  4 - Party size limit [20]   "};
+        String[] gameMode = {"1 - Game mode [Normal]","1 - Game mode [Hardcore]"};
+        String[] logMode = {"2 - Log mode [Reduced Logs]","2 - Log mode [Full Logs]"};
+        String[] gameSpeed = {"3 -  Battle speed [Instant]","3 -  Battle speed [Fast]","3 -  Battle speed [Slow]"};
+        String[] partySize = {"4 - Party size limit [5]", "4 - Party size limit [10]", "4 - Party size limit [20]"};
 
         while(true){
-            System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
-            System.out.println("|                                       Change Settings                                        |           b - Back           |");
-            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-            System.out.print("|" + (hardcore ? gameMode[1] : gameMode[0]) + "|" + (smallLog ? logMode[0] : logMode[1]) + "|");
-            if (battleSpeed==1) {
-                System.out.print(gameSpeed[1] + "|");
-            } else if (battleSpeed ==2){
-                System.out.print(gameSpeed[2] + "|");
-            }else {
-                System.out.print(gameSpeed[0] + "|");
-            }
-            if(Menu.getPartySize() == 5){
-                System.out.println(partySize[0] + "|");
-            }else if(Menu.getPartySize() == 10){
-                System.out.println(partySize[1] + "|");
-            }else if(Menu.getPartySize() == 20){
-                System.out.println(partySize[2] + "|");
-            }
-                System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            Printer.printPart("settings");
+            Printer.printLine(4);
+            String[] stringArr = new String[]{hardcore ? gameMode[1] : gameMode[0],
+                    smallLog ? logMode[0] : logMode[1],
+                    battleSpeed == 1 ? gameSpeed[1] : battleSpeed == 2 ? gameSpeed[2] : gameSpeed[0],
+                    Menu.getPartySize() == 5 ? partySize[0] : Menu.getPartySize() == 10 ? partySize[1] : partySize[2]};
+
+            Printer.printChosenMenus(stringArr,false,false);
 
             input = scanner.nextLine();
             switch (input.toLowerCase()){

@@ -1,9 +1,35 @@
 package com.ironhack.homework_1;
 
 import java.util.Collections;
+import java.util.List;
 
 public class Printer {
     public Printer() {
+    }
+
+    public static int graveyardLine(List<Character> graveyard, int numberNames, int[] maxLength, int startIndex){
+        int index = startIndex;
+        StringBuilder str = new StringBuilder("|");
+        int cnt = 0;
+        for(; (index < startIndex + numberNames); index++){
+            if(index < graveyard.size()){
+                int length = graveyard.get(index).getName().length();
+                if(length > 125){
+                    str.append(" ");
+                    str.append(graveyard.get(index).getName().substring(0,120));
+                    str.append("... ");
+                }else{
+                    str.append(Menu.centerString(graveyard.get(index).getName(), maxLength[cnt]).substring(1, maxLength[cnt++] + 1));
+                }
+            }else{
+                str.append(String.join("", Collections.nCopies(maxLength[cnt], " ")));
+                cnt++;
+            }
+            str.append("|");
+        }
+        System.out.println(str);
+        Printer.printLine(1);
+        return index;
     }
 
     public static void centerString(String middle, int width){
@@ -70,6 +96,11 @@ public class Printer {
                 System.out.println("|                 ______  _______ _______ _______        _______      _______ _______ _______  ______ _______                 |");
                 System.out.println("|                 |_____] |_____|    |       |    |      |______      |______    |    |_____| |_____/    |                    |");
                 System.out.println("|                 |_____] |     |    |       |    |_____ |______      ______|    |    |     | |    \\_    |                    |");
+                break;
+
+            case "settings":
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                System.out.println("|                                       Change Settings                                       |           b - Back            |");
                 break;
 
             case "equalLine":

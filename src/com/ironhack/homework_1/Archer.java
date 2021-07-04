@@ -196,11 +196,11 @@ public class Archer extends Character implements Attacker{
                 Printer.printFormatted("1. Spread Shot   ---   NOT ENOUGH ENERGY " + this.Energy + "/10 Energy required");
                 Printer.printFormatted("Release a clutch of arrows damaging all members of the enemy party.");
                 Printer.printFormatted("Expend 10 Energy to deal damage to each enemy: " + (this.Dexterity / 5) + " Damage to each enemy");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 Printer.printFormatted("2. Aimed shot");
                 Printer.printFormatted("Take aim and deliver a single arrow to center mass.");
                 Printer.printFormatted("Recover 2 Energy deal damage equal to half your dexterity to your opponent: " + (this.Dexterity / 2) + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);

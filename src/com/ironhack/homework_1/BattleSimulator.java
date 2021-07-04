@@ -55,8 +55,7 @@ public class BattleSimulator {
                     Printer.printLine(1);
                 }
                 String roundString = "Round Nº " + round;
-                roundString = Menu.centerString(roundString, 125);
-                System.out.println(roundString);
+                Printer.centerString(roundString, 125);
             }
 
             String c1attack = !Menu.isHardcore() ? c1.attack(c2) : c1.manualAttack(c2); //they attack at the same time
