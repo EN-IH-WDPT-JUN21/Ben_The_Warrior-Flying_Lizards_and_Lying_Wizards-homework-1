@@ -122,16 +122,16 @@ public class Party {
     // Deletes all Characters from party
     public void clearParty() {
         partyCharacters.clear();
-        System.out.println(partyName + " cleared!");
+        Printer.printFormatted(partyName + " cleared!");
     }
 
 
     // ==================== Characters Management in Party ====================
     //Adds character to party list
     public void addCharacter(Character character) {
-        System.out.println("Added to " + partyName + ": " + character.printStats());
         partyCharacters.add(character);
         this.setRepeatedName(character);
+        Printer.printFormatted("Added to " + partyName + ": " + character.printStats());
     }
 
     //Removes character from party list (by character)
@@ -150,29 +150,15 @@ public class Party {
     public Character selectCharacter() {
         Scanner scanner = new Scanner(System.in);
 
-        StringBuilder teamName = new StringBuilder("|");
-        int teamLength = getPartyName().length();
-        int spaces = 125 - teamLength;
-        boolean even = spaces % 2 == 0;
-        teamName.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-        teamName.append(getPartyName());
-        if(even){
-            teamName.append(String.join("", Collections.nCopies(spaces / 2, " ")));
-        }else{
-            teamName.append(String.join("", Collections.nCopies((spaces / 2) + 1, " ")));
-        }
-        teamName.append("|");
+        String teamName = getPartyName();
+        teamName = Menu.centerString(teamName,125);
         System.out.println("+=============================================================================================================================+");
         System.out.println(teamName);
         System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
         System.out.println("| Choose a character from your party:                                                                                         |");
 
         for (int i = 0; i < partyCharacters.size(); i++) {
-            StringBuilder str = new StringBuilder("| (" + (i + 1) + ")" + " " + partyCharacters.get(i).printStats());
-            int length = 126 - str.toString().length();
-            str.append(String.join("", Collections.nCopies(length, " ")));
-            str.append("|");
-            System.out.println(str);
+            Printer.printFormatted("(" + (i + 1) + ")" + " " + partyCharacters.get(i).printStats());
         }
         while (true) {
             String input = scanner.nextLine();

@@ -42,10 +42,15 @@ public class PartyCreator {
 
         // While loop to add each Character to the Party
         while(scanner.hasNextLine()){
-            String[] newCharacter = scanner.nextLine().split(",");
-            Character character = Character.addCharacter(newCharacter);
-            if(character != null){
-                party.addCharacter(Character.addCharacter(newCharacter));
+            if (party.getPartyCharacters().size() < Menu.getPartySize()){
+                String[] newCharacter = scanner.nextLine().split(",");
+                Character character = Character.addCharacter(newCharacter);
+                if(character != null){
+                    party.addCharacter(Character.addCharacter(newCharacter));
+                }
+            }else{
+                System.out.println("| Party limit reached, unable to add more characters! If needed change in settings!                                           |");
+                break;
             }
         }
         scanner.close();
@@ -99,14 +104,18 @@ public class PartyCreator {
     public void randomParty(Party party) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // Find way to know each of the subclasses of Character?
         party.clearParty();
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < Menu.getPartySize(); i++){
             party.addCharacter(Character.getRandom());
         }
     }
 
     public void addCharacter(Party party){
         // add Warrior warrior to the Party party
-        party.addCharacter(Character.createCustom());
+        if (party.getPartyCharacters().size() < Menu.getPartySize()){
+            party.addCharacter(Character.createCustom());
+        }else{
+            System.out.println("| Party limit reached, unable to add more characters! If needed change in settings!                                           |");
+        }
     }
     public void removeCharacter(Party party){
         // add Warrior warrior to the Party party

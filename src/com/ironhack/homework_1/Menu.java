@@ -16,6 +16,7 @@ public class Menu {
     private static final BattleSimulator bt = new BattleSimulator(party1, party2);
     private static boolean smallLog = false;
     private static boolean hardcore = false;
+    private static int partySize = 5;
     private static int battleSpeed = 0;
 
     public static int getBattleSpeed() {
@@ -46,6 +47,43 @@ public class Menu {
         Menu.hardcore = hardcore;
     }
 
+    public static int getPartySize(){
+        return partySize;
+    }
+
+    public static void setPartySize(){
+        if(Menu.partySize == 20){
+            if(party1.getPartyCharacters().size() > 5 || party2.getPartyCharacters().size() > 5){
+                boolean confirmChange = true;
+                while(confirmChange){
+                    System.out.println("| By changing the party size limit, the previously created parties will be erased. Confirm changes? [ yes | no ]         |");
+                    String input = scanner.nextLine();
+                    if(input.length() == 0){
+                        input = "empty";
+                    }
+                    switch (input.toLowerCase().charAt(0)){
+                        case 'y':
+                            party1.clearParty();
+                            party2.clearParty();
+                            confirmChange = false;
+                            break;
+                        case 'n':
+                            confirmChange = false;
+                            break;
+                        default:
+                            System.out.println("| Select a valid option...                                                                                                    |");
+                            break;
+                    }
+                }
+            }
+            Menu.partySize = 5;
+        }else if(Menu.partySize == 5){
+            Menu.partySize = 10;
+        }else if(Menu.partySize == 10){
+            Menu.partySize = 20;
+        }
+    }
+
     public static Party getParty1() {
         return party1;
     }
@@ -54,14 +92,28 @@ public class Menu {
         return party2;
     }
 
+    public static String centerString(String middle, int width){
+        StringBuilder str = new StringBuilder("|");
+        int middleLength = middle.length();
+        int spaces = width - middleLength;
+        boolean even = spaces % 2 == 0;
+        str.append(String.join("", Collections.nCopies(spaces / 2, " ")));
+        str.append(middle);
+        if(even){
+            str.append(String.join("", Collections.nCopies(spaces / 2, " ")));
+        }else{
+            str.append(String.join("", Collections.nCopies((spaces / 2) + 1, " ")));
+        }
+        str.append("|");
+        return str.toString();
+    }
+
     public static void partyManagement() throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String input = "";
         while (true) {
             Printer.printChosenMenus(new String[]{"PARTY - " + party1.getPartyName(), "PARTY - " + party2.getPartyName()}, false, true);
             Printer.partyPrint(party1, party2);
-            System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
-            System.out.println("|    1 - Import party    |    2 - Export party    |   3 - Create manually   |    4 - Random party    |        b - Back        |");
-            System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
+            Printer.printChosenMenus(new String[]{"1 - Import party", "2 - Export party", "3 - Create manually", "4 - Random party", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 // Party management -> Import party
@@ -92,9 +144,7 @@ public class Menu {
         String input = "";
         boolean running = false;
         while(true){
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            System.out.println("|             1 - To Player 1             |             2 - To Player 2             |                b - Back                 |");
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            Printer.printChosenMenus(new String[]{"1- To Player 1", "2 - To Player 2", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 // Party management -> Import party -> To Player 1
@@ -138,9 +188,7 @@ public class Menu {
         String input = "";
         boolean running = false;
         while(true) {
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            System.out.println("|           1 - Export Player 1           |           2 - Export Player 2           |                b - Back                 |");
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            Printer.printChosenMenus(new String[]{"1 - Export Player 1", "2 - Export Player 2", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 // Party management -> Export party -> Export Player 1
@@ -164,7 +212,7 @@ public class Menu {
                         try{
                             System.out.println("What is the file you want to export to?");
                             input = scanner.nextLine();
-                            pc.importParty(party2, input);
+                            pc.saveParty(party2, input);
                             running = false;
                         }catch (FileNotFoundException e){
                             System.out.println(e.getMessage());
@@ -183,9 +231,7 @@ public class Menu {
     public static void partyManagement_createManually(){
         String input = "";
         while(true){
-            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-            System.out.println("|         1 - Player 1         |         2 - Player 2          |     3 - Single character      |           b - Back           |");
-            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            Printer.printChosenMenus(new String[]{"1 - Player 1", "2 - Player 2", "3 - Single character", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 // Party management -> Create manually -> Party 1
@@ -223,7 +269,7 @@ public class Menu {
                         break;
                     case 'n':
                         deleteNotSelected = false;
-                        System.out.println("Previously added characters preserved!");
+                        System.out.println("| Previously added characters preserved!                                                                                      |");
                         break;
                     default:
                         System.out.println("| Select a valid option...                                                                                                    |");
@@ -232,16 +278,42 @@ public class Menu {
             }
         }
         while(true){
+            String partyInfo = "Party size (" + party.getPartyCharacters().size() + "/" + Menu.getPartySize() + ")";
             Printer.printChosenMenus(new String[]{party.getPartyName()}, false, true);
             Printer.partyPrint(party);
-            Printer.printChosenMenus(new String[]{"Party size (" + party.getPartyCharacters().size() + "/10)", "1 - Add Character", "2 - Delete character", "b - Back"}, false,false);
+            if (party.getPartyCharacters().size() == Menu.getPartySize()){
+                Printer.printChosenMenus(new String[]{partyInfo, "1 - Delete character", "b - Back"}, false,false);
+            }else{
+                Printer.printChosenMenus(new String[]{partyInfo, "1 - Delete character", "2 - Add character", "b - Back"}, false,false);
+            }
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 case "1":
-                    pc.addCharacter(party);
+                    boolean deleteNotSelected = true;
+                    while(deleteNotSelected){
+                        Printer.printFormatted("Are you sure you want to delete a character? [ yes | no ]");
+                        input = scanner.nextLine();
+                        if(input.length() == 0){
+                            input = "empty";
+                        }
+                        switch (input.toLowerCase().charAt(0)){
+                            case 'y':
+                                pc.removeCharacter(party);
+                                deleteNotSelected = false;
+                                break;
+                            case 'n':
+                                deleteNotSelected = false;
+                                break;
+                            default:
+                                Printer.printFormatted("Select a valid option...");
+                                break;
+                        }
+                    }
                     break;
                 case "2":
-                    pc.removeCharacter(party);
+                    if (party.getPartyCharacters().size() < Menu.getPartySize()){
+                        pc.addCharacter(party);
+                    }
                     break;
                 case "b":
                     return;
@@ -254,16 +326,22 @@ public class Menu {
     public static void partyManagement_createManually_singleCharacter(){
         String input = "";
         while(true) {
-            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-            System.out.println("|     1 - Add to Player 1      |      2 - Add to Player 2      |   3 - Add to exported party   |           b - Back           |");
-            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            Printer.printChosenMenus(new String[]{"1 - Add to Player 1", "2 - Add to Player 2", "3 - Add to exported party", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()) {
                 case "1":
-                    pc.addCharacter(party1);
+                    if (party1.getPartyCharacters().size() < Menu.getPartySize()){
+                        pc.addCharacter(party1);
+                    }else {
+                        Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
+                    }
                     break;
                 case "2":
-                    pc.addCharacter(party2);
+                    if (party2.getPartyCharacters().size() < Menu.getPartySize()){
+                        pc.addCharacter(party2);
+                    }else {
+                        Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
+                    }
                     break;
                 case "3":
                     boolean running = true;
@@ -291,9 +369,8 @@ public class Menu {
     public static void partyManagement_randomParty() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         while(true){
             String input = "";
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            System.out.println("|              1 - Player 1               |              2 - Player 2               |                b - Back                 |");
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            Printer.printChosenMenus(new String[]{"1 - Player 1", "2 - Player 2", "b - Back"}, false,false);
+
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 case "1":
@@ -363,9 +440,11 @@ public class Menu {
         boolean running = false;
         while(true){
             boolean confirmBattle = false;
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            System.out.println("|            1 - Manual battle            |            2 - Random battle            |                b - Back                 |");
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            if (Menu.isHardcore()){
+                Printer.printChosenMenus(new String[]{"1 - Manual battle", "b - Back"}, false,false);
+            }else{
+                Printer.printChosenMenus(new String[]{"1 - 1v1 Duel", "2 - Random battle", "b - Back"}, false,false);
+            }
             input = scanner.nextLine();
             switch (input){
                 case "1":
@@ -525,16 +604,7 @@ public class Menu {
                     str.append(graveyard.get(index).getName().substring(0,120));
                     str.append("... ");
                 }else{
-                    int dif = maxLength[cnt++] - length;
-                    int n = dif / 2;
-                    boolean even = dif % 2 == 0;
-                    str.append(String.join("", Collections.nCopies(n, " ")));
-                    str.append(graveyard.get(index).getName());
-                    if(even){
-                        str.append(String.join("", Collections.nCopies(n, " ")));
-                    }else{
-                        str.append(String.join("", Collections.nCopies(n+1, " ")));
-                    }
+                    str.append(Menu.centerString(graveyard.get(index).getName(), maxLength[cnt]).substring(1, maxLength[cnt++] + 1));
                 }
             }else{
                 str.append(String.join("", Collections.nCopies(maxLength[cnt], " ")));
@@ -552,21 +622,28 @@ public class Menu {
         String[] gameMode = {"    1 - Game mode [Normal]    ","   1 - Game mode [Hardcore]   "};
         String[] logMode = {"  2 - Log mode [Reduced Logs]  ","   2 - Log mode [Full Logs]    "};
         String[] gameSpeed = {"  3 -  Battle speed [Instant]  ","    3 -  Battle speed [Fast]   ","    3 -  Battle speed [Slow]   "};
+        String[] partySize = {"   4 - Party size limit [5]   ", "  4 - Party size limit [10]   ", "  4 - Party size limit [20]   "};
 
         while(true){
             System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
-            System.out.println("|                                                       Change Settings                                                       |");
+            System.out.println("|                                       Change Settings                                        |           b - Back           |");
             System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
             System.out.print("|" + (hardcore ? gameMode[1] : gameMode[0]) + "|" + (smallLog ? logMode[0] : logMode[1]) + "|");
             if (battleSpeed==1) {
-                System.out.print(gameSpeed[1]);
+                System.out.print(gameSpeed[1] + "|");
             } else if (battleSpeed ==2){
-                System.out.print(gameSpeed[2]);
+                System.out.print(gameSpeed[2] + "|");
             }else {
-                System.out.print(gameSpeed[0]);
+                System.out.print(gameSpeed[0] + "|");
             }
-            System.out.println("|           b - Back           |");
-            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            if(Menu.getPartySize() == 5){
+                System.out.println(partySize[0] + "|");
+            }else if(Menu.getPartySize() == 10){
+                System.out.println(partySize[1] + "|");
+            }else if(Menu.getPartySize() == 20){
+                System.out.println(partySize[2] + "|");
+            }
+                System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
 
             input = scanner.nextLine();
             switch (input.toLowerCase()){
@@ -601,6 +678,9 @@ public class Menu {
                     }else {
                         battleSpeed = 0;
                     }
+                    break;
+                case "4":
+                    setPartySize();
                     break;
                 case "b":
                     return;

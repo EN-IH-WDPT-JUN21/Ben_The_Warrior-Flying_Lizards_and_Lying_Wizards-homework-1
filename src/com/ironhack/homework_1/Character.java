@@ -87,13 +87,6 @@ public abstract class Character {
 
     abstract String toCsvFormat();
 
-    private static void printFormatted(String message){
-        StringBuilder print0 = new StringBuilder("| " + message);
-        print0.append(String.join("", Collections.nCopies(126 - print0.toString().length(), " ")));
-        print0.append("|");
-        System.out.println(print0);
-    }
-
     public static Character addCharacter(String[] parameters){
         switch(parameters[0]){
             case "Warrior":
@@ -122,6 +115,20 @@ public abstract class Character {
                     return null;
                 }
 
+            case "Archer":
+                if(parameters.length == 5){
+                    try{
+                        return new Wizard(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                    }
+                    catch (NumberFormatException e){
+                        return null;
+                    }
+                }else{
+                    System.err.println("ERROR: incorrect number of parameters for Archer. This Character will not be added to the party");
+                    return null;
+                }
+
             default:
                 System.err.println("ERROR: Character " + parameters[0] + " not found");
                 return null;
@@ -135,11 +142,11 @@ public abstract class Character {
 
     public static Character createCustom(){
         Scanner scanner = new Scanner(System.in);
-        printFormatted("Choose a class for your new Character: ");
+        Printer.printFormatted("Choose a class for your new Character: ");
         boolean chosen = false;
-        while (chosen == false) {
+        while (!chosen) {
             for (int i = 0; i < classNames.length; i++) {
-                printFormatted((i + 1) + ". " + classNames[i]);
+                Printer.printFormatted((i + 1) + ". " + classNames[i]);
             }
             String input = scanner.nextLine();
             try {
@@ -160,7 +167,7 @@ public abstract class Character {
 
             }
             catch (NumberFormatException e){
-                printFormatted("Please choose a valid option!");
+                Printer.printFormatted("Please choose a valid option!");
             }
         }
         return null;
