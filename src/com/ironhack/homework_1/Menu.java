@@ -60,6 +60,8 @@ public class Menu {
                     party2.clearParty();
                     Menu.partySize = 5;
                 }
+            }else{
+                Menu.partySize = 5;
             }
         }else if(Menu.partySize == 5){
             Menu.partySize = 10;
