@@ -59,6 +59,21 @@ public class BattleSimulator {
                 System.out.println(roundString);
             }
 
+            for (int i = 0; i < party1.getPartyCharacters().size(); i++) {
+                if (!party1.getPartyCharacters().get(i).isAlive() && !party1.getPartyCharacters().get(i).equals(c1)){
+                    Printer.printFormatted("Party 1's " + party1.getPartyCharacters().get(i).printSimpleIntroduction() + " died in the crossfire!");
+                    party1.removeCharacter(party1.getPartyCharacters().get(i));
+                    i -= 1;
+                }
+            }
+            for (int i = 0; i < party2.getPartyCharacters().size(); i++) {
+                if (!party2.getPartyCharacters().get(i).isAlive() && !party2.getPartyCharacters().get(i).equals(c2)){
+                    Printer.printFormatted("Party 2's " + party2.getPartyCharacters().get(i).printSimpleIntroduction() + " died in the crossfire!");
+                    party2.removeCharacter(party2.getPartyCharacters().get(i));
+                    i -= 1;
+                }
+            }
+
             String c1attack = !Menu.isHardcore() ? c1.attack(c2) : c1.manualAttack(c2); //they attack at the same time
             String[] c1AttackDetails = {c1attack.substring(0, c1attack.indexOf('|')), c1attack.substring(c1attack.indexOf('|') + 1, c1attack.length())};
             String c2attack = !Menu.isHardcore() ? c2.attack(c1) : c2.manualAttack(c1);
