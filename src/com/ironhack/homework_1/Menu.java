@@ -292,7 +292,9 @@ public class Menu {
                     pc.removeCharacter(party);
                     break;
                 case "2":
-                    pc.addCharacter(party);
+                    if (party.getPartyCharacters().size() < Menu.getPartySize()){
+                        pc.addCharacter(party);
+                    }
                     break;
                 case "b":
                     return;
@@ -306,14 +308,21 @@ public class Menu {
         String input = "";
         while(true) {
             Printer.printChosenMenus(new String[]{"1 - Add to Player 1", "2 - Add to Player 2", "3 - Add to exported party", "b - Back"}, false,false);
-
             input = scanner.nextLine();
             switch (input.toLowerCase()) {
                 case "1":
-                    pc.addCharacter(party1);
+                    if (party1.getPartyCharacters().size() < Menu.getPartySize()){
+                        pc.addCharacter(party1);
+                    }else {
+                        Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
+                    }
                     break;
                 case "2":
-                    pc.addCharacter(party2);
+                    if (party2.getPartyCharacters().size() < Menu.getPartySize()){
+                        pc.addCharacter(party2);
+                    }else {
+                        Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
+                    }
                     break;
                 case "3":
                     boolean running = true;

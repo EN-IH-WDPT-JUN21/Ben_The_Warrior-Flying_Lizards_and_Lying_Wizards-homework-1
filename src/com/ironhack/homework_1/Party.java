@@ -129,9 +129,9 @@ public class Party {
     // ==================== Characters Management in Party ====================
     //Adds character to party list
     public void addCharacter(Character character) {
-        Printer.printFormatted("Added to " + partyName + ": " + character.printStats());
         partyCharacters.add(character);
         this.setRepeatedName(character);
+        Printer.printFormatted("Added to " + partyName + ": " + character.printStats());
     }
 
     //Removes character from party list (by character)
