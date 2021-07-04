@@ -86,7 +86,7 @@ public abstract class Character {
                         return null;
                     }
                 }else{
-                    System.err.println("ERROR: incorrect number of parameters for Warrior. This Character will not be added to the party");
+                    Printer.printFormatted("ERROR: incorrect number of parameters for Warrior. This Character will not be added to the party");
                 }
 
             case "Wizard":
@@ -99,7 +99,7 @@ public abstract class Character {
                         return null;
                     }
                 }else{
-                    System.err.println("ERROR: incorrect number of parameters for Wizard. This Character will not be added to the party");
+                    Printer.printFormatted("ERROR: incorrect number of parameters for Wizard. This Character will not be added to the party");
                     return null;
                 }
 
@@ -113,12 +113,12 @@ public abstract class Character {
                         return null;
                     }
                 }else{
-                    System.err.println("ERROR: incorrect number of parameters for Archer. This Character will not be added to the party");
+                    Printer.printFormatted("ERROR: incorrect number of parameters for Archer. This Character will not be added to the party");
                     return null;
                 }
 
             default:
-                System.err.println("ERROR: Character " + parameters[0] + " not found");
+                Printer.printFormatted("ERROR: Character " + parameters[0] + " not found");
                 return null;
         }
     }
