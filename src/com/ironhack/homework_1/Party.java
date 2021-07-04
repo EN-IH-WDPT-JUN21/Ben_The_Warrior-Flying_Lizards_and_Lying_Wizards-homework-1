@@ -122,7 +122,7 @@ public class Party {
     // Deletes all Characters from party
     public void clearParty() {
         partyCharacters.clear();
-        System.out.println(partyName + " cleared!");
+        Printer.printFormatted(partyName + " cleared!");
     }
 
 

@@ -289,7 +289,26 @@ public class Menu {
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 case "1":
-                    pc.removeCharacter(party);
+                    boolean deleteNotSelected = true;
+                    while(deleteNotSelected){
+                        Printer.printFormatted("Are you sure you want to delete a character? [ yes | no ]");
+                        input = scanner.nextLine();
+                        if(input.length() == 0){
+                            input = "empty";
+                        }
+                        switch (input.toLowerCase().charAt(0)){
+                            case 'y':
+                                pc.removeCharacter(party);
+                                deleteNotSelected = false;
+                                break;
+                            case 'n':
+                                deleteNotSelected = false;
+                                break;
+                            default:
+                                Printer.printFormatted("Select a valid option...");
+                                break;
+                        }
+                    }
                     break;
                 case "2":
                     if (party.getPartyCharacters().size() < Menu.getPartySize()){
