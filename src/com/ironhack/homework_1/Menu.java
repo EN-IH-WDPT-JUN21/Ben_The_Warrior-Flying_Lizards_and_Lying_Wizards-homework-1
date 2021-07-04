@@ -113,9 +113,7 @@ public class Menu {
         while (true) {
             Printer.printChosenMenus(new String[]{"PARTY - " + party1.getPartyName(), "PARTY - " + party2.getPartyName()}, false, true);
             Printer.partyPrint(party1, party2);
-            System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
-            System.out.println("|    1 - Import party    |    2 - Export party    |   3 - Create manually   |    4 - Random party    |        b - Back        |");
-            System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
+            Printer.printChosenMenus(new String[]{"1 - Import party", "2 - Export party", "3 - Create manually", "4 - Random party", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 // Party management -> Import party
@@ -146,9 +144,7 @@ public class Menu {
         String input = "";
         boolean running = false;
         while(true){
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            System.out.println("|             1 - To Player 1             |             2 - To Player 2             |                b - Back                 |");
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            Printer.printChosenMenus(new String[]{"1- To Player 1", "2 - To Player 2", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 // Party management -> Import party -> To Player 1
@@ -192,9 +188,7 @@ public class Menu {
         String input = "";
         boolean running = false;
         while(true) {
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            System.out.println("|           1 - Export Player 1           |           2 - Export Player 2           |                b - Back                 |");
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            Printer.printChosenMenus(new String[]{"1 - Export Player 1", "2 - Export Player 2", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 // Party management -> Export party -> Export Player 1
@@ -237,9 +231,7 @@ public class Menu {
     public static void partyManagement_createManually(){
         String input = "";
         while(true){
-            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-            System.out.println("|         1 - Player 1         |         2 - Player 2          |     3 - Single character      |           b - Back           |");
-            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            Printer.printChosenMenus(new String[]{"1 - Player 1", "2 - Player 2", "3 - Single character", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 // Party management -> Create manually -> Party 1
@@ -286,16 +278,21 @@ public class Menu {
             }
         }
         while(true){
+            String partyInfo = "Party size (" + party.getPartyCharacters().size() + "/" + Menu.getPartySize() + ")";
             Printer.printChosenMenus(new String[]{party.getPartyName()}, false, true);
             Printer.partyPrint(party);
-            Printer.printChosenMenus(new String[]{"Party size (" + party.getPartyCharacters().size() + "/10)", "1 - Add Character", "2 - Delete character", "b - Back"}, false,false);
+            if (party.getPartyCharacters().size() == Menu.getPartySize()){
+                Printer.printChosenMenus(new String[]{partyInfo, "1 - Delete character", "b - Back"}, false,false);
+            }else{
+                Printer.printChosenMenus(new String[]{partyInfo, "1 - Delete character", "2 - Add character", "b - Back"}, false,false);
+            }
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 case "1":
-                    pc.addCharacter(party);
+                    pc.removeCharacter(party);
                     break;
                 case "2":
-                    pc.removeCharacter(party);
+                    pc.addCharacter(party);
                     break;
                 case "b":
                     return;
@@ -308,9 +305,8 @@ public class Menu {
     public static void partyManagement_createManually_singleCharacter(){
         String input = "";
         while(true) {
-            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
-            System.out.println("|     1 - Add to Player 1      |      2 - Add to Player 2      |   3 - Add to exported party   |           b - Back           |");
-            System.out.println("+------------------------------+-------------------------------+-------------------------------+------------------------------+");
+            Printer.printChosenMenus(new String[]{"1 - Add to Player 1", "2 - Add to Player 2", "3 - Add to exported party", "b - Back"}, false,false);
+
             input = scanner.nextLine();
             switch (input.toLowerCase()) {
                 case "1":
@@ -345,9 +341,8 @@ public class Menu {
     public static void partyManagement_randomParty() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         while(true){
             String input = "";
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            System.out.println("|              1 - Player 1               |              2 - Player 2               |                b - Back                 |");
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            Printer.printChosenMenus(new String[]{"1 - Player 1", "2 - Player 2", "b - Back"}, false,false);
+
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 case "1":
@@ -417,9 +412,11 @@ public class Menu {
         boolean running = false;
         while(true){
             boolean confirmBattle = false;
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
-            System.out.println("|            1 - Manual battle            |            2 - Random battle            |                b - Back                 |");
-            System.out.println("+-----------------------------------------+-----------------------------------------+-----------------------------------------+");
+            if (Menu.isHardcore()){
+                Printer.printChosenMenus(new String[]{"1 - Manual battle", "b - Back"}, false,false);
+            }else{
+                Printer.printChosenMenus(new String[]{"1 - 1v1 Duel", "2 - Random battle", "b - Back"}, false,false);
+            }
             input = scanner.nextLine();
             switch (input){
                 case "1":

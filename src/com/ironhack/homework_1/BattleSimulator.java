@@ -80,70 +80,39 @@ public class BattleSimulator {
                 System.out.println("| Both fighters have fallen in combat!                                                                                        |");
             }
             else if(!c1.isAlive()){
-                StringBuilder print1 = new StringBuilder("| Fighter ");
-                StringBuilder print2 = new StringBuilder("| The winner is ");
                 this.graveyard.add(c1);
                 this.party1.removeCharacter(c1);
 
-                print1.append(c1.getName());
-                print1.append(" has fallen in combat!");
-                print1.append(String.join("", Collections.nCopies(126 - print1.toString().length(), " ")));
-                print1.append("|");
-
-                print2.append(c2.getName());
-                print2.append(String.join("", Collections.nCopies(126 - print2.toString().length(), " ")));
-                print2.append("|");
-
-                System.out.println(print1.toString());
+                Printer.printFormatted("Fighter " + c1.getName() + " has fallen in combat!");
                 System.out.println("|                                                                                                                             |");
-                System.out.println(print2.toString());
+                Printer.printFormatted("The winner is " + c2.getName());
             }
             else if(!c2.isAlive()){
-                StringBuilder print1 = new StringBuilder("| Fighter ");
-                StringBuilder print2 = new StringBuilder("| The winner is ");
                 this.graveyard.add(c2);
                 this.party2.removeCharacter(c2);
 
-                print1.append(c2.getName());
-                print1.append(" has fallen in combat!");
-                print1.append(String.join("", Collections.nCopies(126 - print1.toString().length(), " ")));
-                print1.append("|");
-
-                print2.append(c1.getName());
-                print2.append(String.join("", Collections.nCopies(126 - print2.toString().length(), " ")));
-                print2.append("|");
-
-                System.out.println(print1.toString());
+                Printer.printFormatted("Fighter " + c2.getName() + " has fallen in combat!");
                 System.out.println("|                                                                                                                             |");
-                System.out.println(print2.toString());
+                Printer.printFormatted("The winner is " + c1.getName());
             }
             else{
                 if (!Menu.getSmallLog()) {
-                    StringBuilder print1 = new StringBuilder("| " + Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
+
+                    Menu.battleSpeedPause();
+                    Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
                             c1.getClass().getSimpleName() + " attacks " + c2.getName() + " with " + c1AttackDetails[0] + " dealing " + c1AttackDetails[1] + " damage!");
-                    StringBuilder print2 = new StringBuilder("| " + Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
+
+                    Menu.battleSpeedPause();
+                    Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
                             c2.getClass().getSimpleName() + " attacks " + c1.getName() + " with " + c2AttackDetails[0] + " dealing " + c2AttackDetails[1] + " damage!");
-                    StringBuilder print3 = new StringBuilder("| " + c1.getName() + " has " + c1.getHp() + " HP");
-                    StringBuilder print4 = new StringBuilder("| " + c2.getName() + " has " + c2.getHp() + " HP");
 
-                    print1.append(String.join("", Collections.nCopies(126 - print1.toString().length(), " ")));
-                    print1.append("|");
-                    print2.append(String.join("", Collections.nCopies(126 - print2.toString().length(), " ")));
-                    print2.append("|");
-                    print3.append(String.join("", Collections.nCopies(126 - print3.toString().length(), " ")));
-                    print3.append("|");
-                    print4.append(String.join("", Collections.nCopies(126 - print4.toString().length(), " ")));
-                    print4.append("|");
-
-                    Menu.battleSpeedPause();
-                    System.out.println(print1);
-                    Menu.battleSpeedPause();
-                    System.out.println(print2);
                     Menu.battleSpeedPause();
                     System.out.println("|                                                                                                                             |");
-                    System.out.println(print3);
+                    Printer.printFormatted(c1.getName() + " has " + c1.getHp() + " HP");
+
                     Menu.battleSpeedPause();
-                    System.out.println(print4);
+                    Printer.printFormatted(c2.getName() + " has " + c2.getHp() + " HP");
+
                     Menu.battleSpeedPause();
                 }
             }

@@ -6,6 +6,13 @@ public class Printer {
     public Printer() {
     }
 
+    public static void printFormatted(String message){
+        StringBuilder print0 = new StringBuilder("| " + message);
+        print0.append(String.join("", Collections.nCopies(126 - print0.toString().length(), " ")));
+        print0.append("|");
+        System.out.println(print0);
+    }
+
     // Sector builder without upper and lower borders
     public static void printChosenMenus(String[] options) {
         boolean isValueToLong = false;      // Saves Error to print Error message in the end

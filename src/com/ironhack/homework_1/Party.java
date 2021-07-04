@@ -129,7 +129,7 @@ public class Party {
     // ==================== Characters Management in Party ====================
     //Adds character to party list
     public void addCharacter(Character character) {
-        System.out.println("Added to " + partyName + ": " + character.printStats());
+        Printer.printFormatted("Added to " + partyName + ": " + character.printStats());
         partyCharacters.add(character);
         this.setRepeatedName(character);
     }
@@ -158,11 +158,7 @@ public class Party {
         System.out.println("| Choose a character from your party:                                                                                         |");
 
         for (int i = 0; i < partyCharacters.size(); i++) {
-            StringBuilder str = new StringBuilder("| (" + (i + 1) + ")" + " " + partyCharacters.get(i).printStats());
-            int length = 126 - str.toString().length();
-            str.append(String.join("", Collections.nCopies(length, " ")));
-            str.append("|");
-            System.out.println(str);
+            Printer.printFormatted("(" + (i + 1) + ")" + " " + partyCharacters.get(i).printStats());
         }
         while (true) {
             String input = scanner.nextLine();
