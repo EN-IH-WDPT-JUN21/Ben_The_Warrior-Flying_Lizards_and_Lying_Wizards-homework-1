@@ -11,8 +11,8 @@ public abstract class Character {
     //idCount is incremented to allocate a new ID when a character is instantiated.
     private static int idCount = 0;
     //Keep track of character classes by name for user selection and by class reference so their constructors can be accessed at runtime.
-    private static String[] classNames = {"Warrior", "Wizard", "Archer"};
-    private static Class[] possibleClasses = {Warrior.class, Wizard.class, Archer.class};
+    private static String[] classNames = {"Warrior", "Wizard", "Archer", "Rogue"};
+    private static Class[] possibleClasses = {Warrior.class, Wizard.class, Archer.class, Rogue.class};
 
     //Default constructor for use when creating randomised characters
     public Character(){
