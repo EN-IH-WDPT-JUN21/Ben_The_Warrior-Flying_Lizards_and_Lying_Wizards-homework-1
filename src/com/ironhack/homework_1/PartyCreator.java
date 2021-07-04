@@ -49,7 +49,7 @@ public class PartyCreator {
                     party.addCharacter(Character.addCharacter(newCharacter));
                 }
             }else{
-                System.out.println("| Party limit reached, unable to add more characters! If needed change in settings!                                           |");
+                Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
                 break;
             }
         }
@@ -93,11 +93,11 @@ public class PartyCreator {
 
         // Message indicating the party was saved
         if(csvFile.equals(".csv")){
-            System.out.println("Warning: party saved in file parties/unnamed.csv");
+            Printer.printFormatted("Warning: party saved in file parties/unnamed.csv");
         }else if(!csvFile.equals("parties/".concat(directoryAndFile[1])) || (!directory.equals("") && !directory.equals("parties/"))){
-            System.out.println("Warning: party saved in " + csvFile);
+            Printer.printFormatted("Warning: party saved in " + csvFile);
         }else{
-            System.out.println("File saved to " + csvFile);
+            Printer.printFormatted("File saved to " + csvFile);
         }
 
     }
@@ -114,7 +114,7 @@ public class PartyCreator {
         if (party.getPartyCharacters().size() < Menu.getPartySize()){
             party.addCharacter(Character.createCustom());
         }else{
-            System.out.println("| Party limit reached, unable to add more characters! If needed change in settings!                                           |");
+            Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
         }
     }
     public void removeCharacter(Party party){
@@ -134,7 +134,7 @@ public class PartyCreator {
         csvFile = directoryAndFile[1];
 
         if(!directory.equals("") && !directory.equals("parties/")){
-            System.out.println("Warning: file saved in parties folder!");
+            Printer.printFormatted("Warning: file saved in parties folder!");
         }
 
         csvFile = "parties/".concat(csvFile);
@@ -159,7 +159,7 @@ public class PartyCreator {
             if(csvFile.contains(".") && !csvFile.endsWith(".csv") && toRead) {
                 throw new IllegalArgumentException("Make sure the file extension is .csv!");
             }else if(csvFile.contains(".") && !csvFile.endsWith(".csv") && !toRead){
-                System.out.println("Warning: file extension changed to .csv");
+                Printer.printFormatted("Warning: file extension changed to .csv");
                 csvFile = csvFile.split("\\.")[0];
                 csvFile = csvFile.concat(".csv");
             }else if(!csvFile.endsWith(".csv")){
