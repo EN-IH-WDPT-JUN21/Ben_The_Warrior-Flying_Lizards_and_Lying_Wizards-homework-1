@@ -89,6 +89,18 @@ public abstract class Character {
                     Printer.printFormatted("ERROR: incorrect number of parameters for Warrior. This Character will not be added to the party");
                 }
 
+            case "Rogue":
+                if(parameters.length == 5){
+                    try{
+                        return new Rogue(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                    }catch (NumberFormatException e){
+                        return null;
+                    }
+                }else{
+                    Printer.printFormatted("ERROR: incorrect number of parameters for Rogue. This Character will not be added to the party");
+                }
+
             case "Wizard":
                 if(parameters.length == 5){
                     try{
