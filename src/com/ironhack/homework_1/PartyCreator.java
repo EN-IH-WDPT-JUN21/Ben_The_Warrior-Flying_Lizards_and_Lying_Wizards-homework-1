@@ -30,8 +30,7 @@ public class PartyCreator {
         if(!file.exists()) {
             file = new File(directory + csvFile);
             if (!file.exists()) {
-                throw new FileNotFoundException("File not found! Make sure the .csv file is in the folder parties or the " +
-                "correct directory is provided");
+                throw new FileNotFoundException("| File not found! Make sure the .csv file is in the folder parties or the correct directory is provided.                      |");
             }
         }
 
@@ -102,9 +101,9 @@ public class PartyCreator {
 
     }
     public void randomParty(Party party) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        // Find way to know each of the subclasses of Character?
-        party.clearParty();
-        for(int i = 0; i < Menu.getPartySize(); i++){
+        int remainingSpaces = Menu.getPartySize() - party.getPartyCharacters().size();
+        if (remainingSpaces == 0) Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
+        for(int i = 0; i < remainingSpaces; i++){
             party.addCharacter(Character.getRandom());
         }
     }
@@ -149,7 +148,7 @@ public class PartyCreator {
 
         // Check if file name exceeds maximum length
         if(csvFile.length() > 100){
-            throw new IllegalArgumentException("Make sure the file name has less than 100 characters!");
+            throw new IllegalArgumentException("| Make sure the file name has less than 100 characters!                                                                       |");
         }
 
         // Add .csv to the file name if it was not provided
@@ -157,7 +156,7 @@ public class PartyCreator {
             csvFile = csvFile.concat(".csv");
         }else{
             if(csvFile.contains(".") && !csvFile.endsWith(".csv") && toRead) {
-                throw new IllegalArgumentException("Make sure the file extension is .csv!");
+                throw new IllegalArgumentException("| Make sure the file extension is .csv!                                                                                       |");
             }else if(csvFile.contains(".") && !csvFile.endsWith(".csv") && !toRead){
                 Printer.printFormatted("Warning: file extension changed to .csv");
                 csvFile = csvFile.split("\\.")[0];

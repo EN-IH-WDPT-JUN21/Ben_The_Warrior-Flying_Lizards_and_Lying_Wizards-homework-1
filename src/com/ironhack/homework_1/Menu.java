@@ -54,29 +54,13 @@ public class Menu {
     public static void setPartySize(){
         if(Menu.partySize == 20){
             if(party1.getPartyCharacters().size() > 5 || party2.getPartyCharacters().size() > 5){
-                boolean confirmChange = true;
-                while(confirmChange){
-                    Printer.printFormatted("By changing the party size limit, the previously created parties will be erased. Confirm changes? [ yes | no ]");
-                    String input = scanner.nextLine();
-                    if(input.length() == 0){
-                        input = "empty";
-                    }
-                    switch (input.toLowerCase().charAt(0)){
-                        case 'y':
-                            party1.clearParty();
-                            party2.clearParty();
-                            confirmChange = false;
-                            break;
-                        case 'n':
-                            confirmChange = false;
-                            break;
-                        default:
-                            Printer.printFormatted("Select a valid option...");
-                            break;
-                    }
+                int confirmation = askYesNoBack("By changing the party size limit, the previously created parties will be erased. Confirm changes? [ yes | no ]", false);
+                if(confirmation == 1){
+                    party1.clearParty();
+                    party2.clearParty();
+                    Menu.partySize = 5;
                 }
             }
-            Menu.partySize = 5;
         }else if(Menu.partySize == 5){
             Menu.partySize = 10;
         }else if(Menu.partySize == 10){
@@ -193,6 +177,7 @@ public class Menu {
             switch (input.toLowerCase()){
                 // Party management -> Export party -> Export Player 1
                 case "1":
+                    if (party2.getPartyCharacters().isEmpty()) Printer.printFormatted("Party is empty! Exporting will create an empty .csv file.");
                     running = true;
                     while(running){
                         try{
@@ -207,6 +192,7 @@ public class Menu {
                     break;
                 // Party management -> Export party -> Export Player 2
                 case "2":
+                    if (party2.getPartyCharacters().isEmpty()) Printer.printFormatted("Party is empty! Exporting will create an empty .csv file.");
                     running = true;
                     while(running){
                         try{
@@ -255,26 +241,11 @@ public class Menu {
     public static void partyManagement_createManually_party(Party party){
         String input = "";
         if(!party.getPartyCharacters().isEmpty()){
-            boolean deleteNotSelected = true;
-            while(deleteNotSelected){
-                Printer.printFormatted("Do you want to delete the characters previously added to this party? [ yes | no ]");
-                input = scanner.nextLine();
-                if(input.length() == 0){
-                    input = "empty";
-                }
-                switch (input.toLowerCase().charAt(0)){
-                    case 'y':
-                        party.clearParty();
-                        deleteNotSelected = false;
-                        break;
-                    case 'n':
-                        deleteNotSelected = false;
-                        Printer.printFormatted("Previously added characters preserved!");
-                        break;
-                    default:
-                        Printer.printFormatted("Select a valid option...");
-                        break;
-                }
+            int confirmation = askYesNoBack("Do you want to delete the characters previously added to this party? [ yes | no ]",false);
+            if (confirmation==1){
+                party.clearParty();
+            }else{
+                Printer.printFormatted("Previously added characters preserved!");
             }
         }
         while(true){
@@ -283,36 +254,27 @@ public class Menu {
             Printer.partyPrint(party);
             if (party.getPartyCharacters().size() == Menu.getPartySize()){
                 Printer.printChosenMenus(new String[]{partyInfo, "1 - Delete character", "b - Back"}, false,false);
-            }else{
-                Printer.printChosenMenus(new String[]{partyInfo, "1 - Delete character", "2 - Add character", "b - Back"}, false,false);
+            }else if (party.getPartyCharacters().isEmpty()){
+                Printer.printChosenMenus(new String[]{partyInfo, "1 - Add character", "b - Back"}, false,false);
+            }else {
+                Printer.printChosenMenus(new String[]{partyInfo, "1 - Add character", "2 - Delete character", "b - Back"}, false,false);
             }
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 case "1":
-                    boolean deleteNotSelected = true;
-                    while(deleteNotSelected){
-                        Printer.printFormatted("Are you sure you want to delete a character? [ yes | no ]");
-                        input = scanner.nextLine();
-                        if(input.length() == 0){
-                            input = "empty";
-                        }
-                        switch (input.toLowerCase().charAt(0)){
-                            case 'y':
-                                pc.removeCharacter(party);
-                                deleteNotSelected = false;
-                                break;
-                            case 'n':
-                                deleteNotSelected = false;
-                                break;
-                            default:
-                                Printer.printFormatted("Select a valid option...");
-                                break;
-                        }
+                    if (party.getPartyCharacters().size() == Menu.getPartySize()){
+                        int confirmation = askYesNoBack("Are you sure you want to delete a character? [ yes | no ]",false);
+                        if (confirmation == 1) pc.removeCharacter(party);
+                    } else {
+                        pc.addCharacter(party);
                     }
                     break;
                 case "2":
-                    if (party.getPartyCharacters().size() < Menu.getPartySize()){
-                        pc.addCharacter(party);
+                    if (party.getPartyCharacters().size() > 0 && party.getPartyCharacters().size() != Menu.getPartySize()){
+                        int confirmation = askYesNoBack("Are you sure you want to delete a character? [ yes | no ]",false);
+                        if (confirmation == 1) pc.removeCharacter(party);
+                    }else{
+                        Printer.printFormatted("Select a valid option...");
                     }
                     break;
                 case "b":
@@ -366,145 +328,94 @@ public class Menu {
             }
         }
     }
+    // Menu for creating a random party. Selects which party and add random character to them.
     public static void partyManagement_randomParty() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         while(true){
             String input = "";
             Printer.printChosenMenus(new String[]{"1 - Player 1", "2 - Player 2", "b - Back"}, false,false);
-
             input = scanner.nextLine();
             switch (input.toLowerCase()){
-                case "1":
-                    if(!party1.getPartyCharacters().isEmpty()){
-                        boolean deleteNotSelected = true;
-                        while (deleteNotSelected){
-                            Printer.printFormatted("Are you sure you want to delete the existing characters in party 1? [ yes | no ]");
-                            input = scanner.nextLine();
-                            if(input.length() == 0){
-                                input = "empty";
-                            }
-                            switch (input.toLowerCase().charAt(0)){
-                                case 'y':
-                                    party1.clearParty();
-                                    pc.randomParty(party1);
-                                    deleteNotSelected = false;
-                                    break;
-                                case 'n':
-                                    Printer.printFormatted("Random party was not created!");
-                                    deleteNotSelected = false;
-                                    break;
-                                default:
-                                    Printer.printFormatted("Select a valid option...");
-                                    break;
-                            }
+                case "1":       // Selects party 1
+                    if(!party1.getPartyCharacters().isEmpty()){ //Check if empty. Empty: Randomise a new party.
+                        // Not Empty: Asks to delete party:
+                        // Yes - clears party and randomise a new one.
+                        // No - fills the rest of the spaces with new randomised characters.
+                        int choice = askYesNoBack("Do you want to delete the existing characters in party 1? [ yes | no | back ]",true);
+                        // 1 -yes, 2 -no, 3 -back.
+                        if(choice==1){
+                            party1.clearParty();
+                            pc.randomParty(party1);
+                        }else if(choice==2){
+                            Printer.printFormatted("Previously added characters preserved!");
+                            pc.randomParty(party1);
+                        }else{
+                            Printer.printFormatted("Random party was not created!");
+                            break;
                         }
                     }else{
                         pc.randomParty(party1);
                     }
                     break;
-                case "2":
+                case "2":   // Selects party 2. Same functionalities as party1.
                     if(!party2.getPartyCharacters().isEmpty()){
-                        boolean deleteNotSelected = true;
-                        while (deleteNotSelected){
-                            Printer.printFormatted("Are you sure you want to delete the existing characters in party 2? [ yes | no ]");
-                            input = scanner.nextLine();
-                            if(input.length() == 0){
-                                input = "empty";
-                            }
-                            switch (input.toLowerCase().charAt(0)){
-                                case 'y':
-                                    party2.clearParty();
-                                    pc.randomParty(party2);
-                                    deleteNotSelected = false;
-                                    break;
-                                case 'n':
-                                    Printer.printFormatted("Random party was not created!");
-                                    deleteNotSelected = false;
-                                    break;
-                                default:
-                                    Printer.printFormatted("Select a valid option...");
-                                    break;
-                            }
+                        int choice = askYesNoBack("Do you want to delete the existing characters in party 2? [ yes | no | back ]",true);
+                        // 1 -yes, 2 -no, 3 -back.
+                        if(choice==1){
+                            party2.clearParty();
+                            pc.randomParty(party2);
+                        }else if(choice==2){
+                            Printer.printFormatted("Previously added characters preserved!");
+                            pc.randomParty(party2);
+                        }else{
+                            Printer.printFormatted("Random party was not created!");
+                            break;
                         }
                     }else{
                         pc.randomParty(party2);
                     }
                     break;
-                case "b":
+                case "b":   // Returns to previous menus.
                     return;
+                default:    // Shows error and repeats Random party menu.
+                    Printer.printFormatted("Select a valid option...");
+                    break;
             }
         }
     }
 
     public static void battleMenu() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String input = "";
-        boolean running = false;
         while(true){
-            boolean confirmBattle = false;
             if (Menu.isHardcore()){
                 Printer.printChosenMenus(new String[]{"1 - Manual battle", "b - Back"}, false,false);
             }else{
                 Printer.printChosenMenus(new String[]{"1 - 1v1 Duel", "2 - Random battle", "b - Back"}, false,false);
             }
             input = scanner.nextLine();
+            int confirmation;
             switch (input){
                 case "1":
-                    confirmBattle = true;
-                    while (confirmBattle){
-                        if(Menu.isHardcore()){
-                            Printer.printFormatted("Are you sure you want to start a manual battle? [ yes | no ]");
-                        }else{
-                            Printer.printFormatted("Are you sure you want to start a 1v1 Duel? [ yes | no ]");
+                    confirmation = askYesNoBack("Are you sure you want to start a "+(isHardcore()? "manual battle":"1v1 duel")+"? [ yes | no ]", false);
+                    if (confirmation == 1){
+                        if(party1.getPartyCharacters().isEmpty()){
+                            pc.randomParty(party1);
                         }
-                        input = scanner.nextLine();
-                        if(input.length() == 0){
-                            input = "empty";
+                        if(party2.getPartyCharacters().isEmpty()){
+                            pc.randomParty(party2);
                         }
-                        switch (input.toLowerCase().charAt(0)){
-                            case 'y':
-                                if(party1.getPartyCharacters().isEmpty()){
-                                    pc.randomParty(party1);
-                                }
-                                if(party2.getPartyCharacters().isEmpty()){
-                                    pc.randomParty(party2);
-                                }
-                                bt.battle();
-                                confirmBattle = false;
-                                break;
-                            case 'n':
-                                confirmBattle = false;
-                                break;
-                            default:
-                                Printer.printFormatted("Select a valid option...");
-                                break;
-                        }
+                        bt.battle();
                     }
                     break;
                 case "2":
-                    confirmBattle = true;
-                    while (confirmBattle && !Menu.isHardcore()){
-                        Printer.printFormatted("Are you sure you want to start a random battle? [ yes | no ]");
-                        input = scanner.nextLine();
-                        if(input.length() == 0){
-                            input = "empty";
+                    confirmation = askYesNoBack("Are you sure you want to start a random battle? [ yes | no ]", false);
+                    if (confirmation == 1){
+                        if(party1.getPartyCharacters().isEmpty()){
+                            pc.randomParty(party1);
                         }
-                        switch (input.toLowerCase().charAt(0)){
-                            case 'y':
-                                if(party1.getPartyCharacters().isEmpty()){
-                                    pc.randomParty(party1);
-                                }
-                                if(party2.getPartyCharacters().isEmpty()){
-                                    pc.randomParty(party2);
-                                }
-                                bt.battleRandom();
-                                confirmBattle = false;
-                                break;
-                            case 'n':
-                                confirmBattle = false;
-                                break;
-                            default:
-                                Printer.printFormatted("Select a valid option...");
-                                break;
+                        if(party2.getPartyCharacters().isEmpty()){
+                            pc.randomParty(party2);
                         }
+                        bt.battleRandom();
                     }
                     break;
                 case "b":
@@ -658,6 +569,34 @@ public class Menu {
                     break;
                 case "b":
                     return;
+                default:
+                    Printer.printFormatted("Select a valid option...");
+                    break;
+            }
+        }
+    }
+
+    // Ask the user for confirmation to delete existing party. y - returns 1. n - returns 2. b - returns 3.
+    private static int askYesNoBack(String message,boolean backOption) {
+        String input = "";
+        while (true){
+            Printer.printFormatted(message);
+            input = scanner.nextLine();
+            if(input.length() == 0){
+                input = "empty";
+            }
+            switch (input.toLowerCase().charAt(0)){
+                case 'y':
+                    return 1;
+                case 'n':
+                    return 2;
+                case 'b':
+                    if (backOption){
+                        return 3;
+                    } else {
+                        Printer.printFormatted("Select a valid option...");
+                    }
+                    break;
                 default:
                     Printer.printFormatted("Select a valid option...");
                     break;
