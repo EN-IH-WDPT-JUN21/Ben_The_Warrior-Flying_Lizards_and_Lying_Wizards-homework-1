@@ -11,8 +11,8 @@ public abstract class Character {
     //idCount is incremented to allocate a new ID when a character is instantiated.
     private static int idCount = 0;
     //Keep track of character classes by name for user selection and by class reference so their constructors can be accessed at runtime.
-    private static String[] classNames = {"Warrior", "Wizard", "Archer"};
-    private static Class[] possibleClasses = {Warrior.class, Wizard.class, Archer.class};
+    private static String[] classNames = {"Warrior", "Wizard", "Archer", "Rogue"};
+    private static Class[] possibleClasses = {Warrior.class, Wizard.class, Archer.class, Rogue.class};
 
     //Default constructor for use when creating randomised characters
     public Character(){
@@ -87,6 +87,18 @@ public abstract class Character {
                     }
                 }else{
                     Printer.printFormatted("ERROR: incorrect number of parameters for Warrior. This Character will not be added to the party");
+                }
+
+            case "Rogue":
+                if(parameters.length == 5){
+                    try{
+                        return new Rogue(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                    }catch (NumberFormatException e){
+                        return null;
+                    }
+                }else{
+                    Printer.printFormatted("ERROR: incorrect number of parameters for Rogue. This Character will not be added to the party");
                 }
 
             case "Wizard":
