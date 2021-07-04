@@ -151,7 +151,6 @@ public class Party {
         Scanner scanner = new Scanner(System.in);
 
         String teamName = getPartyName();
-        teamName = Menu.centerString(teamName,125);
         Printer.printChosenMenus(new String[]{teamName}, false, true);
         Printer.printFormatted("Choose a character from your party:");
 

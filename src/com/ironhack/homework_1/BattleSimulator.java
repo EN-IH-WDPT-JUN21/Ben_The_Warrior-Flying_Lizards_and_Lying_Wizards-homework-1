@@ -48,9 +48,9 @@ public class BattleSimulator {
             round += 1;
             if (!Menu.getSmallLog()) {
                 if (round == 1){
-                    System.out.println("+=============================================================================================================================+");
+                    Printer.printPart("equalLine");
                 }else{
-                    System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                    Printer.printLine(1);
                 }
                 String roundString = "Round Nº " + round;
                 roundString = Menu.centerString(roundString, 125);
@@ -119,17 +119,15 @@ public class BattleSimulator {
     // BattleSimulator choose random fighters for each duel in method battleRandom.
 
     public void battleRandom(){
-        System.out.println("+=============================================================================================================================+");
-        System.out.println("|                 ______  _______ _______ _______        _______      _______ _______ _______  ______ _______                 |");
-        System.out.println("|                 |_____] |_____|    |       |    |      |______      |______    |    |_____| |_____/    |                    |");
-        System.out.println("|                 |_____] |     |    |       |    |_____ |______      ______|    |    |     | |    \\_    |                    |");
+        Printer.printPart("equalLine");
+        Printer.printPart("battle");
         Printer.printFormatted("");
-        System.out.println("+=============================================================================================================================+");
-        Printer.printFormatted("Player 1 V/S Player 2");
+        Printer.printPart("equalLine");
+        Printer.centerString("Player 1 V/S Player 2",125);
         Printer.printLine(2);
         Printer.partyPrint(party1, party2);
-        Printer.printFormatted("PRESS ENTER TO START BATTLE");
-        System.out.print("+=============================================================================================================================+");
+        Printer.centerString("PRESS ENTER TO START BATTLE",125);
+        Printer.printPart("equalLine");
         new Scanner(System.in).nextLine();
 
         int fight = 0;
@@ -139,11 +137,11 @@ public class BattleSimulator {
             Character f1 = getRandomChar(party1);
             Character f2 = getRandomChar(party2);
 
-            System.out.println("+=============================================================================================================================+");
+            Printer.printPart("equalLine");
             String fightTitle = "FIGHT " + fight + "  -  " + f1.printSimpleIntroduction() + "  VS  " + f2.printSimpleIntroduction();
             Printer.printChosenMenus(new String[]{fightTitle});
             if (Menu.getBattleSpeed() != 0) {
-                Printer.printFormatted("PRESS ENTER TO START");
+                Printer.centerString("PRESS ENTER TO START",125);
                 new Scanner(System.in).nextLine();
             }
 
@@ -151,43 +149,41 @@ public class BattleSimulator {
             duel(f1, f2);
         }
 
-        System.out.println("+=============================================================================================================================+");
-        Printer.printFormatted("END OF THE BATTLE");
+        Printer.printPart("equalLine");
+        Printer.centerString("END OF THE BATTLE",125);
         Printer.printFormatted("");
 
 
         if(isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
-            Printer.printFormatted("DRAW: Both parties are dead!");
+            Printer.centerString("DRAW: Both parties are dead!",125);
         }
         else if (!isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
-            Printer.printFormatted("Player 1 WINS");
+            Printer.centerString("Player 1 WINS",125);
         }
         else {
-            Printer.printFormatted("Player 2 WINS");
+            Printer.centerString("Player 2 WINS",125);
         }
-        System.out.println("+=============================================================================================================================+");
+        Printer.printPart("equalLine");
     }
     // Method battle simulate a fight and you can choose your fighter.
 
     public void battle(){
-        System.out.println("+=============================================================================================================================+");
-        System.out.println("|                 ______  _______ _______ _______        _______      _______ _______ _______  ______ _______                 |");
-        System.out.println("|                 |_____] |_____|    |       |    |      |______      |______    |    |_____| |_____/    |                    |");
-        System.out.println("|                 |_____] |     |    |       |    |_____ |______      ______|    |    |     | |    \\_    |                    |");
+        Printer.printPart("equalLine");
+        Printer.printPart("battle");
         Printer.printFormatted("");
-        System.out.println("+=============================================================================================================================+");
-        Printer.printFormatted("Player 1 V/S Player 2");
+        Printer.printPart("equalLine");
+        Printer.centerString("Player 1 V/S Player 2",125);
         Printer.printLine(2);
         Printer.partyPrint(party1, party2);
-        Printer.printFormatted("PRESS ENTER TO START BATTLE");
-        System.out.print("+=============================================================================================================================+");
+        Printer.centerString("PRESS ENTER TO START BATTLE",125);
+        Printer.printPart("equalLine");
         new Scanner(System.in).nextLine();
 
         // battle is going to happen meanwhile party1 and party2 has at least one element
         int fight = 0;
         while(!isPartyEmpty(this.party1) && !isPartyEmpty(this.party2)){
             fight++;
-            System.out.println("+=============================================================================================================================+");
+            Printer.printPart("equalLine");
             String fightTitle = "FIGHT " + fight;
             Printer.printChosenMenus(new String[]{fightTitle});
 
@@ -200,21 +196,21 @@ public class BattleSimulator {
 
 
 
-        System.out.println("+=============================================================================================================================+");
-        Printer.printFormatted("END OF THE BATTLE");
+        Printer.printPart("equalLine");
+        Printer.centerString("END OF THE BATTLE",125);
         Printer.printFormatted("");
 
 
         if(isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
-            Printer.printFormatted("DRAW: Both parties are dead!");
+            Printer.centerString("DRAW: Both parties are dead!",125);
         }
         else if (!isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
-            Printer.printFormatted("Player 1 WINS");
+            Printer.centerString("Player 1 WINS",125);
         }
         else {
-            Printer.printFormatted("Player 2 WINS");
+            Printer.centerString("Player 2 WINS",125);
         }
-        System.out.println("+=============================================================================================================================+");
+        Printer.printPart("equalLine");
     }
 
     // Parties setter

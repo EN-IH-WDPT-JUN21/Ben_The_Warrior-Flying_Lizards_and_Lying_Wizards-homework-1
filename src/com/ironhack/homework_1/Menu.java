@@ -518,21 +518,7 @@ public class Menu {
 
     public static void printGraveyard(){
         String input = "";
-        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
-        System.out.println("|                                                                                                                             |");
-        System.out.println("|                                                           .---.                                                             |");
-        System.out.println("|                                                      '-.  |   |  .-'                                                        |");
-        System.out.println("|                                                        ___|   |___                                                          |");
-        System.out.println("|                                                   -=  [           ]  =-                                                     |");
-        System.out.println("|                                                       `---.   .---'                                                         |");
-        System.out.println("|                                                    __||__ |   | __||__                                                      |");
-        System.out.println("|                                                    '-..-' |   | '-..-'                                                      |");
-        System.out.println("|                                                      ||   |   |   ||                                                        |");
-        System.out.println("|                                                      ||_.-|   |-,_||                                                        |");
-        System.out.println("|                                                    .-\"`   `\"`'`   `\"-.                                                      |");
-        System.out.println("|                                                  .'                   '.                                                    |");
-        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
-
+        Printer.printPart("graveyard");
         List<Character> graveyard = bt.graveyard();
 
         int startInt = 0;
@@ -615,7 +601,7 @@ public class Menu {
             str.append("|");
         }
         System.out.println(str);
-        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+        Printer.printLine(1);
         return index;
     }
 
@@ -652,21 +638,7 @@ public class Menu {
                 case "1":
                     hardcore = !hardcore;
                     if(hardcore){
-                        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
-                        System.out.println("|                                                                                                                             |");
-                        System.out.println("|                      '||'  '||'     |     '||''|.   '||''|.     ..|'''.|  ..|''||   '||''|.   '||''''|                      |");
-                        System.out.println("|                       ||    ||     |||     ||   ||   ||   ||  .|'     '  .|'    ||   ||   ||   ||  .                        |");
-                        System.out.println("|                       ||''''||    |  ||    ||''|'    ||    || ||         ||      ||  ||''|'    ||''|                        |");
-                        System.out.println("|                       ||    ||   .''''|.   ||   |.   ||    || '|.      . '|.     ||  ||   |.   ||                           |");
-                        System.out.println("|                      .||.  .||. .|.  .||. .||.  '|' .||...|'   ''|....'   ''|...|'  .||.  '|' .||.....|                     |");
-                        System.out.println("|                                                                                                                             |");
-                        System.out.println("|                                                                                                                             |");
-                        System.out.println("|                                        '||    ||'  ..|''||   '||''|.   '||''''|                                             |");
-                        System.out.println("|                                         |||  |||  .|'    ||   ||   ||   ||  .                                               |");
-                        System.out.println("|                                         |'|..'||  ||      ||  ||    ||  ||''|                                               |");
-                        System.out.println("|                                         | '|' ||  '|.     ||  ||    ||  ||                                                  |");
-                        System.out.println("|                                        .|. | .||.  ''|...|'  .||...|'  .||.....|                                            |");
-                        System.out.println("|                                                                                                                             |");
+                        Printer.printPart("hardcore");
                     }
                     break;
                 case "2":
@@ -703,12 +675,7 @@ public class Menu {
             boolean depth1 = false;
             boolean depth2 = false;
             while(mainMenu){
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
-                System.out.println("|  _____ _     _            __    _               _                  _    __        _            _ _ _ _               _      |");
-                System.out.println("| |   __| |_ _|_|___ ___   |  |  |_|___ ___ ___ _| |___    ___ ___ _| |  |  |   _ _|_|___ ___   | | | |_|___ ___ ___ _| |___  |");
-                System.out.println("| |   __| | | | |   | . |  |  |__| |- _| .'|  _| . |_ -|  | .'|   | . |  |  |__| | | |   | . |  | | | | |- _| .'|  _| . |_ -| |");
-                System.out.println("| |__|  |_|_  |_|_|_|_  |  |_____|_|___|__,|_| |___|___|  |__,|_|_|___|  |_____|_  |_|_|_|_  |  |_____|_|___|__,|_| |___|___| |");
-                System.out.println("|         |___|     |___|                                                      |___|     |___|                                |");
+                Printer.printPart("main");
                 Printer.printChosenMenus(new String[]{"1 - Party management", "2 - Battle", "3 - Show graveyard", "4 - Settings", "x - Quit"}, false,false);
                 input = scanner.nextLine();
                 switch (input.toLowerCase()){
