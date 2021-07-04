@@ -108,7 +108,7 @@ public class Menu {
         return str.toString();
     }
 
-    public static void partyManagement() throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public static void partyManagement() throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String input = "";
         while (true) {
             Printer.printChosenMenus(new String[]{"PARTY - " + party1.getPartyName(), "PARTY - " + party2.getPartyName()}, false, true);
@@ -366,7 +366,7 @@ public class Menu {
             }
         }
     }
-    public static void partyManagement_randomParty() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public static void partyManagement_randomParty() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         while(true){
             String input = "";
             Printer.printChosenMenus(new String[]{"1 - Player 1", "2 - Player 2", "b - Back"}, false,false);
@@ -435,7 +435,7 @@ public class Menu {
         }
     }
 
-    public static void battleMenu() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public static void battleMenu() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String input = "";
         boolean running = false;
         while(true){
