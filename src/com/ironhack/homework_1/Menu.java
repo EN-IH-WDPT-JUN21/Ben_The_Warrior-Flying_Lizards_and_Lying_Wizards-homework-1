@@ -3,10 +3,7 @@ package com.ironhack.homework_1;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
     private static final PartyCreator pc = new PartyCreator();
@@ -56,7 +53,7 @@ public class Menu {
             if(party1.getPartyCharacters().size() > 5 || party2.getPartyCharacters().size() > 5){
                 boolean confirmChange = true;
                 while(confirmChange){
-                    System.out.println("| By changing the party size limit, the previously created parties will be erased. Confirm changes? [ yes | no ]         |");
+                    Printer.printFormatted("By changing the party size limit, the previously created parties will be erased. Confirm changes? [ yes | no ]");
                     String input = scanner.nextLine();
                     if(input.length() == 0){
                         input = "empty";
@@ -71,7 +68,7 @@ public class Menu {
                             confirmChange = false;
                             break;
                         default:
-                            System.out.println("| Select a valid option...                                                                                                    |");
+                            Printer.printFormatted("Select a valid option...");
                             break;
                     }
                 }
@@ -135,7 +132,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("| Select a valid option...                                                                                                    |");
+                    Printer.printFormatted("Select a valid option...");
                     break;
             }
         }
@@ -152,12 +149,12 @@ public class Menu {
                     running = true;
                     while(running){
                         try{
-                            System.out.println("What is the file you want to import from?");
+                            Printer.printFormatted("What is the file you want to import from?");
                             input = scanner.nextLine();
                             pc.importParty(party1, input);
                             running = false;
                         }catch (FileNotFoundException e){
-                            System.out.println(e.getMessage());
+                            Printer.printFormatted(e.getMessage());
                         }
                     }
                     break;
@@ -166,12 +163,12 @@ public class Menu {
                     running = true;
                     while(running){
                         try{
-                            System.out.println("What is the file you want to import from?");
+                            Printer.printFormatted("What is the file you want to import from?");
                             input = scanner.nextLine();
                             pc.importParty(party2, input);
                             running = false;
                         }catch (FileNotFoundException e){
-                            System.out.println(e.getMessage());
+                            Printer.printFormatted(e.getMessage());
                         }
                     }
                     break;
@@ -179,7 +176,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("| Select a valid option...                                                                                                    |");
+                    Printer.printFormatted("Select a valid option...");
                     break;
             }
         }
@@ -196,12 +193,12 @@ public class Menu {
                     running = true;
                     while(running){
                         try{
-                            System.out.println("What is the file you want to export to?");
+                            Printer.printFormatted("What is the file you want to export to?");
                             input = scanner.nextLine();
                             pc.saveParty(party1, input);
                             running = false;
                         }catch (FileNotFoundException e){
-                            System.out.println(e.getMessage());
+                            Printer.printFormatted(e.getMessage());
                         }
                     }
                     break;
@@ -210,12 +207,12 @@ public class Menu {
                     running = true;
                     while(running){
                         try{
-                            System.out.println("What is the file you want to export to?");
+                            Printer.printFormatted("What is the file you want to export to?");
                             input = scanner.nextLine();
                             pc.saveParty(party2, input);
                             running = false;
                         }catch (FileNotFoundException e){
-                            System.out.println(e.getMessage());
+                            Printer.printFormatted(e.getMessage());
                         }
                     }
                     break;
@@ -223,7 +220,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("| Select a valid option...                                                                                                    |");
+                    Printer.printFormatted("Select a valid option...");
                     break;
             }
         }
@@ -247,7 +244,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("| Select a valid option...                                                                                                    |");
+                    Printer.printFormatted("Select a valid option...");
                     break;
             }
         }
@@ -257,7 +254,7 @@ public class Menu {
         if(!party.getPartyCharacters().isEmpty()){
             boolean deleteNotSelected = true;
             while(deleteNotSelected){
-                System.out.println("| Do you want to delete the characters previously added to this party? [ yes | no ]                                           |");
+                Printer.printFormatted("Do you want to delete the characters previously added to this party? [ yes | no ]");
                 input = scanner.nextLine();
                 if(input.length() == 0){
                     input = "empty";
@@ -269,10 +266,10 @@ public class Menu {
                         break;
                     case 'n':
                         deleteNotSelected = false;
-                        System.out.println("| Previously added characters preserved!                                                                                      |");
+                        Printer.printFormatted("Previously added characters preserved!");
                         break;
                     default:
-                        System.out.println("| Select a valid option...                                                                                                    |");
+                        Printer.printFormatted("Select a valid option...");
                         break;
                 }
             }
@@ -318,7 +315,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("| Select a valid option...                                                                                                    |");
+                    Printer.printFormatted("Select a valid option...");
                     break;
             }
         }
@@ -347,12 +344,12 @@ public class Menu {
                     boolean running = true;
                     while(running){
                         try{
-                            System.out.println("What is the file you want to export to?");
+                            Printer.printFormatted("What is the file you want to export to?");
                             input = scanner.nextLine();
                             pc.addCharacter(input);
                             running = false;
                         }catch (FileNotFoundException e){
-                            System.out.println(e.getMessage());
+                            Printer.printFormatted(e.getMessage());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -361,7 +358,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("| Select a valid option...                                                                                                    |");
+                    Printer.printFormatted("Select a valid option...");
                     break;
             }
         }
@@ -377,7 +374,7 @@ public class Menu {
                     if(!party1.getPartyCharacters().isEmpty()){
                         boolean deleteNotSelected = true;
                         while (deleteNotSelected){
-                            System.out.println("| Are you sure you want to delete the existing characters in party 1? [ yes | no ]                                            |");
+                            Printer.printFormatted("Are you sure you want to delete the existing characters in party 1? [ yes | no ]");
                             input = scanner.nextLine();
                             if(input.length() == 0){
                                 input = "empty";
@@ -389,11 +386,11 @@ public class Menu {
                                     deleteNotSelected = false;
                                     break;
                                 case 'n':
-                                    System.out.println("Random party was not created!");
+                                    Printer.printFormatted("Random party was not created!");
                                     deleteNotSelected = false;
                                     break;
                                 default:
-                                    System.out.println("| Select a valid option...                                                                                                    |");
+                                    Printer.printFormatted("Select a valid option...");
                                     break;
                             }
                         }
@@ -405,7 +402,7 @@ public class Menu {
                     if(!party2.getPartyCharacters().isEmpty()){
                         boolean deleteNotSelected = true;
                         while (deleteNotSelected){
-                            System.out.println("| Are you sure you want to delete the existing characters in party 1? [ yes | no ]                                            |");
+                            Printer.printFormatted("Are you sure you want to delete the existing characters in party 2? [ yes | no ]");
                             input = scanner.nextLine();
                             if(input.length() == 0){
                                 input = "empty";
@@ -417,11 +414,11 @@ public class Menu {
                                     deleteNotSelected = false;
                                     break;
                                 case 'n':
-                                    System.out.println("Random party was not created!");
+                                    Printer.printFormatted("Random party was not created!");
                                     deleteNotSelected = false;
                                     break;
                                 default:
-                                    System.out.println("| Select a valid option...                                                                                                    |");
+                                    Printer.printFormatted("Select a valid option...");
                                     break;
                             }
                         }
@@ -450,7 +447,11 @@ public class Menu {
                 case "1":
                     confirmBattle = true;
                     while (confirmBattle){
-                        System.out.println("| Are you sure you want to start a manual battle? [ yes | no ]                                                                |");
+                        if(Menu.isHardcore()){
+                            Printer.printFormatted("Are you sure you want to start a manual battle? [ yes | no ]");
+                        }else{
+                            Printer.printFormatted("Are you sure you want to start a 1v1 Duel? [ yes | no ]");
+                        }
                         input = scanner.nextLine();
                         if(input.length() == 0){
                             input = "empty";
@@ -470,15 +471,15 @@ public class Menu {
                                 confirmBattle = false;
                                 break;
                             default:
-                                System.out.println("| Select a valid option...                                                                                                    |");
+                                Printer.printFormatted("Select a valid option...");
                                 break;
                         }
                     }
                     break;
                 case "2":
                     confirmBattle = true;
-                    while (confirmBattle){
-                        System.out.println("| Are you sure you want to start a random battle? [ yes | no ]                                                                |");
+                    while (confirmBattle && !Menu.isHardcore()){
+                        Printer.printFormatted("Are you sure you want to start a random battle? [ yes | no ]");
                         input = scanner.nextLine();
                         if(input.length() == 0){
                             input = "empty";
@@ -498,7 +499,7 @@ public class Menu {
                                 confirmBattle = false;
                                 break;
                             default:
-                                System.out.println("| Select a valid option...                                                                                                    |");
+                                Printer.printFormatted("Select a valid option...");
                                 break;
                         }
                     }
@@ -506,7 +507,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("| Select a valid option...                                                                                                    |");
+                    Printer.printFormatted("Select a valid option...");
                     break;
             }
         }
@@ -574,9 +575,7 @@ public class Menu {
                 startInt = graveyardLine(graveyard,1,new int[]{125},startInt);
             }
         }
-        System.out.println("+--------------------------------------------------------------+--------------------------------------------------------------+");
-        System.out.println("|                     1 - Clear graveyard                      |                           b - Back                           |");
-        System.out.println("+--------------------------------------------------------------+--------------------------------------------------------------+");
+        Printer.printChosenMenus(new String[]{"1 - Clear graveyard", "b - Back"}, false,false);
         while(true){
             input = scanner.nextLine();
             switch (input.toLowerCase()){
@@ -587,7 +586,7 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("| Select a valid option...                                                                                                    |");
+                    Printer.printFormatted("Select a valid option...");
                     break;
             }
         }
@@ -685,15 +684,13 @@ public class Menu {
                 case "b":
                     return;
                 default:
-                    System.out.println("| Select a valid option...                                                                                                    |");
+                    Printer.printFormatted("Select a valid option...");
                     break;
             }
         }
     }
 
     public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-        System.out.println("Welcome to the ECC Flying Lizards and Lying Wizards game!");
-        System.out.println("Choose your players");
         List<Character> graveyard = new ArrayList<>();
         String input = "";
         boolean isRunning = true;
@@ -709,9 +706,7 @@ public class Menu {
                 System.out.println("| |   __| | | | |   | . |  |  |__| |- _| .'|  _| . |_ -|  | .'|   | . |  |  |__| | | |   | . |  | | | | |- _| .'|  _| . |_ -| |");
                 System.out.println("| |__|  |_|_  |_|_|_|_  |  |_____|_|___|__,|_| |___|___|  |__,|_|_|___|  |_____|_  |_|_|_|_  |  |_____|_|___|__,|_| |___|___| |");
                 System.out.println("|         |___|     |___|                                                      |___|     |___|                                |");
-                System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
-                System.out.println("|  1 - Party management  |       2 - Battle       |   3 - Show graveyard    |      4 - Settings      |        x - Quit        |");
-                System.out.println("+------------------------+------------------------+-------------------------+------------------------+------------------------+");
+                Printer.printChosenMenus(new String[]{"1 - Party management", "2 - Battle", "3 - Show graveyard", "4 - Settings", "x - Quit"}, false,false);
                 input = scanner.nextLine();
                 switch (input.toLowerCase()){
                     // Party management
@@ -733,7 +728,7 @@ public class Menu {
                         isRunning = false;
                         break;
                     default:
-                        System.out.println("| Select a valid option...                                                                                                    |");
+                        Printer.printFormatted("Select a valid option...");
                         break;
                 }
             }

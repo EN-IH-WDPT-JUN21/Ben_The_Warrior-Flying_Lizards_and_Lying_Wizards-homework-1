@@ -21,12 +21,6 @@ public class BattleSimulator {
     public List<Character> graveyard(){
         return this.graveyard; // return the graveyard
     }
-    // Method that print graveyard
-    public void printGraveyard(){
-        for(Character c1:this.graveyard){
-            System.out.println(c1.getName());
-        }
-    }
 
     // create additional internal methods to help the battle implementation that can be private
 
@@ -69,7 +63,7 @@ public class BattleSimulator {
             String[] c2AttackDetails = {c2attack.substring(0, c2attack.indexOf('|')), c2attack.substring(c2attack.indexOf('|') + 1, c2attack.length())};
 
             if (!Menu.getSmallLog()) {
-                System.out.println("|                                                                                                                             |");
+                Printer.printFormatted("");
             }
 
             if(!c1.isAlive() && !c2.isAlive()){
@@ -77,14 +71,14 @@ public class BattleSimulator {
                 this.graveyard.add(c2);
                 this.party1.removeCharacter(c1);
                 this.party2.removeCharacter(c2);
-                System.out.println("| Both fighters have fallen in combat!                                                                                        |");
+                Printer.printFormatted("Both fighters have fallen in combat!");
             }
             else if(!c1.isAlive()){
                 this.graveyard.add(c1);
                 this.party1.removeCharacter(c1);
 
                 Printer.printFormatted("Fighter " + c1.getName() + " has fallen in combat!");
-                System.out.println("|                                                                                                                             |");
+                Printer.printFormatted("");
                 Printer.printFormatted("The winner is " + c2.getName());
             }
             else if(!c2.isAlive()){
@@ -92,7 +86,7 @@ public class BattleSimulator {
                 this.party2.removeCharacter(c2);
 
                 Printer.printFormatted("Fighter " + c2.getName() + " has fallen in combat!");
-                System.out.println("|                                                                                                                             |");
+                Printer.printFormatted("");
                 Printer.printFormatted("The winner is " + c1.getName());
             }
             else{
@@ -107,7 +101,7 @@ public class BattleSimulator {
                             c2.getClass().getSimpleName() + " attacks " + c1.getName() + " with " + c2AttackDetails[0] + " dealing " + c2AttackDetails[1] + " damage!");
 
                     Menu.battleSpeedPause();
-                    System.out.println("|                                                                                                                             |");
+                    Printer.printFormatted("");
                     Printer.printFormatted(c1.getName() + " has " + c1.getHp() + " HP");
 
                     Menu.battleSpeedPause();
@@ -129,12 +123,12 @@ public class BattleSimulator {
         System.out.println("|                 ______  _______ _______ _______        _______      _______ _______ _______  ______ _______                 |");
         System.out.println("|                 |_____] |_____|    |       |    |      |______      |______    |    |_____| |_____/    |                    |");
         System.out.println("|                 |_____] |     |    |       |    |_____ |______      ______|    |    |     | |    \\_    |                    |");
-        System.out.println("|                                                                                                                             |");
+        Printer.printFormatted("");
         System.out.println("+=============================================================================================================================+");
-        System.out.println("|                                                    Player 1 V/S Player 2                                                    |");
+        Printer.printFormatted("Player 1 V/S Player 2");
         Printer.printLine(2);
         Printer.partyPrint(party1, party2);
-        System.out.println("|                                                 PRESS ENTER TO START BATTLE                                                 |");
+        Printer.printFormatted("PRESS ENTER TO START BATTLE");
         System.out.print("+=============================================================================================================================+");
         new Scanner(System.in).nextLine();
 
@@ -149,7 +143,7 @@ public class BattleSimulator {
             String fightTitle = "FIGHT " + fight + "  -  " + f1.printSimpleIntroduction() + "  VS  " + f2.printSimpleIntroduction();
             Printer.printChosenMenus(new String[]{fightTitle});
             if (Menu.getBattleSpeed() != 0) {
-                System.out.print("|                                                    PRESS ENTER TO START                                                     |");
+                Printer.printFormatted("PRESS ENTER TO START");
                 new Scanner(System.in).nextLine();
             }
 
@@ -157,20 +151,19 @@ public class BattleSimulator {
             duel(f1, f2);
         }
 
-
         System.out.println("+=============================================================================================================================+");
-        System.out.println("|                                                      END OF THE BATTLE                                                      |");
-        System.out.println("|                                                                                                                             |");
+        Printer.printFormatted("END OF THE BATTLE");
+        Printer.printFormatted("");
 
 
         if(isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
-            System.out.println("|                                                DRAW: Both parties are dead!                                                 |");
+            Printer.printFormatted("DRAW: Both parties are dead!");
         }
         else if (!isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
-            System.out.println("|                                                        Player 1 WINS                                                        |");
+            Printer.printFormatted("Player 1 WINS");
         }
         else {
-            System.out.println("|                                                        Player 2 WINS                                                        |");
+            Printer.printFormatted("Player 2 WINS");
         }
         System.out.println("+=============================================================================================================================+");
     }
@@ -181,12 +174,12 @@ public class BattleSimulator {
         System.out.println("|                 ______  _______ _______ _______        _______      _______ _______ _______  ______ _______                 |");
         System.out.println("|                 |_____] |_____|    |       |    |      |______      |______    |    |_____| |_____/    |                    |");
         System.out.println("|                 |_____] |     |    |       |    |_____ |______      ______|    |    |     | |    \\_    |                    |");
-        System.out.println("|                                                                                                                             |");
+        Printer.printFormatted("");
         System.out.println("+=============================================================================================================================+");
-        System.out.println("|                                                    Player 1 V/S Player 2                                                    |");
+        Printer.printFormatted("Player 1 V/S Player 2");
         Printer.printLine(2);
         Printer.partyPrint(party1, party2);
-        System.out.println("|                                                 PRESS ENTER TO START BATTLE                                                 |");
+        Printer.printFormatted("PRESS ENTER TO START BATTLE");
         System.out.print("+=============================================================================================================================+");
         new Scanner(System.in).nextLine();
 
@@ -208,18 +201,18 @@ public class BattleSimulator {
 
 
         System.out.println("+=============================================================================================================================+");
-        System.out.println("|                                                      END OF THE BATTLE                                                      |");
-        System.out.println("|                                                                                                                             |");
+        Printer.printFormatted("END OF THE BATTLE");
+        Printer.printFormatted("");
 
 
         if(isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
-            System.out.println("|                                                DRAW: Both parties are dead!                                                 |");
+            Printer.printFormatted("DRAW: Both parties are dead!");
         }
         else if (!isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
-            System.out.println("|                                                        Player 1 WINS                                                        |");
+            Printer.printFormatted("Player 1 WINS");
         }
         else {
-            System.out.println("|                                                        Player 2 WINS                                                        |");
+            Printer.printFormatted("Player 2 WINS");
         }
         System.out.println("+=============================================================================================================================+");
     }
