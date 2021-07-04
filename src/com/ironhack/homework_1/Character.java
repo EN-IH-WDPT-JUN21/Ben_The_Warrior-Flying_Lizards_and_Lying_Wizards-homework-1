@@ -164,6 +164,9 @@ public abstract class Character {
                     case 3:
                         chosen = true;
                         return Archer.createCustom();
+                    case 4:
+                        chosen = true;
+                        return Rogue.createCustom();
                     default:
                         break;
                 }
