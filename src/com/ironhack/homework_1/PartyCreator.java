@@ -101,7 +101,7 @@ public class PartyCreator {
         }
 
     }
-    public void randomParty(Party party) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void randomParty(Party party) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // Find way to know each of the subclasses of Character?
         party.clearParty();
         for(int i = 0; i < Menu.getPartySize(); i++){

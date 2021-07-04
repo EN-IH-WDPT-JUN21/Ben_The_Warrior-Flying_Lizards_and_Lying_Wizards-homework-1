@@ -1,5 +1,6 @@
 package com.ironhack.homework_1;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class Party {
@@ -65,7 +66,7 @@ public class Party {
     }
 
     // Generates random party (party still needs to be previously initialized)
-    public void generateRandomParty(int partySize) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void generateRandomParty(int partySize) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         for (int i = 0; i < partySize; i++) {
             partyCharacters.add(Character.getRandom());
         }
@@ -74,7 +75,7 @@ public class Party {
     }
 
     // Generates custom party (party still needs to be previously initialized)
-    public void createCustomParty(int partySize) throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void createCustomParty(int partySize) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         for (int i = 0; i < partySize; i++) {
             partyCharacters.add(Character.createCustom());
 
