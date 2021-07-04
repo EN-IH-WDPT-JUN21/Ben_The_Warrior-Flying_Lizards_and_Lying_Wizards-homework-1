@@ -1,5 +1,7 @@
 package com.ironhack.homework_1;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class BattleSimulator {
@@ -102,10 +104,10 @@ public class BattleSimulator {
 
                     Menu.battleSpeedPause();
                     Printer.printFormatted("");
-                    Printer.printFormatted(c1.getName() + " has " + c1.getHp() + " HP");
+                    Printer.printFormatted(c1.getName() + " has " + round(c1.getHp())  + " HP");
 
                     Menu.battleSpeedPause();
-                    Printer.printFormatted(c2.getName() + " has " + c2.getHp() + " HP");
+                    Printer.printFormatted(c2.getName() + " has " + round(c2.getHp()) + " HP");
 
                     Menu.battleSpeedPause();
                 }
@@ -213,8 +215,13 @@ public class BattleSimulator {
         Printer.printPart("equalLine");
     }
 
-    // Parties setter
+    public static double round(double value) {
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(1, RoundingMode.HALF_EVEN);
+        return bd.doubleValue();
+    }
 
+    // Parties setter
     public void setParty1(Party p1){
        this.party1 = p1;
     }
