@@ -125,7 +125,7 @@ public abstract class Character {
                         return null;
                     }
                 }else{
-                    System.err.println("ERROR: incorrect number of parameters for Wizard. This Character will not be added to the party");
+                    System.err.println("ERROR: incorrect number of parameters for Archer. This Character will not be added to the party");
                     return null;
                 }
 
