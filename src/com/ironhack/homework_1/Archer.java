@@ -82,9 +82,9 @@ public class Archer extends Character implements Attacker{
             String name = scanner.nextLine();
             while (upgradePoints > 0) {
                 Printer.printFormatted(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
-                Printer.printFormatted("| 1. Increase Dexterity: " + dex + " => " + (dex + 3));
-                Printer.printFormatted("| 2. Increase Energy: " + Energy + " => " + (Energy + 2));
-                Printer.printFormatted("| 3. Increase Hit Points: " + hp + " => " + (hp + 7));
+                Printer.printFormatted("1. Increase Dexterity: " + dex + " => " + (dex + 3));
+                Printer.printFormatted("2. Increase Energy: " + Energy + " => " + (Energy + 2));
+                Printer.printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 7));
                 String input = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(input);
@@ -156,11 +156,11 @@ public class Archer extends Character implements Attacker{
                 Printer.printFormatted("1. Spread Shot");
                 Printer.printFormatted("Release a clutch of arrows damaging all members of the enemy party.");
                 Printer.printFormatted("Expend 10 Energy to deal damage to each enemy: " + (this.Dexterity / 5) + " Damage to each enemy");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 Printer.printFormatted("2. Aimed shot");
                 Printer.printFormatted("Take aim and deliver a single arrow to center mass.");
                 Printer.printFormatted("Recover 2 Energy deal damage equal to half your dexterity to your opponent: " + (this.Dexterity / 2) + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);

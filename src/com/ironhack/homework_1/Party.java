@@ -45,22 +45,22 @@ public class Party {
     // Name the party  (USER INPUT METHOD)
     public void inputPartyName() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("What would you like to name your Party?");
+        Printer.printFormatted("What would you like to name your Party?");
         this.partyName = scanner.nextLine();
     }
 
     // Select the initial size of the party  (USER INPUT METHOD)
     public int inputPartySize() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Input the size of the party:   ( maximum " + MAX_STARTING_SIZE + " Characters )");
+        Printer.printFormatted("Input the size of the party:   ( maximum " + MAX_STARTING_SIZE + " Characters )");
         while (true) {
             String input = scanner.nextLine();
             try {
                 int choice = Integer.parseInt(input);
                 if (choice > 0 && choice <= MAX_STARTING_SIZE) return choice;
-                System.out.println("Please input a valid choice! Maximum " + MAX_STARTING_SIZE + ".");
+                Printer.printFormatted("Please input a valid choice! Maximum " + MAX_STARTING_SIZE + ".");
             } catch (NumberFormatException e) {
-                System.out.println("Please input a valid number! Maximum " + MAX_STARTING_SIZE + ".");
+                Printer.printFormatted("Please input a valid number! Maximum " + MAX_STARTING_SIZE + ".");
             }
         }
     }
@@ -70,7 +70,7 @@ public class Party {
         for (int i = 0; i < partySize; i++) {
             partyCharacters.add(Character.getRandom());
         }
-        System.out.println("Randomly Generated party:");
+        Printer.printFormatted("Randomly Generated party:");
         printPartyStats();
     }
 
@@ -87,7 +87,7 @@ public class Party {
                 return;
             }
         }
-        System.out.println("Customised party:");
+        Printer.printFormatted("Customised party:");
         printPartyStats();
     }
 
@@ -95,7 +95,7 @@ public class Party {
     // (doesn't need to be included. just for cases where you regret trying to create 30 characters by hand)
     // (adapted so it could be used to exit other method)  (returns -1 to exit and 0 to continue)
     public static int inputExit(boolean isCreating) {
-        System.out.println(isCreating ? "Continue custom creation?   (y)Yes   (r)Randomise Remaining   (n)Exit"
+        Printer.printFormatted(isCreating ? "Continue custom creation?   (y)Yes   (r)Randomise Remaining   (n)Exit"
                 : "Continue operation?   (y)Yes   (n)Exit");
         while (true) {
             Scanner scanner = new Scanner(System.in);
@@ -106,16 +106,16 @@ public class Party {
                         return 0;
                     case "r":
                         if (isCreating) return 1;
-                        System.out.println("Please choose a valid option!");
+                        Printer.printFormatted("Please choose a valid option!");
                         break;
                     case "n":
                         return -1;
                     default:
-                        System.out.println("Please choose a valid option!");
+                        Printer.printFormatted("Please choose a valid option!");
                         break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Please choose a valid option!");
+                Printer.printFormatted("Please choose a valid option!");
             }
         }
     }
@@ -143,7 +143,7 @@ public class Party {
 
     //Removes character from party list (by index)
     public void removeCharacter(int i) {
-        System.out.println("Removed from " + partyName + ": " + this.getPartyCharacters().get(i).printStats());
+        Printer.printFormatted("Removed from " + partyName + ": " + this.getPartyCharacters().get(i).printStats());
         this.getPartyCharacters().remove(i);
     }
 
@@ -152,11 +152,8 @@ public class Party {
         Scanner scanner = new Scanner(System.in);
 
         String teamName = getPartyName();
-        teamName = Menu.centerString(teamName,125);
-        System.out.println("+=============================================================================================================================+");
-        System.out.println(teamName);
-        System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
-        System.out.println("| Choose a character from your party:                                                                                         |");
+        Printer.printChosenMenus(new String[]{teamName}, false, true);
+        Printer.printFormatted("Choose a character from your party:");
 
         for (int i = 0; i < partyCharacters.size(); i++) {
             Printer.printFormatted("(" + (i + 1) + ")" + " " + partyCharacters.get(i).printStats());
@@ -166,9 +163,9 @@ public class Party {
             try {
                 int choice = Integer.parseInt(input);
                 if (choice > 0 && choice <= partyCharacters.size()) return partyCharacters.get(choice - 1);
-                System.out.println("| Please choose a valid option!                                                                                               |");
+                Printer.printFormatted("Please choose a valid option!");
             } catch (NumberFormatException e) {
-                System.out.println("| Please choose a valid option!                                                                                               |");
+                Printer.printFormatted("Please choose a valid option!");
             }
         }
     }
@@ -197,11 +194,11 @@ public class Party {
     // ==================== Log ====================
     // Prints each character from the party with their stats, using "Character.printStats()"
     public void printPartyStats() {
-        System.out.println("Party - " + partyName);
+        Printer.printFormatted("Party - " + partyName);
         for (Character character : partyCharacters) {
-            System.out.println(character.printStats());
+            Printer.printFormatted(character.printStats());
         }
-        System.out.println("");
+        Printer.printFormatted("");
     }
 
     public int getMAX_STARTING_SIZE() {

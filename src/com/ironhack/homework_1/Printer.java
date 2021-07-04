@@ -6,6 +6,78 @@ public class Printer {
     public Printer() {
     }
 
+    public static void centerString(String middle, int width){
+        StringBuilder str = new StringBuilder("|");
+        int middleLength = middle.length();
+        int spaces = width - middleLength;
+        boolean even = spaces % 2 == 0;
+        str.append(String.join("", Collections.nCopies(spaces / 2, " ")));
+        str.append(middle);
+        if(even){
+            str.append(String.join("", Collections.nCopies(spaces / 2, " ")));
+        }else{
+            str.append(String.join("", Collections.nCopies((spaces / 2) + 1, " ")));
+        }
+        str.append("|");
+        System.out.println(str.toString());
+    }
+
+    public static void printPart(String printCase){
+        switch (printCase){
+            case "graveyard":
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                System.out.println("|                                                                                                                             |");
+                System.out.println("|                                                           .---.                                                             |");
+                System.out.println("|                                                      '-.  |   |  .-'                                                        |");
+                System.out.println("|                                                        ___|   |___                                                          |");
+                System.out.println("|                                                   -=  [           ]  =-                                                     |");
+                System.out.println("|                                                       `---.   .---'                                                         |");
+                System.out.println("|                                                    __||__ |   | __||__                                                      |");
+                System.out.println("|                                                    '-..-' |   | '-..-'                                                      |");
+                System.out.println("|                                                      ||   |   |   ||                                                        |");
+                System.out.println("|                                                      ||_.-|   |-,_||                                                        |");
+                System.out.println("|                                                    .-\"`   `\"`'`   `\"-.                                                      |");
+                System.out.println("|                                                  .'                   '.                                                    |");
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                break;
+            case "main":
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                System.out.println("|  _____ _     _            __    _               _                  _    __        _            _ _ _ _               _      |");
+                System.out.println("| |   __| |_ _|_|___ ___   |  |  |_|___ ___ ___ _| |___    ___ ___ _| |  |  |   _ _|_|___ ___   | | | |_|___ ___ ___ _| |___  |");
+                System.out.println("| |   __| | | | |   | . |  |  |__| |- _| .'|  _| . |_ -|  | .'|   | . |  |  |__| | | |   | . |  | | | | |- _| .'|  _| . |_ -| |");
+                System.out.println("| |__|  |_|_  |_|_|_|_  |  |_____|_|___|__,|_| |___|___|  |__,|_|_|___|  |_____|_  |_|_|_|_  |  |_____|_|___|__,|_| |___|___| |");
+                System.out.println("|         |___|     |___|                                                      |___|     |___|                                |");
+                break;
+            case "hardcore":
+                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                System.out.println("|                                                                                                                             |");
+                System.out.println("|                      '||'  '||'     |     '||''|.   '||''|.     ..|'''.|  ..|''||   '||''|.   '||''''|                      |");
+                System.out.println("|                       ||    ||     |||     ||   ||   ||   ||  .|'     '  .|'    ||   ||   ||   ||  .                        |");
+                System.out.println("|                       ||''''||    |  ||    ||''|'    ||    || ||         ||      ||  ||''|'    ||''|                        |");
+                System.out.println("|                       ||    ||   .''''|.   ||   |.   ||    || '|.      . '|.     ||  ||   |.   ||                           |");
+                System.out.println("|                      .||.  .||. .|.  .||. .||.  '|' .||...|'   ''|....'   ''|...|'  .||.  '|' .||.....|                     |");
+                System.out.println("|                                                                                                                             |");
+                System.out.println("|                                                                                                                             |");
+                System.out.println("|                                        '||    ||'  ..|''||   '||''|.   '||''''|                                             |");
+                System.out.println("|                                         |||  |||  .|'    ||   ||   ||   ||  .                                               |");
+                System.out.println("|                                         |'|..'||  ||      ||  ||    ||  ||''|                                               |");
+                System.out.println("|                                         | '|' ||  '|.     ||  ||    ||  ||                                                  |");
+                System.out.println("|                                        .|. | .||.  ''|...|'  .||...|'  .||.....|                                            |");
+                System.out.println("|                                                                                                                             |");
+                break;
+
+            case "battle":
+                System.out.println("|                 ______  _______ _______ _______        _______      _______ _______ _______  ______ _______                 |");
+                System.out.println("|                 |_____] |_____|    |       |    |      |______      |______    |    |_____| |_____/    |                    |");
+                System.out.println("|                 |_____] |     |    |       |    |_____ |______      ______|    |    |     | |    \\_    |                    |");
+                break;
+
+            case "equalLine":
+                System.out.println("+=============================================================================================================================+");
+                break;
+        }
+    }
+
     public static void printFormatted(String message){
         StringBuilder print0 = new StringBuilder("| " + message);
         print0.append(String.join("", Collections.nCopies(126 - print0.toString().length(), " ")));
