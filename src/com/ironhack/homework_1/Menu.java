@@ -3,7 +3,10 @@ package com.ironhack.homework_1;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 
 public class Menu {
     private static final PartyCreator pc = new PartyCreator();
