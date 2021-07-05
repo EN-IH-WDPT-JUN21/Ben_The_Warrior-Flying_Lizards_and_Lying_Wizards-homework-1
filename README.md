@@ -18,12 +18,12 @@ In this game mode the player can ...
 #### Hardcore
 In this game mode the player only can do manual battles where he is able to control every part of the battle.
 The character creation in this game mode is RPG like with the usage of stat points.
-## Log mode
+### Log mode
 #### Full logs
 #### Simplified logs
-## Battle speed
+### Battle speed
 #### Instant
 #### Fast
 #### Slow
-## Party size limit
+### Party size limit
 This setting controls the limit size of the parties. After a party is full no more characters can be added to the party.
