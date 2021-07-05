@@ -68,6 +68,7 @@ public class BattleSimulator {
 
             if(!c1.isAlive() && !c2.isAlive()){
                 if (c1.getClass() != Skeleton.class) {
+                    Printer.printFormatted("");
                     this.graveyard.add(c1);
                 }
                 if (c2.getClass() != Skeleton.class) {
@@ -79,6 +80,7 @@ public class BattleSimulator {
             }
             else if(!c1.isAlive()){
                 if (c1.getClass() != Skeleton.class) {
+                    Printer.printFormatted("");
                     this.graveyard.add(c1);
                 }
                 this.party1.removeCharacter(c1);
@@ -89,6 +91,7 @@ public class BattleSimulator {
             }
             else if(!c2.isAlive()){
                 if (c2.getClass() != Skeleton.class) {
+                    Printer.printFormatted("");
                     this.graveyard.add(c2);
                 }
                 this.party2.removeCharacter(c2);
