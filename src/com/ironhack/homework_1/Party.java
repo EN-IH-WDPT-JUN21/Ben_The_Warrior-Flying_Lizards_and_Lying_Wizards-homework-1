@@ -35,7 +35,6 @@ public class Party {
     public void addCharacter(Character character) {
         partyCharacters.add(character);
         this.setRepeatedName(character);
-        Printer.printFormatted("Added to " + partyName + ": " + character.printStats());
     }
 
     //Removes character from party list (by character)

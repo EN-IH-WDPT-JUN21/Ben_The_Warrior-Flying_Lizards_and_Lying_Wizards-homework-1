@@ -104,7 +104,9 @@ public class PartyCreator {
         // Print message if it is not possible to add new characters and add characters if it is possible until limit is reached
         if (remainingSpaces == 0) Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
         for(int i = 0; i < remainingSpaces; i++){
-            party.addCharacter(Character.getRandom());
+            Character c = Character.getRandom();
+            party.addCharacter(c);
+            Printer.printFormatted("Added to " + party.getPartyName() + ": " + c.printStats());
         }
     }
 
@@ -112,7 +114,11 @@ public class PartyCreator {
         // add a new character to the Party passed in through the createCustom method
         // if party limit was already reached do not add a new character
         if (party.getPartyCharacters().size() < Menu.getPartySize()){
-            party.addCharacter(Character.createCustom());
+            Character c = Character.createCustom();
+            party.addCharacter(c);
+            if (c != null){
+                Printer.printFormatted("Added to " + party.getPartyName() + ": " + c.printStats());
+            }
         }else{
             Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
         }
