@@ -30,11 +30,31 @@ Example:
 | HP | Stamina | Strength |
 | :---: | :---: | :---: |
 | 100 - 200 | 10 - 50 | 1 - 10 |
+
+#### Skills:
+1. **Heavy Attack**
+    - A strong cleaving stroke with the equipped weapon.
+    - **Damage**: (*Strength*) HP
+    - **Cost**: 5 Stamina
+
+2. **Weak Attack**
+    - Wear your opponent down with a basic strike while conversing energy.
+    - **Damage**: *Strength*/2 HP
+    - **Recover**: 1 Stamina
 ### Wizard
 #### Stats:
 | HP | Mana | Intelligence |
 | :---: | :---: | :---: |
 | 50 - 100 | 10 - 50 | 10 - 50 |
+#### Skills:
+1. **Fireball**
+    - Turn your foe to cinders!
+    - **Damage**: *Intelligence* HP
+    - **Cost**: 5 Mana
+2. **Staff Hit**
+    - Whack!
+    - **Damage**: 2 HP
+    - **Recover**: 1 Mana
 ### Archer
 #### Stats:
 | HP | Energy | Dexterity |
