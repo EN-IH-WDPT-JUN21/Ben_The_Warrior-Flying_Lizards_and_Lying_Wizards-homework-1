@@ -1,25 +1,17 @@
 package com.ironhack.homework_1;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Party {
-    private final int MAX_STARTING_SIZE = 20; // Only used to define the maximum party size for the manual creation
     private List<Character> partyCharacters;
     private String partyName;
 
-
-    public Party(List<Character> partyCharacters, String partyName) {
-        this.partyCharacters = partyCharacters;
-        this.partyName = partyName;
-    }
-
+    // ========== CONSTRUCTORS ==========
     public Party(String partyName) {
         this.partyName = partyName;
-        this.partyCharacters = new ArrayList<>();
-    }
-
-    public Party() {
         this.partyCharacters = new ArrayList<>();
     }
 
@@ -27,103 +19,14 @@ public class Party {
     public String getPartyName() {
         return partyName;
     }
-
     public void setPartyName(String partyName) {
         this.partyName = partyName;
     }
-
     public List<Character> getPartyCharacters() {
         return partyCharacters;
     }
-
     public void setPartyCharacters(List<Character> partyCharacters) {
         this.partyCharacters = partyCharacters;
-    }
-
-    // ========== Party Creation ==========
-
-    // Name the party  (USER INPUT METHOD)
-    public void inputPartyName() {
-        Scanner scanner = new Scanner(System.in);
-        Printer.printFormatted("What would you like to name your Party?");
-        this.partyName = scanner.nextLine();
-    }
-
-    // Select the initial size of the party  (USER INPUT METHOD)
-    public int inputPartySize() {
-        Scanner scanner = new Scanner(System.in);
-        Printer.printFormatted("Input the size of the party:   ( maximum " + MAX_STARTING_SIZE + " Characters )");
-        while (true) {
-            String input = scanner.nextLine();
-            try {
-                int choice = Integer.parseInt(input);
-                if (choice > 0 && choice <= MAX_STARTING_SIZE) return choice;
-                Printer.printFormatted("Please input a valid choice! Maximum " + MAX_STARTING_SIZE + ".");
-            } catch (NumberFormatException e) {
-                Printer.printFormatted("Please input a valid number! Maximum " + MAX_STARTING_SIZE + ".");
-            }
-        }
-    }
-
-    // Generates random party (party still needs to be previously initialized)
-    public void generateRandomParty(int partySize) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        for (int i = 0; i < partySize; i++) {
-            partyCharacters.add(Character.getRandom());
-        }
-        Printer.printFormatted("Randomly Generated party:");
-        printPartyStats();
-    }
-
-    // Generates custom party (party still needs to be previously initialized)
-    public void createCustomParty(int partySize) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        for (int i = 0; i < partySize; i++) {
-            partyCharacters.add(Character.createCustom());
-
-            //optional, used to stop creation method
-            int nextChoice = inputExit(true);
-            if (nextChoice == -1) return;       // exits
-            if (nextChoice == 1) {              // create remaining party size as random. and exits
-                generateRandomParty(partySize - i - 1);
-                return;
-            }
-        }
-        Printer.printFormatted("Customised party:");
-        printPartyStats();
-    }
-
-    // Checks if the user wants to continue custom creation  (USER INPUT METHOD)
-    // (doesn't need to be included. just for cases where you regret trying to create 30 characters by hand)
-    // (adapted so it could be used to exit other method)  (returns -1 to exit and 0 to continue)
-    public static int inputExit(boolean isCreating) {
-        Printer.printFormatted(isCreating ? "Continue custom creation?   (y)Yes   (r)Randomise Remaining   (n)Exit"
-                : "Continue operation?   (y)Yes   (n)Exit");
-        while (true) {
-            Scanner scanner = new Scanner(System.in);
-            String input = scanner.nextLine();
-            try {
-                switch (input) {
-                    case "y":
-                        return 0;
-                    case "r":
-                        if (isCreating) return 1;
-                        Printer.printFormatted("Please choose a valid option!");
-                        break;
-                    case "n":
-                        return -1;
-                    default:
-                        Printer.printFormatted("Please choose a valid option!");
-                        break;
-                }
-            } catch (NumberFormatException e) {
-                Printer.printFormatted("Please choose a valid option!");
-            }
-        }
-    }
-
-    // Deletes all Characters from party
-    public void clearParty() {
-        partyCharacters.clear();
-        Printer.printFormatted(partyName + " cleared!");
     }
 
 
@@ -137,27 +40,19 @@ public class Party {
 
     //Removes character from party list (by character)
     public void removeCharacter(Character character) {
-        //System.out.println("Removed from " + partyName + ": " + character.printStats());
         this.getPartyCharacters().remove(character);
-    }
-
-    //Removes character from party list (by index)
-    public void removeCharacter(int i) {
-        Printer.printFormatted("Removed from " + partyName + ": " + this.getPartyCharacters().get(i).printStats());
-        this.getPartyCharacters().remove(i);
     }
 
     // Selects character from the party  (USER INPUT METHOD)
     public Character selectCharacter() {
         Scanner scanner = new Scanner(System.in);
-
-        String teamName = getPartyName();
-        Printer.printChosenMenus(new String[]{teamName}, false, true);
+        Printer.printChosenMenus(new String[]{getPartyName()}, false, true);
         Printer.printFormatted("Choose a character from your party:");
-
+        // Prints all members of the party with an index (from 1 to n).
         for (int i = 0; i < partyCharacters.size(); i++) {
             Printer.printFormatted("(" + (i + 1) + ")" + " " + partyCharacters.get(i).printStats());
         }
+        // Asks user for a valid input and select from the existing characters.
         while (true) {
             String input = scanner.nextLine();
             try {
@@ -176,12 +71,12 @@ public class Party {
         return partyCharacters.get(rand.nextInt(partyCharacters.size()));
     }
 
-    // Returns the index of the character in the party list (can be useful for newer methods) (not in use)
+    // Returns the index of the character in the party list.
     public int getIdxInParty(Character character) {
         return partyCharacters.indexOf(character);
     }
 
-    // Renames characters that have repeated names in party. Needs to be added everytime we add to party.
+    // Renames characters that have repeated names in party. Adds Jr. to the end of the name. Does not include skeletons.
     public void setRepeatedName(Character character) {
         for (Character partyMembers : this.partyCharacters) {
             if (partyMembers.getName().equals(character.getName()) && partyMembers != character && character.getClass() != Skeleton.class) {
@@ -190,18 +85,10 @@ public class Party {
         }
     }
 
-
-    // ==================== Log ====================
-    // Prints each character from the party with their stats, using "Character.printStats()"
-    public void printPartyStats() {
-        Printer.printFormatted("Party - " + partyName);
-        for (Character character : partyCharacters) {
-            Printer.printFormatted(character.printStats());
-        }
-        Printer.printFormatted("");
+    // Deletes all Characters from party
+    public void clearParty() {
+        partyCharacters.clear();
+        Printer.printFormatted(partyName + " cleared!");
     }
 
-    public int getMAX_STARTING_SIZE() {
-        return MAX_STARTING_SIZE;
-    }
 }

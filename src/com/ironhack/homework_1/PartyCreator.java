@@ -119,7 +119,9 @@ public class PartyCreator {
     }
     public void removeCharacter(Party party){
         // Remove the character selected
-        party.removeCharacter(party.selectCharacter());
+        Character c = party.selectCharacter();
+        party.removeCharacter(c);
+        Printer.printFormatted("Removed from " + party.getPartyName() + ": " + c.printStats());
     }
 
     public void addCharacter(String csvFile) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException {
