@@ -168,7 +168,7 @@ public class Necromancer extends Character implements Attacker{
                             return "Summon a Skeleton!|" + 0;
                         case 2:
                             character.receiveDamage(this.Wisdom / 2.0);
-                            this.Mana++;
+                            this.Mana += 5;
                             return "Life Drain|" + (this.Wisdom / 2);
                         default:
                             Printer.printFormatted("Choose an attack by entering 1 or 2");
@@ -204,8 +204,8 @@ public class Necromancer extends Character implements Attacker{
                             break;
                         case 2:
                             character.receiveDamage(this.Wisdom / 2.0);
-                            this.Mana++;
-                            return "Life Drain|" + (this.Wisdom / 2);
+                            this.Mana += 5;
+                            return "Life Drain|" + (this.Wisdom / 2.0);
                         default:
                             Printer.printFormatted("Choose an attack by entering 1 or 2");
                     }
