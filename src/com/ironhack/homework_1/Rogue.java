@@ -121,8 +121,8 @@ public class Rogue extends Character implements Attacker{
             Printer.printFormatted("What would you like to call your Rogue?");
             String name = scanner.nextLine();
             Agi = statInput(5, 25, "Please enter a value for Agility between 5 and 25");
-            Luck = statInput(5, 15, "Please enter a value for Luck between 5 and 20");
-            hp = statInput(40, 80, "Please enter a value for Hp between 50 and 100");
+            Luck = statInput(5, 15, "Please enter a value for Luck between 5 and 15");
+            hp = statInput(40, 80, "Please enter a value for Hp between 40 and 80");
             //scanner.close();
             return new Rogue(name, Agi, Luck, hp);
         }

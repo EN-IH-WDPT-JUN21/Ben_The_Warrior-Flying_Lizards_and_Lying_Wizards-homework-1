@@ -133,11 +133,11 @@ public class Archer extends Character implements Attacker{
             return "Aimed Shot|" + (this.Dexterity / 2.0);
         } else {
             if (Menu.getParty1().getIdxInParty(character) == -1) {
-                for (Character ch : Menu.getParty1().getPartyCharacters()){
+                for (Character ch : Menu.getParty2().getPartyCharacters()){
                     ch.receiveDamage(this.Dexterity / 5.0);
                 }
             } else {
-                for (Character ch : Menu.getParty2().getPartyCharacters()){
+                for (Character ch : Menu.getParty1().getPartyCharacters()){
                     ch.receiveDamage(this.Dexterity / 5.0);
                 }
             }
@@ -167,11 +167,11 @@ public class Archer extends Character implements Attacker{
                     switch (choice){
                         case 1:
                             if (Menu.getParty1().getIdxInParty(character) == -1) {
-                                for (Character ch : Menu.getParty1().getPartyCharacters()){
+                                for (Character ch : Menu.getParty2().getPartyCharacters()){
                                     ch.receiveDamage(this.Dexterity / 5.0);
                                 }
                             } else {
-                                for (Character ch : Menu.getParty2().getPartyCharacters()){
+                                for (Character ch : Menu.getParty1().getPartyCharacters()){
                                     ch.receiveDamage(this.Dexterity / 5.0);
                                 }
                             }
