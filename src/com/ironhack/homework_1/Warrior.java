@@ -225,9 +225,6 @@ public class Warrior extends Character implements Attacker{
 
     //Functions to return a characters stats when requested to enabled logging/saving.
     public String printStats(){
-        if (this.getName() == "Skeleton Warrior") {
-            return this.getName() + "; Id: " + this.getId() + ", Strength: " + this.getStrength() + ", Stamina: " + this.getStamina() + ", Hp: " + (int) this.getHp() + ".";
-        }
         return this.getName() + " the " + this.getClass().getSimpleName() + "; Id: " + this.getId() + ", Strength: " + this.getStrength() + ", Stamina: " + this.getStamina() + ", Hp: " + (int) this.getHp() + ".";
     }
     public String printSimpleStats(){
