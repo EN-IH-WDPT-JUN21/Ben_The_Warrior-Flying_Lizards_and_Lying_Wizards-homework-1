@@ -146,6 +146,20 @@ public abstract class Character {
                     return null;
                 }
 
+            case "Skeleton":
+                if(parameters.length == 5){
+                    try{
+                        return new Skeleton(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                    }
+                    catch (NumberFormatException e){
+                        return null;
+                    }
+                }else{
+                    Printer.printFormatted("ERROR: incorrect number of parameters for Skeleton. This Character will not be added to the party");
+                    return null;
+                }
+
             default:
                 Printer.printFormatted("ERROR: Character " + parameters[0] + " not found");
                 return null;
