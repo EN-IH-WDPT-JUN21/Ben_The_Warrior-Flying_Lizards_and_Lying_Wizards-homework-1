@@ -135,7 +135,7 @@ public abstract class Character {
             case "archer":
                 if(parameters.length == 5){
                     try{
-                        return new Wizard(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                        return new Archer(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
                                 Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
                     }
                     catch (NumberFormatException e){
@@ -143,6 +143,20 @@ public abstract class Character {
                     }
                 }else{
                     Printer.printFormatted("ERROR: incorrect number of parameters for Archer. This Character will not be added to the party");
+                    return null;
+                }
+
+            case "Skeleton":
+                if(parameters.length == 5){
+                    try{
+                        return new Skeleton(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                    }
+                    catch (NumberFormatException e){
+                        return null;
+                    }
+                }else{
+                    Printer.printFormatted("ERROR: incorrect number of parameters for Skeleton. This Character will not be added to the party");
                     return null;
                 }
 

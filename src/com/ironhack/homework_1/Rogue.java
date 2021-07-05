@@ -22,9 +22,9 @@ public class Rogue extends Character implements Attacker{
     //Constructor that can be used to create objects with specific property values.
     public Rogue(String name, int Agi, int Luck, double hp){
         super(name);
-        setAgility(Agi);
-        setLuck(Luck);
-        setHp(hp);
+        setAgility(Math.min(Agi, 40));
+        setLuck(Math.min(Luck, 30));
+        setHp(Math.max(Math.min(hp, 120), 40));
         comboCount = 0;
     }
 
@@ -33,13 +33,13 @@ public class Rogue extends Character implements Attacker{
         return Luck;
     }
     public void setLuck(int Luck) {
-        this.Luck = Math.min(Luck, 30);
+        this.Luck = Math.max(Luck, 5);
     }
     public int getAgility() {
         return Agility;
     }
     public void setAgility(int Agility) {
-        this.Agility = Math.min(Agility, 35);
+        this.Agility = Math.max(Agility, 10);
     }
 
     //Helper function that loops user input until a valid number is entered between statMin and Statmax, displays message.
@@ -134,15 +134,15 @@ public class Rogue extends Character implements Attacker{
             case 0:
                 character.receiveDamage(Agility);
                 this.comboCount++;
-                return "1...|" + this.Agility;
+                return "Right Hook|" + this.Agility;
             case 1:
                 character.receiveDamage(Agility);
                 this.comboCount++;
-                return "2...|" + this.Agility;
+                return "Left Hook" + this.Agility;
             case 2:
                 character.receiveDamage(Agility);
                 this.comboCount++;
-                return "3..!|" + this.Agility;
+                return "Leg Sweep" + this.Agility;
             default:
                 character.receiveDamage(this.Agility * 4.0);
                 this.comboCount = 0;

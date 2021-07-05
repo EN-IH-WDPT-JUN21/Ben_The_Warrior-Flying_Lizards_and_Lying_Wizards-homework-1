@@ -21,9 +21,9 @@ public class Necromancer extends Character implements Attacker{
     //Constructor that can be used to create objects with specific property values.
     public Necromancer(String name, int wis, int mana, double hp){
         super(name);
-        setWisdom(wis);
-        setMana(mana);
-        setHp(hp);
+        setWisdom(Math.min(wis, 30));
+        setMana(Math.min(mana, 40));
+        setHp(Math.max(Math.min(hp, 120), 50));
     }
 
     //Getters and setters for Necromancer specific properties.
@@ -31,13 +31,13 @@ public class Necromancer extends Character implements Attacker{
         return Mana;
     }
     public void setMana(int Mana) {
-        this.Mana = Mana;
+        this.Mana = Math.max(Mana, 10);
     }
     public int getWisdom() {
         return Wisdom;
     }
     public void setWisdom(int Wisdom) {
-        this.Wisdom = Wisdom;
+        this.Wisdom = Math.max(Wisdom, 1);
     }
 
     //Helper function that loops user input until a valid number is entered between statMin and Statmax, displays message.
@@ -85,7 +85,7 @@ public class Necromancer extends Character implements Attacker{
                 Printer.printFormatted(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
                 Printer.printFormatted("1. Increase Wisdom: " + wis + " => " + (wis + 2));
                 Printer.printFormatted("2. Increase Mana: " + mana + " => " + (mana + 2));
-                Printer.printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 6));
+                Printer.printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 7));
                 String input = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(input);
@@ -99,7 +99,7 @@ public class Necromancer extends Character implements Attacker{
                             upgradePoints--;
                             break;
                         case 3:
-                            hp += 6;
+                            hp += 7;
                             upgradePoints--;
                             break;
                         default:
