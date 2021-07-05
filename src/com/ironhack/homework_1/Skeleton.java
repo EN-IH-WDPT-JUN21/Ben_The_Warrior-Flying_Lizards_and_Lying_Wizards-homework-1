@@ -62,11 +62,11 @@ public class Skeleton extends Warrior implements Attacker{
                 Printer.printFormatted("1. Heavy Attack");
                 Printer.printFormatted("A strong cleaving stroke with equipped weapon.");
                 Printer.printFormatted("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 Printer.printFormatted("2. Weak Attack");
                 Printer.printFormatted("Wear your opponent down with a basic strike while conversing energy.");
                 Printer.printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2) + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
@@ -94,11 +94,11 @@ public class Skeleton extends Warrior implements Attacker{
                 Printer.printFormatted("1. Heavy Attack   ---    NOT ENOUGH STAMINA: " + this.stamina + "/5 Stamina required.");
                 Printer.printFormatted("A strong cleaving stroke with equipped weapon.");
                 Printer.printFormatted("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 Printer.printFormatted("2. Weak Attack");
                 Printer.printFormatted("Wear your opponent down with a basic strike while conversing energy.");
                 Printer.printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2) + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);

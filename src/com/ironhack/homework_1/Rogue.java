@@ -160,11 +160,11 @@ public class Rogue extends Character implements Attacker{
                 Printer.printFormatted("1. Shank");
                 Printer.printFormatted("Open up your enemies defences with an expertly aimed jab.");
                 Printer.printFormatted("Deal light damage and increase your combo-count by 1: " + (this.Agility) + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 Printer.printFormatted("2. Coup de grâce!   ---   NO COMBO POINTS!");
                 Printer.printFormatted("Delivery a finishing blow to your opponent!");
                 Printer.printFormatted("Reset your combo count. Deal damage equal to your Agility * your combo count + 1: 0 Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
@@ -191,11 +191,11 @@ public class Rogue extends Character implements Attacker{
                 Printer.printFormatted("1. Shank");
                 Printer.printFormatted("Open up your enemies defences with an expertly aimed jab.");
                 Printer.printFormatted("Deal light damage and increase your combo-count by 1: " + (this.Agility) + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 Printer.printFormatted("2. Coup de grâce!   ---   using " + this.comboCount + " Combo Points!");
                 Printer.printFormatted("Delivery a finishing blow to your opponent!");
                 Printer.printFormatted("Reset your combo count. Deal damage equal to your Agility * your combo count + 1: " + ((this.comboCount + 1) * this.Agility) + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
