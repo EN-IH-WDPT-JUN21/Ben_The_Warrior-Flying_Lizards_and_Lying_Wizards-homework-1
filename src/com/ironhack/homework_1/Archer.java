@@ -22,7 +22,7 @@ public class Archer extends Character implements Attacker{
         super(name);
         setDexterity(Math.min(dex, 35));
         setEnergy(Math.min(Energy, 30));
-        setHp(Math.max(Math.min(hp, 120), 50));
+        setHp(hp);
     }
 
     //Getters and setters for Archer specific properties.

@@ -14,7 +14,7 @@ public class Skeleton extends Warrior implements Attacker{
         super(name);
         setStrength(Math.min(str, 30));
         setStamina(Math.min(stam, 30));
-        setHp(Math.max(Math.min(hp, 30), 1));
+        setHp(hp);
     }
 
     //Getters and setters for Warrior specific properties.

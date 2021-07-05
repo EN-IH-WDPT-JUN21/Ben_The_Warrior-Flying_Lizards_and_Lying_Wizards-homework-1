@@ -22,7 +22,7 @@ public class Warrior extends Character implements Attacker{
         super(name);
         setStrength(Math.min(str, 15));
         setStamina(Math.min(stam, 80));
-        setHp(Math.max(Math.min(hp, 250), 100));
+        setHp(hp);
     }
 
     //Default constructor that takes no arguments and randomises all properties.
