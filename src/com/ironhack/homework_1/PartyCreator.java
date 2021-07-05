@@ -43,7 +43,11 @@ public class PartyCreator {
         // While loop to add each Character to the Party until file ended or party is full
         while(scanner.hasNextLine()){
             if (party.getPartyCharacters().size() < Menu.getPartySize()){
-                String[] newCharacter = scanner.nextLine().split(",");
+                String nextLine = scanner.nextLine();
+                if(nextLine.isEmpty()){
+                    continue;
+                }
+                String[] newCharacter = nextLine.split(",");
                 Character character = Character.addCharacter(newCharacter);
                 if(character != null){
                     party.addCharacter(Character.addCharacter(newCharacter));
@@ -77,6 +81,9 @@ public class PartyCreator {
 
         // add parties directory and open FileWriter
         csvFile = "parties/".concat(csvFile);
+        if(csvFile.equals("parties/.csv")){
+            csvFile = "parties/unnamed.csv";
+        }
         FileWriter fileWriter = new FileWriter(csvFile, false);
 
         // Get Characters from Party and save them in the file
@@ -89,7 +96,7 @@ public class PartyCreator {
         fileWriter.close();
 
         // Message indicating the party was saved and warning messages if file name or directory were changed
-        if(csvFile.equals(".csv")){
+        if(csvFile.equals("parties/unnamed.csv")){
             Printer.printFormatted("Warning: party saved in file parties/unnamed.csv");
         }else if(!csvFile.equals("parties/".concat(directoryAndFile[1])) || (!directory.equals("") && !directory.equals("parties/"))){
             Printer.printFormatted("Warning: party saved in " + csvFile);
@@ -131,25 +138,38 @@ public class PartyCreator {
     }
 
     public void addCharacter(String csvFile) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException {
-        // check if file has a valid name and extension
+        // String split into directory and name of the file
+        String[] directoryAndFile = directoryAndName(csvFile);
+        String directory = directoryAndFile[0];
+        csvFile = directoryAndFile[1];
+
+        // Add ".csv" to the file name if it was not provided
         try{
             csvFile = csvCheck(csvFile, true);
         }catch(IllegalArgumentException e){
             throw new FileNotFoundException(e.getMessage());
         }
 
-        // Separate file name from directory
-        String[] directoryAndFile = directoryAndName(csvFile);
-        String directory = directoryAndFile[0];
-        csvFile = directoryAndFile[1];
-
-        // if a directory different from the parties folder was provided display a warning
-        if(!directory.equals("") && !directory.equals("parties/")){
-            Printer.printFormatted("Warning: file saved in parties folder!");
+        // Search the file in the parties folder and if not found check with the directory provided
+        File file = new File("parties/" + csvFile);
+        if(!file.exists()) {
+            file = new File(directory + csvFile);
+            if (!file.exists()) {
+                throw new FileNotFoundException("File not found! Make sure the .csv file is in the folder parties or the correct directory is provided.");
+            }
         }
 
-        csvFile = "parties/".concat(csvFile);
-        FileWriter fileWriter = new FileWriter(csvFile,true);
+        Scanner reader = new Scanner(file);
+        String last = "";
+        while(reader.hasNextLine()){
+            last = reader.nextLine();
+        }
+        reader.close();
+
+        FileWriter fileWriter = new FileWriter(file,true);
+        if (!last.equals("")){
+            fileWriter.write("\n");
+        }
 
         // Create character through user input and save file in the csv file
         fileWriter.write(Objects.requireNonNull(Character.createCustom()).toCsvFormat());

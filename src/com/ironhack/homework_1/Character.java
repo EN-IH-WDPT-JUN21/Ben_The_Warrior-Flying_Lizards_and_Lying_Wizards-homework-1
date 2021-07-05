@@ -81,7 +81,7 @@ public abstract class Character {
     //Character object parsing for use when importing from CSV file. Checks each character is correctly formatted
     //with the appropriate amount of parameters a character should have.
     public static Character addCharacter(String[] parameters){
-        switch(parameters[0]){
+        switch(parameters[0].trim()){
             case "Warrior":
                 if(parameters.length == 5){
                     try{
