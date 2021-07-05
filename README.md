@@ -24,6 +24,33 @@ Example:
 - Graveyard and game banner with ASCII Art
 - Stylised menus
 
+## Available Characters
+### Warrior
+#### Stats:
+| HP | Stamina | Strength |
+| :---: | :---: | :---: |
+| 100 - 200 | 10 - 50 | 1 - 10 |
+### Wizard
+#### Stats:
+| HP | Mana | Intelligence |
+| :---: | :---: | :---: |
+| 50 - 100 | 10 - 50 | 10 - 50 |
+### Archer
+#### Stats:
+| HP | Energy | Dexterity |
+| :---: | :---: | :---: |
+| 50 - 100 | 5 - 20 | 5 - 25 |
+### Rogue
+#### Stats:
+| HP | Luck | Agility |
+| :---: | :---: | :---: |
+| 40 - 80 | 5 - 15 | 5 - 25 |
+### Necromancer
+#### Stats:
+| HP | Mana | Wisdom |
+| :---: | :---: | :---: |
+| 50 - 100 | 10 - 20 | 1 - 20 |
+
 ## Settings
 ### Game mode
 #### Normal
