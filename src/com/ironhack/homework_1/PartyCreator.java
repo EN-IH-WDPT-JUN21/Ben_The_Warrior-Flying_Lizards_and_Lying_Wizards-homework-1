@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -39,7 +40,7 @@ public class PartyCreator {
         // Scanner initialization
         Scanner scanner = new Scanner(file);
 
-        // While loop to add each Character to the Party
+        // While loop to add each Character to the Party until file ended or party is full
         while(scanner.hasNextLine()){
             if (party.getPartyCharacters().size() < Menu.getPartySize()){
                 String[] newCharacter = scanner.nextLine().split(",");
@@ -53,12 +54,9 @@ public class PartyCreator {
             }
         }
         scanner.close();
-        //return party;
     }
 
     public void saveParty(Party party, String csvFile) throws IOException {
-
-        // Save passed in Party party to file <fileName>.csv in the default folder
 
         // Split string into directory and name of file
         String[] directoryAndFile = directoryAndName(csvFile);
@@ -90,7 +88,7 @@ public class PartyCreator {
         fileWriter.flush();
         fileWriter.close();
 
-        // Message indicating the party was saved
+        // Message indicating the party was saved and warning messages if file name or directory were changed
         if(csvFile.equals(".csv")){
             Printer.printFormatted("Warning: party saved in file parties/unnamed.csv");
         }else if(!csvFile.equals("parties/".concat(directoryAndFile[1])) || (!directory.equals("") && !directory.equals("parties/"))){
@@ -101,7 +99,9 @@ public class PartyCreator {
 
     }
     public void randomParty(Party party) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        // Check how many party characters can be added
         int remainingSpaces = Menu.getPartySize() - party.getPartyCharacters().size();
+        // Print message if it is not possible to add new characters and add characters if it is possible until limit is reached
         if (remainingSpaces == 0) Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
         for(int i = 0; i < remainingSpaces; i++){
             party.addCharacter(Character.getRandom());
@@ -109,7 +109,8 @@ public class PartyCreator {
     }
 
     public void addCharacter(Party party){
-        // add Warrior warrior to the Party party
+        // add a new character to the Party passed in through the createCustom method
+        // if party limit was already reached do not add a new character
         if (party.getPartyCharacters().size() < Menu.getPartySize()){
             party.addCharacter(Character.createCustom());
         }else{
@@ -117,21 +118,24 @@ public class PartyCreator {
         }
     }
     public void removeCharacter(Party party){
-        // add Warrior warrior to the Party party
+        // Remove the character selected
         party.removeCharacter(party.selectCharacter());
     }
 
     public void addCharacter(String csvFile) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException {
+        // check if file has a valid name and extension
         try{
             csvFile = csvCheck(csvFile, true);
         }catch(IllegalArgumentException e){
             throw new FileNotFoundException(e.getMessage());
         }
 
+        // Separate file name from directory
         String[] directoryAndFile = directoryAndName(csvFile);
         String directory = directoryAndFile[0];
         csvFile = directoryAndFile[1];
 
+        // if a directory different from the parties folder was provided display a warning
         if(!directory.equals("") && !directory.equals("parties/")){
             Printer.printFormatted("Warning: file saved in parties folder!");
         }
@@ -139,7 +143,8 @@ public class PartyCreator {
         csvFile = "parties/".concat(csvFile);
         FileWriter fileWriter = new FileWriter(csvFile,true);
 
-        fileWriter.write(Character.createCustom().toCsvFormat());
+        // Create character through user input and save file in the csv file
+        fileWriter.write(Objects.requireNonNull(Character.createCustom()).toCsvFormat());
         fileWriter.flush();
         fileWriter.close();
     }
