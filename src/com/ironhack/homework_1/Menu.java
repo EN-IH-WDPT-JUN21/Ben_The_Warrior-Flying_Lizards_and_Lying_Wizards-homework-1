@@ -208,7 +208,7 @@ public class Menu {
                 case "1":
                     // if party is empty warn user and ask if wants to proceed
                     running = true;
-                    if (party2.getPartyCharacters().isEmpty()){
+                    if (party1.getPartyCharacters().isEmpty()){
                         Printer.printFormatted("Party is empty! Exporting will create an empty .csv file.");
                         if(Menu.askYesNoBack("Do you wish to proceed? [ yes | no ]", false) == 2){
                             running = false;
