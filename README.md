@@ -12,17 +12,17 @@ Example:
 - If the user is prompted to confirm a selected option they may input **y/n** or **yes/no**.
 
 ## Overview of Features
-- 2 Different game Modes
-- 3 Different battle Modes
+- 2 Different game modes
+- 3 Different battle modes
 - 5 Character Classes
 - 3 Ways to create a Character
 - Over 2500 random Character names!
-- 2 Battle log Modes
+- 2 Battle log modes
 - 3 Battle speeds
 - Importing and exporting of entire parties to csv file format
 - Adjustable Party size
-- Graveyard and Game Banner with ASCII Art
-- Stylised Menus
+- Graveyard and game banner with ASCII Art
+- Stylised menus
 
 ## Settings
 ### Game mode
