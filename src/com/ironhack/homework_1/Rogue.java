@@ -24,7 +24,7 @@ public class Rogue extends Character implements Attacker{
         super(name);
         setAgility(Math.min(Agi, 40));
         setLuck(Math.min(Luck, 30));
-        setHp(Math.max(Math.min(hp, 120), 40));
+        setHp(hp);
         comboCount = 0;
     }
 

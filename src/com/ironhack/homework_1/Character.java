@@ -78,6 +78,10 @@ public abstract class Character {
         }
     }
 
+    private static double hpBound(double min, double max, double hp){
+        return hp > max ? max : Math.max(hp, min);
+    }
+
     //Character object parsing for use when importing from CSV file. Checks each character is correctly formatted
     //with the appropriate amount of parameters a character should have.
     public static Character addCharacter(String[] parameters){
@@ -86,7 +90,9 @@ public abstract class Character {
                 if(parameters.length == 5){
                     try{
                         return new Warrior(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
-                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                                Integer.parseInt(parameters[3].trim()), Menu.isHardcore()
+                                ? hpBound(100.0, 250.0, Double.parseDouble(parameters[4].trim()))
+                                : hpBound(100.0, 200.0, Double.parseDouble(parameters[4].trim())));
                     }catch (NumberFormatException e){
                         return null;
                     }
@@ -98,7 +104,7 @@ public abstract class Character {
                 if(parameters.length == 5){
                     try{
                         return new Rogue(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
-                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                                Integer.parseInt(parameters[3].trim()), hpBound(40.0, 120.0, Double.parseDouble(parameters[4].trim())));
                     }catch (NumberFormatException e){
                         return null;
                     }
@@ -110,7 +116,7 @@ public abstract class Character {
                 if(parameters.length == 5){
                     try{
                         return new Necromancer(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
-                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                                Integer.parseInt(parameters[3].trim()), hpBound(50.0, 100.0, Double.parseDouble(parameters[4].trim())));
                     }catch (NumberFormatException e){
                         return null;
                     }
@@ -122,7 +128,9 @@ public abstract class Character {
                 if(parameters.length == 5){
                     try{
                         return new Wizard(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
-                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                                Integer.parseInt(parameters[3].trim()), Menu.isHardcore()
+                                ? hpBound(50.0, 120.0, Double.parseDouble(parameters[4].trim()))
+                                : hpBound(50.0, 100.0, Double.parseDouble(parameters[4].trim())));
                     }
                     catch (NumberFormatException e){
                         return null;
@@ -136,7 +144,7 @@ public abstract class Character {
                 if(parameters.length == 5){
                     try{
                         return new Archer(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
-                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                                Integer.parseInt(parameters[3].trim()), hpBound(50.0, 120.0, Double.parseDouble(parameters[4].trim())));
                     }
                     catch (NumberFormatException e){
                         return null;
@@ -150,7 +158,7 @@ public abstract class Character {
                 if(parameters.length == 5){
                     try{
                         return new Skeleton(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
-                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                                Integer.parseInt(parameters[3].trim()), hpBound(1.0, 30.0, Double.parseDouble(parameters[4].trim())));
                     }
                     catch (NumberFormatException e){
                         return null;

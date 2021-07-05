@@ -23,7 +23,7 @@ public class Necromancer extends Character implements Attacker{
         super(name);
         setWisdom(Math.min(wis, 30));
         setMana(Math.min(mana, 40));
-        setHp(Math.max(Math.min(hp, 120), 50));
+        setHp(hp);
     }
 
     //Getters and setters for Necromancer specific properties.

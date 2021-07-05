@@ -22,7 +22,7 @@ public class Wizard extends Character implements Attacker{
         super(name);
         setIntelligence(Math.min(intel, 60));
         setMana(Math.min(mana, 80));
-        setHp(Math.max(Math.min(hp, 125), 50));
+        setHp(hp);
     }
 
     //Getters and setters for Wizard specific properties.
