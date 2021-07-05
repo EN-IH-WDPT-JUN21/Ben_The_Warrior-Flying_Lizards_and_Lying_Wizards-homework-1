@@ -66,12 +66,36 @@ public class BattleSimulator {
             if (!Menu.getSmallLog()) {
                 Menu.battleSpeedPause();
                 Printer.printFormatted("");
-                Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
-                        c1.getClass().getSimpleName() + " attacks " + c2.getName() + " with " + c1AttackDetails[0] + " dealing " + c1AttackDetails[1] + " damage!");
+                if (c1.getClass() != Skeleton.class) {
+                    if (!c1AttackDetails[0].equals("Summon a Skeleton!")) {
+                        Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
+                                c1.getClass().getSimpleName() + " attacks " + c2.getName() + " with " + c1AttackDetails[0] + " dealing " + c1AttackDetails[1] + " damage!");
+                    }
+                    else {
+                        Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
+                                c1.getClass().getSimpleName() + " summons a Skeleton Warrior to fight for his party!");
+                    }
+                }
+                else {
+                    Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " attacks " +
+                            c2.getName() + " with " + c1AttackDetails[0] + " dealing " + c1AttackDetails[1] + " damage!");
+                }
 
                 Menu.battleSpeedPause();
-                Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
-                        c2.getClass().getSimpleName() + " attacks " + c1.getName() + " with " + c2AttackDetails[0] + " dealing " + c2AttackDetails[1] + " damage!");
+                if (c2.getClass() != Skeleton.class) {
+                    if (!c2AttackDetails[0].equals("Summon a Skeleton!")) {
+                        Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
+                                c2.getClass().getSimpleName() + " attacks " + c1.getName() + " with " + c2AttackDetails[0] + " dealing " + c2AttackDetails[1] + " damage!");
+                    }
+                    else {
+                        Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
+                                c2.getClass().getSimpleName() + " summons a Skeleton Warrior to fight for his party!");
+                    }
+                }
+                else {
+                    Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " attacks " +
+                            c1.getName() + " with " + c2AttackDetails[0] + " dealing " + c2AttackDetails[1] + " damage!");
+                }
                 Menu.battleSpeedPause();
             }
             for (int i = 0; i < party1.getPartyCharacters().size(); i++) {
@@ -94,6 +118,15 @@ public class BattleSimulator {
                     i -= 1;
                 }
             }
+
+            if (!Menu.getSmallLog()) {
+                Printer.printFormatted("");
+                Printer.printFormatted(c1.getName() + " has " + round(c1.getHp())  + " HP");
+                Menu.battleSpeedPause();
+                Printer.printFormatted(c2.getName() + " has " + round(c2.getHp()) + " HP");
+                Menu.battleSpeedPause();
+            }
+
             if(!c1.isAlive() && !c2.isAlive()){
                 Printer.printFormatted("");
                 if (c1.getClass() != Skeleton.class) {
@@ -130,15 +163,6 @@ public class BattleSimulator {
                 Printer.printFormatted("Fighter " + c2.getName() + " has fallen in combat!");
                 Printer.printFormatted("");
                 Printer.printFormatted("The winner is " + c1.getName());
-            }
-            else{
-                if (!Menu.getSmallLog()) {
-                    Printer.printFormatted("");
-                    Printer.printFormatted(c1.getName() + " has " + round(c1.getHp())  + " HP");
-                    Menu.battleSpeedPause();
-                    Printer.printFormatted(c2.getName() + " has " + round(c2.getHp()) + " HP");
-                    Menu.battleSpeedPause();
-                }
             }
         }
     }
