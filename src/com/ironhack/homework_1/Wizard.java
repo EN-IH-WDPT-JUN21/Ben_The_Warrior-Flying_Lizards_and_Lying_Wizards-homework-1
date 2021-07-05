@@ -20,9 +20,9 @@ public class Wizard extends Character implements Attacker{
     //Constructor that can be used to create objects with specific property values.
     public Wizard(String name, int intel, int mana, double hp){
         super(name);
-        setIntelligence(intel);
-        setMana(mana);
-        setHp(hp);
+        setIntelligence(Math.min(intel, 60));
+        setMana(Math.min(mana, 80));
+        setHp(Math.max(Math.min(hp, 125), 50));
     }
 
     //Getters and setters for Wizard specific properties.
@@ -30,13 +30,13 @@ public class Wizard extends Character implements Attacker{
         return mana;
     }
     public void setMana(int mana) {
-        this.mana = mana;
+        this.mana = Math.max(10, mana);
     }
     public int getIntelligence() {
         return intelligence;
     }
     public void setIntelligence(int intelligence) {
-        this.intelligence = intelligence;
+        this.intelligence = Math.max(1, intelligence);
     }
 
     //Helper function that loops user input until a valid number is entered between statMin and Statmax, displays message.
@@ -75,7 +75,7 @@ public class Wizard extends Character implements Attacker{
     public static Wizard createCustom(){
         if (Menu.isHardcore() == true) {
             int upgradePoints = 10;
-            int intel = 20;
+            int intel = 30;
             int mana = 30;
             int hp = 75;
             Printer.printFormatted("What would you like to call your Wizard?");

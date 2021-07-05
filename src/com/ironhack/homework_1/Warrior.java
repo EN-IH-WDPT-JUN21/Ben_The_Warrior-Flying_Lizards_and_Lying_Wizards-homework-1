@@ -20,9 +20,9 @@ public class Warrior extends Character implements Attacker{
     //Constructor that can be used to create objects with specific property values.
     public Warrior(String name, int str, int stam, double hp){
         super(name);
-        setStrength(str);
-        setStamina(stam);
-        setHp(hp);
+        setStrength(Math.min(str, 15));
+        setStamina(Math.min(stam, 80));
+        setHp(Math.max(Math.min(hp, 250), 100));
     }
 
     //Default constructor that takes no arguments and randomises all properties.
@@ -35,13 +35,13 @@ public class Warrior extends Character implements Attacker{
         return stamina;
     }
     public void setStamina(int stamina) {
-        this.stamina = stamina;
+        this.stamina = Math.max(10, stamina);
     }
     public int getStrength() {
         return strength;
     }
     public void setStrength(int strength) {
-        this.strength = strength;
+        this.strength = Math.max(1, strength);
     }
 
     //Helper function that loops user input until a valid number is entered between statMin and Statmax, displays message.

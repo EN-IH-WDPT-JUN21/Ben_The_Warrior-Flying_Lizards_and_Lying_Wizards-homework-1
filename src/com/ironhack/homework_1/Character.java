@@ -135,7 +135,7 @@ public abstract class Character {
             case "Archer":
                 if(parameters.length == 5){
                     try{
-                        return new Wizard(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                        return new Archer(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
                                 Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
                     }
                     catch (NumberFormatException e){

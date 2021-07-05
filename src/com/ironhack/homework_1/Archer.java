@@ -20,9 +20,9 @@ public class Archer extends Character implements Attacker{
     //Constructor that can be used to create objects with specific property values.
     public Archer(String name, int dex, int Energy, double hp){
         super(name);
-        setDexterity(dex);
-        setEnergy(Energy);
-        setHp(hp);
+        setDexterity(Math.min(dex, 35));
+        setEnergy(Math.min(Energy, 30));
+        setHp(Math.max(Math.min(hp, 120), 50));
     }
 
     //Getters and setters for Archer specific properties.
@@ -30,13 +30,13 @@ public class Archer extends Character implements Attacker{
         return Energy;
     }
     public void setEnergy(int Energy) {
-        this.Energy = Math.min(Energy, 30);
+        this.Energy = Math.max(Energy, 5);
     }
     public int getDexterity() {
         return Dexterity;
     }
     public void setDexterity(int Dexterity) {
-        this.Dexterity = Math.min(Dexterity, 35);
+        this.Dexterity = Math.max(Dexterity, 5);
     }
 
     //Helper function that loops user input until a valid number is entered between statMin and Statmax, displays message.

@@ -12,9 +12,9 @@ public class Skeleton extends Warrior implements Attacker{
     //Constructor that can be used to create objects with specific property values.
     public Skeleton(String name, int str, int stam, double hp){
         super(name);
-        setStrength(str);
-        setStamina(stam);
-        setHp(hp);
+        setStrength(Math.min(str, 30));
+        setStamina(Math.min(stam, 30));
+        setHp(Math.max(Math.min(hp, 30), 1));
     }
 
     //Getters and setters for Warrior specific properties.
@@ -22,13 +22,13 @@ public class Skeleton extends Warrior implements Attacker{
         return stamina;
     }
     public void setStamina(int stamina) {
-        this.stamina = stamina;
+        this.stamina = Math.max(1, stamina);
     }
     public int getStrength() {
         return strength;
     }
     public void setStrength(int strength) {
-        this.strength = strength;
+        this.strength = Math.max(1, strength);
     }
 
     //Function to output characters to CSV file in standardized format that can be parsed back when CSV file is read from.
