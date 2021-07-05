@@ -188,7 +188,7 @@ public class PartyCreator {
             return new String[]{"", csvFile};
         }else{
             String directory = "";
-            for(int i = 0; i < csvFileParts.length - 2; i++){
+            for(int i = 0; i < csvFileParts.length - 1; i++){
                 directory = directory.concat(csvFileParts[i]).concat("/");
             }
             return new String[]{directory, csvFileParts[csvFileParts.length-1]};
