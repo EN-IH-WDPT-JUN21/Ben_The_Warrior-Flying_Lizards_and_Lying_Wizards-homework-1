@@ -9,6 +9,20 @@ Example:
 - If the player wants to select Option 1, he must input: **1**.
 - If the player wants to select Option 2, he must input: **2**.
 - If the player wants to go back, he must input: **b**.
+- If the user is prompted to confirm a selected option they may input **y/n** or **yes/no**.
+
+## Overview of Features
+- 2 Different game Modes
+- 3 Different battle Modes
+- 5 Character Classes
+- 3 Ways to create a Character
+- Over 2500 random Character names!
+- 2 Battle log Modes
+- 3 Battle speeds
+- Importing and exporting of entire parties to csv file format
+- Adjustable Party size
+- Graveyard and Game Banner with ASCII Art
+- Stylised Menus
 
 ## Settings
 ### Game mode
@@ -30,7 +44,9 @@ In hardcore mode the player has 2 options for character creation.
 2. The player can manually create a character with more fine grained control. The player can choose the class of the character and their name like before but instead of only manually entering the value of the stats between the a minimum and maximum, the player is now allocated 10 stat upgrade points which he can use to upgrade the characters stats. In this mode the player can exceed the maximum randomised value of a stat, but this comes at the cost of severely weaking the other stats. This mode allows you to make a character more specialized at the cost of lower overall stat totals. This is similair to other classic RPG character creation systems but simplified to fit inside the confines of the project.
 
 ##### -- Battle --
-Hardcore mode unlocks a new battle system that allows players to directly control the combatants behavior. The player can choose the combatants that will fight in each duel and then will be presented with the option of which skill to use. This gives players the oppurtunity to play the game in a more strategic way. Why spend your resources delivering a Heavy Attack to an already weak enemy when a Weak Attack would do? The selectable options are limited by the resource values of the character and the player is informed if when they don't have enough resources to perform a skill, and how far they are from being able to. The player is also informed before choosing the attack how much damage it does as well as being giving a short flavor description of each attack and any other effects it may have.
+Hardcore mode unlocks a new battle system that allows players to directly control the combatants behavior. The player can choose the combatants that will fight in each duel and then will be presented with the option of which skill to use. 
+This gives players the oppurtunity to play the game in a more strategic way. Why spend your resources delivering a Heavy Attack to an already weak enemy when a Weak Attack would do? 
+The selectable options are limited by the resource values of the character and the player is informed if when they don't have enough resources to perform a skill, and how far they are from being able to. The player is also informed before choosing the attack how much damage it does as well as being giving a short flavor description of each attack and any other effects it may have.
 
 ### Log mode
 #### Full logs
