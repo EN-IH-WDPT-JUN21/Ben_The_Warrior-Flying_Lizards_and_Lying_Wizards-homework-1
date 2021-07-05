@@ -11,8 +11,8 @@ public abstract class Character {
     //idCount is incremented to allocate a new ID when a character is instantiated.
     private static int idCount = 0;
     //Keep track of character classes by name for user selection and by class reference so their constructors can be accessed at runtime.
-    private static String[] classNames = {"Warrior", "Wizard", "Archer", "Rogue"};
-    private static Class[] possibleClasses = {Warrior.class, Wizard.class, Archer.class, Rogue.class};
+    private static String[] classNames = {"Warrior", "Wizard", "Archer", "Rogue", "Necromancer"};
+    private static Class[] possibleClasses = {Warrior.class, Wizard.class, Archer.class, Rogue.class, Necromancer.class};
 
     //Default constructor for use when creating randomised characters
     public Character(){
@@ -101,6 +101,18 @@ public abstract class Character {
                     Printer.printFormatted("ERROR: incorrect number of parameters for Rogue. This Character will not be added to the party");
                 }
 
+            case "Necromancer":
+                if(parameters.length == 5){
+                    try{
+                        return new Necromancer(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
+                                Integer.parseInt(parameters[3].trim()), Double.parseDouble(parameters[4].trim()));
+                    }catch (NumberFormatException e){
+                        return null;
+                    }
+                }else{
+                    Printer.printFormatted("ERROR: incorrect number of parameters for Necromancer. This Character will not be added to the party");
+                }
+
             case "Wizard":
                 if(parameters.length == 5){
                     try{
@@ -167,6 +179,9 @@ public abstract class Character {
                     case 4:
                         chosen = true;
                         return Rogue.createCustom();
+                    case 5:
+                        chosen = true;
+                        return Necromancer.createCustom();
                     default:
                         break;
                 }

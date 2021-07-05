@@ -96,15 +96,23 @@ public class BattleSimulator {
             }
             if(!c1.isAlive() && !c2.isAlive()){
                 Printer.printFormatted("");
-                this.graveyard.add(c1);
-                this.graveyard.add(c2);
+                if (c1.getClass() != Skeleton.class) {
+                    this.graveyard.add(c1);
+                }
+                if (c2.getClass() != Skeleton.class) {
+                    this.graveyard.add(c2);
+                }
+
                 this.party1.removeCharacter(c1);
                 this.party2.removeCharacter(c2);
                 Printer.printFormatted("Both fighters have fallen in combat!");
             }
             else if(!c1.isAlive()){
                 Printer.printFormatted("");
-                this.graveyard.add(c1);
+                if (c1.getClass() != Skeleton.class) {
+                    this.graveyard.add(c1);
+                }
+
                 this.party1.removeCharacter(c1);
 
                 Printer.printFormatted("Fighter " + c1.getName() + " has fallen in combat!");
@@ -113,7 +121,10 @@ public class BattleSimulator {
             }
             else if(!c2.isAlive()){
                 Printer.printFormatted("");
-                this.graveyard.add(c2);
+                if (c2.getClass() != Skeleton.class) {
+                    this.graveyard.add(c2);
+                }
+
                 this.party2.removeCharacter(c2);
 
                 Printer.printFormatted("Fighter " + c2.getName() + " has fallen in combat!");
@@ -181,6 +192,21 @@ public class BattleSimulator {
         }
         else {
             Printer.centerString("Player 2 WINS",125);
+        }
+
+        Iterator<Character> ch1 = party1.getPartyCharacters().iterator();
+        Iterator<Character> ch2 = party2.getPartyCharacters().iterator();
+        while (ch1.hasNext()){
+            Character ch = ch1.next();
+            if (ch.getClass() == Skeleton.class){
+                ch1.remove();
+            }
+        }
+        while (ch2.hasNext()){
+            Character ch = ch2.next();
+            if (ch.getClass() == Skeleton.class){
+                ch2.remove();
+            }
         }
         Printer.printPart("equalLine");
     }
