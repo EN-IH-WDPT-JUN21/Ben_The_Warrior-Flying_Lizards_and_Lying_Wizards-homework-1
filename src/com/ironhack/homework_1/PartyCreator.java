@@ -42,16 +42,20 @@ public class PartyCreator {
 
         // While loop to add each Character to the Party until file ended or party is full
         while(scanner.hasNextLine()){
-            if (party.getPartyCharacters().size() < Menu.getPartySize()){
+            if (party.getPartyCharacters().size() < Menu.getPartySize()) {
                 String nextLine = scanner.nextLine();
-                if(nextLine.isEmpty()){
+                if (nextLine.isEmpty()) {
                     continue;
                 }
                 String[] newCharacter = nextLine.split(",");
                 Character character = Character.addCharacter(newCharacter);
-                if(character != null){
+                if (character != null) {
                     party.addCharacter(Character.addCharacter(newCharacter));
                 }
+                if (!scanner.hasNextLine()){
+                Printer.printFormatted("Characters were imported to the party");
+                }
+
             }else{
                 Printer.printFormatted("Party limit reached, unable to add more characters! Added the first " + Menu.getPartySize() + " characters! If needed change in settings!");
                 break;
