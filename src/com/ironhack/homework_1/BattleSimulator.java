@@ -67,14 +67,20 @@ public class BattleSimulator {
             }
 
             if(!c1.isAlive() && !c2.isAlive()){
-                this.graveyard.add(c1);
-                this.graveyard.add(c2);
+                if (c1.getClass() != Skeleton.class) {
+                    this.graveyard.add(c1);
+                }
+                if (c2.getClass() != Skeleton.class) {
+                    this.graveyard.add(c2);
+                }
                 this.party1.removeCharacter(c1);
                 this.party2.removeCharacter(c2);
                 Printer.printFormatted("Both fighters have fallen in combat!");
             }
             else if(!c1.isAlive()){
-                this.graveyard.add(c1);
+                if (c1.getClass() != Skeleton.class) {
+                    this.graveyard.add(c1);
+                }
                 this.party1.removeCharacter(c1);
 
                 Printer.printFormatted("Fighter " + c1.getName() + " has fallen in combat!");
@@ -82,7 +88,9 @@ public class BattleSimulator {
                 Printer.printFormatted("The winner is " + c2.getName());
             }
             else if(!c2.isAlive()){
-                this.graveyard.add(c2);
+                if (c2.getClass() != Skeleton.class) {
+                    this.graveyard.add(c2);
+                }
                 this.party2.removeCharacter(c2);
 
                 Printer.printFormatted("Fighter " + c2.getName() + " has fallen in combat!");
@@ -162,6 +170,16 @@ public class BattleSimulator {
         }
         else {
             Printer.centerString("Player 2 WINS",125);
+        }
+        for (Character ch : party1.getPartyCharacters()){
+            if (ch.getClass() == Skeleton.class){
+                party1.removeCharacter(ch);
+            }
+        }
+        for (Character ch : party2.getPartyCharacters()){
+            if (ch.getClass() == Skeleton.class){
+                party2.removeCharacter(ch);
+            }
         }
         Printer.printPart("equalLine");
     }

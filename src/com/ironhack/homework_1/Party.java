@@ -184,7 +184,7 @@ public class Party {
     // Renames characters that have repeated names in party. Needs to be added everytime we add to party.
     public void setRepeatedName(Character character) {
         for (Character partyMembers : this.partyCharacters) {
-            if (partyMembers.getName().equals(character.getName()) && partyMembers != character) {
+            if (partyMembers.getName().equals(character.getName()) && partyMembers != character && character.getName() != "Skeleton Warrior") {
                 character.setName(character.getName() + " Jr.");
             }
         }

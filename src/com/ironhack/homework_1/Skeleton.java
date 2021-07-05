@@ -2,32 +2,19 @@ package com.ironhack.homework_1;
 import java.util.Scanner;
 
 //Class extends character as a subclass and implements the attack interface to check for conformity.
-public class Warrior extends Character implements Attacker{
+public class Skeleton extends Warrior implements Attacker{
     private int stamina;
     private int strength;
 
     //Instantiates a scanner object to be used in class body.
     static Scanner scanner = new Scanner(System.in);
 
-    //Default constructor that takes no arguments and randomises all properties.
-    public Warrior() {
-        super();
-        setStrength(1 + (int)(Math.random() * 9 + 1));
-        setStamina(10 + (int)(Math.random() * 40 + 1));
-        setHp(100 + (int)(Math.random() * 100 + 1));
-    }
-
     //Constructor that can be used to create objects with specific property values.
-    public Warrior(String name, int str, int stam, double hp){
+    public Skeleton(String name, int str, int stam, double hp){
         super(name);
         setStrength(str);
         setStamina(stam);
         setHp(hp);
-    }
-
-    //Default constructor that takes no arguments and randomises all properties.
-    public Warrior(String name) {
-        super(name);
     }
 
     //Getters and setters for Warrior specific properties.
@@ -44,92 +31,12 @@ public class Warrior extends Character implements Attacker{
         this.strength = strength;
     }
 
-    //Helper function that loops user input until a valid number is entered between statMin and Statmax, displays message.
-    //Used for custom character creation loop
-    private static int statInput(int statMin, int statMax, String message){
-        Printer.printFormatted(message);
-        String tmp = scanner.nextLine();
-        try {
-            int choice = Integer.parseInt(tmp);
-            if (choice >= statMin && choice <= statMax){
-                return choice;
-            }
-            else {
-                Printer.printFormatted("Please enter a valid number");
-                statInput(statMin, statMax, message);
-            }
-        }
-        catch (NumberFormatException e){
-            Printer.printFormatted("Please enter a valid number");
-            statInput(statMin, statMax, message);
-        }
-        return statMin;
-    }
-
     //Function to output characters to CSV file in standardized format that can be parsed back when CSV file is read from.
     @Override
     public String toCsvFormat() {
-        return "Warrior," + super.getName() + "," + getStrength() + "," + getStamina() +"," + super.getHp() + "\n";
+        return "Skeleton," + super.getName() + "," + getStrength() + "," + getStamina() +"," + super.getHp() + "\n";
     }
 
-    //Function that allows more systematic and controlled character creation that is enabled when Hardcore mode is activated.
-    //Starts off user with a pool of upgrade points that can be used to increment stats by set amount to enable a more balanced character creation.
-    //While this method allows characters to have a greater individual stat value than is possible with randomisation, this comes at the cost
-    //of low values in the other stats. A randomised character can be randomised with close to perfect values in all stats but lower maximums.
-    //Trades overall stat totals for the ability to specialize.
-    public static Warrior createCustom(){
-        if (Menu.isHardcore() == true) {
-            int upgradePoints = 10;
-            int str = 5;
-            int stam = 30;
-            int hp = 150;
-            Printer.printFormatted("What would you like to call your Warrior?");
-            String name = scanner.nextLine();
-            while (upgradePoints > 0) {
-                Printer.printFormatted(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
-                Printer.printFormatted("1. Increase Strength: " + str + " => " + (str + 1));
-                Printer.printFormatted("2. Increase Stamina: " + stam + " => " + (stam + 5));
-                Printer.printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 10));
-                String input = scanner.nextLine();
-                try {
-                    int choice = Integer.parseInt(input);
-                    switch (choice) {
-                        case 1:
-                            str++;
-                            upgradePoints--;
-                            break;
-                        case 2:
-                            stam += 5;
-                            upgradePoints--;
-                            break;
-                        case 3:
-                            hp += 10;
-                            upgradePoints--;
-                            break;
-                        default:
-                            Printer.printFormatted("Please choose a valid option!");
-                            break;
-                    }
-                } catch (NumberFormatException e) {
-                    Printer.printFormatted("Please choose a valid option!");
-                }
-            }
-            return new Warrior(name, str, stam, hp);
-        }
-        else {
-            Scanner scanner = new Scanner(System.in);
-            int str = 0;
-            int stam = 0;
-            int hp = 0;
-            Printer.printFormatted("What would you like to call your Warrior?");
-            String name = scanner.nextLine();
-            str = statInput(1, 10, "Please enter a value for Strength between 1 and 10");
-            stam = statInput(10, 50, "Please enter a value for Stamina between 10 and 50");
-            hp = statInput(100, 200, "Please enter a value for Hp between 100 and 200");
-            //scanner.close();
-            return new Warrior(name, str, stam, hp);
-        }
-    }
 
     //Function that takes a target character as an input and chooses an attack based on current Energy value.
     public String attack(Character character) {
