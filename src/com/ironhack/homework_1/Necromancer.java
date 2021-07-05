@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Necromancer extends Character implements Attacker{
     private int Mana;
     private int Wisdom;
+    private final int SKELETON_PARTY_SIZE = 20; // Used to define the maximum size of the skeleton party
 
     //Instantiates a scanner object to be used in class body.
     static Scanner scanner = new Scanner(System.in);
@@ -129,7 +130,7 @@ public class Necromancer extends Character implements Attacker{
     //Function that takes a target character as an input and chooses an attack based on current Energy value.
     public String attack(Character character) {
         Party necroParty = Menu.getParty1().getIdxInParty(character) != -1 ? Menu.getParty2() : Menu.getParty1();
-        if (this.Mana >= (20 + this.Wisdom) && necroParty.getPartyCharacters().size() < necroParty.getMAX_STARTING_SIZE()){
+        if (this.Mana >= (20 + this.Wisdom) && necroParty.getPartyCharacters().size() < SKELETON_PARTY_SIZE){
             necroParty.addCharacter(new Skeleton("Skeleton Warrior", this.Wisdom, this.Wisdom, this.Wisdom));
             this.Mana -= (20 + this.Wisdom);
             return "Summon a Skeleton!|" + 0;
@@ -146,7 +147,7 @@ public class Necromancer extends Character implements Attacker{
     //Returns data about chosen attack that is printed during battle logging.
     public String manualAttack(Character character) {
         Party necroParty = Menu.getParty1().getIdxInParty(character) != -1 ? Menu.getParty2() : Menu.getParty1();
-        if (this.Mana >= (20 + this.Wisdom) && necroParty.getPartyCharacters().size() < necroParty.getMAX_STARTING_SIZE()){
+        if (this.Mana >= (20 + this.Wisdom) && necroParty.getPartyCharacters().size() < SKELETON_PARTY_SIZE){
             while (true){
                 Printer.printFormatted(this.getName() + " attacks with: ");
                 Printer.printFormatted("1. Summon Skeleton Warrior!");
