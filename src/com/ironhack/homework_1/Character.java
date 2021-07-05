@@ -1,6 +1,5 @@
 package com.ironhack.homework_1;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Locale;
 import java.util.Scanner;
 
 public abstract class Character {
