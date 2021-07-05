@@ -193,14 +193,19 @@ public class BattleSimulator {
         else {
             Printer.centerString("Player 2 WINS",125);
         }
-        for (Character ch : party1.getPartyCharacters()){
+
+        Iterator<Character> ch1 = party1.getPartyCharacters().iterator();
+        Iterator<Character> ch2 = party2.getPartyCharacters().iterator();
+        while (ch1.hasNext()){
+            Character ch = ch1.next();
             if (ch.getClass() == Skeleton.class){
-                party1.removeCharacter(ch);
+                ch1.remove();
             }
         }
-        for (Character ch : party2.getPartyCharacters()){
+        while (ch2.hasNext()){
+            Character ch = ch2.next();
             if (ch.getClass() == Skeleton.class){
-                party2.removeCharacter(ch);
+                ch2.remove();
             }
         }
         Printer.printPart("equalLine");
