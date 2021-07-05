@@ -35,9 +35,6 @@ public class Menu {
     public static boolean getSmallLog() {
         return smallLog;
     }
-    public static boolean getHardcore() {
-        return hardcore;
-    }
 
     public static boolean isHardcore() {
         return hardcore;
@@ -52,7 +49,10 @@ public class Menu {
     }
 
     public static void setPartySize(){
+        // loops party size limit through the values 5, 10 and 20
         if(Menu.partySize == 20){
+            // when changing the limit from 20 to 5, if a party has more than the 5 elements the user is asked if he
+            // wants to proceed and clear the parties previously created or cancel the settings change
             if(party1.getPartyCharacters().size() > 5 || party2.getPartyCharacters().size() > 5){
                 int confirmation = askYesNoBack("By changing the party size limit, the previously created parties will be erased. Confirm changes? [ yes | no ]", false);
                 if(confirmation == 1){
@@ -79,9 +79,13 @@ public class Menu {
     }
 
     public static String centerString(String middle, int width){
+        // method used to center a string in a string of length width and surrounded by |
         StringBuilder str = new StringBuilder("|");
+        // calculation of the number of spaces required
         int middleLength = middle.length();
         int spaces = width - middleLength;
+        // if the number of spaces is even they are divided equally before and after the String middle
+        // if the number of spaces is odd they are divided such a way that after the String middle there is one more space
         boolean even = spaces % 2 == 0;
         str.append(String.join("", Collections.nCopies(spaces / 2, " ")));
         str.append(middle);
@@ -94,9 +98,12 @@ public class Menu {
         return str.toString();
     }
 
+    // Menu -> Party management
+    // menu where the party management options are available
     public static void partyManagement() throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String input = "";
         while (true) {
+            // prints of available parties and party management options
             Printer.printChosenMenus(new String[]{"PARTY - " + party1.getPartyName(), "PARTY - " + party2.getPartyName()}, false, true);
             Printer.partyPrint(party1, party2);
             Printer.printChosenMenus(new String[]{"1 - Import party", "2 - Export party", "3 - Create manually", "4 - Random party", "b - Back"}, false,false);
@@ -118,6 +125,7 @@ public class Menu {
                 case "4":
                     partyManagement_randomParty();
                     break;
+                // Return to the main menu
                 case "b":
                     return;
                 default:
@@ -126,10 +134,14 @@ public class Menu {
             }
         }
     }
+
+    // Menu -> Party management -> Import party
+    // menu to import parties from csv
     public static void partyManagement_importParty(){
         String input = "";
         boolean running = false;
         while(true){
+            // print of import options
             Printer.printChosenMenus(new String[]{"1- To Player 1", "2 - To Player 2", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
@@ -137,6 +149,8 @@ public class Menu {
                 case "1":
                     running = true;
                     while(running){
+                        // if file was found add each character to the Player 1, else print error message
+                        // if import fails verify if user wants to retry import
                         try{
                             Printer.printFormatted("What is the file you want to import from?");
                             input = scanner.nextLine();
@@ -144,6 +158,9 @@ public class Menu {
                             running = false;
                         }catch (FileNotFoundException e){
                             Printer.printFormatted(e.getMessage());
+                            if(Menu.askYesNoBack("Retry import? [ yes | no ]", false) == 2){
+                                running = false;
+                            }
                         }
                     }
                     break;
@@ -151,6 +168,8 @@ public class Menu {
                 case "2":
                     running = true;
                     while(running){
+                        // if file was found add each character to the Player 2, else print error message
+                        // if import fails verify if user wants to retry import
                         try{
                             Printer.printFormatted("What is the file you want to import from?");
                             input = scanner.nextLine();
@@ -158,10 +177,13 @@ public class Menu {
                             running = false;
                         }catch (FileNotFoundException e){
                             Printer.printFormatted(e.getMessage());
+                            if(Menu.askYesNoBack("Retry import? [ yes | no ]", false) == 2){
+                                running = false;
+                            }
                         }
                     }
                     break;
-                // Party management -> Import party -> Back
+                // Return to Party management
                 case "b":
                     return;
                 default:
@@ -170,17 +192,30 @@ public class Menu {
             }
         }
     }
+
+    // Menu -> Party management -> Export party
+    // menu to export parties to csv
     public static void partyManagement_exportParty() throws IOException {
         String input = "";
         boolean running = false;
+
         while(true) {
+            // print of export options
             Printer.printChosenMenus(new String[]{"1 - Export Player 1", "2 - Export Player 2", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 // Party management -> Export party -> Export Player 1
                 case "1":
-                    if (party2.getPartyCharacters().isEmpty()) Printer.printFormatted("Party is empty! Exporting will create an empty .csv file.");
+                    // if party is empty warn user and ask if wants to proceed
                     running = true;
+                    if (party2.getPartyCharacters().isEmpty()){
+                        Printer.printFormatted("Party is empty! Exporting will create an empty .csv file.");
+                        if(Menu.askYesNoBack("Do you wish to proceed? [ yes | no ]", false) == 2){
+                            running = false;
+                        }
+                    }
+                    // ask for the file to export
+                    // if not able to save ask user if he wants to retry export process
                     while(running){
                         try{
                             Printer.printFormatted("What is the file you want to export to?");
@@ -189,13 +224,24 @@ public class Menu {
                             running = false;
                         }catch (FileNotFoundException e){
                             Printer.printFormatted(e.getMessage());
+                            if(Menu.askYesNoBack("Retry export? [ yes | no ]", false) == 2){
+                                running = false;
+                            }
                         }
                     }
                     break;
                 // Party management -> Export party -> Export Player 2
                 case "2":
-                    if (party2.getPartyCharacters().isEmpty()) Printer.printFormatted("Party is empty! Exporting will create an empty .csv file.");
+                    // if party is empty warn user and ask if wants to proceed
                     running = true;
+                    if (party2.getPartyCharacters().isEmpty()){
+                        Printer.printFormatted("Party is empty! Exporting will create an empty .csv file.");
+                        if(Menu.askYesNoBack("Do you wish to proceed? [ yes | no ]", false) == 2){
+                            running = false;
+                        }
+                    }
+                    // ask for the file to export
+                    // if not able to save ask user if he wants to retry export process
                     while(running){
                         try{
                             Printer.printFormatted("What is the file you want to export to?");
@@ -204,10 +250,13 @@ public class Menu {
                             running = false;
                         }catch (FileNotFoundException e){
                             Printer.printFormatted(e.getMessage());
+                            if(Menu.askYesNoBack("Retry export? [ yes | no ]", false) == 2){
+                                running = false;
+                            }
                         }
                     }
                     break;
-                // Party management -> Export party -> Back
+                // Return to Party management
                 case "b":
                     return;
                 default:
@@ -216,9 +265,13 @@ public class Menu {
             }
         }
     }
+
+    // Menu -> Party management -> Create manually
+    // menu where the options to manually create characters are available
     public static void partyManagement_createManually(){
         String input = "";
         while(true){
+            // print manual character creation options
             Printer.printChosenMenus(new String[]{"1 - Player 1", "2 - Player 2", "3 - Single character", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()){
@@ -226,12 +279,15 @@ public class Menu {
                 case "1":
                     partyManagement_createManually_party(party1);
                     break;
+                // Party management -> Create manually -> Party 2
                 case "2":
                     partyManagement_createManually_party(party2);
                     break;
+                // Party management -> Create manually -> Single character
                 case "3":
                     partyManagement_createManually_singleCharacter();
                     break;
+                // Return to Party management
                 case "b":
                     return;
                 default:
@@ -240,8 +296,12 @@ public class Menu {
             }
         }
     }
+
+    // Menu -> Party management -> Create manually -> Party
+    // menu to add manually characters to a specific party
     public static void partyManagement_createManually_party(Party party){
         String input = "";
+        // if party is not empty, ask the user if the party should be erased
         if(!party.getPartyCharacters().isEmpty()){
             int confirmation = askYesNoBack("Do you want to delete the characters previously added to this party? [ yes | no ]",false);
             if (confirmation==1){
@@ -250,6 +310,7 @@ public class Menu {
                 Printer.printFormatted("Previously added characters preserved!");
             }
         }
+        // Print party elements and, the current size and limit and the available options (add, delete, back)
         while(true){
             String partyInfo = "Party size (" + party.getPartyCharacters().size() + "/" + Menu.getPartySize() + ")";
             Printer.printChosenMenus(new String[]{party.getPartyName()}, false, true);
@@ -261,6 +322,7 @@ public class Menu {
             }else {
                 Printer.printChosenMenus(new String[]{partyInfo, "1 - Add character", "2 - Delete character", "b - Back"}, false,false);
             }
+            // check which options are available to correctly map input to the action to take
             input = scanner.nextLine();
             switch (input.toLowerCase()){
                 case "1":
@@ -287,12 +349,18 @@ public class Menu {
             }
         }
     }
+
+    // Menu -> Party management -> Create manually -> Single character
+    // menu to create a character and add it to a party or export it to a csv file
     public static void partyManagement_createManually_singleCharacter(){
         String input = "";
         while(true) {
+            // print manual creation options
             Printer.printChosenMenus(new String[]{"1 - Add to Player 1", "2 - Add to Player 2", "3 - Add to exported party", "b - Back"}, false,false);
             input = scanner.nextLine();
             switch (input.toLowerCase()) {
+                // Menu -> Party management -> Create manually -> Single character -> Add to Player 1
+                // check if party is not full to add a character
                 case "1":
                     if (party1.getPartyCharacters().size() < Menu.getPartySize()){
                         pc.addCharacter(party1);
@@ -300,6 +368,8 @@ public class Menu {
                         Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
                     }
                     break;
+                // Menu -> Party management -> Create manually -> Single character -> Add to Player 2
+                // check if party is not full to add a character
                 case "2":
                     if (party2.getPartyCharacters().size() < Menu.getPartySize()){
                         pc.addCharacter(party2);
@@ -307,6 +377,7 @@ public class Menu {
                         Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
                     }
                     break;
+                // Menu -> Party management -> Create manually -> Single character -> Add to exported party
                 case "3":
                     boolean running = true;
                     while(running){
@@ -322,6 +393,7 @@ public class Menu {
                         }
                     }
                     break;
+                // Return to Create manually
                 case "b":
                     return;
                 default:
@@ -330,6 +402,8 @@ public class Menu {
             }
         }
     }
+
+    // Menu -> Random party
     // Menu for creating a random party. Selects which party and add random character to them.
     public static void partyManagement_randomParty() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         while(true){
@@ -385,9 +459,12 @@ public class Menu {
         }
     }
 
+    // Menu -> Battle
+    // Menu to start manual and random battles
     public static void battleMenu() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String input = "";
         while(true){
+            // Print options available when in hardcore mode and in normal mode
             if (Menu.isHardcore()){
                 Printer.printChosenMenus(new String[]{"1 - Manual battle", "b - Back"}, false,false);
             }else{
@@ -396,6 +473,8 @@ public class Menu {
             input = scanner.nextLine();
             int confirmation;
             switch (input){
+                // Menu -> Battle -> 1v1 Duel / Manual battle
+                // Confirm if player wants to start a battle, create random party for empty parties and start battle
                 case "1":
                     confirmation = askYesNoBack("Are you sure you want to start a "+(isHardcore()? "manual battle":"1v1 duel")+"? [ yes | no ]", false);
                     if (confirmation == 1){
@@ -408,6 +487,8 @@ public class Menu {
                         bt.battle();
                     }
                     break;
+                // Menu -> Battle -> Random battle
+                // Confirm if player wants to start a battle, create random party for empty parties and start battle
                 case "2":
                     confirmation = askYesNoBack("Are you sure you want to start a random battle? [ yes | no ]", false);
                     if (confirmation == 1){
@@ -420,6 +501,7 @@ public class Menu {
                         bt.battleRandom();
                     }
                     break;
+                // Return to Menu
                 case "b":
                     return;
                 default:
@@ -429,11 +511,15 @@ public class Menu {
         }
     }
 
+    // Menu -> Graveyard
+    // Menu where the graveyard is displayed
     public static void printGraveyard(){
         String input = "";
+        // print graveyard ascii art
         Printer.printPart("graveyard");
         List<Character> graveyard = bt.graveyard();
 
+        // search for longest name in the dead characters
         int startInt = 0;
         int longestName = 0;
         for (Character character : graveyard) {
@@ -442,37 +528,40 @@ public class Menu {
                 longestName = length;
             }
         }
+        // define how many names appear side by side from the longest name length
+        // graveyardLine() method creates the string with multiple names to print
         if(longestName < 15){
-            //print 7 names at a time
+            //print 7 names in the same line
             while(startInt < graveyard.size()){
                 startInt = Printer.graveyardLine(graveyard,7,new int[]{17,17,17,17,17,17,17},startInt);
             }
         }else if(longestName < 18){
-            //print 6 names at a time
+            //print 6 names in the same line
             while(startInt < graveyard.size()){
                 startInt = Printer.graveyardLine(graveyard,6,new int[]{20,20,20,20,20,20},startInt);
             }
         }else if(longestName < 22) {
-            //print 5 names at a time
+            //print 5 names in the same line
             while (startInt < graveyard.size()) {
                 startInt = Printer.graveyardLine(graveyard, 5, new int[]{24, 24, 25, 24, 24}, startInt);
             }
         }else if(longestName < 28){
-            //print 4 names at a time
+            //print 4 names in the same line
             while (startInt < graveyard.size()) {
                 startInt = Printer.graveyardLine(graveyard, 4, new int[]{30,31,31,30}, startInt);
             }
         }else if(longestName < 39){
-            //print 3 names at a time
+            //print 3 names in the same line
             while(startInt < graveyard.size()){
                 startInt = Printer.graveyardLine(graveyard,3,new int[]{41,41,41},startInt);
             }
         }else if(longestName < 60){
-            //print 2 names at a time
+            //print 2 names in the same line
             while(startInt < graveyard.size()){
                 startInt = Printer.graveyardLine(graveyard,2,new int[]{62,62},startInt);
             }
         }else{
+            // print only 1 name in the same line
             while(startInt < graveyard.size()){
                 startInt = Printer.graveyardLine(graveyard,1,new int[]{125},startInt);
             }
@@ -481,10 +570,15 @@ public class Menu {
         while(true){
             input = scanner.nextLine();
             switch (input.toLowerCase()){
+                // Menu -> Graveyard -> Clear graveyard
+                // Clears the graveyard
                 case "1":
                     bt.clearGraveyard();
                     printGraveyard();
+                    // returns to menu so that when the player chooses to go back this method also closes and the previous
+                    // graveyard does not appear
                     return;
+                // Return to Menu
                 case "b":
                     return;
                 default:
@@ -496,6 +590,7 @@ public class Menu {
 
     public static void settings(){
         String input = "";
+        // String arrays with possible setting options for each setting
         String[] gameMode = {"1 - Game mode [Normal]","1 - Game mode [Hardcore]"};
         String[] logMode = {"2 - Log mode [Reduced Logs]","2 - Log mode [Full Logs]"};
         String[] gameSpeed = {"3 -  Battle speed [Instant]","3 -  Battle speed [Fast]","3 -  Battle speed [Slow]"};
@@ -504,6 +599,7 @@ public class Menu {
         while(true){
             Printer.printPart("settings");
             Printer.printLine(4);
+            // create string with current settings and print
             String[] stringArr = new String[]{hardcore ? gameMode[1] : gameMode[0],
                     smallLog ? logMode[0] : logMode[1],
                     battleSpeed == 1 ? gameSpeed[1] : battleSpeed == 2 ? gameSpeed[2] : gameSpeed[0],
@@ -513,15 +609,21 @@ public class Menu {
 
             input = scanner.nextLine();
             switch (input.toLowerCase()){
+                // Menu -> Settings -> Game mode
+                // change the game mode
                 case "1":
                     hardcore = !hardcore;
                     if(hardcore){
                         Printer.printPart("hardcore");
                     }
                     break;
+                // Menu -> Settings -> Log mode
+                // change the log mode
                 case "2":
                     smallLog = !smallLog;
                     break;
+                // Menu -> Settings -> Battle speed
+                // change the battle speed
                 case "3":
                     if (battleSpeed == 0) {
                         battleSpeed = 1;
@@ -531,9 +633,12 @@ public class Menu {
                         battleSpeed = 0;
                     }
                     break;
+                // Menu -> Settings -> Party size limit
+                // change the party size limit
                 case "4":
                     setPartySize();
                     break;
+                // Return to Menu
                 case "b":
                     return;
                 default:
@@ -578,27 +683,29 @@ public class Menu {
 
         while(isRunning){
             boolean mainMenu = true;
-            boolean depth1 = false;
-            boolean depth2 = false;
             while(mainMenu){
+                // Print game name and main menu options
                 Printer.printPart("main");
                 Printer.printChosenMenus(new String[]{"1 - Party management", "2 - Battle", "3 - Show graveyard", "4 - Settings", "x - Quit"}, false,false);
                 input = scanner.nextLine();
                 switch (input.toLowerCase()){
-                    // Party management
+                    // Menu -> Party management
                     case "1":
                         partyManagement();
                         break;
-                    // Battle
+                    // Menu -> Battle
                     case "2":
                         battleMenu();
                         break;
+                    // Menu -> Show graveyard
                     case "3":
                         printGraveyard();
                         break;
+                    // Menu -> Settings
                     case "4":
                         settings();
                         break;
+                    // Menu -> Quit
                     case "x":
                         mainMenu = false;
                         isRunning = false;
