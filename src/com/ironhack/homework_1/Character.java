@@ -1,5 +1,6 @@
 package com.ironhack.homework_1;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public abstract class Character {
@@ -81,8 +82,8 @@ public abstract class Character {
     //Character object parsing for use when importing from CSV file. Checks each character is correctly formatted
     //with the appropriate amount of parameters a character should have.
     public static Character addCharacter(String[] parameters){
-        switch(parameters[0].trim()){
-            case "Warrior":
+        switch(parameters[0].trim().toLowerCase()){
+            case "warrior":
                 if(parameters.length == 5){
                     try{
                         return new Warrior(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
@@ -94,7 +95,7 @@ public abstract class Character {
                     Printer.printFormatted("ERROR: incorrect number of parameters for Warrior. This Character will not be added to the party");
                 }
 
-            case "Rogue":
+            case "rogue":
                 if(parameters.length == 5){
                     try{
                         return new Rogue(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
@@ -106,7 +107,7 @@ public abstract class Character {
                     Printer.printFormatted("ERROR: incorrect number of parameters for Rogue. This Character will not be added to the party");
                 }
 
-            case "Necromancer":
+            case "necromancer":
                 if(parameters.length == 5){
                     try{
                         return new Necromancer(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
@@ -118,7 +119,7 @@ public abstract class Character {
                     Printer.printFormatted("ERROR: incorrect number of parameters for Necromancer. This Character will not be added to the party");
                 }
 
-            case "Wizard":
+            case "wizard":
                 if(parameters.length == 5){
                     try{
                         return new Wizard(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
@@ -132,7 +133,7 @@ public abstract class Character {
                     return null;
                 }
 
-            case "Archer":
+            case "archer":
                 if(parameters.length == 5){
                     try{
                         return new Wizard(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
