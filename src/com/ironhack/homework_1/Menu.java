@@ -386,6 +386,9 @@ public class Menu {
                             running = false;
                         }catch (FileNotFoundException e){
                             Printer.printFormatted(e.getMessage());
+                            if(Menu.askYesNoBack("Retry export? [ yes | no ]", false) == 2){
+                                running = false;
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
