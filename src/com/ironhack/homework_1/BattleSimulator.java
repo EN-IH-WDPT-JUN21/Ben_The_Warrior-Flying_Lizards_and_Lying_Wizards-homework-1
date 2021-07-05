@@ -1,5 +1,7 @@
 package com.ironhack.homework_1;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class BattleSimulator {
@@ -53,8 +55,7 @@ public class BattleSimulator {
                     Printer.printLine(1);
                 }
                 String roundString = "Round Nº " + round;
-                roundString = Menu.centerString(roundString, 125);
-                System.out.println(roundString);
+                Printer.centerString(roundString, 125);
             }
 
             String c1attack = !Menu.isHardcore() ? c1.attack(c2) : c1.manualAttack(c2); //they attack at the same time
@@ -63,26 +64,55 @@ public class BattleSimulator {
             String[] c2AttackDetails = {c2attack.substring(0, c2attack.indexOf('|')), c2attack.substring(c2attack.indexOf('|') + 1, c2attack.length())};
 
             if (!Menu.getSmallLog()) {
+                Menu.battleSpeedPause();
                 Printer.printFormatted("");
-            }
+                Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
+                        c1.getClass().getSimpleName() + " attacks " + c2.getName() + " with " + c1AttackDetails[0] + " dealing " + c1AttackDetails[1] + " damage!");
 
+                Menu.battleSpeedPause();
+                Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
+                        c2.getClass().getSimpleName() + " attacks " + c1.getName() + " with " + c2AttackDetails[0] + " dealing " + c2AttackDetails[1] + " damage!");
+                Menu.battleSpeedPause();
+            }
+            for (int i = 0; i < party1.getPartyCharacters().size(); i++) {
+                if (!party1.getPartyCharacters().get(i).isAlive() && !party1.getPartyCharacters().get(i).equals(c1)){
+                    if (!Menu.getSmallLog()){
+                        Printer.printFormatted("Party 1's " + party1.getPartyCharacters().get(i).printSimpleIntroduction() + " died in the crossfire!");
+                        Menu.battleSpeedPause();
+                    }
+                    party1.removeCharacter(party1.getPartyCharacters().get(i));
+                    i -= 1;
+                }
+            }
+            for (int i = 0; i < party2.getPartyCharacters().size(); i++) {
+                if (!party2.getPartyCharacters().get(i).isAlive() && !party2.getPartyCharacters().get(i).equals(c2)){
+                    if (!Menu.getSmallLog()) {
+                        Printer.printFormatted("Party 2's " + party2.getPartyCharacters().get(i).printSimpleIntroduction() + " died in the crossfire!");
+                        if (!Menu.getSmallLog()) Menu.battleSpeedPause();
+                    }
+                    party2.removeCharacter(party2.getPartyCharacters().get(i));
+                    i -= 1;
+                }
+            }
             if(!c1.isAlive() && !c2.isAlive()){
+                Printer.printFormatted("");
                 if (c1.getClass() != Skeleton.class) {
-                    Printer.printFormatted("");
                     this.graveyard.add(c1);
                 }
                 if (c2.getClass() != Skeleton.class) {
                     this.graveyard.add(c2);
                 }
+
                 this.party1.removeCharacter(c1);
                 this.party2.removeCharacter(c2);
                 Printer.printFormatted("Both fighters have fallen in combat!");
             }
             else if(!c1.isAlive()){
+                Printer.printFormatted("");
                 if (c1.getClass() != Skeleton.class) {
-                    Printer.printFormatted("");
                     this.graveyard.add(c1);
                 }
+
                 this.party1.removeCharacter(c1);
 
                 Printer.printFormatted("Fighter " + c1.getName() + " has fallen in combat!");
@@ -90,10 +120,11 @@ public class BattleSimulator {
                 Printer.printFormatted("The winner is " + c2.getName());
             }
             else if(!c2.isAlive()){
+                Printer.printFormatted("");
                 if (c2.getClass() != Skeleton.class) {
-                    Printer.printFormatted("");
                     this.graveyard.add(c2);
                 }
+
                 this.party2.removeCharacter(c2);
 
                 Printer.printFormatted("Fighter " + c2.getName() + " has fallen in combat!");
@@ -102,27 +133,14 @@ public class BattleSimulator {
             }
             else{
                 if (!Menu.getSmallLog()) {
-
-                    Menu.battleSpeedPause();
-                    Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
-                            c1.getClass().getSimpleName() + " attacks " + c2.getName() + " with " + c1AttackDetails[0] + " dealing " + c1AttackDetails[1] + " damage!");
-
-                    Menu.battleSpeedPause();
-                    Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
-                            c2.getClass().getSimpleName() + " attacks " + c1.getName() + " with " + c2AttackDetails[0] + " dealing " + c2AttackDetails[1] + " damage!");
-
-                    Menu.battleSpeedPause();
                     Printer.printFormatted("");
-                    Printer.printFormatted(c1.getName() + " has " + c1.getHp() + " HP");
-
+                    Printer.printFormatted(c1.getName() + " has " + round(c1.getHp())  + " HP");
                     Menu.battleSpeedPause();
-                    Printer.printFormatted(c2.getName() + " has " + c2.getHp() + " HP");
-
+                    Printer.printFormatted(c2.getName() + " has " + round(c2.getHp()) + " HP");
                     Menu.battleSpeedPause();
                 }
             }
         }
-
     }
 
     // BattleSimulator prints a pretty and detailed log (request? or default?)
@@ -153,6 +171,7 @@ public class BattleSimulator {
             Printer.printChosenMenus(new String[]{fightTitle});
             if (Menu.getBattleSpeed() != 0) {
                 Printer.centerString("PRESS ENTER TO START",125);
+                Printer.printPart("equalLine");
                 new Scanner(System.in).nextLine();
             }
 
@@ -234,8 +253,13 @@ public class BattleSimulator {
         Printer.printPart("equalLine");
     }
 
-    // Parties setter
+    public static double round(double value) {
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(1, RoundingMode.HALF_EVEN);
+        return bd.doubleValue();
+    }
 
+    // Parties setter
     public void setParty1(Party p1){
        this.party1 = p1;
     }

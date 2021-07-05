@@ -150,11 +150,11 @@ public class Wizard extends Character implements Attacker{
                 Printer.printFormatted("1. Fireball");
                 Printer.printFormatted("Turn your foe to cinders!");
                 Printer.printFormatted("Expend 5 mana to deal damage equal to your intelligence: " + this.intelligence + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 Printer.printFormatted("2. Staff Hit");
                 Printer.printFormatted("Whack!");
                 Printer.printFormatted("Recover 1 mana while giving your opponent a whack with your staff: " + "2 Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
@@ -182,11 +182,11 @@ public class Wizard extends Character implements Attacker{
                 Printer.printFormatted("1. Fireball   ---   NOT ENOUGH MANA: " + this.mana + "/5 Mana required.");
                 Printer.printFormatted("Turn your foe to cinders!");
                 Printer.printFormatted("Expend 5 mana to deal damage equal to your intelligence: " + this.intelligence + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 Printer.printFormatted("2. Staff Hit");
                 Printer.printFormatted("Whack!");
                 Printer.printFormatted("Recover 1 mana while giving your opponent a whack with your staff: " + "2 Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);

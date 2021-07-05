@@ -30,8 +30,7 @@ public class PartyCreator {
         if(!file.exists()) {
             file = new File(directory + csvFile);
             if (!file.exists()) {
-                throw new FileNotFoundException("File not found! Make sure the .csv file is in the folder parties or the " +
-                "correct directory is provided");
+                throw new FileNotFoundException("File not found! Make sure the .csv file is in the folder parties or the correct directory is provided.");
             }
         }
 
@@ -102,9 +101,9 @@ public class PartyCreator {
 
     }
     public void randomParty(Party party) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        // Find way to know each of the subclasses of Character?
-        party.clearParty();
-        for(int i = 0; i < Menu.getPartySize(); i++){
+        int remainingSpaces = Menu.getPartySize() - party.getPartyCharacters().size();
+        if (remainingSpaces == 0) Printer.printFormatted("Party limit reached, unable to add more characters! If needed change in settings!");
+        for(int i = 0; i < remainingSpaces; i++){
             party.addCharacter(Character.getRandom());
         }
     }
