@@ -70,7 +70,12 @@ public abstract class Character {
 
     //Prints out the basics of a character object
     public String printSimpleIntroduction(){
-        return this.getName() + " the " + this.getClass().getSimpleName();
+        if (this.getClass() != Skeleton.class) {
+            return this.getName() + " the " + this.getClass().getSimpleName();
+        }
+        else {
+            return this.getName();
+        }
     }
 
     //Character object parsing for use when importing from CSV file. Checks each character is correctly formatted
