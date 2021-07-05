@@ -57,7 +57,7 @@ public class PartyCreator {
                 }
 
             }else{
-                Printer.printFormatted("Party limit reached, unable to add more characters! Added the first " + Menu.getPartySize() + " characters! If needed change in settings!");
+                Printer.printFormatted("Party limit reached! Added the first " + Menu.getPartySize() + " characters! If needed change in settings!");
                 break;
             }
         }

@@ -153,11 +153,11 @@ public class Necromancer extends Character implements Attacker{
                 Printer.printFormatted("1. Summon Skeleton Warrior!");
                 Printer.printFormatted("Summon a skeletal warrior to fight for your party.");
                 Printer.printFormatted("Adds a weak Skeleton Warrior to the party. Deals no damage.");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 Printer.printFormatted("2. Drain Life");
                 Printer.printFormatted("Suck the very life force from your opponent!");
                 Printer.printFormatted("Recover 5 Mana by sucking energy from your opponent: " + (this.Wisdom / 2) + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
@@ -190,11 +190,11 @@ public class Necromancer extends Character implements Attacker{
                 }
                 Printer.printFormatted("Summon a skeletal warrior to fight for your party.");
                 Printer.printFormatted("Adds a weak Skeleton Warrior to the party. Deals no damage.");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 Printer.printFormatted("2. Drain Life");
                 Printer.printFormatted("Suck the very life force from your opponent!");
                 Printer.printFormatted("Recover 5 Mana by sucking energy from your opponent: " + (this.Wisdom / 2) + " Damage");
-                System.out.println("+-----------------------------------------------------------------------------------------------------------------------------+");
+                Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
