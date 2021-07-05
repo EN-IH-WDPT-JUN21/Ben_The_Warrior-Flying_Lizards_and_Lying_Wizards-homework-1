@@ -67,8 +67,14 @@ public class BattleSimulator {
                 Menu.battleSpeedPause();
                 Printer.printFormatted("");
                 if (c1.getClass() != Skeleton.class) {
-                    Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
-                            c1.getClass().getSimpleName() + " attacks " + c2.getName() + " with " + c1AttackDetails[0] + " dealing " + c1AttackDetails[1] + " damage!");
+                    if (!c1AttackDetails[0].equals("Summon a Skeleton!")) {
+                        Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
+                                c1.getClass().getSimpleName() + " attacks " + c2.getName() + " with " + c1AttackDetails[0] + " dealing " + c1AttackDetails[1] + " damage!");
+                    }
+                    else {
+                        Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " the " +
+                                c1.getClass().getSimpleName() + " summons a Skeleton Warrior to fight for his party!");
+                    }
                 }
                 else {
                     Printer.printFormatted(Menu.getParty1().getPartyName() + ": " + c1.getName() + " attacks " +
@@ -76,9 +82,15 @@ public class BattleSimulator {
                 }
 
                 Menu.battleSpeedPause();
-                if (c1.getClass() != Skeleton.class) {
-                    Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
-                            c2.getClass().getSimpleName() + " attacks " + c1.getName() + " with " + c2AttackDetails[0] + " dealing " + c2AttackDetails[1] + " damage!");
+                if (c2.getClass() != Skeleton.class) {
+                    if (!c2AttackDetails[0].equals("Summon a Skeleton!")) {
+                        Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
+                                c2.getClass().getSimpleName() + " attacks " + c1.getName() + " with " + c2AttackDetails[0] + " dealing " + c2AttackDetails[1] + " damage!");
+                    }
+                    else {
+                        Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " the " +
+                                c2.getClass().getSimpleName() + " summons a Skeleton Warrior to fight for his party!");
+                    }
                 }
                 else {
                     Printer.printFormatted(Menu.getParty2().getPartyName() + ": " + c2.getName() + " attacks " +
