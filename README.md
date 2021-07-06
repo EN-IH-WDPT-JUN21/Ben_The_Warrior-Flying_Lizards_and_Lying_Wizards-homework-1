@@ -38,7 +38,7 @@ Example:
     - **Cost**: `5` Stamina
 
 2. **Weak Attack**
-    - Wear your opponent down with a basic strike while conversing energy.
+    - Wear your opponent down with a basic strike while conserving energy.
     - **Damage**: `Strength / 2` HP
     - **Recover**: `1` Stamina
 
@@ -86,6 +86,7 @@ Example:
 2. Coup de grâce!
     - Delivery a finishing blow to your opponent!
     - **Damage**: `Agility x (Combo Points + 1)` HP
+    - **Cost**: All Combo Points
 
 3. Blend into the shadows
     - Blend into the shadows becoming hard to hit. Immune to damage for this turn!
@@ -99,8 +100,8 @@ Example:
 
 #### Skills:
 1. Summon Skeleton Warrior
-    - Summon a skeletal warrior to fight for your party. (Party size limit of 20)
-    - **Damage**: 0
+    - Summon a skeletal warrior to fight for your party. (Party size limited to 20).
+    - **Damage**: `0` HP
     - **Cost**: `20 + Wisdom` Mana
     - **Receive**: Skeleton Warrior with stats:
         - HP: `Wisdom`
@@ -138,12 +139,31 @@ The selectable options are limited by the resource values of the character and t
 
 ### Log mode
 #### Full logs
-
+Battle log information related to:
+- Party elements;
+- Fight number;
+- Duellers;
+- Round number;
+- Attack executed and damage dealt by each dueller each round;
+- Each dueller's remaining HP at the end of each round;
+- Dueller's casualties at the end of each fight;
+- Duel result;
+- Battle result.
 #### Simplified logs
+Battle log information related to:
+- Party elements;
+- Fight number;
+- Duellers;
+- Dueller's casualties at the end of each fight;
+- Duel result;
+- Battle result.
 ### Battle speed
 #### Instant
+Battle logs are printed instantly.
 #### Fast
+Battle logs are printed with a small delay of `150` miliseconds.
 #### Slow
+Battle logs are printed with a delay of `500` miliseconds.
 ### Party size limit
 This setting controls the limit size of the parties. After a party is full no more characters can be added to the party.
 
