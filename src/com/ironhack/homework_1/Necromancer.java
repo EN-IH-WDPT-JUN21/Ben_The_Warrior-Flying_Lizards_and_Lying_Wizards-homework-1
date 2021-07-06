@@ -2,46 +2,42 @@ package com.ironhack.homework_1;
 import java.util.Scanner;
 
 //Class extends character as a subclass and implements the attack interface to check for conformity.
-public class Warrior extends Character implements Attacker{
-    private int stamina;
-    private int strength;
+public class Necromancer extends Character implements Attacker{
+    private int Mana;
+    private int Wisdom;
+    private final int SKELETON_PARTY_SIZE = 20; // Used to define the maximum size of the skeleton party
 
     //Instantiates a scanner object to be used in class body.
     static Scanner scanner = new Scanner(System.in);
 
     //Default constructor that takes no arguments and randomises all properties.
-    public Warrior() {
+    public Necromancer() {
         super();
-        setStrength(1 + (int)(Math.random() * 9 + 1));
-        setStamina(10 + (int)(Math.random() * 40 + 1));
-        setHp(100 + (int)(Math.random() * 100 + 1));
+        setWisdom(1 + (int)(Math.random() * 20 + 1));
+        setMana(10 + (int)(Math.random() * 10 + 1));
+        setHp(50 + (int)(Math.random() * 50 + 1));
     }
 
     //Constructor that can be used to create objects with specific property values.
-    public Warrior(String name, int str, int stam, double hp){
+    public Necromancer(String name, int wis, int mana, double hp){
         super(name);
-        setStrength(Math.min(str, 15));
-        setStamina(Math.min(stam, 80));
+        setWisdom(Math.min(wis, 30));
+        setMana(Math.min(mana, 40));
         setHp(hp);
     }
 
-    //Default constructor that takes no arguments and randomises all properties.
-    public Warrior(String name) {
-        super(name);
+    //Getters and setters for Necromancer specific properties.
+    public int getMana() {
+        return Mana;
     }
-
-    //Getters and setters for Warrior specific properties.
-    public int getStamina() {
-        return stamina;
+    public void setMana(int Mana) {
+        this.Mana = Math.max(Mana, 10);
     }
-    public void setStamina(int stamina) {
-        this.stamina = Math.max(10, stamina);
+    public int getWisdom() {
+        return Wisdom;
     }
-    public int getStrength() {
-        return strength;
-    }
-    public void setStrength(int strength) {
-        this.strength = Math.max(1, strength);
+    public void setWisdom(int Wisdom) {
+        this.Wisdom = Math.max(Wisdom, 1);
     }
 
     //Helper function that loops user input until a valid number is entered between statMin and Statmax, displays message.
@@ -69,7 +65,7 @@ public class Warrior extends Character implements Attacker{
     //Function to output characters to CSV file in standardized format that can be parsed back when CSV file is read from.
     @Override
     public String toCsvFormat() {
-        return "Warrior," + super.getName() + "," + getStrength() + "," + getStamina() +"," + super.getHp() + "\n";
+        return "Necromancer," + super.getName() + "," + getWisdom() + "," + getMana() +"," + super.getHp() + "\n";
     }
 
     //Function that allows more systematic and controlled character creation that is enabled when Hardcore mode is activated.
@@ -77,33 +73,33 @@ public class Warrior extends Character implements Attacker{
     //While this method allows characters to have a greater individual stat value than is possible with randomisation, this comes at the cost
     //of low values in the other stats. A randomised character can be randomised with close to perfect values in all stats but lower maximums.
     //Trades overall stat totals for the ability to specialize.
-    public static Warrior createCustom(){
+    public static Necromancer createCustom(){
         if (Menu.isHardcore() == true) {
             int upgradePoints = 10;
-            int str = 5;
-            int stam = 30;
-            int hp = 150;
-            Printer.printFormatted("What would you like to call your Warrior?");
+            int wis = 10;
+            int mana = 20;
+            int hp = 50;
+            Printer.printFormatted("What would you like to call your Necromancer?");
             String name = scanner.nextLine();
             while (upgradePoints > 0) {
                 Printer.printFormatted(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
-                Printer.printFormatted("1. Increase Strength: " + str + " => " + (str + 1));
-                Printer.printFormatted("2. Increase Stamina: " + stam + " => " + (stam + 5));
-                Printer.printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 10));
+                Printer.printFormatted("1. Increase Wisdom: " + wis + " => " + (wis + 2));
+                Printer.printFormatted("2. Increase Mana: " + mana + " => " + (mana + 2));
+                Printer.printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 7));
                 String input = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(input);
                     switch (choice) {
                         case 1:
-                            str++;
+                            wis += 2;
                             upgradePoints--;
                             break;
                         case 2:
-                            stam += 5;
+                            mana += 2;
                             upgradePoints--;
                             break;
                         case 3:
-                            hp += 10;
+                            hp += 7;
                             upgradePoints--;
                             break;
                         default:
@@ -114,34 +110,35 @@ public class Warrior extends Character implements Attacker{
                     Printer.printFormatted("Please choose a valid option!");
                 }
             }
-            return new Warrior(name, str, stam, hp);
+            return new Necromancer(name, wis, mana, hp);
         }
         else {
             Scanner scanner = new Scanner(System.in);
-            int str = 0;
-            int stam = 0;
+            int wis = 0;
+            int mana = 0;
             int hp = 0;
-            Printer.printFormatted("What would you like to call your Warrior?");
+            Printer.printFormatted("What would you like to call your Necromancer?");
             String name = scanner.nextLine();
-            str = statInput(1, 10, "Please enter a value for Strength between 1 and 10");
-            stam = statInput(10, 50, "Please enter a value for Stamina between 10 and 50");
-            hp = statInput(100, 200, "Please enter a value for Hp between 100 and 200");
+            wis = statInput(1, 20, "Please enter a value for Wisdom between 1 and 20");
+            mana = statInput(10, 20, "Please enter a value for Mana between 10 and 20");
+            hp = statInput(50, 100, "Please enter a value for Hp between 50 and 100");
             //scanner.close();
-            return new Warrior(name, str, stam, hp);
+            return new Necromancer(name, wis, mana, hp);
         }
     }
 
     //Function that takes a target character as an input and chooses an attack based on current Energy value.
     public String attack(Character character) {
-        if (this.stamina >= 5){
-            character.receiveDamage(this.strength);
-            this.stamina -= 5;
-            return "Heavy Attack|" + this.strength;
+        Party necroParty = Menu.getParty1().getIdxInParty(character) != -1 ? Menu.getParty2() : Menu.getParty1();
+        if (this.Mana >= (20 + this.Wisdom) && necroParty.getPartyCharacters().size() < SKELETON_PARTY_SIZE){
+            necroParty.addCharacter(new Skeleton("Skeleton Warrior", this.Wisdom, this.Wisdom, this.Wisdom));
+            this.Mana -= (20 + this.Wisdom);
+            return "Summon a Skeleton!|" + 0;
         }
         else {
-            character.receiveDamage(this.strength / 2.0);
-            this.stamina++;
-            return "Weak Attack|" + (this.strength / 2.0);
+            character.receiveDamage(this.Wisdom / 2.0);
+            this.Mana += 5;
+            return "Drain Life|" + (this.Wisdom / 2.0);
         }
     }
 
@@ -149,29 +146,30 @@ public class Warrior extends Character implements Attacker{
     //Informs user about the details of an attack and how much damage it will deal. Allows more strategic user of resources.
     //Returns data about chosen attack that is printed during battle logging.
     public String manualAttack(Character character) {
-        if (this.stamina >= 5){
+        Party necroParty = Menu.getParty1().getIdxInParty(character) != -1 ? Menu.getParty2() : Menu.getParty1();
+        if (this.Mana >= (20 + this.Wisdom) && necroParty.getPartyCharacters().size() < SKELETON_PARTY_SIZE){
             while (true){
                 Printer.printFormatted(this.getName() + " attacks with: ");
-                Printer.printFormatted("1. Heavy Attack");
-                Printer.printFormatted("A strong cleaving stroke with equipped weapon.");
-                Printer.printFormatted("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
+                Printer.printFormatted("1. Summon Skeleton Warrior!");
+                Printer.printFormatted("Summon a skeletal warrior to fight for your party.");
+                Printer.printFormatted("Adds a weak Skeleton Warrior to the party. Deals no damage.");
                 Printer.printLine(1);
-                Printer.printFormatted("2. Weak Attack");
-                Printer.printFormatted("Wear your opponent down with a basic strike while conserving energy.");
-                Printer.printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2.0) + " Damage");
+                Printer.printFormatted("2. Drain Life");
+                Printer.printFormatted("Suck the very life force from your opponent!");
+                Printer.printFormatted("Recover 5 Mana by sucking energy from your opponent: " + (this.Wisdom / 2.0) + " Damage");
                 Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
                     switch (choice){
                         case 1:
-                            character.receiveDamage(this.strength);
-                            this.stamina -= 5;
-                            return "Heavy Attack|" + this.strength;
+                            necroParty.addCharacter(new Warrior("Skeleton Warrior", this.Wisdom, this.Wisdom, this.Wisdom));
+                            this.Mana -= (20 + this.Wisdom);
+                            return "Summon a Skeleton!|" + 0;
                         case 2:
-                            character.receiveDamage(this.strength / 2.0);
-                            this.stamina++;
-                            return "Weak Attack|" + (this.strength / 2.0);
+                            character.receiveDamage(this.Wisdom / 2.0);
+                            this.Mana += 5;
+                            return "Life Drain|" + (this.Wisdom / 2.0);
                         default:
                             Printer.printFormatted("Choose an attack by entering 1 or 2");
                     }
@@ -184,25 +182,30 @@ public class Warrior extends Character implements Attacker{
         else {
             while (true){
                 Printer.printFormatted(this.getName() + " attacks with: ");
-                Printer.printFormatted("1. Heavy Attack   ---    NOT ENOUGH STAMINA: " + this.stamina + "/5 Stamina required.");
-                Printer.printFormatted("A strong cleaving stroke with equipped weapon.");
-                Printer.printFormatted("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
+                if (this.Mana < 20 + this.Wisdom) {
+                    Printer.printFormatted("1. Summon Skeleton Warrior!   --- NOT ENOUGH MANA " + this.Mana + "/" + (this.Wisdom + 20) + " mana required.");
+                }
+                else {
+                    Printer.printFormatted("1. Summon Skeleton Warrior!   --- TOO MANY SKELETONS!");
+                }
+                Printer.printFormatted("Summon a skeletal warrior to fight for your party.");
+                Printer.printFormatted("Adds a weak Skeleton Warrior to the party. Deals no damage.");
                 Printer.printLine(1);
-                Printer.printFormatted("2. Weak Attack");
-                Printer.printFormatted("Wear your opponent down with a basic strike while conserving energy.");
-                Printer.printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2.0) + " Damage");
+                Printer.printFormatted("2. Drain Life");
+                Printer.printFormatted("Suck the very life force from your opponent!");
+                Printer.printFormatted("Recover 5 Mana by sucking energy from your opponent: " + (this.Wisdom / 2.0) + " Damage");
                 Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(tmp);
                     switch (choice){
                         case 1:
-                            Printer.printFormatted("Not enough Stamina!");
+                            Printer.printFormatted("I can't do that!");
                             break;
                         case 2:
-                            character.receiveDamage(this.strength / 2.0);
-                            this.stamina++;
-                            return "Weak Attack|" + (this.strength / 2.0);
+                            character.receiveDamage(this.Wisdom / 2.0);
+                            this.Mana += 5;
+                            return "Life Drain|" + (this.Wisdom / 2.0);
                         default:
                             Printer.printFormatted("Choose an attack by entering 1 or 2");
                     }
@@ -225,9 +228,9 @@ public class Warrior extends Character implements Attacker{
 
     //Functions to return a characters stats when requested to enabled logging/saving.
     public String printStats(){
-        return this.getName() + " the " + this.getClass().getSimpleName() + "; Id: " + this.getId() + ", Strength: " + this.getStrength() + ", Stamina: " + this.getStamina() + ", Hp: " + (int) this.getHp() + ".";
+        return this.getName() + " the " + this.getClass().getSimpleName() + "; Id: " + this.getId() + ", Wisdom: " + this.getWisdom() + ", Mana: " + this.getMana() + ", Hp: " + (int) this.getHp() + ".";
     }
     public String printSimpleStats(){
-        return "Hp:" + (int) this.getHp() + " / Stamina:" + this.getStamina() + " / Strength:" + this.getStrength();
+        return "Hp:" + (int) this.getHp() + " / Mana:" + this.getMana() + " / Wisdom:" + this.getWisdom();
     }
 }
