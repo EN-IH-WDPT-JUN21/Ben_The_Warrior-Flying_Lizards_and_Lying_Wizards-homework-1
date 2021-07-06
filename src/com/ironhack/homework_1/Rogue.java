@@ -146,6 +146,7 @@ public class Rogue extends Character implements Attacker{
             default:
                 character.receiveDamage(this.Agility * 4.0);
                 this.comboCount = 0;
+                this.Luck += 5;
                 return "Coup de grâce!|" + (this.Agility * 4.0);
         }
     }
@@ -172,7 +173,6 @@ public class Rogue extends Character implements Attacker{
                         case 1:
                             character.receiveDamage(this.Agility);
                             this.comboCount++;
-                            this.Luck++;
                             return "Shank|" + (this.Agility);
                         case 2:
                             Printer.printFormatted("No Combo Points!");
@@ -203,12 +203,11 @@ public class Rogue extends Character implements Attacker{
                         case 1:
                             character.receiveDamage(this.Agility);
                             this.comboCount++;
-                            this.Luck++;
                             return "Shank|" + (this.Agility);
                         case 2:
                             character.receiveDamage(this.Agility * (this.comboCount + 1));
                             this.comboCount = 0;
-                            this.Luck += 2;
+                            this.Luck += 5;
                             return "Coup de grâce!|" + (this.Agility * (this.comboCount + 1));
                         default:
                             Printer.printFormatted("Choose an attack by entering 1 or 2");

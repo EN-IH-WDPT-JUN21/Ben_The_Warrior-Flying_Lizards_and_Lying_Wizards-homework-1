@@ -138,7 +138,7 @@ public class Necromancer extends Character implements Attacker{
         else {
             character.receiveDamage(this.Wisdom / 2.0);
             this.Mana += 5;
-            return "Drain Life|" + (this.Wisdom / 2);
+            return "Drain Life|" + (this.Wisdom / 2.0);
         }
     }
 
@@ -169,7 +169,7 @@ public class Necromancer extends Character implements Attacker{
                         case 2:
                             character.receiveDamage(this.Wisdom / 2.0);
                             this.Mana += 5;
-                            return "Life Drain|" + (this.Wisdom / 2);
+                            return "Life Drain|" + (this.Wisdom / 2.0);
                         default:
                             Printer.printFormatted("Choose an attack by entering 1 or 2");
                     }

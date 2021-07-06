@@ -202,7 +202,7 @@ public class Warrior extends Character implements Attacker{
                         case 2:
                             character.receiveDamage(this.strength / 2.0);
                             this.stamina++;
-                            return "Weak Attack|" + (this.strength / 2);
+                            return "Weak Attack|" + (this.strength / 2.0);
                         default:
                             Printer.printFormatted("Choose an attack by entering 1 or 2");
                     }

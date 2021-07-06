@@ -150,7 +150,7 @@ public class Archer extends Character implements Attacker{
     //Informs user about the details of an attack and how much damage it will deal. Allows more strategic user of resources.
     //Returns data about chosen attack that is printed during battle logging.
     public String manualAttack(Character character) {
-        if (this.Energy >= 5){
+        if (this.Energy >= 10){
             while (true){
                 Printer.printFormatted(this.getName() + " attacks with: ");
                 Printer.printFormatted("1. Spread Shot");
