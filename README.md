@@ -34,13 +34,14 @@ Example:
 #### Skills:
 1. **Heavy Attack**
     - A strong cleaving stroke with the equipped weapon.
-    - **Damage**: (*Strength*) HP
-    - **Cost**: 5 Stamina
+    - **Damage**: `Strength` HP
+    - **Cost**: `5` Stamina
 
 2. **Weak Attack**
     - Wear your opponent down with a basic strike while conversing energy.
-    - **Damage**: *Strength*/2 HP
-    - **Recover**: 1 Stamina
+    - **Damage**: `Strength / 2` HP
+    - **Recover**: `1` Stamina
+
 ### Wizard
 #### Stats:
 | HP | Mana | Intelligence |
@@ -49,27 +50,67 @@ Example:
 #### Skills:
 1. **Fireball**
     - Turn your foe to cinders!
-    - **Damage**: *Intelligence* HP
-    - **Cost**: 5 Mana
+    - **Damage**: `Intelligence` HP
+    - **Cost**: `5` Mana
 2. **Staff Hit**
     - Whack!
-    - **Damage**: 2 HP
-    - **Recover**: 1 Mana
+    - **Damage**: `2` HP
+    - **Recover**: `1` Mana
+
 ### Archer
 #### Stats:
 | HP | Energy | Dexterity |
 | :---: | :---: | :---: |
 | 50 - 100 | 5 - 20 | 5 - 25 |
+#### Skills:
+1. Spread Shot
+    - Release a clutch of arrows damaging all members of the enemy party.
+    - **Damage**: `Dexterity / 5` HP
+    - **Cost**: `10` Energy
+2. Aimed Shot
+    - Take aim and deliver a single arrow to center mass. 
+    - **Damage**: `Dexterity / 2` HP
+    - **Recover**: `2` Energy
+
 ### Rogue
 #### Stats:
 | HP | Luck | Agility |
 | :---: | :---: | :---: |
 | 40 - 80 | 5 - 15 | 5 - 25 |
+#### Skills:
+1. Shank
+    - Open up your enemies defences with an expertly aimed jab.
+    - **Damage**: `Agility` HP
+    - **Receive**: Combo Point
+
+2. Coup de grâce!
+    - Delivery a finishing blow to your opponent!
+    - **Damage**: `Agility x (Combo Points + 1)` HP
+
+3. Blend into the shadows
+    - Blend into the shadows becoming hard to hit. Immune to damage for this turn!
+    - **Receive**: Imunity for 1 turn
+
 ### Necromancer
 #### Stats:
 | HP | Mana | Wisdom |
 | :---: | :---: | :---: |
 | 50 - 100 | 10 - 20 | 1 - 20 |
+
+#### Skills:
+1. Summon Skeleton Warrior
+    - Summon a skeletal warrior to fight for your party. (Party size limit of 20)
+    - **Damage**: 0
+    - **Cost**: `20 + Wisdom` Mana
+    - **Receive**: Skeleton Warrior with stats:
+        - HP: `Wisdom`
+        - Stamina: `Wisdom`
+        - Strength: `Wisdom`
+
+2. Drain Life
+    - Suck the very life force from your opponent!
+    - **Damage**: `Wisdom / 2` HP
+    - **Recover**: `5` Mana
 
 ## Settings
 ### Game mode
@@ -88,15 +129,16 @@ The player has 2 options for battle in normal mode.
 ##### -- Character Creation -- 
 In hardcore mode the player has 2 options for character creation.
 1. The player can create a fully randomised party. This follows the same rules as the option in Normal mode.
-2. The player can manually create a character with more fine grained control. The player can choose the class of the character and their name like before but instead of only manually entering the value of the stats between the a minimum and maximum, the player is now allocated 10 stat upgrade points which he can use to upgrade the characters stats. In this mode the player can exceed the maximum randomised value of a stat, but this comes at the cost of severely weaking the other stats. This mode allows you to make a character more specialized at the cost of lower overall stat totals. This is similair to other classic RPG character creation systems but simplified to fit inside the confines of the project.
+2. The player can manually create a character with more fine grained control. The player can choose the class of the character and their name like before but instead of only manually entering the value of the stats between a minimum and maximum, the player is now allocated 10 stat upgrade points which he can use to upgrade the characters stats. In this mode the player can exceed the maximum randomised value of a stat, but this comes at the cost of severely weaking the other stats. This mode allows you to make a character more specialized at the cost of lower overall stat totals. This is similair to other classic RPG character creation systems but simplified to fit inside the confines of the project.
 
 ##### -- Battle --
 Hardcore mode unlocks a new battle system that allows players to directly control the combatants behavior. The player can choose the combatants that will fight in each duel and then will be presented with the option of which skill to use. 
 This gives players the oppurtunity to play the game in a more strategic way. Why spend your resources delivering a Heavy Attack to an already weak enemy when a Weak Attack would do? 
-The selectable options are limited by the resource values of the character and the player is informed if when they don't have enough resources to perform a skill, and how far they are from being able to. The player is also informed before choosing the attack how much damage it does as well as being giving a short flavor description of each attack and any other effects it may have.
+The selectable options are limited by the resource values of the character and the player is informed if when they don't have enough resources to perform a skill, and how far they are from being able to. The player is also informed before choosing the attack how much damage it does as well as being given a short flavor description of each attack and any other effects it may have.
 
 ### Log mode
 #### Full logs
+
 #### Simplified logs
 ### Battle speed
 #### Instant
@@ -104,3 +146,5 @@ The selectable options are limited by the resource values of the character and t
 #### Slow
 ### Party size limit
 This setting controls the limit size of the parties. After a party is full no more characters can be added to the party.
+
+The allowed values of maximum number of Characters per Party are `5`, `10` and `20`.
