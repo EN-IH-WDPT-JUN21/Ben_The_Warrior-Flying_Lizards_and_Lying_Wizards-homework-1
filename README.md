@@ -1,17 +1,32 @@
 # Flying Lizards and Lying Wizards :dragon: :mage: (homework 1)
-## How to navigate the menu
-To navigate through the menu the user must input the argument corresponding to the wanted action 
-Example:
 
-| 1 - Option 1 | 2 - Option 2 |   b - Back   |
-| ------------ | ------------ | ------------ |
+## Table of Contents
 
-- If the player wants to select Option 1, he must input: **1**.
-- If the player wants to select Option 2, he must input: **2**.
-- If the player wants to go back, he must input: **b**.
-- If the user is prompted to confirm a selected option they may input **y/n** or **yes/no**.
+1. [**Introduction**](#Introduction)
+    1. [Overview of Features](#Overview of Features)
+2. [**Menu**](#Menu)
+    1. [How to navigate the menu](#How to navigate the menu)
+3. [**Party Management**](#Party Management)
+    1. [Available Characters](#Available Characters)
+    2. [Import Party](#Import Party)
+    3. [Export Party](#Export Party)
+    4. [Create Manually](#Create Manually)
+    5. [Random Party](#Random Party)
+4. [**Battle**](#Battle)
+5. [**Settings**](#Settings)
+6. [**Hardcore Mode**](#Hardcore Mode)
+6. [**Code structure**](#Code structure)
 
-## Overview of Features
+## Introduction
+
+This project was created as a collaborative assignment work for the Ironhack bootcamp. The objective of this project was
+to develop an RPG simulator that would allow the user to create a party with warriors and wizards and to simulate
+battles between two parties.  
+Adding to the required objectives of the assignment, we decided to try to implement extra functionality. We believe that
+having more overall features could improve the user experience.
+
+### Overview of Features
+
 - 2 Different game modes
 - 3 Different battle modes
 - 5 Character Classes
@@ -24,14 +39,41 @@ Example:
 - Graveyard and game banner with ASCII Art
 - Stylised menus
 
-## Available Characters
-### Warrior
-#### Stats:
+## Menu
+
+The main menu is the basis of the navigation in the game. Its structure can be easily defined in four major sections:
+Party Managment, Battle, Graveyard, and Settings. Defined as a text-based game, transversing trough the game uses only
+text-based commands.
+
+### How to navigate the menu
+
+To navigate through the menu the user must input the argument corresponding to the wanted action Example:
+
+| 1 - Option 1 | 2 - Option 2 |   b - Back   |
+| ------------ | ------------ | ------------ |
+
+- If the player wants to select Option 1, he must input: **1**.
+- If the player wants to select Option 2, he must input: **2**.
+- If the player wants to go back, he must input: **b**.
+- If the user is prompted to confirm a selected option they may input **y/n** or **yes/no**.
+
+## Party Management
+
+### Available Characters
+
+#### Warrior
+
+The warrior is a simple character that has the most health of all characters. The warrior uses stamina for the Heavy
+attacks which can be quite damaging.
+
+##### Stats:
+
 | HP | Stamina | Strength |
 | :---: | :---: | :---: |
 | 100 - 200 | 10 - 50 | 1 - 10 |
 
-#### Skills:
+##### Skills:
+
 1. **Heavy Attack**
     - A strong cleaving stroke with the equipped weapon.
     - **Damage**: `Strength` HP
@@ -42,12 +84,19 @@ Example:
     - **Damage**: `Strength / 2` HP
     - **Recover**: `1` Stamina
 
-### Wizard
-#### Stats:
+#### Wizard
+
+The wizard is a type of mage that requires mana to attack efficiently. Even though they don't have a lot of health, his
+Fireball attack can one of the most devastating attacks in the game.
+
+##### Stats:
+
 | HP | Mana | Intelligence |
 | :---: | :---: | :---: |
 | 50 - 100 | 10 - 50 | 10 - 50 |
-#### Skills:
+
+##### Skills:
+
 1. **Fireball**
     - Turn your foe to cinders!
     - **Damage**: `Intelligence` HP
@@ -57,27 +106,41 @@ Example:
     - **Damage**: `2` HP
     - **Recover**: `1` Mana
 
-### Archer
-#### Stats:
+#### Archer
+
+The archer is ranged character that can be quite strong weakening the enemy party. His main attack affects the whole
+enemy team, preparing his party for victory!
+
+##### Stats:
+
 | HP | Energy | Dexterity |
 | :---: | :---: | :---: |
 | 50 - 100 | 5 - 20 | 5 - 25 |
-#### Skills:
+
+##### Skills:
+
 1. Spread Shot
     - Release a clutch of arrows damaging all members of the enemy party.
     - **Damage**: `Dexterity / 5` HP
     - **Cost**: `10` Energy
 2. Aimed Shot
-    - Take aim and deliver a single arrow to center mass. 
+    - Take aim and deliver a single arrow to center mass.
     - **Damage**: `Dexterity / 2` HP
     - **Recover**: `2` Energy
 
-### Rogue
-#### Stats:
+#### Rogue
+
+The Rogue is an agile character that hits hard, and can be harder to hit. His combo attack can be extremely devastating
+it well-prepared.
+
+##### Stats:
+
 | HP | Luck | Agility |
 | :---: | :---: | :---: |
 | 40 - 80 | 5 - 15 | 5 - 25 |
-#### Skills:
+
+##### Skills:
+
 1. Shank
     - Open up your enemies defences with an expertly aimed jab.
     - **Damage**: `Agility` HP
@@ -92,13 +155,19 @@ Example:
     - Blend into the shadows becoming hard to hit. Immune to damage for this turn!
     - **Receive**: Imunity for 1 turn
 
-### Necromancer
-#### Stats:
+#### Necromancer
+
+The necromancer is a character that can swarm the enemy team with the undead. Although the cost can be high, the
+necromancers can summon skeleton warriors to fight for his team.
+
+##### Stats:
+
 | HP | Mana | Wisdom |
 | :---: | :---: | :---: |
 | 50 - 100 | 10 - 20 | 1 - 20 |
 
-#### Skills:
+##### Skills:
+
 1. Summon Skeleton Warrior
     - Summon a skeletal warrior to fight for your party. (Party size limited to 20).
     - **Damage**: `0` HP
@@ -113,13 +182,23 @@ Example:
     - **Damage**: `Wisdom / 2` HP
     - **Recover**: `5` Mana
 
-## Party Management
+##### Skeleton Warrior:
+
+Summoned into a party by a necromancer, the Skeleton Warrior uses the same fighting ability as the Warrior. This
+character is considered a summoned character, and, even tho it is added to a party in a battle, it does not remain in the
+party after victory. When killed , the skeleton warrior ceases to exist and will not appear in the graveyard.
+
 ### Import Party
-To import a Party from a .csv file the player is queried to provide the name of the file or the path to the file to import. If only the name is provided, the filed is searched in the parties folder. If the file is not found in the specific parties folder the directory provided is used.
 
-The Characters should be added to a .csv file either by exporting a previously created Party or by manually adding Characters to a .csv file.
+To import a Party from a .csv file the player is queried to provide the name of the file or the path to the file to
+import. If only the name is provided, the filed is searched in the parties folder. If the file is not found in the
+specific parties folder the directory provided is used.
 
-The Characters are saved in the following format: 
+The Characters should be added to a .csv file either by exporting a previously created Party or by manually adding
+Characters to a .csv file.
+
+The Characters are saved in the following format:
+
 ```
 Warrior,Name,Strength,Stamina,HP
 Wizard,Name,Intelligence,Mana,HP
@@ -129,6 +208,7 @@ Necromancer,Name,Wisdom,Mana,HP
 ```
 
 In the parties folder it is possible to observe a template (template.csv):
+
 ```
 Warrior,Ben,5,20,150
 Wizard,Voldemort,30,30,100
@@ -136,36 +216,25 @@ Archer,Robin Hood,25,20,80
 Rogue,Daegan,10,5,50
 Necromancer,Karthus,15,15,80
 ````
+
 ### Export Party
-To export a Party to a .csv file the player is queried to provide the name of the file and the Party is saved in the parties folder.
+
+To export a Party to a .csv file the player is queried to provide the name of the file and the Party is saved in the
+parties folder.
+
+## Battle
 
 ## Settings
-### Game mode
-#### Normal
-##### -- Character Creation -- 
-The player has 2 options in normal mode for character creation.
-1. The player can create fully randomised parties of a give party size. Characters are randomised by class, name and stat values between minimums and maximums. The sizes of these parties can be changed in the settings menu to allow for larger or smaller fights.
-2. The player can choose to create a single character with greater control. They can choose the class from a list of available Character classes, the name of the character and can input values for each stat when prompted, between a minimum and maximum.
 
-##### -- Battle --
-The player has 2 options for battle in normal mode.
-1. A fully automatic battle can be initiated. Each combatant is chosen from each party at random to face off against each other. The combatants act according to rules that govern when they can and can't use certain abilites. Defeated combatants are moved to the graveyard and the party with characters left alive at the end is the winner! As both combatants in a duel can die at the same time, it is also possible to have an overall draw.
-2. The player can choose which combatants will fight each other. The behavior of the combatants is still controlled by the same rules that control them for the fully automatic battle.
-
-#### Hardcore
-##### -- Character Creation -- 
-In hardcore mode the player has 2 options for character creation.
-1. The player can create a fully randomised party. This follows the same rules as the option in Normal mode.
-2. The player can manually create a character with more fine grained control. The player can choose the class of the character and their name like before but instead of only manually entering the value of the stats between a minimum and maximum, the player is now allocated 10 stat upgrade points which he can use to upgrade the characters stats. In this mode the player can exceed the maximum randomised value of a stat, but this comes at the cost of severely weaking the other stats. This mode allows you to make a character more specialized at the cost of lower overall stat totals. This is similair to other classic RPG character creation systems but simplified to fit inside the confines of the project.
-
-##### -- Battle --
-Hardcore mode unlocks a new battle system that allows players to directly control the combatants behavior. The player can choose the combatants that will fight in each duel and then will be presented with the option of which skill to use. 
-This gives players the oppurtunity to play the game in a more strategic way. Why spend your resources delivering a Heavy Attack to an already weak enemy when a Weak Attack would do? 
-The selectable options are limited by the resource values of the character and the player is informed if when they don't have enough resources to perform a skill, and how far they are from being able to. The player is also informed before choosing the attack how much damage it does as well as being given a short flavor description of each attack and any other effects it may have.
+### Hardcore Mode
 
 ### Log mode
-#### Full logs
-Battle log information related to:
+
+#### [x] Full logs
+
+Displays all the actions and information that occurs during a battle.  
+Information displayed:
+
 - Party elements;
 - Fight number;
 - Duellers;
@@ -175,22 +244,95 @@ Battle log information related to:
 - Dueller's casualties at the end of each fight;
 - Duel result;
 - Battle result.
-#### Simplified logs
-Battle log information related to:
+
+#### [x] Simplified logs
+
+Reduces the information displayed. Represents only the overall state to the battle.  
+Information displayed:
+
 - Party elements;
 - Fight number;
 - Duellers;
 - Dueller's casualties at the end of each fight;
 - Duel result;
 - Battle result.
-### Battle speed
-#### Instant
-Battle logs are printed instantly.
-#### Fast
-Battle logs are printed with a small delay of `150` miliseconds.
-#### Slow
-Battle logs are printed with a delay of `500` miliseconds.
-### Party size limit
-This setting controls the limit size of the parties. After a party is full no more characters can be added to the party.
 
-The allowed values of maximum number of Characters per Party are `5`, `10` and `20`.
+### Battle speed
+
+#### [x] Instant
+
+Prints the all the battle logs instantly.
+
+#### [x] Fast
+
+Battle logs are printed fast, with a small delay of `0.15` seconds, and the battle is paused after each fight.  
+The user needs to resume the fights when battling in random mode.
+
+#### [x] Slow
+
+Battle logs are printed slower, with a delay of `0.5` seconds, and the battle is paused after each fight.  
+The user needs to resume the fights when battling in random mode.
+
+### Party size limit
+
+This setting controls the limit size of the parties. The allowed values the maximum number of Characters per Party
+are `5`, `10` and `20`.
+
+When a party is full no more characters can be added or imported to the party. Changing the party size limit from 20 to
+5, in cases where the party size already exceeds the limit of 5, will require deleting all the characters from party.
+
+### Hardcore Mode
+
+#### Normal
+
+##### -- Character Creation --
+
+The player has 2 options in normal mode for character creation.
+
+1. The player can create fully randomised parties of a give party size. Characters are randomised by class, name and
+   stat values between minimums and maximums. The sizes of these parties can be changed in the settings menu to allow
+   for larger or smaller fights.
+2. The player can choose to create a single character with greater control. They can choose the class from a list of
+   available Character classes, the name of the character and can input values for each stat when prompted, between a
+   minimum and maximum.
+
+##### -- Battle --
+
+The player has 2 options for battle in normal mode.
+
+1. A fully automatic battle can be initiated. Each combatant is chosen from each party at random to face off against
+   each other. The combatants act according to rules that govern when they can and can't use certain abilites. Defeated
+   combatants are moved to the graveyard and the party with characters left alive at the end is the winner! As both
+   combatants in a duel can die at the same time, it is also possible to have an overall draw.
+2. The player can choose which combatants will fight each other. The behavior of the combatants is still controlled by
+   the same rules that control them for the fully automatic battle.
+
+#### Hardcore
+
+##### -- Character Creation --
+
+In hardcore mode the player has 2 options for character creation.
+
+1. The player can create a fully randomised party. This follows the same rules as the option in Normal mode.
+2. The player can manually create a character with more fine grained control. The player can choose the class of the
+   character and their name like before but instead of only manually entering the value of the stats between a minimum
+   and maximum, the player is now allocated 10 stat upgrade points which he can use to upgrade the characters stats. In
+   this mode the player can exceed the maximum randomised value of a stat, but this comes at the cost of severely
+   weaking the other stats. This mode allows you to make a character more specialized at the cost of lower overall stat
+   totals. This is similair to other classic RPG character creation systems but simplified to fit inside the confines of
+   the project.
+
+##### -- Battle --
+
+Hardcore mode unlocks a new battle system that allows players to directly control the combatants behavior. The player
+can choose the combatants that will fight in each duel and then will be presented with the option of which skill to use.
+This gives players the oppurtunity to play the game in a more strategic way. Why spend your resources delivering a Heavy
+Attack to an already weak enemy when a Weak Attack would do? The selectable options are limited by the resource values
+of the character and the player is informed if when they don't have enough resources to perform a skill, and how far
+they are from being able to. The player is also informed before choosing the attack how much damage it does as well as
+being given a short flavor description of each attack and any other effects it may have.
+
+## Code structure
+
+## The Team
+
