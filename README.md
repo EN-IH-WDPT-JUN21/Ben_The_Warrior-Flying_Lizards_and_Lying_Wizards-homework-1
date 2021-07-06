@@ -126,6 +126,8 @@ deleting the current party, fill the rest of the party with random Characters, o
 
 ### Available Characters
 
+---
+
 #### Warrior
 
 The warrior is a simple Character that has the most health of all Characters. The warrior uses stamina for the Heavy
@@ -149,6 +151,8 @@ attacks which can be quite damaging.
     - **Damage**: `Strength / 2` HP
     - **Recover**: `1` Stamina
 
+---
+
 #### Wizard
 
 The wizard is a type of mage that requires mana to attack efficiently. Even though they don't have a lot of health, his
@@ -171,6 +175,8 @@ Fireball attack can one of the most devastating attacks in the game.
     - **Damage**: `2` HP
     - **Recover**: `1` Mana
 
+---
+
 #### Archer
 
 The archer is a ranged Character that can be quite strong weakening the enemy party. His main attack affects the whole
@@ -192,6 +198,8 @@ enemy team, preparing his party for victory!
     - Take aim and deliver a single arrow to center mass.
     - **Damage**: `Dexterity / 2` HP
     - **Recover**: `2` Energy
+
+---
 
 #### Rogue
 
@@ -219,6 +227,8 @@ it well-prepared.
 3. Blend into the shadows
     - Blend into the shadows becoming hard to hit. Immune to damage for this turn!
     - **Receive**: Immunity for 1 turn
+
+---
 
 #### Necromancer
 
