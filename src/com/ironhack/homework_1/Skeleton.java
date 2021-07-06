@@ -48,7 +48,7 @@ public class Skeleton extends Warrior implements Attacker{
         else {
             character.receiveDamage(this.strength / 2.0);
             this.stamina++;
-            return "Weak Attack|" + (this.strength / 2);
+            return "Weak Attack|" + (this.strength / 2.0);
         }
     }
 
