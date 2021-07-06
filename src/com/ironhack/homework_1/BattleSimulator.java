@@ -2,7 +2,10 @@ package com.ironhack.homework_1;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Iterator;
 
 public class BattleSimulator {
     private Party party1;
