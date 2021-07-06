@@ -79,8 +79,8 @@ Characters to a .csv file.
 
 The size of the imported party is limited by the party size settings. In the case of importing a party larger than the
 maximum size defined, only the initial Characters will be imported. Besides the party size, the values of each Character
-attribute cannot be defined outside its maximum and minimum limits. In the this event, the exceeded value will take form
-of the maximum or minimum allowed.
+attribute cannot be defined outside its maximum and minimum limits. In this event, the exceeded value will be set to either
+the minimum value if it falls below the minimum, or the maximum if it exceeds the maximum.
 
 The Characters are saved in the following format:
 
@@ -130,8 +130,8 @@ deleting the current party, fill the rest of the party with random Characters, o
 
 #### Warrior
 
-The warrior is a simple Character that has the most health of all Characters. The warrior uses stamina for the Heavy
-attacks which can be quite damaging.
+The warrior is the archetypal tank, low damage but by far the most hp of all the classes. The warrior uses Stamina to enable
+a Heavy Attack and builds up Stamina when using Weak Attack.
 
 ##### Stats:
 
@@ -155,8 +155,9 @@ attacks which can be quite damaging.
 
 #### Wizard
 
-The wizard is a type of mage that requires mana to attack efficiently. Even though they don't have a lot of health, his
-Fireball attack can one of the most devastating attacks in the game.
+The wizard is a classic mage that requires mana to attack efficiently. Even though they don't have a lot of health, his
+Fireball attack can be one of the most devastating attacks in the game. When drained of mana though, the wizard
+becomes a sitting duck and can be dispatched quickly by a Rogues combo attack!
 
 ##### Stats:
 
@@ -179,8 +180,10 @@ Fireball attack can one of the most devastating attacks in the game.
 
 #### Archer
 
-The archer is a ranged Character that can be quite strong weakening the enemy party. His main attack affects the whole
-enemy team, preparing his party for victory!
+The archer is a ranged Character that excels in weaking the enemy team. Especially good against low hp characters such as
+Wizards, Necromancer and draining the luck from Rogues.
+The Archer uses his Energy to attack the entire enemy team at once but this attack is very resouce intensive. They can
+recover their energy by performing an aimed shot which still does decent damage to their opponent in the duel.
 
 ##### Stats:
 
@@ -203,8 +206,11 @@ enemy team, preparing his party for victory!
 
 #### Rogue
 
-The Rogue is an agile Character that hits hard, and can be harder to hit. His combo attack can be extremely devastating
-it well-prepared.
+The Rogue is an agile Character that hits hard, and can be harder to hit. He builds up combo points with each of his basic attacks
+which allow him to deliver a devestating blow that grows stronger the more combo points he has.
+Unlike all the other classes, Rogue uses his resource, Luck, to defend himself rather than attack. While rogues have the lowest hp
+out of any of the classes, their Luck allows them to sometimes become entirely immune to damage for a single round! This 
+resource is only refilled when they deliver a Coup de grace so is very slow to recover when used up.
 
 ##### Stats:
 
@@ -223,8 +229,9 @@ it well-prepared.
     - Delivery a finishing blow to your opponent!
     - **Damage**: `Agility x (Combo Points + 1)` HP
     - **Cost**: All Combo Points
+    - **Receive**: One use of Blend Into the Shadows
 
-3. Blend into the shadows
+3. Blend into The Shadows
     - Blend into the shadows becoming hard to hit. Immune to damage for this turn!
     - **Receive**: Immunity for 1 turn
 
@@ -234,6 +241,10 @@ it well-prepared.
 
 The necromancer is a Character that can swarm the enemy team with the undead. Although the cost can be high, the
 necromancers can summon skeleton warriors to fight for his team.
+Unlike the other characters where a higher value is always better; Necromancers perform differently depending of if their
+wisdom is high or low. Low Wisdom scores allow a Necromancer to make huge numbers of weak skeletons, perfect for battering down
+a problem wizard but weak to the archer. Necromancers with high Wisdom can make fewer skeletons, but their skeletons are much stronger
+are a perfect meat shields to wear down Warriors and Archer.
 
 ##### Stats:
 
@@ -260,8 +271,8 @@ necromancers can summon skeleton warriors to fight for his team.
 ##### Skeleton Warrior:
 
 Summoned into a party by a necromancer, the Skeleton Warrior uses the same fighting ability as the Warrior. This
-Character is considered a summoned Character, and, even tho it is added to a party during a battle, it does not remain
-in the party after victory. When killed, the skeleton warrior ceases to exist and will not appear in the graveyard.
+Character is considered a summoned Character and crumbles after a fight is finished. 
+When killed, the skeleton warrior ceases to exist and will not appear in the graveyard.
 
 ## Battle
 
