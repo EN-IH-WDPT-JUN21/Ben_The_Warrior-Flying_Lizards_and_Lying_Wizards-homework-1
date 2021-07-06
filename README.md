@@ -17,7 +17,7 @@
     2. [Random Battle](#Random-Battle)
 5. [**Settings**](#Settings)
     1. [Hardcore Mode](#Hardcore-Mode)
-    2. [Log mode](#Log mode)
+    2. [Log mode](#Log-mode)
     3. [Battle speed](#Battle-speed)
     4. [Party size limit](#Party-size-limit)
 6. [**Hardcore**](#Hardcore)
