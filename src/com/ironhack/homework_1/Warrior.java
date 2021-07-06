@@ -157,7 +157,7 @@ public class Warrior extends Character implements Attacker{
                 Printer.printFormatted("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
                 Printer.printLine(1);
                 Printer.printFormatted("2. Weak Attack");
-                Printer.printFormatted("Wear your opponent down with a basic strike while conversing energy.");
+                Printer.printFormatted("Wear your opponent down with a basic strike while conserving energy.");
                 Printer.printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2.0) + " Damage");
                 Printer.printLine(1);
                 String tmp = scanner.nextLine();
@@ -189,7 +189,7 @@ public class Warrior extends Character implements Attacker{
                 Printer.printFormatted("Expend 5 stamina to deal damage equal to your strength: " + this.strength + " Damage");
                 Printer.printLine(1);
                 Printer.printFormatted("2. Weak Attack");
-                Printer.printFormatted("Wear your opponent down with a basic strike while conversing energy.");
+                Printer.printFormatted("Wear your opponent down with a basic strike while conserving energy.");
                 Printer.printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2.0) + " Damage");
                 Printer.printLine(1);
                 String tmp = scanner.nextLine();
