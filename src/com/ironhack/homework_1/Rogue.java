@@ -138,11 +138,11 @@ public class Rogue extends Character implements Attacker{
             case 1:
                 character.receiveDamage(Agility);
                 this.comboCount++;
-                return "Left Hook" + this.Agility;
+                return "Left Hook|" + this.Agility;
             case 2:
                 character.receiveDamage(Agility);
                 this.comboCount++;
-                return "Leg Sweep" + this.Agility;
+                return "Leg Sweep|" + this.Agility;
             default:
                 character.receiveDamage(this.Agility * 4.0);
                 this.comboCount = 0;

@@ -150,16 +150,16 @@ public class Archer extends Character implements Attacker{
     //Informs user about the details of an attack and how much damage it will deal. Allows more strategic user of resources.
     //Returns data about chosen attack that is printed during battle logging.
     public String manualAttack(Character character) {
-        if (this.Energy >= 5){
+        if (this.Energy >= 10){
             while (true){
                 Printer.printFormatted(this.getName() + " attacks with: ");
                 Printer.printFormatted("1. Spread Shot");
                 Printer.printFormatted("Release a clutch of arrows damaging all members of the enemy party.");
-                Printer.printFormatted("Expend 10 Energy to deal damage to each enemy: " + (this.Dexterity / 5) + " Damage to each enemy");
+                Printer.printFormatted("Expend 10 Energy to deal damage to each enemy: " + (this.Dexterity / 5.0) + " Damage to each enemy");
                 Printer.printLine(1);
                 Printer.printFormatted("2. Aimed shot");
                 Printer.printFormatted("Take aim and deliver a single arrow to center mass.");
-                Printer.printFormatted("Recover 2 Energy deal damage equal to half your dexterity to your opponent: " + (this.Dexterity / 2) + " Damage");
+                Printer.printFormatted("Recover 2 Energy deal damage equal to half your dexterity to your opponent: " + (this.Dexterity / 2.0) + " Damage");
                 Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
@@ -195,11 +195,11 @@ public class Archer extends Character implements Attacker{
                 Printer.printFormatted(this.getName() + " attacks with: ");
                 Printer.printFormatted("1. Spread Shot   ---   NOT ENOUGH ENERGY " + this.Energy + "/10 Energy required");
                 Printer.printFormatted("Release a clutch of arrows damaging all members of the enemy party.");
-                Printer.printFormatted("Expend 10 Energy to deal damage to each enemy: " + (this.Dexterity / 5) + " Damage to each enemy");
+                Printer.printFormatted("Expend 10 Energy to deal damage to each enemy: " + (this.Dexterity / 5.0) + " Damage to each enemy");
                 Printer.printLine(1);
                 Printer.printFormatted("2. Aimed shot");
                 Printer.printFormatted("Take aim and deliver a single arrow to center mass.");
-                Printer.printFormatted("Recover 2 Energy deal damage equal to half your dexterity to your opponent: " + (this.Dexterity / 2) + " Damage");
+                Printer.printFormatted("Recover 2 Energy deal damage equal to half your dexterity to your opponent: " + (this.Dexterity / 2.0) + " Damage");
                 Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {

@@ -141,7 +141,7 @@ public class Warrior extends Character implements Attacker{
         else {
             character.receiveDamage(this.strength / 2.0);
             this.stamina++;
-            return "Weak Attack|" + (this.strength / 2);
+            return "Weak Attack|" + (this.strength / 2.0);
         }
     }
 
@@ -158,7 +158,7 @@ public class Warrior extends Character implements Attacker{
                 Printer.printLine(1);
                 Printer.printFormatted("2. Weak Attack");
                 Printer.printFormatted("Wear your opponent down with a basic strike while conversing energy.");
-                Printer.printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2) + " Damage");
+                Printer.printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2.0) + " Damage");
                 Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
@@ -171,7 +171,7 @@ public class Warrior extends Character implements Attacker{
                         case 2:
                             character.receiveDamage(this.strength / 2.0);
                             this.stamina++;
-                            return "Weak Attack|" + (this.strength / 2);
+                            return "Weak Attack|" + (this.strength / 2.0);
                         default:
                             Printer.printFormatted("Choose an attack by entering 1 or 2");
                     }
@@ -190,7 +190,7 @@ public class Warrior extends Character implements Attacker{
                 Printer.printLine(1);
                 Printer.printFormatted("2. Weak Attack");
                 Printer.printFormatted("Wear your opponent down with a basic strike while conversing energy.");
-                Printer.printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2) + " Damage");
+                Printer.printFormatted("Recover 1 stamina to deal damage equal to half your strength: " + (this.strength / 2.0) + " Damage");
                 Printer.printLine(1);
                 String tmp = scanner.nextLine();
                 try {
@@ -202,7 +202,7 @@ public class Warrior extends Character implements Attacker{
                         case 2:
                             character.receiveDamage(this.strength / 2.0);
                             this.stamina++;
-                            return "Weak Attack|" + (this.strength / 2);
+                            return "Weak Attack|" + (this.strength / 2.0);
                         default:
                             Printer.printFormatted("Choose an attack by entering 1 or 2");
                     }
