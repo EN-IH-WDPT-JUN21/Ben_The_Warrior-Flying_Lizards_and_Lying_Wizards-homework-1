@@ -3,26 +3,25 @@
 ## Table of Contents
 
 1. [**Introduction**](#Introduction)
-    1. [Overview of Features](#Overview of Features)
+    1. [Overview of Features](#Overview-of-Features)
 2. [**Menu**](#Menu)
-    1. [How to navigate the menu](#How to navigate the menu)
-3. [**Party Management**](#Party Management)
-    1. [Import Party](#Import Party)
-    2. [Export Party](#Export Party)
-    3. [Create Manually](#Create Manually)
-    4. [Random Party](#Random Party)
-    5. [Available Characters](#Available Characters)
+    1. [How to navigate the menu](#How-to-navigate-the-menu)
+3. [**Party Management**](#Party-Management)
+    1. [Import Party](#Import-Party)
+    2. [Export Party](#Export-Party)
+    3. [Create Manually](#Create-Manually)
+    4. [Random Party](#Random-Party)
+    5. [Available Characters](#Available-Characters)
 4. [**Battle**](#Battle)
-    1. [1v1 Duel](#1v1 Duel)
-    2. [Random Battle](#Random Battle)
+    1. [1v1 Duel](#1v1-Duel)
+    2. [Random Battle](#Random-Battle)
 5. [**Settings**](#Settings)
-    1. [Hardcore Mode](#Hardcore Mode)
+    1. [Hardcore Mode](#Hardcore-Mode)
     2. [Log mode](#Log mode)
-    3. [Battle speed](#Battle speed)
-    4. [Party size limit](#Party size limit)
+    3. [Battle speed](#Battle-speed)
+    4. [Party size limit](#Party-size-limit)
 6. [**Hardcore**](#Hardcore)
-7. [**Code structure ???**](#Code structure ???)
-8. [**The Team**](#The Team)
+7. [**The Team**](#The-Team)
 
 ## Introduction
 
@@ -370,7 +369,13 @@ Hardcore mode unlocks a new battle system that allows players to directly contro
   skill, and how far they are from being able to. The player is also informed before choosing the attack how much damage
   it does as well as being given a short flavor description of each attack and any other effects it may have.
 
-## Code structure ???
-
 ## The Team
+
+by:  
+**Ben The Warrior**
+- [Joaodss](https://github.com/Joaodss)
+- [MigNeves](https://github.com/MigNeves)
+- [ShaunRly](https://github.com/ShaunRly)
+- [simonpedrorios](https://github.com/simonpedrorios)
+- [UrszulaF](https://github.com/UrszulaF)
 
