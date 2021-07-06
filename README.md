@@ -113,6 +113,32 @@ Example:
     - **Damage**: `Wisdom / 2` HP
     - **Recover**: `5` Mana
 
+## Party Management
+### Import Party
+To import a Party from a .csv file the player is queried to provide the name of the file or the path to the file to import. If only the name is provided, the filed is searched in the parties folder. If the file is not found in the specific parties folder the directory provided is used.
+
+The Characters should be added to a .csv file either by exporting a previously created Party or by manually adding Characters to a .csv file.
+
+The Characters are saved in the following format: 
+```
+Warrior,Name,Strength,Stamina,HP
+Wizard,Name,Intelligence,Mana,HP
+Archer,Name,Dexterity,Energy,HP
+Rogue,Name,Agility,Luck,HP
+Necromancer,Name,Wisdom,Mana,HP
+```
+
+In the parties folder it is possible to observe a template (template.csv):
+```
+Warrior,Ben,5,20,150
+Wizard,Voldemort,30,30,100
+Archer,Robin Hood,25,20,80
+Rogue,Daegan,10,5,50
+Necromancer,Karthus,15,15,80
+````
+### Export Party
+To export a Party to a .csv file the player is queried to provide the name of the file and the Party is saved in the parties folder.
+
 ## Settings
 ### Game mode
 #### Normal
