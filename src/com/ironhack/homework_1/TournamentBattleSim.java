@@ -1,9 +1,13 @@
 package com.ironhack.homework_1;
 
+import netscape.javascript.JSObject;
+
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
+
+
 
 public class TournamentBattleSim {
     private static final PartyCreator pc = new PartyCreator();
@@ -35,6 +39,7 @@ public class TournamentBattleSim {
 
     //Could be implemented using modified parts of Menu code
     public static void tournamentMenu() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        //Infinite while loop to keep user in Tournament until they decide to leave or loose, in which case we simply "return;" to return to main menu
         while(true){
             /*Tournament Menu
             -- 1. Start floor Battle, 2. Show Enemy Party Details, 3. Party Management, 4. Settings, 5. save progress and exit back to main menu--
@@ -46,8 +51,21 @@ public class TournamentBattleSim {
                     3. show list of characters that died in tournament mode, reduce level by 75%?
                     4. back
                 4. Settings for Battle Speed and log type, this mode is hardcore only
-                5. save characterLevelUp map, tournament level, enemy party, graveyard to csv format so players can resume.
+                5. save characterLevelUp map, tournament level, enemy party, graveyard to file. Maybe need to use Maven and JSON since we're saving nested data?
             */
+
+            //1. start floor battle
+            boolean win = battle();
+            if (win == false){
+                return;
+            }
+            else {
+                floorBattleWrapUp();
+                Printer.printFormatted("Floor " + floorNum + " cleared!");
+            }
+
+            //5. Save progress
+            tournamentToCsv();
         }
     }
 
@@ -58,9 +76,10 @@ public class TournamentBattleSim {
         for (Character ch : party1.getPartyCharacters()){
             characterLevelUps.put(ch, new double[] {characterLevelUps.get(ch)[0], characterLevelUps.get(ch)[1] += (floorNum - 1) * 1000, characterLevelUps.get(ch)[2]});
             while(characterLevelUps.get(ch)[1] >= characterLevelUps.get(ch)[2] * 1000){
-                characterLevelUps.put(ch, new double[] {characterLevelUps.get(ch)[0] + 1, characterLevelUps.get(ch)[1] -= characterLevelUps.get(ch)[2] * 1000, characterLevelUps.get(ch)[2] + 1});
+                characterLevelUps.put(ch, new double[] {characterLevelUps.get(ch)[0] + 1, characterLevelUps.get(ch)[1], characterLevelUps.get(ch)[2] + 1});
             }
         }
+
     }
 
     //Prepares party 2 for next battle. Creates party of random characters and then allows them to be randomly leveled up an amount of times based on floor lvl.
@@ -82,6 +101,10 @@ public class TournamentBattleSim {
         characterPicked.levelUp((int) characterLevelUps.get(characterPicked)[0], false);
     }
 
+    public static void tournamentToCsv(){
+        // Do we need to use JSON and Maven for this?? //
+    }
+
     public void clearGraveyard(){
         this.graveyard.clear();
     }
@@ -94,7 +117,7 @@ public class TournamentBattleSim {
     // create additional internal methods to help the battle implementation that can be private
 
     // check if the party is empty, if is true so we have one winner
-    private boolean isPartyEmpty(Party party){
+    private static boolean isPartyEmpty(Party party){
         return party.getPartyCharacters().isEmpty();
     }
 
@@ -104,13 +127,13 @@ public class TournamentBattleSim {
         return p1.selectRandomCharacter();
     }
 
-    private Character getChar(Party p1){
+    private static Character getChar(Party p1){
         return p1.selectCharacter();
     }
 
 
     // private Method that simulate a single duel
-    private void duel(Character c1, Character c2){
+    private static void duel(Character c1, Character c2){
         int round = 0;
 
         while(c1.isAlive() && c2.isAlive()){
@@ -197,23 +220,23 @@ public class TournamentBattleSim {
             if(!c1.isAlive() && !c2.isAlive()){
                 Printer.printFormatted("");
                 if (c1.getClass() != Skeleton.class) {
-                    this.graveyard.add(c1);
+                    graveyard.add(c1);
                 }
                 if (c2.getClass() != Skeleton.class) {
-                    this.graveyard.add(c2);
+                    graveyard.add(c2);
                 }
 
-                this.party1.removeCharacter(c1);
-                this.party2.removeCharacter(c2);
+                party1.removeCharacter(c1);
+                party2.removeCharacter(c2);
                 Printer.printFormatted("Both fighters have fallen in combat!");
             }
             else if(!c1.isAlive()){
                 Printer.printFormatted("");
                 if (c1.getClass() != Skeleton.class) {
-                    this.graveyard.add(c1);
+                    graveyard.add(c1);
                 }
 
-                this.party1.removeCharacter(c1);
+                party1.removeCharacter(c1);
 
                 Printer.printFormatted("Fighter " + c1.getName() + " has fallen in combat!");
                 Printer.printFormatted("");
@@ -222,10 +245,10 @@ public class TournamentBattleSim {
             else if(!c2.isAlive()){
                 Printer.printFormatted("");
                 if (c2.getClass() != Skeleton.class) {
-                    this.graveyard.add(c2);
+                    graveyard.add(c2);
                 }
 
-                this.party2.removeCharacter(c2);
+                party2.removeCharacter(c2);
 
                 Printer.printFormatted("Fighter " + c2.getName() + " has fallen in combat!");
                 Printer.printFormatted("");
@@ -236,7 +259,7 @@ public class TournamentBattleSim {
 
     // Method battle simulate a fight and you can choose your fighter.
 
-    public void battle(){
+    public static boolean battle(){
         Printer.printPart("equalLine");
         Printer.printPart("battle");
         Printer.printFormatted("");
@@ -250,7 +273,7 @@ public class TournamentBattleSim {
 
         // battle is going to happen meanwhile party1 and party2 has at least one element
         int fight = 0;
-        while(!isPartyEmpty(this.party1) && !isPartyEmpty(this.party2)){
+        while(!isPartyEmpty(party1) && !isPartyEmpty(party2)){
             fight++;
             Printer.printPart("equalLine");
             String fightTitle = "FIGHT " + fight;
@@ -270,16 +293,18 @@ public class TournamentBattleSim {
         Printer.printFormatted("");
 
 
-        if(isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
+        if(isPartyEmpty(party1) && isPartyEmpty(party2)){
             Printer.centerString("DRAW: Both parties are dead!",125);
+            return false;
         }
-        else if (!isPartyEmpty(this.party1) && isPartyEmpty(this.party2)){
+        else if (!isPartyEmpty(party1) && isPartyEmpty(party2)){
             Printer.centerString("Player 1 WINS",125);
+            return true;
         }
         else {
             Printer.centerString("Player 2 WINS",125);
+            return false;
         }
-        Printer.printPart("equalLine");
     }
 
     public static double round(double value) {
