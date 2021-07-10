@@ -128,6 +128,45 @@ public class Rogue extends Character implements Attacker{
         }
     }
 
+    public void levelUp(int levelUpPoints, boolean random){
+        int upgradePoints = levelUpPoints;
+        int Agility = this.Agility;
+        int Luck = this.Luck;
+        double hp = this.getHp();
+        String name = scanner.nextLine();
+        while (upgradePoints > 0) {
+            if (random == false) {
+                Printer.printFormatted(upgradePoints + " level up points remaining. Choose a stat to upgrade.");
+                Printer.printFormatted("1. Increase Agility: " + Agility + " => " + (Agility + 3));
+                Printer.printFormatted("2. Increase Luck: " + Luck + " => " + (Luck + 2));
+                Printer.printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 6));
+            }
+            String input = scanner.nextLine();
+            try {
+                int choice = random == false ? Integer.parseInt(input) : 1 + (int)(Math.random() * ((3 - 1) + 1));
+                switch (choice) {
+                    case 1:
+                        this.Agility += 3;
+                        upgradePoints--;
+                        break;
+                    case 2:
+                        this.Luck += 2;
+                        upgradePoints--;
+                        break;
+                    case 3:
+                        this.setHp(this.getHp() + 6);
+                        upgradePoints--;
+                        break;
+                    default:
+                        Printer.printFormatted("Please choose a valid option!");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                Printer.printFormatted("Please choose a valid option!");
+            }
+        }
+    }
+
     //Function that takes a target character as an input and chooses an attack based on current Luck value.
     public String attack(Character character) {
         switch (comboCount){

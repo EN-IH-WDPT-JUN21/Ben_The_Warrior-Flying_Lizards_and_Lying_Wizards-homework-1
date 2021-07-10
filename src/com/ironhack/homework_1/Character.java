@@ -67,6 +67,7 @@ public abstract class Character {
     abstract String printStats();
     abstract String printSimpleStats();
     abstract String toCsvFormat();
+    abstract void levelUp(int levelUpPoints, boolean random);
 
     //Prints out the basics of a character object
     public String printSimpleIntroduction(){

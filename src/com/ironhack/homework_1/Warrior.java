@@ -34,15 +34,12 @@ public class Warrior extends Character implements Attacker{
     public int getStamina() {
         return stamina;
     }
-    public void setStamina(int stamina) {
-        this.stamina = Math.max(10, stamina);
-    }
+    public void setStamina(int stamina) { this.stamina = Math.max(10, stamina); }
     public int getStrength() {
         return strength;
     }
-    public void setStrength(int strength) {
-        this.strength = Math.max(1, strength);
-    }
+    public void setStrength(int strength) { this.strength = Math.max(1, strength); }
+
 
     //Helper function that loops user input until a valid number is entered between statMin and Statmax, displays message.
     //Used for custom character creation loop
@@ -128,6 +125,45 @@ public class Warrior extends Character implements Attacker{
             hp = statInput(100, 200, "Please enter a value for Hp between 100 and 200");
             //scanner.close();
             return new Warrior(name, str, stam, hp);
+        }
+    }
+
+    public void levelUp(int levelUpPoints, boolean random){
+        int upgradePoints = levelUpPoints;
+        int strength = this.strength;
+        int stamina = this.stamina;
+        double hp = this.getHp();
+        String name = scanner.nextLine();
+        while (upgradePoints > 0) {
+            if (random == false) {
+                Printer.printFormatted(upgradePoints + " level up points remaining. Choose a stat to upgrade.");
+                Printer.printFormatted("1. Increase strength: " + strength + " => " + (strength + 1));
+                Printer.printFormatted("2. Increase stamina: " + stamina + " => " + (stamina + 5));
+                Printer.printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 10));
+            }
+            String input = scanner.nextLine();
+            try {
+                int choice = random == false ? Integer.parseInt(input) : 1 + (int)(Math.random() * ((3 - 1) + 1));
+                switch (choice) {
+                    case 1:
+                        this.strength += 1;
+                        upgradePoints--;
+                        break;
+                    case 2:
+                        this.stamina += 5;
+                        upgradePoints--;
+                        break;
+                    case 3:
+                        this.setHp(this.getHp() + 10);
+                        upgradePoints--;
+                        break;
+                    default:
+                        Printer.printFormatted("Please choose a valid option!");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                Printer.printFormatted("Please choose a valid option!");
+            }
         }
     }
 

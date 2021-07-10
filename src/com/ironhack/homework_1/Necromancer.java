@@ -127,6 +127,45 @@ public class Necromancer extends Character implements Attacker{
         }
     }
 
+    public void levelUp(int levelUpPoints, boolean random){
+        int upgradePoints = levelUpPoints;
+        int Wisdom = this.Wisdom;
+        int Mana = this.Mana;
+        double hp = this.getHp();
+        String name = scanner.nextLine();
+        while (upgradePoints > 0) {
+            if (random == false) {
+                Printer.printFormatted(upgradePoints + " level up points remaining. Choose a stat to upgrade.");
+                Printer.printFormatted("1. Increase Wisdom: " + Wisdom + " => " + (Wisdom + 2));
+                Printer.printFormatted("2. Increase Mana: " + Mana + " => " + (Mana + 2));
+                Printer.printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 7));
+            }
+            String input = scanner.nextLine();
+            try {
+                int choice = random == false ? Integer.parseInt(input) : 1 + (int)(Math.random() * ((3 - 1) + 1));
+                switch (choice) {
+                    case 1:
+                        this.Wisdom += 2;
+                        upgradePoints--;
+                        break;
+                    case 2:
+                        this.Mana += 2;
+                        upgradePoints--;
+                        break;
+                    case 3:
+                        this.setHp(this.getHp() + 7);
+                        upgradePoints--;
+                        break;
+                    default:
+                        Printer.printFormatted("Please choose a valid option!");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                Printer.printFormatted("Please choose a valid option!");
+            }
+        }
+    }
+
     //Function that takes a target character as an input and chooses an attack based on current Energy value.
     public String attack(Character character) {
         Party necroParty = Menu.getParty1().getIdxInParty(character) != -1 ? Menu.getParty2() : Menu.getParty1();
