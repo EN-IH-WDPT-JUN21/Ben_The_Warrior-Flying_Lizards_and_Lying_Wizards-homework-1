@@ -39,21 +39,24 @@ public class PartyCreator {
 
         // Scanner initialization
         Scanner scanner = new Scanner(file);
-
+        int count=0;
         // While loop to add each Character to the Party until file ended or party is full
         while(scanner.hasNextLine()){
             if (party.getPartyCharacters().size() < Menu.getPartySize()) {
+
                 String nextLine = scanner.nextLine();
                 if (nextLine.isEmpty()) {
                     continue;
                 }
                 String[] newCharacter = nextLine.split(",");
                 Character character = Character.addCharacter(newCharacter);
+
                 if (character != null) {
                     party.addCharacter(Character.addCharacter(newCharacter));
+                    count++;
                 }
                 if (!scanner.hasNextLine()){
-                Printer.printFormatted("Characters were imported to the party");
+                Printer.printFormatted(count + " characters were imported to the party");
                 }
 
             }else{

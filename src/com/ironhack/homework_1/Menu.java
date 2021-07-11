@@ -663,8 +663,10 @@ public class Menu {
             switch (input.toLowerCase().charAt(0)){
                 case 'y':
                     return 1;
+
                 case 'n':
                     return 2;
+
                 case 'b':
                     if (backOption){
                         return 3;
@@ -680,11 +682,10 @@ public class Menu {
     }
 
     public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-        List<Character> graveyard = new ArrayList<>();
-        String input = "";
-        boolean isRunning = true;
 
-        while(isRunning){
+        String input = "";
+
+
             boolean mainMenu = true;
             while(mainMenu){
                 // Print game name and main menu options
@@ -711,13 +712,13 @@ public class Menu {
                     // Menu -> Quit
                     case "x":
                         mainMenu = false;
-                        isRunning = false;
+
                         break;
                     default:
                         Printer.printFormatted("Select a valid option...");
                         break;
                 }
             }
-        }
+
     }
 }
