@@ -94,6 +94,7 @@ public abstract class Character {
                                 ? hpBound(100.0, 250.0, Double.parseDouble(parameters[4].trim()))
                                 : hpBound(100.0, 200.0, Double.parseDouble(parameters[4].trim())));
                     }catch (NumberFormatException e){
+                        Printer.printFormatted("ERROR: incorrect parameters for Warrior " +parameters[1].trim() + ". This Character will not be added to the party");
                         return null;
                     }
                 }else{
@@ -106,6 +107,7 @@ public abstract class Character {
                         return new Rogue(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
                                 Integer.parseInt(parameters[3].trim()), hpBound(40.0, 120.0, Double.parseDouble(parameters[4].trim())));
                     }catch (NumberFormatException e){
+                        Printer.printFormatted("ERROR: incorrect parameters for Rogue " +parameters[1].trim() + ". This Character will not be added to the party");
                         return null;
                     }
                 }else{
@@ -118,6 +120,7 @@ public abstract class Character {
                         return new Necromancer(parameters[1].trim(), Integer.parseInt(parameters[2].trim()),
                                 Integer.parseInt(parameters[3].trim()), hpBound(50.0, 100.0, Double.parseDouble(parameters[4].trim())));
                     }catch (NumberFormatException e){
+                        Printer.printFormatted("ERROR: incorrect parameters for Necromancer " +parameters[1].trim() + ". This Character will not be added to the party");
                         return null;
                     }
                 }else{
@@ -133,6 +136,7 @@ public abstract class Character {
                                 : hpBound(50.0, 100.0, Double.parseDouble(parameters[4].trim())));
                     }
                     catch (NumberFormatException e){
+                        Printer.printFormatted("ERROR: incorrect parameters for Wizard " +parameters[1].trim() + ". This Character will not be added to the party");
                         return null;
                     }
                 }else{
@@ -147,6 +151,7 @@ public abstract class Character {
                                 Integer.parseInt(parameters[3].trim()), hpBound(50.0, 120.0, Double.parseDouble(parameters[4].trim())));
                     }
                     catch (NumberFormatException e){
+                        Printer.printFormatted("ERROR: incorrect parameters for Archer " +parameters[1].trim() + ". This Character will not be added to the party");
                         return null;
                     }
                 }else{
@@ -161,6 +166,7 @@ public abstract class Character {
                                 Integer.parseInt(parameters[3].trim()), hpBound(1.0, 30.0, Double.parseDouble(parameters[4].trim())));
                     }
                     catch (NumberFormatException e){
+                        Printer.printFormatted("ERROR: incorrect parameters for Skeleton " +parameters[1].trim() + ". This Character will not be added to the party");
                         return null;
                     }
                 }else{
@@ -210,6 +216,7 @@ public abstract class Character {
                         chosen = true;
                         return Necromancer.createCustom();
                     default:
+                        Printer.printFormatted("Please choose a valid option!");
                         break;
                 }
 
