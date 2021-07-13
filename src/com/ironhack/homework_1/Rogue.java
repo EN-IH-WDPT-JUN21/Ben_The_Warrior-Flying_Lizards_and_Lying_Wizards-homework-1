@@ -85,9 +85,9 @@ public class Rogue extends Character implements Attacker{
             String name = scanner.nextLine();
             while (upgradePoints > 0) {
                 Printer.printFormatted(upgradePoints + " stat points remaining. Choose a stat to upgrade.");
-                Printer.printFormatted("| 1. Increase Agility: " + Agi + " => " + (Agi + 3));
-                Printer.printFormatted("| 2. Increase Luck: " + Luck + " => " + (Luck + 2));
-                Printer.printFormatted("| 3. Increase Hit Points: " + hp + " => " + (hp + 6));
+                Printer.printFormatted("1. Increase Agility: " + Agi + " => " + (Agi + 3));
+                Printer.printFormatted("2. Increase Luck: " + Luck + " => " + (Luck + 2));
+                Printer.printFormatted("3. Increase Hit Points: " + hp + " => " + (hp + 6));
                 String input = scanner.nextLine();
                 try {
                     int choice = Integer.parseInt(input);

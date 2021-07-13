@@ -2,7 +2,7 @@ package com.ironhack.homework_1;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
-public abstract class Character {
+public abstract class Character implements Attacker{
     private int id;
     private String name;
     private double hp;
@@ -61,9 +61,15 @@ public abstract class Character {
 
 
     //Abstract functions implemented by all subclasses
-    abstract String attack(Character character);
-    abstract String manualAttack(Character character);
-    abstract void receiveDamage(double damage);
+    public String attack(Character character){
+        throw new RuntimeException("Must be implemented in subclasses");
+    }
+    public String manualAttack(Character character) {
+        throw new RuntimeException("Must be implemented in subclasses");
+    }
+    public void receiveDamage(double damage) {
+
+    }
     abstract String printStats();
     abstract String printSimpleStats();
     abstract String toCsvFormat();

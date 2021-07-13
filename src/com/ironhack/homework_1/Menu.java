@@ -679,7 +679,7 @@ public class Menu {
         }
     }
 
-    public static void main(String[] args) throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public static void mainMenu() throws IOException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         String input = "";
             boolean mainMenu = true;
             while(mainMenu){
@@ -707,7 +707,7 @@ public class Menu {
                     // Menu -> Quit
                     case "x":
                         mainMenu = false;
-                        break;
+                        return;
                     default:
                         Printer.printFormatted("Select a valid option...");
                         break;
