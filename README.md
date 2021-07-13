@@ -2,26 +2,36 @@
 
 ## Table of Contents
 
-1. [**Introduction**](#Introduction)
+1. [**Installation**](#Installation)
+2. [**Introduction**](#Introduction)
     1. [Overview of Features](#Overview-of-Features)
-2. [**Menu**](#Menu)
+3. [**Menu**](#Menu)
     1. [How to navigate the menu](#How-to-navigate-the-menu)
-3. [**Party Management**](#Party-Management)
+4. [**Party Management**](#Party-Management)
     1. [Import Party](#Import-Party)
     2. [Export Party](#Export-Party)
     3. [Create Manually](#Create-Manually)
     4. [Random Party](#Random-Party)
     5. [Available Characters](#Available-Characters)
-4. [**Battle**](#Battle)
+5. [**Battle**](#Battle)
     1. [1v1 Duel](#1v1-Duel)
     2. [Random Battle](#Random-Battle)
-5. [**Settings**](#Settings)
+6. [**Settings**](#Settings)
     1. [Hardcore Mode](#Hardcore-Mode)
     2. [Log mode](#Log-mode)
     3. [Battle speed](#Battle-speed)
     4. [Party size limit](#Party-size-limit)
-6. [**Hardcore**](#Hardcore)
-7. [**The Team**](#The-Team)
+7. [**Hardcore**](#Hardcore)
+8. [**The Team**](#The-Team)
+
+## Installation
+Download the project from the repository.
+
+Open the directory as a project on a IDE as IntelliJ.
+
+Run the Main.java file on the path:
+
+ `./src/com/ironhack/homework_1/main`
 
 ## Introduction
 
