@@ -27,7 +27,7 @@
 ## Installation
 Download the project from the repository.
 
-Open the directory as a project on a IDE as IntelliJ.
+Open the repository as a project on a IDE such as IntelliJ.
 
 Run the Main.java file on the path:
 
